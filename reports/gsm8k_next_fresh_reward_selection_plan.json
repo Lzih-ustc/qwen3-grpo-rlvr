@@ -1,0 +1,32 @@
+{
+  "status": "locked_before_candidate_validation",
+  "dataset": "data/gsm8k-next-fresh",
+  "validation_sha256": "4134f3804b0fab799b5db3ae58da2ac28c8955ad48bcd29becf928e4cf551ee6",
+  "candidate_selection_metric": "exact_match_accuracy",
+  "decode": {
+    "do_sample": false,
+    "max_new_tokens": 192,
+    "thinking": false,
+    "seed": 20261024
+  },
+  "candidates": [
+    {
+      "reward_mode": "distance_shaped",
+      "adapter": "runs/gsm8k-next-fresh-g8-distance-16k/attempt-01/final_adapter",
+      "optimizer_updates": 12,
+      "generated_tokens": 17502,
+      "train_data_sha256": "b2a024bc82427709d5835c9f42091a4a5441111805afdf3e822774c40fe42dd4"
+    },
+    {
+      "reward_mode": "exact_format",
+      "adapter": "runs/gsm8k-next-fresh-g8-exact-format-16k/attempt-01/trainer/checkpoint-13",
+      "optimizer_updates": 13,
+      "generated_tokens": 17272,
+      "train_data_sha256": "b2a024bc82427709d5835c9f42091a4a5441111805afdf3e822774c40fe42dd4"
+    }
+  ],
+  "selection_rule": "Choose the trained candidate with highest exact-match accuracy on the fixed validation split; ties choose fewer training completion tokens, then fewer optimizer updates.",
+  "base_model_is_reference_only": true,
+  "test_used_for_selection": false,
+  "test_opened": false
+}

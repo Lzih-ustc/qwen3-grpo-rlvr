@@ -158,6 +158,8 @@ validation按预先固定的exact-match规则选择step50与step100中更好的s
 
 这12个训练prompt上有16/96条精确正确（16.7%），解析率47.9%，XML答案标签率18.8%；这是训练rollout的样本内诊断，不能和500题基座validation直接比较。8/12组至少有一条completion被截断，平均组内截断比例31.25%（估算约30/96条）；3/12组reward方差及梯度为零。错误且可解析答案的平均绝对距离为49,588。该pilot因此不能作为策略效果结论，也提示256-token上限和旧距离奖励都可能产生大量无效样本。因为token预算在第25步保存间隔之前触发，首个pilot只保存final adapter；训练代码随后补上预算停止时保存完整终态Trainer checkpoint。逐条rollout见`reports/gsm8k_next_fresh_distance16k_rollout_audit.json`。
 
+在完全相同的train split、seed、group 8、学习率、256-token长度上限和16,000-token目标下，完成了`exact_format`奖励对照。距离奖励组为12次更新/96条completion/17,502 token，训练155.71秒、112.40 token/s、整卡峰值4,430 MiB；exact-format组为13次更新/104条completion/17,272 token，训练159.52秒、108.28 token/s、整卡峰值4,384 MiB。两组均无OOM，预算超额分别为9.4%和8.0%。训练rollout精确正确率为16.7%（16/96）与20.2%（21/104），解析率47.9%与58.7%，平均completion截断比例31.25%与20.19%；两组都各有3个零方差/零梯度更新。以上是13个prompt左右的样本内诊断，不能说明validation泛化或奖励改进。距离组只有final adapter，没有完整终态resume checkpoint；exact-format组的checkpoint-13含完整状态。validation候选路径与选模规则已在`reports/gsm8k_next_fresh_reward_selection_plan.json`预先锁定，validation结果尚未运行；新test仍封存。
+
 step100按validation选定后，基座和adapter各自在完整1,063题正式test上贪心评测一次（test SHA-256=`306c5d08ad76236c03c24a7fb60160453fc6e99161c988721893662e5e4f838f`）：
 
 | 模型 | Exact match | 解析率 | 输出token / token/s | 耗时 | PyTorch峰值allocated/reserved | 整卡采样峰值 |
