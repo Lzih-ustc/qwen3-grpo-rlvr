@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "torch": "2.5.1+cu121",
+  "cuda_available": true,
+  "torch_cuda": "12.1",
+  "transformers": "4.57.3",
+  "trl": "1.16.0",
+  "peft": "0.21.2",
+  "bitsandbytes": "0.50.2",
+  "grpo_use_vllm": false,
+  "grpo_loss_type": "grpo",
+  "grpo_completion_limit": 32,
+  "oom_fallback_ladder": {
+    "completion_lengths": [
+      256,
+      224,
+      192,
+      160,
+      128,
+      96,
+      64,
+      48,
+      32,
+      24
+    ],
+    "generation_groups": [
+      8,
+      4,
+      2
+    ],
+    "gradient_accumulation_tracks_group": true
+  }
+}

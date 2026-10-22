@@ -1,0 +1,108 @@
+{
+  "status": "passed",
+  "checks": {
+    "smoke": {
+      "run_dir": "runs/smoke-v2",
+      "optimizer_updates": 1,
+      "generation_group": 2,
+      "gradient_accumulation_steps": 2,
+      "positive_gradient_steps": 1,
+      "zero_gradient_steps": 0,
+      "zero_reward_variance_steps": 0,
+      "total_reward_logged_steps": 1,
+      "changed_lora_parameters": 2750819,
+      "checkpoints": [
+        {
+          "path": "runs/smoke-v2/attempt-01/trainer/checkpoint-1",
+          "required_files_present": true,
+          "missing_files": []
+        }
+      ],
+      "checks": {
+        "run_success": true,
+        "optimizer_update_count_matches_state": true,
+        "finite_loss_reward_and_gradient_logs": true,
+        "at_least_one_nonzero_gradient": true,
+        "reward_variance_present": true,
+        "effective_generation_group_and_accumulation_match": true,
+        "observed_completions_match_updates_times_group": true,
+        "adapter_parameters_changed": true,
+        "final_adapter_weights_exist": true,
+        "all_checkpoints_have_resume_state": true
+      }
+    },
+    "small_run": {
+      "run_dir": "runs/local-small",
+      "optimizer_updates": 12,
+      "generation_group": 4,
+      "gradient_accumulation_steps": 4,
+      "positive_gradient_steps": 7,
+      "zero_gradient_steps": 5,
+      "zero_reward_variance_steps": 5,
+      "total_reward_logged_steps": 12,
+      "changed_lora_parameters": 4170816,
+      "checkpoints": [
+        {
+          "path": "runs/local-small/attempt-01/trainer/checkpoint-12",
+          "required_files_present": true,
+          "missing_files": []
+        },
+        {
+          "path": "runs/local-small/attempt-01/trainer/checkpoint-8",
+          "required_files_present": true,
+          "missing_files": []
+        }
+      ],
+      "checks": {
+        "run_success": true,
+        "optimizer_update_count_matches_state": true,
+        "finite_loss_reward_and_gradient_logs": true,
+        "at_least_one_nonzero_gradient": true,
+        "reward_variance_present": true,
+        "effective_generation_group_and_accumulation_match": true,
+        "observed_completions_match_updates_times_group": true,
+        "adapter_parameters_changed": true,
+        "final_adapter_weights_exist": true,
+        "all_checkpoints_have_resume_state": true
+      }
+    },
+    "three_way_data_split_passed": true,
+    "validation_checkpoint_selection": {
+      "criterion": "highest exact-match accuracy on data/validation.jsonl; ties choose the earlier checkpoint",
+      "candidates": [
+        {
+          "path": "reports/validation_step12.json",
+          "adapter": "runs/local-small/attempt-01/trainer/checkpoint-12",
+          "correct_count": 65,
+          "eval_count": 96,
+          "accuracy": 0.6770833333333334,
+          "parse_rate": 0.6979166666666666,
+          "eval_data_sha256": "016c7a94489a2827f3b22eebf82b64d242f9f9679391311e1993c0ba606f276d",
+          "checkpoint_reload_exercised": true
+        },
+        {
+          "path": "reports/validation_step8.json",
+          "adapter": "runs/local-small/attempt-01/trainer/checkpoint-8",
+          "correct_count": 63,
+          "eval_count": 96,
+          "accuracy": 0.65625,
+          "parse_rate": 0.6875,
+          "eval_data_sha256": "016c7a94489a2827f3b22eebf82b64d242f9f9679391311e1993c0ba606f276d",
+          "checkpoint_reload_exercised": true
+        }
+      ],
+      "selected": {
+        "path": "reports/validation_step12.json",
+        "adapter": "runs/local-small/attempt-01/trainer/checkpoint-12",
+        "correct_count": 65,
+        "eval_count": 96,
+        "accuracy": 0.6770833333333334,
+        "parse_rate": 0.6979166666666666,
+        "eval_data_sha256": "016c7a94489a2827f3b22eebf82b64d242f9f9679391311e1993c0ba606f276d",
+        "checkpoint_reload_exercised": true
+      },
+      "final_test_data_sha256": "fef149b7c763de8edc4e75d470e7dba79424891547c7f910ae7d4888b8705107",
+      "selection_used_final_test": false
+    }
+  }
+}

@@ -1,0 +1,422 @@
+{
+  "tag": "local-small-step12",
+  "timestamp_utc": "2026-10-22T15:46:51.539865+00:00",
+  "model_id": "Qwen/Qwen3-0.6B",
+  "model_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+  "adapter": "runs/local-small/attempt-01/final_adapter",
+  "seed": 20261022,
+  "decode": {
+    "do_sample": false,
+    "max_new_tokens": 48,
+    "thinking": false
+  },
+  "eval_count": 48,
+  "correct_count": 32,
+  "accuracy": 0.6666666666666666,
+  "parse_rate": 0.6666666666666666,
+  "elapsed_seconds": 40.31416143200022,
+  "tokens_per_second": 22.02699916003043,
+  "generated_tokens": 888,
+  "eval_data_sha256": "fef149b7c763de8edc4e75d470e7dba79424891547c7f910ae7d4888b8705107",
+  "torch_peak_allocated_mib": 819.98828125,
+  "torch_peak_reserved_mib": 862.0,
+  "gpu_start": {
+    "memory_used_mib": 3708.0,
+    "memory_total_mib": 12288.0,
+    "gpu_util_percent": 8.0,
+    "temperature_c": 56.0
+  },
+  "gpu_monitor": {
+    "nvidia_smi_samples": 73,
+    "whole_gpu_peak_memory_used_mib": 4509.0,
+    "whole_gpu_peak_utilization_percent": 50.0,
+    "whole_gpu_start_memory_used_mib": 3710.0,
+    "whole_gpu_end_memory_used_mib": 4096.0
+  },
+  "predictions": [
+    {
+      "prompt": "Compute 11 + 89. Show a short calculation and put the final integer exactly inside <answer>...</answer>.",
+      "expected": 100,
+      "completion": "11 + 89 = 100\n\n<answer>100</answer>",
+      "predicted": 100,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "Evaluate 67 - 60. Give one brief line of work, then write <answer>integer</answer> with the result.",
+      "expected": 7,
+      "completion": "67 - 60 = 7\n\nAnswer: <answer>7</answer>",
+      "predicted": 7,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "What is 35 * 23? Return the final integer using this exact format: <answer>integer</answer>.",
+      "expected": 805,
+      "completion": "<answer>35 * 23</answer>",
+      "predicted": null,
+      "parse_source": null,
+      "correct": false
+    },
+    {
+      "prompt": "Compute 50 + 15. Show a short calculation and put the final integer exactly inside <answer>...</answer>.",
+      "expected": 65,
+      "completion": "50 + 15 = 65\n\n<answer>65</answer>",
+      "predicted": 65,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "Evaluate 75 - 66. Give one brief line of work, then write <answer>integer</answer> with the result.",
+      "expected": 9,
+      "completion": "75 - 66 = 9\n\nAnswer: <answer>9</answer>",
+      "predicted": 9,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "What is 25 * 35? Return the final integer using this exact format: <answer>integer</answer>.",
+      "expected": 875,
+      "completion": "<answer>25 * 35</answer>",
+      "predicted": null,
+      "parse_source": null,
+      "correct": false
+    },
+    {
+      "prompt": "Compute 17 + 74. Show a short calculation and put the final integer exactly inside <answer>...</answer>.",
+      "expected": 91,
+      "completion": "17 + 74 = 91\n\n<answer>91</answer>",
+      "predicted": 91,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "Evaluate 34 - 25. Give one brief line of work, then write <answer>integer</answer> with the result.",
+      "expected": 9,
+      "completion": "34 - 25 = 9\n\nAnswer: <answer>9</answer>",
+      "predicted": 9,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "What is 8 * 23? Return the final integer using this exact format: <answer>integer</answer>.",
+      "expected": 184,
+      "completion": "<answer>8 * 23</answer>",
+      "predicted": null,
+      "parse_source": null,
+      "correct": false
+    },
+    {
+      "prompt": "Compute 8 + 29. Show a short calculation and put the final integer exactly inside <answer>...</answer>.",
+      "expected": 37,
+      "completion": "8 + 29 = 37\n\n<answer>37</answer>",
+      "predicted": 37,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "Evaluate 43 - 24. Give one brief line of work, then write <answer>integer</answer> with the result.",
+      "expected": 19,
+      "completion": "43 - 24 = 19\n\nAnswer: <answer>19</answer>",
+      "predicted": 19,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "What is 63 * 42? Return the final integer using this exact format: <answer>integer</answer>.",
+      "expected": 2646,
+      "completion": "<answer>63 * 42</answer>",
+      "predicted": null,
+      "parse_source": null,
+      "correct": false
+    },
+    {
+      "prompt": "Compute 11 + 94. Show a short calculation and put the final integer exactly inside <answer>...</answer>.",
+      "expected": 105,
+      "completion": "11 + 94 = 105\n\n<answer>105</answer>",
+      "predicted": 105,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "Evaluate 42 - 32. Give one brief line of work, then write <answer>integer</answer> with the result.",
+      "expected": 10,
+      "completion": "42 - 32 = 10\n\nAnswer: <answer>10</answer>",
+      "predicted": 10,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "What is 18 * 59? Return the final integer using this exact format: <answer>integer</answer>.",
+      "expected": 1062,
+      "completion": "<answer>18 * 59</answer>",
+      "predicted": null,
+      "parse_source": null,
+      "correct": false
+    },
+    {
+      "prompt": "Compute 27 + 47. Show a short calculation and put the final integer exactly inside <answer>...</answer>.",
+      "expected": 74,
+      "completion": "27 + 47 = 74.  \nFinal integer inside <answer>...</answer>:\n\n<answer>74</answer>",
+      "predicted": 74,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "Evaluate 9 - 3. Give one brief line of work, then write <answer>integer</answer> with the result.",
+      "expected": 6,
+      "completion": "9 - 3 = 6  \nAnswer: <answer>6</answer>",
+      "predicted": 6,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "What is 81 * 95? Return the final integer using this exact format: <answer>integer</answer>.",
+      "expected": 7695,
+      "completion": "<answer>81 * 95</answer>",
+      "predicted": null,
+      "parse_source": null,
+      "correct": false
+    },
+    {
+      "prompt": "Compute 79 + 16. Show a short calculation and put the final integer exactly inside <answer>...</answer>.",
+      "expected": 95,
+      "completion": "79 + 16 = 95\n\n<answer>95</answer>",
+      "predicted": 95,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "Evaluate 36 - 27. Give one brief line of work, then write <answer>integer</answer> with the result.",
+      "expected": 9,
+      "completion": "36 - 27 = 9\n\nAnswer: <answer>9</answer>",
+      "predicted": 9,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "What is 94 * 86? Return the final integer using this exact format: <answer>integer</answer>.",
+      "expected": 8084,
+      "completion": "<answer>94 * 86</answer>",
+      "predicted": null,
+      "parse_source": null,
+      "correct": false
+    },
+    {
+      "prompt": "Compute 96 + 55. Show a short calculation and put the final integer exactly inside <answer>...</answer>.",
+      "expected": 151,
+      "completion": "96 + 55 = 151\n\n<answer>151</answer>",
+      "predicted": 151,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "Evaluate 76 - 60. Give one brief line of work, then write <answer>integer</answer> with the result.",
+      "expected": 16,
+      "completion": "76 - 60 = 16\n\nAnswer: <answer>16</answer>",
+      "predicted": 16,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "What is 53 * 45? Return the final integer using this exact format: <answer>integer</answer>.",
+      "expected": 2385,
+      "completion": "<answer>53 * 45</answer>",
+      "predicted": null,
+      "parse_source": null,
+      "correct": false
+    },
+    {
+      "prompt": "Compute 42 + 7. Show a short calculation and put the final integer exactly inside <answer>...</answer>.",
+      "expected": 49,
+      "completion": "42 + 7 = 49\n\n<answer>49</answer>",
+      "predicted": 49,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "Evaluate 55 - 45. Give one brief line of work, then write <answer>integer</answer> with the result.",
+      "expected": 10,
+      "completion": "55 - 45 = 10\n\nAnswer: <answer>10</answer>",
+      "predicted": 10,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "What is 18 * 12? Return the final integer using this exact format: <answer>integer</answer>.",
+      "expected": 216,
+      "completion": "<answer>18 * 12</answer>",
+      "predicted": null,
+      "parse_source": null,
+      "correct": false
+    },
+    {
+      "prompt": "Compute 81 + 75. Show a short calculation and put the final integer exactly inside <answer>...</answer>.",
+      "expected": 156,
+      "completion": "81 + 75 = 156\n\n<answer>156</answer>",
+      "predicted": 156,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "Evaluate 60 - 21. Give one brief line of work, then write <answer>integer</answer> with the result.",
+      "expected": 39,
+      "completion": "60 - 21 = 39\n\nAnswer: <answer>39</answer>",
+      "predicted": 39,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "What is 27 * 15? Return the final integer using this exact format: <answer>integer</answer>.",
+      "expected": 405,
+      "completion": "<answer>27 * 15</answer>",
+      "predicted": null,
+      "parse_source": null,
+      "correct": false
+    },
+    {
+      "prompt": "Compute 12 + 21. Show a short calculation and put the final integer exactly inside <answer>...</answer>.",
+      "expected": 33,
+      "completion": "12 + 21 = 33\n\n<answer>33</answer>",
+      "predicted": 33,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "Evaluate 83 - 82. Give one brief line of work, then write <answer>integer</answer> with the result.",
+      "expected": 1,
+      "completion": "83 - 82 = 1\n\nAnswer: <answer>1</answer>",
+      "predicted": 1,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "What is 43 * 16? Return the final integer using this exact format: <answer>integer</answer>.",
+      "expected": 688,
+      "completion": "<answer>43 * 16</answer>",
+      "predicted": null,
+      "parse_source": null,
+      "correct": false
+    },
+    {
+      "prompt": "Compute 15 + 96. Show a short calculation and put the final integer exactly inside <answer>...</answer>.",
+      "expected": 111,
+      "completion": "15 + 96 = 111\n\n<answer>111</answer>",
+      "predicted": 111,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "Evaluate 93 - 61. Give one brief line of work, then write <answer>integer</answer> with the result.",
+      "expected": 32,
+      "completion": "93 - 61 = 32\n\nAnswer: <answer>32</answer>",
+      "predicted": 32,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "What is 71 * 33? Return the final integer using this exact format: <answer>integer</answer>.",
+      "expected": 2343,
+      "completion": "<answer>71 * 33</answer>",
+      "predicted": null,
+      "parse_source": null,
+      "correct": false
+    },
+    {
+      "prompt": "Compute 93 + 89. Show a short calculation and put the final integer exactly inside <answer>...</answer>.",
+      "expected": 182,
+      "completion": "93 + 89 = 182\n\n<answer>182</answer>",
+      "predicted": 182,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "Evaluate 70 - 52. Give one brief line of work, then write <answer>integer</answer> with the result.",
+      "expected": 18,
+      "completion": "70 - 52 = 18\n\nAnswer: <answer>18</answer>",
+      "predicted": 18,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "What is 82 * 28? Return the final integer using this exact format: <answer>integer</answer>.",
+      "expected": 2296,
+      "completion": "<answer>82 * 28</answer>",
+      "predicted": null,
+      "parse_source": null,
+      "correct": false
+    },
+    {
+      "prompt": "Compute 82 + 55. Show a short calculation and put the final integer exactly inside <answer>...</answer>.",
+      "expected": 137,
+      "completion": "82 + 55 = 137\n\n<answer>137</answer>",
+      "predicted": 137,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "Evaluate 93 - 63. Give one brief line of work, then write <answer>integer</answer> with the result.",
+      "expected": 30,
+      "completion": "93 - 63 = 30\n\nAnswer: <answer>30</answer>",
+      "predicted": 30,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "What is 60 * 82? Return the final integer using this exact format: <answer>integer</answer>.",
+      "expected": 4920,
+      "completion": "<answer>60 * 82</answer>",
+      "predicted": null,
+      "parse_source": null,
+      "correct": false
+    },
+    {
+      "prompt": "Compute 20 + 61. Show a short calculation and put the final integer exactly inside <answer>...</answer>.",
+      "expected": 81,
+      "completion": "20 + 61 = 81\n\n<answer>81</answer>",
+      "predicted": 81,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "Evaluate 25 - 3. Give one brief line of work, then write <answer>integer</answer> with the result.",
+      "expected": 22,
+      "completion": "25 - 3 = 22\n\nAnswer: <answer>22</answer>",
+      "predicted": 22,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "What is 60 * 75? Return the final integer using this exact format: <answer>integer</answer>.",
+      "expected": 4500,
+      "completion": "<answer>60 * 75</answer>",
+      "predicted": null,
+      "parse_source": null,
+      "correct": false
+    },
+    {
+      "prompt": "Compute 42 + 42. Show a short calculation and put the final integer exactly inside <answer>...</answer>.",
+      "expected": 84,
+      "completion": "42 + 42 = 84.  \n<answer>84</answer>",
+      "predicted": 84,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "Evaluate 83 - 45. Give one brief line of work, then write <answer>integer</answer> with the result.",
+      "expected": 38,
+      "completion": "83 - 45 = 38\n\nAnswer: <answer>38</answer>",
+      "predicted": 38,
+      "parse_source": "answer_tag",
+      "correct": true
+    },
+    {
+      "prompt": "What is 72 * 89? Return the final integer using this exact format: <answer>integer</answer>.",
+      "expected": 6408,
+      "completion": "<answer>72 * 89</answer>",
+      "predicted": null,
+      "parse_source": null,
+      "correct": false
+    }
+  ]
+}

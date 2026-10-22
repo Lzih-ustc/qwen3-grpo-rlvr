@@ -1,0 +1,63 @@
+{
+  "timestamp_utc": "2026-10-22T15:47:21.202922+00:00",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+  "executable": "/home/zihao/.venvs/qwen3-grpo/bin/python",
+  "cwd": "/mnt/e/强化学习项目",
+  "packages": {
+    "torch": "2.5.1+cu121",
+    "transformers": "4.57.3",
+    "trl": "1.16.0",
+    "peft": "0.21.2",
+    "accelerate": "1.15.0",
+    "datasets": "4.7.0",
+    "bitsandbytes": "0.50.2",
+    "numpy": "2.5.4"
+  },
+  "torch": {
+    "installed": true,
+    "version": "2.5.1+cu121",
+    "compiled_cuda": "12.1",
+    "cuda_available": true,
+    "bf16_supported": true,
+    "devices": [
+      {
+        "index": 0,
+        "name": "NVIDIA GeForce RTX 3060",
+        "total_memory_bytes": 12884377600,
+        "capability": [
+          8,
+          6
+        ]
+      }
+    ]
+  },
+  "nvidia_smi": {
+    "command": [
+      "nvidia-smi"
+    ],
+    "returncode": 0,
+    "stdout": "Thu Oct 22 23:47:21 2026       \n+---------------------------------------------------------------------------------------+\n| NVIDIA-SMI 535.120                Driver Version: 537.58       CUDA Version: 12.2     |\n|-----------------------------------------+----------------------+----------------------+\n| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |\n| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |\n|                                         |                      |               MIG M. |\n|=========================================+======================+======================|\n|   0  NVIDIA GeForce RTX 3060        On  | 00000000:01:00.0  On |                  N/A |\n| 57%   55C    P0              49W / 170W |   2057MiB / 12288MiB |      3%      Default |\n|                                         |                      |                  N/A |\n+-----------------------------------------+----------------------+----------------------+\n                                                                                         \n+---------------------------------------------------------------------------------------+\n| Processes:                                                                            |\n|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |\n|        ID   ID                                                             Usage      |\n|=======================================================================================|\n|    0   N/A  N/A        59      G   /Xwayland                                 N/A      |\n+---------------------------------------------------------------------------------------+",
+    "stderr": ""
+  },
+  "nvidia_query": {
+    "command": [
+      "nvidia-smi",
+      "--query-gpu=name,driver_version,memory.total,memory.used,memory.free",
+      "--format=csv,noheader,nounits"
+    ],
+    "returncode": 0,
+    "stdout": "NVIDIA GeForce RTX 3060, 537.58, 12288, 2057, 10066",
+    "stderr": ""
+  },
+  "wsl_release": {
+    "command": [
+      "bash",
+      "-lc",
+      "cat /etc/os-release; uname -a"
+    ],
+    "returncode": 0,
+    "stdout": "PRETTY_NAME=\"Ubuntu 24.04.3 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"24.04\"\nVERSION=\"24.04.3 LTS (Noble Numbat)\"\nVERSION_CODENAME=noble\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=noble\nLOGO=ubuntu-logo\nLinux PC-20250419ZQLH 6.6.87.2-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Thu Jun  5 18:30:46 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux",
+    "stderr": ""
+  }
+}

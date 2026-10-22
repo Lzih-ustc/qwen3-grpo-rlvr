@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "reward_cases": 5,
+  "splits": {
+    "train": {
+      "examples": 256,
+      "sha256": "9493e73bcd6eb59f281449308fd0626dea9e41a7d3f2fbdfca5f7163846df011"
+    },
+    "validation": {
+      "examples": 96,
+      "sha256": "016c7a94489a2827f3b22eebf82b64d242f9f9679391311e1993c0ba606f276d"
+    },
+    "eval": {
+      "examples": 48,
+      "sha256": "fef149b7c763de8edc4e75d470e7dba79424891547c7f910ae7d4888b8705107"
+    }
+  },
+  "question_overlaps": {
+    "train_validation": 0,
+    "train_eval": 0,
+    "validation_eval": 0
+  }
+}

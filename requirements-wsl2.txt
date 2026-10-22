@@ -1,0 +1,13 @@
+# The exact environment snapshot is written after the local smoke and training run.
+torch==2.5.1+cu121
+transformers==4.57.3
+trl==1.16.0
+peft==0.21.2
+bitsandbytes==0.50.2
+accelerate==1.15.0
+datasets==4.7.0
+huggingface-hub==0.36.2
+numpy==2.5.4
+safetensors==0.8.0
+# Keep CUDA JIT-link libraries on the same toolkit generation as the PyTorch wheel.
+nvidia-nvjitlink-cu12==12.1.105

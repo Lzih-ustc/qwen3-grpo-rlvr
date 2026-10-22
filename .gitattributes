@@ -1,0 +1,10 @@
+* text=auto
+*.py text eol=lf
+*.json text eol=lf
+*.jsonl text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.parquet binary
+*.safetensors binary
+*.pt binary
+.gitattributes text eol=lf

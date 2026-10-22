@@ -1,0 +1,165 @@
+# Qwen3-0.6B 本地 GRPO 实验报告
+
+执行时间：2026-10-22 UTC 至 2026-10-23 Asia/Shanghai。全部训练和评测在本地 WSL2 RTX 3060 上完成；没有租用或使用 AutoDL/其他云端 GPU。模型和公开数据文件下载到本地缓存。
+
+## 结果摘要
+
+- 最小正确性检查通过；1 步 smoke 完成真实反向传播与优化器更新。
+- 12 步小训练完成，LoRA 权重发生可量化变化，保留了完整 Trainer checkpoint 和最终 adapter。
+- 全程没有 OOM，因此未启用显存回退。
+- 固定 48 题留出集上，基座 exact-match 为 24/48（50.0%），微调后为 32/48（66.7%），增加 16.7 个百分点。这只是小样本 sanity 结果，不足以证明稳定泛化提升。
+- 另完成固定 GSM8K revision 的本地 RLVR pilot：validation 选中的 group-4 step-4 在独立 test2 子集为 33/128（25.78%），base 为 12/128（9.38%）。这是单 seed、小子集结果；输出 token 与推理耗时明显增加，尚不能视为稳定提升或效率优化。
+
+## 环境审计
+
+首次安装前，WSL2 能看到 RTX 3060，但 PyTorch、Transformers、TRL、PEFT、Accelerate 和 bitsandbytes 均未安装。最终训练环境如下：
+
+| 项目 | 审计结果 |
+|---|---|
+| 系统 | WSL2 / Ubuntu 24.04.3 LTS，Linux kernel 6.6.87.2 |
+| Python | 3.12.3；虚拟环境 `/home/zihao/.venvs/qwen3-grpo` |
+| GPU | NVIDIA GeForce RTX 3060，12,288 MiB，compute capability 8.6 |
+| NVIDIA driver | 537.58；`nvidia-smi` 报告 driver CUDA 12.2 |
+| PyTorch | 2.5.1+cu121；PyTorch CUDA runtime 12.1；CUDA 可用，BF16 可用 |
+| Transformers / TRL | 4.57.3 / 1.16.0 |
+| PEFT / Accelerate | 0.21.2 / 1.15.0 |
+| Datasets / bitsandbytes | 4.7.0 / 0.50.2 |
+| NumPy | 2.5.4 |
+| 最终 `pip check` | 无依赖冲突 |
+
+开始训练前最后一次环境审计记录到 2,057 MiB 已用、10,066 MiB 可用；最初审计为 2,111 MiB 已用、10,012 MiB 可用。占用主要来自桌面显示进程。逐次训练的 GPU 峰值是 0.5 秒间隔 `nvidia-smi` 采样到的整卡数字，包含桌面/其他进程；另列 PyTorch allocator 指标，二者不能相互替代。
+
+环境完整记录见 `environment_preinstall.json` 和 `environment.json`。
+
+## 模型、数据与可验证奖励
+
+- 模型：`Qwen/Qwen3-0.6B`，固定 revision `c1899de289a04d12100db370d81485cdf75e47ca`。
+- 训练数据：256 条固定种子的整数加减乘题；SHA-256：`9493e73bcd6eb59f281449308fd0626dea9e41a7d3f2fbdfca5f7163846df011`。
+- 验证集：96 条题目；SHA-256：`016c7a94489a2827f3b22eebf82b64d242f9f9679391311e1993c0ba606f276d`。按固定种子生成，并在采样时排除 train 与 final eval 已出现的题目。
+- 最终评测集：48 条独立种子题；SHA-256：`fef149b7c763de8edc4e75d470e7dba79424891547c7f910ae7d4888b8705107`。
+- `validate_reward.py` 对已保存 JSONL 与确定性生成器逐行比对，train/validation/eval 三组 prompt 文本交集均为 0。训练集 256 行中有 252 个唯一 prompt（4 行重复），验证集和评测集内无重复；正式数据应去重训练样本。
+- 奖励只从唯一 `<answer>整数</answer>` 或唯一 `\boxed{整数}` 解析最终答案；未标记答案或多个答案标记不给分。正确答案加 1.0，正确 XML 格式加 0.05，距离 shaping 最多加 0.1。
+- 5 项奖励/解析单测全部通过；包含正确、错误、无格式、重复标签和 boxed 负整数。
+
+## 训练配置与实测指标
+
+两次训练都使用 NF4 4-bit 基座、double quant、BF16 计算、LoRA `r=8 / alpha=16 / dropout=0`，注入 q/k/v/o/gate/up/down 投影；启用非 reentrant gradient checkpointing，单卡 Transformers 原生生成，`use_vllm=False`。没有加载 reference model（`beta=0`）。
+
+| 指标 | 正确性 smoke | 小规模训练 |
+|---|---:|---:|
+| Prompt / completion token 上限 | 96 / 32 | 128 / 64 |
+| Generation group / 梯度累积 | 2 / 2 | 4 / 4 |
+| 优化器更新 | 1 | 12 |
+| 训练耗时 | 24.35 秒 | 43.95 秒 |
+| 更新速度 | 0.041 step/s | 0.273 step/s |
+| Completion 速度 | 0.082 completion/s | 1.092 completion/s |
+| 实际生成 token / 速度 | 51 / 2.09 token/s | 1,111 / 25.28 token/s |
+| 平均训练 reward | 0.575 | 0.766（每步均值的算术平均） |
+| reward 范围 | 0.575 | 0.000–1.150 |
+| 零组内 reward 方差 | 0/1 步 | 5/12 步 |
+| PyTorch 峰值 allocated / reserved | 1,107 / 1,432 MiB | 1,107 / 1,432 MiB |
+| 采样整卡 GPU 峰值 | 4,457 MiB | 4,491 MiB |
+| OOM / 回退 | 无 / 无 | 无 / 无 |
+
+小训练共有 5,046,272 个可训练 LoRA 参数，其中 4,170,816 个参数在最终模型中发生变化；LoRA 参数绝对更新量之和为 638.29。训练日志 12 步 loss、reward 和 grad norm 均为有限数；7 步 grad norm 大于零，5 步 grad norm 为零。后 5 步正好对应组内 reward 方差为零，因此这些步没有有效的组内相对偏好信号；报告该情况供解释训练 reward 和后续正式配置时参考。
+
+## Validation 选 checkpoint
+
+先固定规则：按 validation exact-match accuracy 选 checkpoint；并列时选更早的 checkpoint。使用独立进程从 checkpoint 目录重载 adapter，在同一个 96 题 validation 集上贪心评测：
+
+| Checkpoint | 正确题数 | Accuracy | 解析率 | 耗时 / 吞吐 |
+|---|---:|---:|---:|---:|
+| step 8 | 63/96 | 65.63% | 68.75% | 87.15 秒 / 29.28 token/s |
+| step 12 | 65/96 | 67.71% | 69.79% | 68.58 秒 / 26.51 token/s |
+
+因此选择 `checkpoint-12`。该选择只依据 validation；`quality_gate.json` 记录了候选、规则、hash 和 selected path。最终评测集 SHA 与 validation 不同，也没有用于选择模型。最终 adapter 的权重与 step 12 checkpoint 权重 SHA-256 相同。
+
+## 独立留出评测
+
+评测由独立进程加载基座或已保存 adapter，使用 greedy decoding、`max_new_tokens=48`、关闭 thinking；基座和 12 步模型使用同一最终评测文件及 seed。step 8/12 checkpoint 选择另用独立 validation 集。
+
+| 模型 | Exact match | 解析率 | 耗时 / 生成吞吐 | PyTorch 峰值 allocated / reserved | 整卡采样峰值 |
+|---|---:|---:|---:|---:|---:|
+| 基座 | 24/48（50.0%） | 25/48（52.1%） | 41.92 秒 / 32.92 token/s | 820 / 846 MiB | 4,116 MiB |
+| 12 步 adapter | 32/48（66.7%） | 32/48（66.7%） | 40.31 秒 / 22.03 token/s | 820 / 862 MiB | 4,509 MiB |
+
+小评测集存在较大统计波动，评测准确率不能替代正式数学基准，也不应用训练 reward 选取正式模型。逐题预测、解析结果和准确率都保存在评测 JSON 中。测试结果显示本模型小样本 exact-match 上升，但这并不能证明通用数学推理能力提升。
+
+## GSM8K 多步数学 RLVR pilot
+
+算术实验验证了训练接口，但任务过于简单。后续 pilot 改用固定 revision 的 [`openai/gsm8k`](https://huggingface.co/datasets/openai/gsm8k/blob/740312add88f781978c0658806c59bc2815b9866/README.md)：官方数据卡将其描述为需要多步推理的年级数学题并列出 MIT 许可；上游 MIT 文本保存在 `data/gsm8k/LICENSE`。本地划分由固定样本种子生成，最终答案严格解析自来源答案末尾 `#### integer`，不符合整数格式的数据会使准备脚本失败。
+
+| Split | 数量 | SHA-256 | 用途 |
+|---|---:|---|---|
+| train | 256 | `61cf86d39c754b0867b91547d8445afbcfe48a78dfd085d364f7ba6143c640bd` | GRPO |
+| validation | 96 | `198be3c7a638cbbf6f71df4469dd30df5653d974ebf072dcac691ea04434fe16` | 选择 checkpoint |
+| test（slice 1） | 128 | `ee7c56ff8834669a354c5b4eda69fdca8741471e0800872d82974fa64ca30ca8` | 初轮开发诊断；之后用于比较采样组，不作最终留出结论 |
+| test2（slice 2） | 128 | `d422c8ecffd4aefcbcc8ded6de47b4d05970470da56cfaa028b6b7d3faf86350` | 最终 pilot 对照，选择 checkpoint 前未查看 |
+
+四个 split 的题目文本均不重叠，逐行 JSONL hash 与 pinned manifest 匹配。训练配置都使用同一 Qwen3 revision、NF4 QLoRA、BF16、LoRA r=8/alpha=16、gradient checkpointing、`use_vllm=False`、学习率 `5e-5`、prompt 上限192和 completion 上限160。唯一主要变量为 GRPO group 与更新数；两组各采样16条 completion，但不是相同 token 或时间预算，因此这只是采样组探索，不是公平的效率消融。
+
+| 训练条件 | Updates / group | Completion 数 / token 数 | train 时间 | 平均 reward / 平均组内 std | 被截断更新 | PyTorch allocated/reserved 峰值 | 整卡采样峰值 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| group 2 | 8 / 2 | 16 / 304 | 24.08 秒 | 0.05296 / 0.01094 | step 2 有部分截断 | 1,117/1,432 MiB | 4,193 MiB |
+| group 4 | 4 / 4 | 16 / 1,225 | 40.58 秒 | 0.24082 / 0.29572 | step 4 的4条全到160-token上限 | 1,144/1,432 MiB | 4,132 MiB |
+
+两组都完成真实 LoRA 更新、日志数值有限、保留 optimizer/RNG/Trainer checkpoint，且无 OOM。按 validation exact-match 最高者从四个候选 checkpoint 中选出 group-4 step-4：base 为8/96（8.33%），group-2 step-4/8 均为4/96（4.17%），group-4 step-2 为14/96（14.58%），group-4 step-4 为29/96（30.21%）。所有候选都在同一 validation hash 上由独立进程重载评测；选择规则和实际结果见 `gsm8k_checkpoint_selection.json`。
+
+在选择完成后，对未参与选模的 test2 做 base 与所选 checkpoint 的同协议对照（greedy，max_new_tokens=192，thinking 关闭）：
+
+| 模型 | Exact match | 解析率 | 输出 token / token/s | 耗时 | PyTorch allocated/reserved | 整卡采样峰值 |
+|---|---:|---:|---:|---:|---:|---:|
+| Base | 12/128（9.38%，95% Wilson CI 5.44–15.67%） | 78.13% | 5,188 / 49.30 | 105.23 秒 | 820/878 MiB | 3,520 MiB |
+| 选中 group-4 step-4 | 33/128（25.78%，95% Wilson CI 18.99–33.99%） | 69.53% | 15,455 / 29.25 | 528.31 秒 | 820/900 MiB | 3,669 MiB |
+
+test2 上两个模型对同一批题逐题配对：7 题都答对、5 题 base-only 正确、26 题 selected-only 正确、90 题都错；精确 McNemar 双侧 p=0.00019。该结果支持“这次固定采样下准确率上升”的描述，但只有128题、单 seed，而且所选模型生成约3倍 token、推理时间约5倍，解析率也低8.6个百分点；不应据此声称已获得普遍、稳定的 GSM8K 提升或训练加速。
+
+首个 test slice 的早期开发诊断为 base 13/128、group-2 step-4 4/128；看到该结果后才探索 group 4。它不用于最终结论。test2 在 group-4 checkpoint 选择前保持未查看。训练 step-4 的 completion 截断率为100%，下一轮须先扩大长度预算并测显存/截断，然后用更多 updates 和新 seed 重复；另需给效率比较匹配生成 token 或 GPU 时间预算。
+
+## Checkpoint 与复现材料
+
+小训练保留的 Trainer checkpoint：
+
+- `runs/local-small/attempt-01/trainer/checkpoint-8`
+- `runs/local-small/attempt-01/trainer/checkpoint-12`
+- 最终 adapter：`runs/local-small/attempt-01/final_adapter`
+
+checkpoint 保存 adapter、optimizer、scheduler、RNG 状态和 Trainer 状态，可供续训；评测直接使用最终 adapter。第 12 步 adapter 权重 SHA-256 为 `9fd7d119a81c377bbe752b2b7745648508489c289c4431b51eae4bcd15f5e7d7`；第 8 步权重 SHA-256 为 `c92b2a5e09af8f7e5dfd6d0af261c5104ffaf6a4753a6be02a84b984f303e578`。
+
+完整文件大小与哈希清单在 `artifact_manifest.json`。训练依赖锁 `requirements-wsl2.lock.txt` 的 SHA-256 为 `9b220140188d5ea20bd457a5fffb04b00a3c1f2ce0c528aeabbcd0306a8665d6`。成功运行 summary 另记录模型 revision、数据/代码 hash、优化器更新数、reward log、显存峰值和 checkpoint 路径。
+
+可在 WSL Ubuntu 工作区中用新目录重跑：
+
+```bash
+cd /mnt/e/强化学习项目
+~/.venvs/qwen3-grpo/bin/python scripts/audit_env.py --output reports/environment.json
+~/.venvs/qwen3-grpo/bin/python scripts/check_runtime.py
+~/.venvs/qwen3-grpo/bin/python scripts/validate_reward.py
+~/.venvs/qwen3-grpo/bin/python scripts/train_grpo.py --profile smoke --run-dir runs/smoke-repro
+~/.venvs/qwen3-grpo/bin/python scripts/eval_math.py --tag base --output reports/eval_base.json
+~/.venvs/qwen3-grpo/bin/python scripts/train_grpo.py --profile small --run-dir runs/local-small-repro
+~/.venvs/qwen3-grpo/bin/python scripts/eval_math.py --adapter runs/local-small-repro/attempt-01/trainer/checkpoint-8 --eval-data data/validation.jsonl --tag step8-validation --output reports/validation_step8_repro.json
+~/.venvs/qwen3-grpo/bin/python scripts/eval_math.py --adapter runs/local-small-repro/attempt-01/trainer/checkpoint-12 --eval-data data/validation.jsonl --tag step12-validation --output reports/validation_step12_repro.json
+~/.venvs/qwen3-grpo/bin/python scripts/eval_math.py --adapter runs/local-small-repro/attempt-01/final_adapter --tag local-small-repro --output reports/eval_local_small.json
+~/.venvs/qwen3-grpo/bin/python scripts/audit_run.py --smoke-run runs/smoke-repro --small-run runs/local-small-repro --step8-validation reports/validation_step8_repro.json --step12-validation reports/validation_step12_repro.json --output-dir reports/repro
+```
+
+首次运行需从 Hugging Face 下载模型文件；以上命令的模型推理、反向传播和评测都在本机 GPU 执行。输出目录必须为空，复跑时使用新的目录名。
+
+## 初次兼容性问题
+
+第一次 smoke 暴露已安装 TRL `GRPOConfig` 不接受 `use_cache` 参数。该项已从 Trainer 配置移除，模型 config 保持 `use_cache=False`；修正后的 smoke 完成了有效参数更新。对应失败记录留在 `runs/smoke/attempt-01/failure.json`，成功记录留在 `runs/smoke-v2/run_summary.json`。另一次较新的 Transformers 与当前 PyTorch 组合不兼容，最终固定使用本报告列出的版本并由 `pip check` 验证。
+
+## AutoDL 单张 24GB GPU 正式训练计划
+
+详细迁移步骤见 `formal_training_plan.md`。核心顺序：在 AutoDL 记录实际 GPU/driver/CUDA，按驱动重建锁定环境并通过 reward/runtime 检查；运行 1 步小 smoke，再以正式长度/group 做 1 步 profile；稳定后使用单卡 NF4 QLoRA、gradient checkpointing、no-vLLM、group 8、prompt/completion 上限 256、500 optimizer updates、每 50 步保存。使用 1,500 条训练、500 条验证和 1,063 条独立留出题，每 100 步单独评测；保留全部 checkpoint、环境和数据 hash、吞吐、reward、准确率及显存曲线。OOM 时按计划逐项缩短 completion、降低 generation group，再降低 prompt 上限。
+
+本机 12GB 显存上小训练的整卡峰值为 4,491 MiB，但 AutoDL 型号、桌面占用、驱动和吞吐都需在目标实例重新实测；不能根据这次结果线性外推。
+
+正式训练数据已在本地单独准备到 `data/gsm8k-formal/`，包含 1,500 train、500 validation 和 1,063 条官方 test。test 通过旧 pilot 两个 test split 的来源索引排除 256 道已查看问题，并由 `gsm8k_formal_data_validation.json` 验证无重叠；四个 split SHA-256 记录在该目录 `manifest.json`。这份正式 test 尚未用于模型推理或选模。正式训练尚未启动，也没有使用 AutoDL/GPU 云服务。
+
+## 上游接口依据
+
+- [TRL GRPOTrainer 文档](https://huggingface.co/docs/trl/grpo_trainer)
+- [Qwen3-0.6B 固定 revision 模型卡](https://huggingface.co/Qwen/Qwen3-0.6B/tree/c1899de289a04d12100db370d81485cdf75e47ca)
+- [Qwen3 模型卡与 thinking 选项](https://huggingface.co/Qwen/Qwen3-0.6B)

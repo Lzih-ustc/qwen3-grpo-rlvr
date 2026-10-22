@@ -1,0 +1,77 @@
+{
+  "criterion": "highest validation exact-match accuracy; ties prefer fewer optimizer updates, then smaller group",
+  "candidate_checkpoints": [
+    {
+      "group_size": 4,
+      "step": 4,
+      "adapter": "runs/gsm8k-group4-pilot/attempt-01/trainer/checkpoint-4",
+      "correct_count": 29,
+      "eval_count": 96,
+      "accuracy": 0.3020833333333333,
+      "parse_rate": 0.7395833333333334,
+      "elapsed_seconds": 391.636521634,
+      "tokens_per_second": 28.582625423430862,
+      "generated_tokens": 11194,
+      "validation_sha256": "198be3c7a638cbbf6f71df4469dd30df5653d974ebf072dcac691ea04434fe16",
+      "checkpoint_reloaded": true
+    },
+    {
+      "group_size": 4,
+      "step": 2,
+      "adapter": "runs/gsm8k-group4-pilot/attempt-01/trainer/checkpoint-2",
+      "correct_count": 14,
+      "eval_count": 96,
+      "accuracy": 0.14583333333333334,
+      "parse_rate": 0.78125,
+      "elapsed_seconds": 208.3260126669993,
+      "tokens_per_second": 27.039350141089304,
+      "generated_tokens": 5633,
+      "validation_sha256": "198be3c7a638cbbf6f71df4469dd30df5653d974ebf072dcac691ea04434fe16",
+      "checkpoint_reloaded": true
+    },
+    {
+      "group_size": 2,
+      "step": 4,
+      "adapter": "runs/gsm8k-pilot/attempt-01/trainer/checkpoint-4",
+      "correct_count": 4,
+      "eval_count": 96,
+      "accuracy": 0.041666666666666664,
+      "parse_rate": 0.7916666666666666,
+      "elapsed_seconds": 47.584983007999654,
+      "tokens_per_second": 23.620897370311994,
+      "generated_tokens": 1124,
+      "validation_sha256": "198be3c7a638cbbf6f71df4469dd30df5653d974ebf072dcac691ea04434fe16",
+      "checkpoint_reloaded": true
+    },
+    {
+      "group_size": 2,
+      "step": 8,
+      "adapter": "runs/gsm8k-pilot/attempt-01/trainer/checkpoint-8",
+      "correct_count": 4,
+      "eval_count": 96,
+      "accuracy": 0.041666666666666664,
+      "parse_rate": 0.8125,
+      "elapsed_seconds": 41.240828033999605,
+      "tokens_per_second": 26.042154127326857,
+      "generated_tokens": 1074,
+      "validation_sha256": "198be3c7a638cbbf6f71df4469dd30df5653d974ebf072dcac691ea04434fe16",
+      "checkpoint_reloaded": true
+    }
+  ],
+  "selected": {
+    "group_size": 4,
+    "step": 4,
+    "adapter": "runs/gsm8k-group4-pilot/attempt-01/trainer/checkpoint-4",
+    "correct_count": 29,
+    "eval_count": 96,
+    "accuracy": 0.3020833333333333,
+    "parse_rate": 0.7395833333333334,
+    "elapsed_seconds": 391.636521634,
+    "tokens_per_second": 28.582625423430862,
+    "generated_tokens": 11194,
+    "validation_sha256": "198be3c7a638cbbf6f71df4469dd30df5653d974ebf072dcac691ea04434fe16",
+    "checkpoint_reloaded": true
+  },
+  "test2_sha256": "d422c8ecffd4aefcbcc8ded6de47b4d05970470da56cfaa028b6b7d3faf86350",
+  "test2_used_for_selection": false
+}

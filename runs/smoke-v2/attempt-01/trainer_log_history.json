@@ -1,0 +1,38 @@
+[
+  {
+    "loss": 0.0,
+    "grad_norm": 5.21875,
+    "learning_rate": 5e-05,
+    "num_tokens": 125.0,
+    "completions/mean_length": 25.5,
+    "completions/min_length": 21.0,
+    "completions/max_length": 30.0,
+    "completions/clipped_ratio": 0.0,
+    "completions/mean_terminated_length": 25.5,
+    "completions/min_terminated_length": 21.0,
+    "completions/max_terminated_length": 30.0,
+    "rewards/tracked_math_reward/mean": 0.574999988079071,
+    "rewards/tracked_math_reward/std": 0.8131728172302246,
+    "reward": 0.574999988079071,
+    "reward_std": 0.8131728172302246,
+    "frac_reward_zero_std": 0.0,
+    "entropy": 0.31848496943712234,
+    "clip_ratio/low_mean": 0.0,
+    "clip_ratio/high_mean": 0.0,
+    "clip_ratio/region_mean": 0.0,
+    "clip_ratio/low_min": 0.0,
+    "clip_ratio/high_max": 0.0,
+    "step_time": 20.713833373999933,
+    "epoch": 0.00390625,
+    "step": 1
+  },
+  {
+    "train_runtime": 24.1529,
+    "train_samples_per_second": 0.083,
+    "train_steps_per_second": 0.041,
+    "total_flos": 0.0,
+    "train_loss": 0.0,
+    "epoch": 0.00390625,
+    "step": 1
+  }
+]

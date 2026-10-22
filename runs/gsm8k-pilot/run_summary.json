@@ -1,0 +1,210 @@
+{
+  "status": "success",
+  "timestamp_utc": "2026-10-22T16:05:48.210755+00:00",
+  "attempt": 1,
+  "model_id": "Qwen/Qwen3-0.6B",
+  "model_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+  "software_versions": {
+    "torch": "2.5.1+cu121",
+    "transformers": "4.57.3",
+    "trl": "1.16.0",
+    "peft": "0.21.2",
+    "accelerate": "1.15.0",
+    "datasets": "4.7.0",
+    "bitsandbytes": "0.50.2"
+  },
+  "base_precision": "4bit-nf4-double-quant",
+  "compute_dtype": "torch.bfloat16",
+  "lora": {
+    "r": 8,
+    "alpha": 16,
+    "dropout": 0.0,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ]
+  },
+  "use_vllm": false,
+  "gradient_checkpointing": true,
+  "seed": 20261023,
+  "dataset": {
+    "path": "data/gsm8k/train.jsonl",
+    "count": 256,
+    "sha256": "61cf86d39c754b0867b91547d8445afbcfe48a78dfd085d364f7ba6143c640bd"
+  },
+  "code_sha256": {
+    "train_grpo.py": "206adc6fe3e10eb3991d108ad420cbe590cb048bc785765757ce489c934f8a2d",
+    "math_task.py": "d88a20883dc08268406c729748bd1271a5d94080d1f57341380206e65ab19722",
+    "telemetry.py": "fcb25c391f1029f5ec9a8adf39ff82c2064b42fd6c351e0d0c3dc8654b2897f8",
+    "eval_math.py": "a2b4b40677ed2609b9ff418c51e40b8478415a4f7243a33aca4553cd64f955f7",
+    "prepare_data.py": "769f080feb0943ec8447c62e2214af4a68ee3b609e7ca184f619599336ad41bb",
+    "validate_reward.py": "fd87276ec463f1643b6ce731ce0d0aa97eaecc14a748d0c36d019ac7ebfa3c05",
+    "audit_env.py": "2803e8f26306fc9e27d82ad07d6278e4649b88e441926b10c970878126c8ece0",
+    "check_runtime.py": "1f0ad5d84e0c6ceb76ea9380e35d80583cc3d3ba4c996b08598743751b4d00de"
+  },
+  "dependency_lock_sha256": "9b220140188d5ea20bd457a5fffb04b00a3c1f2ce0c528aeabbcd0306a8665d6",
+  "attempt_config": {
+    "prompt_token_limit": 192,
+    "max_completion_length": 160,
+    "num_generations": 2,
+    "gradient_accumulation_steps": 2
+  },
+  "optimizer_updates": 8,
+  "trainable_parameters": 5046272,
+  "changed_lora_parameter_count": 4128575,
+  "lora_parameter_l1_update": 550.3588458895683,
+  "train_seconds": 24.0847359520003,
+  "steps_per_second": 0.33216058568977497,
+  "completions_per_second": 0.6643211713795499,
+  "observed_generation_completion_count": 16,
+  "observed_completion_tokens": 304,
+  "completion_tokens_per_second": 12.622102256211448,
+  "trainer_metrics": {
+    "train_runtime": 23.9141,
+    "train_samples_per_second": 0.669,
+    "train_steps_per_second": 0.335,
+    "train_loss": -4.470348358154297e-07,
+    "epoch": 0.03125
+  },
+  "reward_log_entries": [
+    {
+      "completions/mean_length": 9.5,
+      "completions/min_length": 9.0,
+      "completions/max_length": 10.0,
+      "completions/clipped_ratio": 0.0,
+      "completions/mean_terminated_length": 9.5,
+      "completions/min_terminated_length": 9.0,
+      "completions/max_terminated_length": 10.0,
+      "rewards/tracked_math_reward/mean": 0.053006187081336975,
+      "rewards/tracked_math_reward/std": 0.0006252037128433585,
+      "reward": 0.053006187081336975,
+      "reward_std": 0.0006252037128433585,
+      "frac_reward_zero_std": 0.0
+    },
+    {
+      "completions/mean_length": 84.0,
+      "completions/min_length": 8.0,
+      "completions/max_length": 160.0,
+      "completions/clipped_ratio": 0.5,
+      "completions/mean_terminated_length": 8.0,
+      "completions/min_terminated_length": 8.0,
+      "completions/max_terminated_length": 8.0,
+      "rewards/tracked_math_reward/mean": 0.05000000074505806,
+      "rewards/tracked_math_reward/std": 0.0707106813788414,
+      "reward": 0.05000000074505806,
+      "reward_std": 0.0707106813788414,
+      "frac_reward_zero_std": 0.0
+    },
+    {
+      "completions/mean_length": 8.5,
+      "completions/min_length": 8.0,
+      "completions/max_length": 9.0,
+      "completions/clipped_ratio": 0.0,
+      "completions/mean_terminated_length": 8.5,
+      "completions/min_terminated_length": 8.0,
+      "completions/max_terminated_length": 9.0,
+      "rewards/tracked_math_reward/mean": 0.054298244416713715,
+      "rewards/tracked_math_reward/std": 0.0013645911822095513,
+      "reward": 0.054298244416713715,
+      "reward_std": 0.0013645911822095513,
+      "frac_reward_zero_std": 0.0
+    },
+    {
+      "completions/mean_length": 12.0,
+      "completions/min_length": 12.0,
+      "completions/max_length": 12.0,
+      "completions/clipped_ratio": 0.0,
+      "completions/mean_terminated_length": 12.0,
+      "completions/min_terminated_length": 12.0,
+      "completions/max_terminated_length": 12.0,
+      "rewards/tracked_math_reward/mean": 0.05000678822398186,
+      "rewards/tracked_math_reward/std": 5.484358553076163e-06,
+      "reward": 0.05000678822398186,
+      "reward_std": 5.484358553076163e-06,
+      "frac_reward_zero_std": 0.0
+    },
+    {
+      "completions/mean_length": 10.0,
+      "completions/min_length": 10.0,
+      "completions/max_length": 10.0,
+      "completions/clipped_ratio": 0.0,
+      "completions/mean_terminated_length": 10.0,
+      "completions/min_terminated_length": 10.0,
+      "completions/max_terminated_length": 10.0,
+      "rewards/tracked_math_reward/mean": 0.05174611881375313,
+      "rewards/tracked_math_reward/std": 0.0007447348325513303,
+      "reward": 0.05174611881375313,
+      "reward_std": 0.0007447348325513303,
+      "frac_reward_zero_std": 0.0
+    },
+    {
+      "completions/mean_length": 9.5,
+      "completions/min_length": 9.0,
+      "completions/max_length": 10.0,
+      "completions/clipped_ratio": 0.0,
+      "completions/mean_terminated_length": 9.5,
+      "completions/min_terminated_length": 9.0,
+      "completions/max_terminated_length": 10.0,
+      "rewards/tracked_math_reward/mean": 0.052355073392391205,
+      "rewards/tracked_math_reward/std": 0.002561980625614524,
+      "reward": 0.052355073392391205,
+      "reward_std": 0.002561980625614524,
+      "frac_reward_zero_std": 0.0
+    },
+    {
+      "completions/mean_length": 9.5,
+      "completions/min_length": 9.0,
+      "completions/max_length": 10.0,
+      "completions/clipped_ratio": 0.0,
+      "completions/mean_terminated_length": 9.5,
+      "completions/min_terminated_length": 9.0,
+      "completions/max_terminated_length": 10.0,
+      "rewards/tracked_math_reward/mean": 0.05867580324411392,
+      "rewards/tracked_math_reward/std": 0.011300794780254364,
+      "reward": 0.05867580324411392,
+      "reward_std": 0.011300794780254364,
+      "frac_reward_zero_std": 0.0
+    },
+    {
+      "completions/mean_length": 9.0,
+      "completions/min_length": 9.0,
+      "completions/max_length": 9.0,
+      "completions/clipped_ratio": 0.0,
+      "completions/mean_terminated_length": 9.0,
+      "completions/min_terminated_length": 9.0,
+      "completions/max_terminated_length": 9.0,
+      "rewards/tracked_math_reward/mean": 0.05357598885893822,
+      "rewards/tracked_math_reward/std": 0.00018061503942590207,
+      "reward": 0.05357598885893822,
+      "reward_std": 0.00018061503942590207,
+      "frac_reward_zero_std": 0.0
+    }
+  ],
+  "torch_peak_allocated_mib": 1116.81591796875,
+  "torch_peak_reserved_mib": 1432.0,
+  "gpu_start": {
+    "memory_used_mib": 1904.0,
+    "memory_total_mib": 12288.0,
+    "gpu_util_percent": 2.0,
+    "temperature_c": 57.0
+  },
+  "gpu_monitor": {
+    "nvidia_smi_samples": 55,
+    "whole_gpu_peak_memory_used_mib": 4193.0,
+    "whole_gpu_peak_utilization_percent": 64.0,
+    "whole_gpu_start_memory_used_mib": 1904.0,
+    "whole_gpu_end_memory_used_mib": 4192.0
+  },
+  "checkpoints": [
+    "runs/gsm8k-pilot/attempt-01/trainer/checkpoint-4",
+    "runs/gsm8k-pilot/attempt-01/trainer/checkpoint-8"
+  ],
+  "final_adapter": "runs/gsm8k-pilot/attempt-01/final_adapter",
+  "profile": "small",
+  "oom_fallbacks": []
+}

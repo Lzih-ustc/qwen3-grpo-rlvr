@@ -1,0 +1,28 @@
+{
+  "dataset_id": "openai/gsm8k",
+  "dataset_revision": "740312add88f781978c0658806c59bc2815b9866",
+  "dataset_config": "main",
+  "license": "MIT",
+  "seed": 20261023,
+  "counts": {
+    "train": 256,
+    "validation": 96,
+    "test": 128,
+    "test2": 128
+  },
+  "sha256": {
+    "train": "61cf86d39c754b0867b91547d8445afbcfe48a78dfd085d364f7ba6143c640bd",
+    "validation": "198be3c7a638cbbf6f71df4469dd30df5653d974ebf072dcac691ea04434fe16",
+    "test": "ee7c56ff8834669a354c5b4eda69fdca8741471e0800872d82974fa64ca30ca8",
+    "test2": "d422c8ecffd4aefcbcc8ded6de47b4d05970470da56cfaa028b6b7d3faf86350"
+  },
+  "question_overlaps": {
+    "train_validation": 0,
+    "train_test": 0,
+    "train_test2": 0,
+    "validation_test": 0,
+    "validation_test2": 0,
+    "test_test2": 0
+  },
+  "answer_parser": "####\\s*([-+]?\\d[\\d,]*(?:\\.\\d+)?)\\s*$"
+}

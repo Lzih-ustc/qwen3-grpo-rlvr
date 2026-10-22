@@ -1,0 +1,10 @@
+# Local Python environment and caches
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Keep run metrics and reports in Git, but leave model and optimizer binaries local.
+runs/**/trainer/checkpoint-*/
+runs/**/final_adapter/
+runs/**/trainer/README.md

@@ -1,0 +1,37 @@
+{
+  "criterion": "highest exact-match accuracy on data/validation.jsonl; ties choose the earlier checkpoint",
+  "candidates": [
+    {
+      "path": "reports/validation_step12.json",
+      "adapter": "runs/local-small/attempt-01/trainer/checkpoint-12",
+      "correct_count": 65,
+      "eval_count": 96,
+      "accuracy": 0.6770833333333334,
+      "parse_rate": 0.6979166666666666,
+      "eval_data_sha256": "016c7a94489a2827f3b22eebf82b64d242f9f9679391311e1993c0ba606f276d",
+      "checkpoint_reload_exercised": true
+    },
+    {
+      "path": "reports/validation_step8.json",
+      "adapter": "runs/local-small/attempt-01/trainer/checkpoint-8",
+      "correct_count": 63,
+      "eval_count": 96,
+      "accuracy": 0.65625,
+      "parse_rate": 0.6875,
+      "eval_data_sha256": "016c7a94489a2827f3b22eebf82b64d242f9f9679391311e1993c0ba606f276d",
+      "checkpoint_reload_exercised": true
+    }
+  ],
+  "selected": {
+    "path": "reports/validation_step12.json",
+    "adapter": "runs/local-small/attempt-01/trainer/checkpoint-12",
+    "correct_count": 65,
+    "eval_count": 96,
+    "accuracy": 0.6770833333333334,
+    "parse_rate": 0.6979166666666666,
+    "eval_data_sha256": "016c7a94489a2827f3b22eebf82b64d242f9f9679391311e1993c0ba606f276d",
+    "checkpoint_reload_exercised": true
+  },
+  "final_test_data_sha256": "fef149b7c763de8edc4e75d470e7dba79424891547c7f910ae7d4888b8705107",
+  "selection_used_final_test": false
+}
