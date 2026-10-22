@@ -127,6 +127,25 @@ test2 上两个模型对同一批题逐题配对：7 题都答对、5 题 base-o
 
 group-8比group-4单步生成更多token且用时增加，但不同completion数、短样本和不同采样结果使这一比较不能说明质量或效率优劣。基于本机显存余量，下一步采用group-8、256-token completion上限做100步扩展pilot；用固定500题validation比较step50与step100，再决定是否继续正式阶段。两个profile运行记录见 `runs/profile-g4-c256/` 和 `runs/profile-g8-c256/`。
 
+## Formal split 的100步扩展pilot
+
+在固定正式训练split上完成group-8、100次optimizer update（seed `20261023`，学习率 `5e-5`，prompt/completion上限256）。运行记录的Git commit为 `c0c36832c2aa95d89ddcf84aff5e13f14ea1d871`；数据hash、配置、完整 reward/gradient history、completion parquet及checkpoint均保存在 `runs/gsm8k-formal-g8-100/`。
+
+| 指标 | 结果 |
+|---|---:|
+| Optimizer updates / rollout group | 100 / 8 |
+| Completion 数 / 生成 token 数 | 800 / 8,603 |
+| 训练耗时 / step/s / completion/s / token/s | 271.21秒 / 0.369 / 2.950 / 31.72 |
+| 平均训练 reward | 0.07811 |
+| 零组内 reward 方差 / 零 gradient step | 4/100 / 4/100 |
+| completion 截断 | 0/100 步 |
+| 发生变化的 LoRA 参数 | 4,183,041 / 5,046,272 |
+| PyTorch 峰值 allocated / reserved | 1,435 / 1,512 MiB |
+| 整卡采样峰值 | 4,136 MiB |
+| OOM / fallback | 无 / 无 |
+
+validation按预先固定的exact-match规则选择step50与step100中更好的step100；但它仍低于同一validation上的基座：基座46/500（9.2%），step50为9/500（1.8%），step100为24/500（4.8%）。adapter解析率提高至97.6%，基座为74.8%，但格式改善没有转化为答案正确率。该运行因此是负向的扩展诊断，不支持能力提升结论。训练中零方差只占4%，不能单独解释准确率下降；平均reward偏低且模型更倾向输出可解析答案，下一步应检查奖励组成与训练样本难度/正确答案比例，而不是直接扩大到500步。step50/100均由独立进程重载并在相同500题、max-new-tokens192评测。正式test仍保持未查看，等step100选择锁定后做一次基座对照与adapter对照。
+
 ## Checkpoint 与复现材料
 
 小训练保留的 Trainer checkpoint：

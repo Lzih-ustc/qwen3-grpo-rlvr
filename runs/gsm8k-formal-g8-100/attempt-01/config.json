@@ -1,0 +1,6 @@
+{
+  "prompt_token_limit": 256,
+  "max_completion_length": 256,
+  "num_generations": 8,
+  "gradient_accumulation_steps": 8
+}

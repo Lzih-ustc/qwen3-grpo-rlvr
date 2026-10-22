@@ -23,7 +23,9 @@ Last updated: 2026-10-23 (Asia/Shanghai)
 - The group-4 final training step hit the 160-token completion limit for all four samples. Raise the completion budget in the next local profile and measure truncation before scaling the run.
 - `reports/gsm8k_quality_gate.json` verifies finite metrics, nonzero gradients, actual adapter updates, checkpoint files/reloads, split hashes, validation-only selection, and the held-out comparison.
 - A separate formal-stage dataset is now prepared at `data/gsm8k-formal/` (1,500 train, 500 validation, 1,063 test). The test excludes all 256 official-test rows seen in the two pilot slices; `reports/gsm8k_formal_data_validation.json` passes the source-index exclusion check. No formal training or formal-test evaluation has run.
-- Formal-length single-step profiles at group 4 and 8, with prompt/completion limits 256, completed without OOM or clipping; sampled whole-card peaks were 3,774 and 3,769 MiB. Each profile generated fewer than 100 tokens, so neither estimates worst-case throughput. A 100-update group-8 run on the formal train split is the current local extension.
+- Formal-length single-step profiles at group 4 and 8, with prompt/completion limits 256, completed without OOM or clipping; sampled whole-card peaks were 3,774 and 3,769 MiB. Each profile generated fewer than 100 tokens, so neither estimates worst-case throughput.
+- A 100-update group-8 extension completed on the formal train split with 8,603 generated tokens, 31.72 token/s, 4,136 MiB whole-card peak, and no OOM/clipping. Only 4/100 updates had zero reward variance/gradient. Validation selected step 100 (24/500) over step 50 (9/500), but base scored 46/500; formatting improved while accuracy fell. Treat this as a negative result and do not scale the same recipe unchanged.
+- The step-100 checkpoint is selected by validation, not the formal test. The 1,063-row formal test has not been model-evaluated.
 
 ## Remaining phases
 
@@ -33,4 +35,4 @@ Last updated: 2026-10-23 (Asia/Shanghai)
 
 ## Next action
 
-Use `data/gsm8k-formal/` for the next longer run after profiling a larger completion budget to address the observed truncation. Preserve both pilot test slices as already-used pilot data. Keep the arithmetic and first GSM8K pilot artifacts immutable. Continue on the local RTX 3060; any paid AutoDL run still requires explicit user approval.
+Analyze the reward and prompt distribution behind the 100-step validation loss, then design a compute-matched sampling/reward diagnostic before extending training. Preserve the formal test until the next candidate is selected on validation. Keep both used pilot test slices and the arithmetic artifacts immutable. Continue on the local RTX 3060; any paid AutoDL run still requires explicit user approval.
