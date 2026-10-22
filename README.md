@@ -12,6 +12,8 @@
 - `scripts/train_grpo.py`：先运行 1 步 smoke，再运行小规模训练；仅在 OOM 时按顺序缩短 completion、降低 generation group，并记录每次配置。
 - `scripts/eval_math.py`：独立进程逐题贪心解码，评估基座模型或已保存的 LoRA adapter。
 - `scripts/audit_run.py`：检查训练日志有限性、真实梯度/参数更新、generation 组配置、checkpoint 内容和 validation 选模结果。
+- `scripts/audit_grpo_run.py`：逐 completion 审计精确正确率、解析率、组内方差、截断和生成 token 预算。
+- `scripts/audit_grpo_run.py`：逐 completion 审计精确正确率、解析率、组内方差、截断和生成 token 预算。
 - `scripts/audit_gsm8k.py`：审计 GSM8K pilot、validation checkpoint 选择和未参与选择的 test2 对照。
 - `requirements-wsl2.txt`：直接依赖版本；运行成功后生成的 `requirements-wsl2.lock.txt` 冻结完整依赖树。
 - `reports/`：环境审计、最小测试和实验结果。

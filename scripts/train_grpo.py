@@ -277,6 +277,11 @@ def run_attempt(
                 "Training reached max_steps before the generated-token budget: "
                 f"{generation_stats['completion_tokens']} < {args.max_generated_tokens}"
             )
+        terminal_checkpoint = attempt_dir / "trainer" / f"checkpoint-{trainer.state.global_step}"
+        if trainer.state.global_step > 0 and not terminal_checkpoint.is_dir():
+            # Token-budget stopping may happen between periodic save intervals.
+            # Preserve optimizer, scheduler, RNG, adapter, and Trainer state at the terminal update.
+            trainer._save_checkpoint(trainer.model, trial=None)
         trainer.save_model(str(attempt_dir / "final_adapter"))
         trainer.state.save_to_json(str(attempt_dir / "trainer_state.json"))
         history = trainer.state.log_history

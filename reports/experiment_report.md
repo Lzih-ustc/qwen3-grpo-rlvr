@@ -152,6 +152,12 @@ validation按预先固定的exact-match规则选择step50与step100中更好的s
 
 新鲜split上尚未训练前的基座验证已完成：54/500（10.8%）精确正确，解析率76.0%，生成21,635 token，耗时396.45秒（54.57 token/s），PyTorch峰值allocated/reserved为820/882 MiB，采样整卡峰值3,481 MiB。新测试集仍未运行模型。另以`token-budget-smoke`验证停止回调：目标1 token时完成1次真实optimizer update、8条completion、274 token，LoRA参数变化2,748,622个，step-1 checkpoint已保存；回调在完整group后停下，超额273 token。训练耗时15.24秒，PyTorch allocated/reserved峰值1,211/1,432 MiB，整卡峰值3,940 MiB。此极小预算仅验证回调和训练链路，不作为性能结果。
 
+### Fresh split 16k-token 距离奖励 pilot
+
+为观察新split的生成长度和训练预算回调，先在group-8、256 completion上限下运行`distance_shaped`小pilot。运行12次更新，抽到12个不同训练prompt；96条completion生成17,502 token，较16,000目标超出1,502（9.4%）。训练耗时155.71秒，112.40 token/s；PyTorch峰值allocated/reserved为1,638/1,834 MiB，整卡峰值4,430 MiB，无OOM/回退。
+
+这12个训练prompt上有16/96条精确正确（16.7%），解析率47.9%，XML答案标签率18.8%；这是训练rollout的样本内诊断，不能和500题基座validation直接比较。8/12组至少有一条completion被截断，平均组内截断比例31.25%（估算约30/96条）；3/12组reward方差及梯度为零。错误且可解析答案的平均绝对距离为49,588。该pilot因此不能作为策略效果结论，也提示256-token上限和旧距离奖励都可能产生大量无效样本。因为token预算在第25步保存间隔之前触发，首个pilot只保存final adapter；训练代码随后补上预算停止时保存完整终态Trainer checkpoint。逐条rollout见`reports/gsm8k_next_fresh_distance16k_rollout_audit.json`。
+
 step100按validation选定后，基座和adapter各自在完整1,063题正式test上贪心评测一次（test SHA-256=`306c5d08ad76236c03c24a7fb60160453fc6e99161c988721893662e5e4f838f`）：
 
 | 模型 | Exact match | 解析率 | 输出token / token/s | 耗时 | PyTorch峰值allocated/reserved | 整卡采样峰值 |
