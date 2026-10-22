@@ -10,6 +10,7 @@ import json
 import os
 import random
 import re
+import subprocess
 import time
 from copy import deepcopy
 from datetime import datetime, timezone
@@ -41,6 +42,21 @@ def package_version(name: str) -> str | None:
         return package_metadata.version(name)
     except package_metadata.PackageNotFoundError:
         return None
+
+
+def git_provenance() -> dict:
+    try:
+        commit = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], text=True, stderr=subprocess.DEVNULL
+        ).strip()
+        dirty = bool(
+            subprocess.check_output(
+                ["git", "status", "--porcelain"], text=True, stderr=subprocess.DEVNULL
+            ).strip()
+        )
+        return {"commit": commit, "working_tree_dirty": dirty}
+    except (OSError, subprocess.CalledProcessError):
+        return {"commit": None, "working_tree_dirty": None}
 
 
 def seed_everything(seed: int) -> None:
@@ -269,6 +285,7 @@ def run_attempt(
             "use_vllm": False,
             "gradient_checkpointing": True,
             "seed": args.seed,
+            "git": git_provenance(),
             "dataset": {"path": str(data_path), "count": len(train_rows), "sha256": sha256(data_path)},
             "code_sha256": {
                 path.name: sha256(path)
