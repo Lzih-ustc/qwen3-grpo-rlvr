@@ -51,7 +51,9 @@ def git_provenance() -> dict:
         ).strip()
         dirty = bool(
             subprocess.check_output(
-                ["git", "status", "--porcelain"], text=True, stderr=subprocess.DEVNULL
+                ["git", "status", "--porcelain", "--untracked-files=no"],
+                text=True,
+                stderr=subprocess.DEVNULL,
             ).strip()
         )
         return {"commit": commit, "working_tree_dirty": dirty}

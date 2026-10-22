@@ -1,0 +1,115 @@
+{
+  "status": "success",
+  "timestamp_utc": "2026-10-22T16:52:24.442406+00:00",
+  "attempt": 1,
+  "model_id": "Qwen/Qwen3-0.6B",
+  "model_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+  "software_versions": {
+    "torch": "2.5.1+cu121",
+    "transformers": "4.57.3",
+    "trl": "1.16.0",
+    "peft": "0.21.2",
+    "accelerate": "1.15.0",
+    "datasets": "4.7.0",
+    "bitsandbytes": "0.50.2"
+  },
+  "base_precision": "4bit-nf4-double-quant",
+  "compute_dtype": "torch.bfloat16",
+  "lora": {
+    "r": 8,
+    "alpha": 16,
+    "dropout": 0.0,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ]
+  },
+  "use_vllm": false,
+  "gradient_checkpointing": true,
+  "seed": 20261023,
+  "git": {
+    "commit": "dc98dcb854f2b080ac25e6a1be4bc4962fc60131",
+    "working_tree_dirty": true
+  },
+  "dataset": {
+    "path": "/mnt/e/强化学习项目/data/gsm8k-formal/train.jsonl",
+    "count": 1500,
+    "sha256": "0a3b034f2c8c341bb95094554fec5af88de98723557677a505ffe795a916f993"
+  },
+  "code_sha256": {
+    "train_grpo.py": "dfe8f93497323cbe5d950e202f8789437c89c2b4d4a3354f1534d80ef8eed0cb",
+    "math_task.py": "d88a20883dc08268406c729748bd1271a5d94080d1f57341380206e65ab19722",
+    "telemetry.py": "fcb25c391f1029f5ec9a8adf39ff82c2064b42fd6c351e0d0c3dc8654b2897f8",
+    "eval_math.py": "a7d95e3302794024cbdd72713722437a6bb86d0723a93d92f396492a17c654e9",
+    "prepare_data.py": "769f080feb0943ec8447c62e2214af4a68ee3b609e7ca184f619599336ad41bb",
+    "validate_reward.py": "b1dfade7f369535280556e1d56e62b14041afa07490812d247e3805648b00aec",
+    "audit_env.py": "2803e8f26306fc9e27d82ad07d6278e4649b88e441926b10c970878126c8ece0",
+    "check_runtime.py": "43a67903d0ec4715c9f3d36fe9ddaa78826e4a91ef9ef044d0a0af72796534a7"
+  },
+  "dependency_lock_sha256": "9b220140188d5ea20bd457a5fffb04b00a3c1f2ce0c528aeabbcd0306a8665d6",
+  "attempt_config": {
+    "prompt_token_limit": 256,
+    "max_completion_length": 256,
+    "num_generations": 4,
+    "gradient_accumulation_steps": 4
+  },
+  "optimizer_updates": 1,
+  "trainable_parameters": 5046272,
+  "changed_lora_parameter_count": 2752355,
+  "lora_parameter_l1_update": 137.5774092078209,
+  "train_seconds": 9.37997580700005,
+  "steps_per_second": 0.10661008307225313,
+  "completions_per_second": 0.4264403322890125,
+  "observed_generation_completion_count": 4,
+  "observed_completion_tokens": 45,
+  "completion_tokens_per_second": 4.797453738251391,
+  "trainer_metrics": {
+    "train_runtime": 9.2096,
+    "train_samples_per_second": 0.434,
+    "train_steps_per_second": 0.109,
+    "train_loss": 1.1175870895385742e-08,
+    "epoch": 0.0006666666666666666
+  },
+  "reward_log_entries": [
+    {
+      "completions/mean_length": 11.25,
+      "completions/min_length": 9.0,
+      "completions/max_length": 18.0,
+      "completions/clipped_ratio": 0.0,
+      "completions/mean_terminated_length": 11.25,
+      "completions/min_terminated_length": 9.0,
+      "completions/max_terminated_length": 18.0,
+      "rewards/tracked_math_reward/mean": 0.05446787178516388,
+      "rewards/tracked_math_reward/std": 0.0023129014298319817,
+      "reward": 0.05446787178516388,
+      "reward_std": 0.0023129014298319817,
+      "frac_reward_zero_std": 0.0
+    }
+  ],
+  "torch_peak_allocated_mib": 1107.47216796875,
+  "torch_peak_reserved_mib": 1432.0,
+  "gpu_start": {
+    "memory_used_mib": 1593.0,
+    "memory_total_mib": 12288.0,
+    "gpu_util_percent": 21.0,
+    "temperature_c": 55.0
+  },
+  "gpu_monitor": {
+    "nvidia_smi_samples": 35,
+    "whole_gpu_peak_memory_used_mib": 3774.0,
+    "whole_gpu_peak_utilization_percent": 86.0,
+    "whole_gpu_start_memory_used_mib": 1593.0,
+    "whole_gpu_end_memory_used_mib": 3774.0
+  },
+  "checkpoints": [
+    "/mnt/e/强化学习项目/runs/profile-g4-c256/attempt-01/trainer/checkpoint-1"
+  ],
+  "final_adapter": "/mnt/e/强化学习项目/runs/profile-g4-c256/attempt-01/final_adapter",
+  "profile": "formal",
+  "oom_fallbacks": []
+}
