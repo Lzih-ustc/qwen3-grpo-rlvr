@@ -1,5 +1,5 @@
 {
-  "status": "validation_selection_passed",
+  "status": "passed",
   "checks": {
     "trainer_completed_100_updates": true,
     "group_and_gradient_accumulation_match": true,
@@ -11,10 +11,12 @@
     "no_oom_or_fallback": true,
     "run_commit_recorded_and_source_clean": true,
     "validation_candidates_reloaded_and_share_split": true,
-    "selection_uses_validation_only": true
+    "selection_uses_validation_only": true,
+    "logged_rollouts_match_training_groups": true,
+    "reward_variance_matches_logged_steps": true
   },
   "training": {
-    "run_dir": "runs/gsm8k-formal-g8-100",
+    "run_dir": "/mnt/e/强化学习项目/runs/gsm8k-formal-g8-100",
     "git_commit": "c0c36832c2aa95d89ddcf84aff5e13f14ea1d871",
     "updates": 100,
     "group_size": 8,
@@ -33,13 +35,13 @@
     "checkpoints": [
       {
         "step": 50,
-        "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-50",
+        "path": "/mnt/e/强化学习项目/runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-50",
         "present": true,
         "missing_files": []
       },
       {
         "step": 100,
-        "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-100",
+        "path": "/mnt/e/强化学习项目/runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-100",
         "present": true,
         "missing_files": []
       }
@@ -58,7 +60,7 @@
     "candidates": [
       {
         "step": 100,
-        "path": "reports/gsm8k_formal_g8_step100_validation.json",
+        "path": "/mnt/e/强化学习项目/reports/gsm8k_formal_g8_step100_validation.json",
         "adapter": "/mnt/e/强化学习项目/runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-100",
         "correct_count": 24,
         "eval_count": 500,
@@ -78,7 +80,7 @@
       },
       {
         "step": 50,
-        "path": "reports/gsm8k_formal_g8_step50_validation.json",
+        "path": "/mnt/e/强化学习项目/reports/gsm8k_formal_g8_step50_validation.json",
         "adapter": "/mnt/e/强化学习项目/runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-50",
         "correct_count": 9,
         "eval_count": 500,
@@ -99,7 +101,7 @@
     ],
     "selected": {
       "step": 100,
-      "path": "reports/gsm8k_formal_g8_step100_validation.json",
+      "path": "/mnt/e/强化学习项目/reports/gsm8k_formal_g8_step100_validation.json",
       "adapter": "/mnt/e/强化学习项目/runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-100",
       "correct_count": 24,
       "eval_count": 500,
@@ -119,7 +121,78 @@
     },
     "selection_used_final_test": false,
     "formal_test_sha256": "306c5d08ad76236c03c24a7fb60160453fc6e99161c988721893662e5e4f838f",
-    "formal_test_opened": false
+    "formal_test_opened": true
   },
-  "final_test_comparison": null
+  "rollout_analysis": {
+    "completions": 800,
+    "unique_prompts": 100,
+    "group_size": 8,
+    "parse_rate": 0.9425,
+    "answer_tag_rate": 0.93875,
+    "exact_match_rate_on_rollouts": 0.0225,
+    "correct_rollouts": 18,
+    "groups_with_at_least_one_correct": 11,
+    "groups_with_mixed_correct_and_incorrect": 11,
+    "correct_rollouts_per_group_histogram": {
+      "0": 89,
+      "1": 6,
+      "2": 3,
+      "3": 2,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0
+    },
+    "mean_reward": 0.07810971720720318,
+    "mean_reward_on_correct_rollouts": 1.1472222010294597,
+    "mean_reward_on_incorrect_rollouts": 0.05350098995809753,
+    "mean_reward_std_within_group": 0.052561126944195014,
+    "mean_reward_std_groups_with_correct": 0.41599272316393177,
+    "mean_reward_std_groups_without_correct": 0.007642615051867995,
+    "zero_reward_variance_groups_from_parquet": 4,
+    "nonzero_distance_mean": 342.88461538461536,
+    "first_half_exact_match_rate": 0.0125,
+    "second_half_exact_match_rate": 0.0325,
+    "first_half_mean_reward": 0.06473164547455781,
+    "second_half_mean_reward": 0.09148778893984855
+  },
+  "final_test_comparison": {
+    "data_sha256": "306c5d08ad76236c03c24a7fb60160453fc6e99161c988721893662e5e4f838f",
+    "eval_count": 1063,
+    "base": {
+      "correct_count": 95,
+      "accuracy": 0.08936970837253057,
+      "parse_rate": 0.7563499529633114,
+      "elapsed_seconds": 950.7347306790002,
+      "generated_tokens": 52137,
+      "tokens_per_second": 54.83864038790773
+    },
+    "selected": {
+      "correct_count": 77,
+      "accuracy": 0.07243650047036689,
+      "parse_rate": 0.9811853245531514,
+      "elapsed_seconds": 388.79071642100007,
+      "generated_tokens": 11371,
+      "tokens_per_second": 29.24709752505245
+    },
+    "accuracy_delta_percentage_points": -1.6933207902163683,
+    "wilson_95_ci": {
+      "base": [
+        0.07366611248819374,
+        0.10803048096344245
+      ],
+      "selected": [
+        0.05834581751375813,
+        0.08960630556474965
+      ]
+    },
+    "paired_outcomes": {
+      "both_correct": 14,
+      "base_only": 81,
+      "selected_only": 63,
+      "both_wrong": 905
+    },
+    "exact_mcnemar_two_sided_p": 0.15633984208003965
+  }
 }

@@ -23,7 +23,7 @@ def main() -> None:
         action="append",
         type=Path,
         default=[],
-        help="Existing JSONL test slices that must not overlap the new test/test2 rows.",
+        help="Existing JSONL source rows that must not overlap any new split.",
     )
     args = parser.parse_args()
     manifest = json.loads((args.data_dir / "manifest.json").read_text(encoding="utf-8"))
@@ -33,6 +33,7 @@ def main() -> None:
     prompts = {}
     checks = {}
     split_names = ["train", "validation", "test", "test2"]
+    split_sources = manifest.get("split_source_splits", {"train": "train", "validation": "train", "test": "test", "test2": "test"})
     for split in split_names:
         path = args.data_dir / f"{split}.jsonl"
         raw = path.read_bytes()
@@ -46,6 +47,7 @@ def main() -> None:
             assert ANSWER_RE.fullmatch(str(row["answer"])), row["answer"]
             meta = row["meta"]
             assert meta["dataset"] == EXPECTED_DATASET and meta["dataset_revision"] == EXPECTED_REVISION
+            assert meta["source_split"] == split_sources[split], (split, meta["source_split"], split_sources[split])
             assert f"<answer>...</answer>" in row["prompt"][0]["content"]
         checks[split] = {"count": len(rows), "unique_prompts": len(prompts[split]), "sha256": manifest["sha256"][split]}
     overlaps = {
@@ -58,13 +60,14 @@ def main() -> None:
     for path in args.exclude_source_data:
         for line in path.read_text(encoding="utf-8").split("\n"):
             if line.strip():
-                excluded_indices.add(int(json.loads(line)["meta"]["source_index"]))
-    new_test_indices = {
-        int(row["meta"]["source_index"])
-        for split in ("test", "test2")
+                meta = json.loads(line)["meta"]
+                excluded_indices.add((meta["source_split"], int(meta["source_index"])))
+    new_source_indices = {
+        (row["meta"]["source_split"], int(row["meta"]["source_index"]))
+        for split in split_names
         for row in rows_by_split[split]
     }
-    assert not (excluded_indices & new_test_indices), "Formal test overlaps a previously opened test row"
+    assert not (excluded_indices & new_source_indices), "New split overlaps a previously used source row"
     result = {
         "status": "passed",
         "dataset_id": EXPECTED_DATASET,
@@ -72,7 +75,7 @@ def main() -> None:
         "license": manifest["license"],
         "splits": checks,
         "question_overlaps": overlaps,
-        "excluded_test_source_indices_verified": len(excluded_indices),
+        "excluded_source_rows_verified": len(excluded_indices),
         "answer_schema": "terminal integer in the pinned GSM8K source #### marker",
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)

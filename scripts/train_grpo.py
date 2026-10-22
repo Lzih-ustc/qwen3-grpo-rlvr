@@ -22,10 +22,10 @@ import numpy as np
 import torch
 from datasets import Dataset
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
-from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig, set_seed
+from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig, TrainerCallback, set_seed
 from trl import GRPOConfig, GRPOTrainer
 
-from math_task import MODEL_ID, MODEL_REVISION, exact_math_reward
+from math_task import MODEL_ID, MODEL_REVISION, exact_format_reward, exact_math_reward
 from telemetry import GpuMonitor, query_gpu
 
 
@@ -74,6 +74,19 @@ def seed_everything(seed: int) -> None:
 
 def is_oom(exc: BaseException) -> bool:
     return isinstance(exc, torch.cuda.OutOfMemoryError) or (isinstance(exc, RuntimeError) and "out of memory" in str(exc).lower())
+
+
+class GeneratedTokenBudgetCallback(TrainerCallback):
+    """Stop after the current optimizer update crosses a generated-token budget."""
+
+    def __init__(self, generation_stats: dict[str, int], token_budget: int):
+        self.generation_stats = generation_stats
+        self.token_budget = token_budget
+
+    def on_step_end(self, args, state, control, **kwargs):
+        if self.generation_stats["completion_tokens"] >= self.token_budget:
+            control.should_training_stop = True
+        return control
 
 
 def make_fallbacks(initial: dict) -> list[dict]:
@@ -235,11 +248,13 @@ def run_attempt(
             num_completions_to_print=2,
         )
 
+        reward_fn = exact_math_reward if args.reward_mode == "distance_shaped" else exact_format_reward
+
         def tracked_math_reward(completions, answer, completion_ids=None, **kwargs):
             if completion_ids is not None:
                 generation_stats["completion_count"] += len(completion_ids)
                 generation_stats["completion_tokens"] += sum(len(ids) for ids in completion_ids)
-            return exact_math_reward(completions, answer, **kwargs)
+            return reward_fn(completions, answer, **kwargs)
 
         trainer = GRPOTrainer(
             model=model,
@@ -248,9 +263,20 @@ def run_attempt(
             train_dataset=dataset,
             processing_class=tokenizer,
         )
+        if args.max_generated_tokens is not None:
+            trainer.add_callback(GeneratedTokenBudgetCallback(generation_stats, args.max_generated_tokens))
         train_started = time.perf_counter()
         result = trainer.train()
         train_seconds = time.perf_counter() - train_started
+        budget_reached = (
+            args.max_generated_tokens is None
+            or generation_stats["completion_tokens"] >= args.max_generated_tokens
+        )
+        if not budget_reached:
+            raise RuntimeError(
+                "Training reached max_steps before the generated-token budget: "
+                f"{generation_stats['completion_tokens']} < {args.max_generated_tokens}"
+            )
         trainer.save_model(str(attempt_dir / "final_adapter"))
         trainer.state.save_to_json(str(attempt_dir / "trainer_state.json"))
         history = trainer.state.log_history
@@ -286,6 +312,7 @@ def run_attempt(
             "lora": {"r": 8, "alpha": 16, "dropout": 0.0, "target_modules": ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]},
             "use_vllm": False,
             "gradient_checkpointing": True,
+            "reward_mode": args.reward_mode,
             "seed": args.seed,
             "git": git_provenance(),
             "dataset": {"path": str(data_path), "count": len(train_rows), "sha256": sha256(data_path)},
@@ -314,6 +341,14 @@ def run_attempt(
             "observed_generation_completion_count": generation_stats["completion_count"],
             "observed_completion_tokens": generation_stats["completion_tokens"],
             "completion_tokens_per_second": generation_stats["completion_tokens"] / train_seconds if train_seconds else None,
+            "training_budget": {
+                "type": "generated_completion_tokens",
+                "target": args.max_generated_tokens,
+                "actual": generation_stats["completion_tokens"],
+                "reached": budget_reached,
+                "overshoot_tokens": max(0, generation_stats["completion_tokens"] - args.max_generated_tokens)
+                if args.max_generated_tokens is not None else 0,
+            },
             "trainer_metrics": train_metrics,
             "reward_log_entries": [{k: v for k, v in log.items() if "reward" in k.lower() or "complet" in k.lower()} for log in history if any("reward" in k.lower() or "complet" in k.lower() for k in log)],
             "torch_peak_allocated_mib": process_peak_allocated / (1024**2),
@@ -365,7 +400,12 @@ def main() -> None:
     parser.add_argument("--prompt-token-limit", type=int)
     parser.add_argument("--seed", type=int, default=20261022)
     parser.add_argument("--learning-rate", type=float, default=5e-5)
+    parser.add_argument("--reward-mode", choices=["distance_shaped", "exact_format"], default="distance_shaped")
+    parser.add_argument("--max-generated-tokens", type=int)
     args = parser.parse_args()
+
+    if args.max_generated_tokens is not None and args.max_generated_tokens < 1:
+        raise SystemExit("--max-generated-tokens must be positive.")
 
     if not torch.cuda.is_available():
         raise SystemExit("CUDA is unavailable in this WSL environment; refusing a CPU GRPO run.")
@@ -388,6 +428,8 @@ def main() -> None:
         "max_completion_length": completion,
         "num_generations": generations,
         "gradient_accumulation_steps": generations,
+        "reward_mode": args.reward_mode,
+        "max_generated_tokens": args.max_generated_tokens,
     }
     if args.num_generations is not None:
         if args.num_generations < 2:

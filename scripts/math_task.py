@@ -115,3 +115,21 @@ def exact_math_reward(completions: list[Any], answer: list[Any], **_: Any) -> li
         format_bonus = 0.05 if source == "answer_tag" else 0.0
         rewards.append(format_bonus + 0.10 / (1 + distance) + (1.0 if distance == 0 else 0.0))
     return rewards
+
+
+def exact_format_reward(completions: list[Any], answer: list[Any], **_: Any) -> list[float]:
+    """Reward only verifier-confirmed answers, with a small requested-format bonus.
+
+    Unlike ``exact_math_reward``, this has no numerical-distance shaping. Incorrect
+    integer guesses therefore cannot earn relative advantage merely for being
+    numerically close to the target.
+    """
+    rewards: list[float] = []
+    for completion, target in zip(completions, answer, strict=True):
+        predicted, source = extract_answer(completion_text(completion))
+        if predicted is None:
+            rewards.append(0.0)
+            continue
+        format_bonus = 0.05 if source == "answer_tag" else 0.0
+        rewards.append(format_bonus + (1.0 if predicted == int(target) else 0.0))
+    return rewards

@@ -1,6 +1,11 @@
 {
   "status": "passed",
   "reward_cases": 5,
+  "exact_format_reward_cases": 4,
+  "reward_modes": [
+    "distance_shaped",
+    "exact_format"
+  ],
   "splits": {
     "train": {
       "examples": 256,

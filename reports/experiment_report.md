@@ -125,7 +125,7 @@ test2 上两个模型对同一批题逐题配对：7 题都答对、5 题 base-o
 | 4 | 4 / 45 | 9.38秒 / 4.80 token/s | 0.05447 / 0.00231 | 1,107/1,432 MiB | 3,774 MiB | 无 / 0% |
 | 8 | 8 / 74 | 12.73秒 / 5.81 token/s | 0.05592 / 0.00492 | 1,107/1,432 MiB | 3,769 MiB | 无 / 0% |
 
-group-8比group-4单步生成更多token且用时增加，但不同completion数、短样本和不同采样结果使这一比较不能说明质量或效率优劣。基于本机显存余量，下一步采用group-8、256-token completion上限做100步扩展pilot；用固定500题validation比较step50与step100，再决定是否继续正式阶段。两个profile运行记录见 `runs/profile-g4-c256/` 和 `runs/profile-g8-c256/`。
+group-8比group-4单步生成更多token且用时增加，但不同completion数、短样本和不同采样结果使这一比较不能说明质量或效率优劣。随后以group-8、256-token completion上限完成100步扩展pilot；训练与选模结果见下节。两个profile运行记录见 `runs/profile-g4-c256/` 和 `runs/profile-g8-c256/`。
 
 ## Formal split 的100步扩展pilot
 
@@ -144,7 +144,20 @@ group-8比group-4单步生成更多token且用时增加，但不同completion数
 | 整卡采样峰值 | 4,136 MiB |
 | OOM / fallback | 无 / 无 |
 
-validation按预先固定的exact-match规则选择step50与step100中更好的step100；但它仍低于同一validation上的基座：基座46/500（9.2%），step50为9/500（1.8%），step100为24/500（4.8%）。adapter解析率提高至97.6%，基座为74.8%，但格式改善没有转化为答案正确率。该运行因此是负向的扩展诊断，不支持能力提升结论。训练中零方差只占4%，不能单独解释准确率下降；平均reward偏低且模型更倾向输出可解析答案，下一步应检查奖励组成与训练样本难度/正确答案比例，而不是直接扩大到500步。step50/100均由独立进程重载并在相同500题、max-new-tokens192评测。正式test仍保持未查看，等step100选择锁定后做一次基座对照与adapter对照。
+validation按预先固定的exact-match规则选择step50与step100中更好的step100；但它仍低于同一validation上的基座：基座46/500（9.2%），step50为9/500（1.8%），step100为24/500（4.8%）。adapter解析率提高至97.6%，基座为74.8%，但格式改善没有转化为答案正确率。该运行因此是负向的扩展诊断，不支持能力提升结论。对训练parquet离线审计发现800条completion中只有18条精确正确（2.25%），754条能解析（94.25%），平均错误答案绝对距离为342.9；100个group中只有4组reward完全相同，对应4个零gradient步骤。零方差只占4%，不能单独解释准确率下降；大量错误但格式正确、距离很远的答案仍获得约0.05格式分和很弱的距离分，提示策略主要学会格式而未学会求解。step50/100均由独立进程重载并在相同500题、max-new-tokens192评测。
+
+进一步按组统计，只有11/100组出现过正确答案，另有89组完全没有正确答案；其中仅4组reward方差为零，85组虽然全错仍因数值距离不同而产生非零方差。无正确答案组的平均reward标准差为0.00764，而出现正确答案组为0.416。当前`scale_rewards="group"`会将每组reward按组内统计量缩放，因此微弱的错误答案距离差异也可能为这85组提供相对优势。这是无效更新的一个可能来源。
+
+据此新增`exact_format`奖励消融：正确整数得1分，唯一`<answer>`格式另加0.05分，错误整数不再按距离分层；原有奖励保留为`distance_shaped`对照。训练脚本还新增按真实生成completion token预算停止的回调，用于将两个条件配到约8,603个生成token并记录组边界造成的实际超额。新奖励已通过独立单元案例；两种奖励在新鲜split上的训练对照仍待执行，正式test保持封存。
+
+step100按validation选定后，基座和adapter各自在完整1,063题正式test上贪心评测一次（test SHA-256=`306c5d08ad76236c03c24a7fb60160453fc6e99161c988721893662e5e4f838f`）：
+
+| 模型 | Exact match | 解析率 | 输出token / token/s | 耗时 | PyTorch峰值allocated/reserved | 整卡采样峰值 |
+|---|---:|---:|---:|---:|---:|---:|
+| 基座 | 95/1,063（8.94%，Wilson 95% CI 7.37–10.80%） | 75.63% | 52,137 / 54.84 | 950.73秒 | 820/888 MiB | 3,490 MiB |
+| step100 adapter | 77/1,063（7.24%，Wilson 95% CI 5.83–8.96%） | 98.12% | 11,371 / 29.25 | 388.79秒 | 820/884 MiB | 3,479 MiB |
+
+配对题目中两者都正确14题、仅基座正确81题、仅adapter正确63题、两者都错905题；exact McNemar双侧p=0.156。adapter少生成78.2% token、耗时少59.1%，但准确率低1.69个百分点，且token/s更低；这不是维持任务成功率前提下的成本优化。该正式test已经使用，后续新候选不能再用它调参或选模；需要从尚未查看的GSM8K来源行重新留出测试集，或使用新的独立基准。
 
 ## Checkpoint 与复现材料
 
@@ -186,7 +199,9 @@ cd /mnt/e/强化学习项目
 
 本机 12GB 显存上小训练的整卡峰值为 4,491 MiB，但 AutoDL 型号、桌面占用、驱动和吞吐都需在目标实例重新实测；不能根据这次结果线性外推。
 
-正式训练数据已在本地单独准备到 `data/gsm8k-formal/`，包含 1,500 train、500 validation 和 1,063 条官方 test。test 通过旧 pilot 两个 test split 的来源索引排除 256 道已查看问题，并由 `gsm8k_formal_data_validation.json` 验证无重叠；四个 split SHA-256 记录在该目录 `manifest.json`。这份正式 test 尚未用于模型推理或选模。正式训练尚未启动，也没有使用 AutoDL/GPU 云服务。
+`data/gsm8k-formal/`中的官方test已在step100选模后用于一次基座/adapter对照并视为已消耗。后续AutoDL迁移计划改为从官方train split剩余行中排除已用的1,500 train与500 validation source indices，另生成1,000条新test；新代码支持按source split/source index校验无重叠。更长的500步AutoDL正式训练尚未启动，也没有使用AutoDL/GPU云服务。
+
+下一轮新split已准备在 `data/gsm8k-next-fresh/`：从官方train剩余source rows中排除之前正式实验的2,000个source indices，再新采样1,500 train、500 validation和1,000 test。新validation/test与此前分配和彼此均无重叠，校验结果在 `reports/gsm8k_next_fresh_data_validation.json`；该新test尚未用于模型推理。
 
 ## 上游接口依据
 

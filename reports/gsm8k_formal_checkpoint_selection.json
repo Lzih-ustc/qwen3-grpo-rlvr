@@ -11,7 +11,7 @@
   "candidates": [
     {
       "step": 100,
-      "path": "reports/gsm8k_formal_g8_step100_validation.json",
+      "path": "/mnt/e/强化学习项目/reports/gsm8k_formal_g8_step100_validation.json",
       "adapter": "/mnt/e/强化学习项目/runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-100",
       "correct_count": 24,
       "eval_count": 500,
@@ -31,7 +31,7 @@
     },
     {
       "step": 50,
-      "path": "reports/gsm8k_formal_g8_step50_validation.json",
+      "path": "/mnt/e/强化学习项目/reports/gsm8k_formal_g8_step50_validation.json",
       "adapter": "/mnt/e/强化学习项目/runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-50",
       "correct_count": 9,
       "eval_count": 500,
@@ -52,7 +52,7 @@
   ],
   "selected": {
     "step": 100,
-    "path": "reports/gsm8k_formal_g8_step100_validation.json",
+    "path": "/mnt/e/强化学习项目/reports/gsm8k_formal_g8_step100_validation.json",
     "adapter": "/mnt/e/强化学习项目/runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-100",
     "correct_count": 24,
     "eval_count": 500,
@@ -72,5 +72,5 @@
   },
   "selection_used_final_test": false,
   "formal_test_sha256": "306c5d08ad76236c03c24a7fb60160453fc6e99161c988721893662e5e4f838f",
-  "formal_test_opened": false
+  "formal_test_opened": true
 }

@@ -1,5 +1,5 @@
 {
-  "created_utc": "2026-10-22T16:55:23.363426+00:00",
+  "created_utc": "2026-10-22T17:56:53.154936+00:00",
   "model_id": "Qwen/Qwen3-0.6B",
   "model_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
   "files": [
@@ -15,8 +15,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 9738,
-      "sha256": "76572cce987833b88b009e9d83b463412e8b68b5987c31ae9bdea1112e617831"
+      "bytes": 9774,
+      "sha256": "a71b1b456b2b0b88fc4afcea1091156237d29c27e22af9ce12cbcefbf283db13"
     },
     {
       "path": "data/eval.jsonl",
@@ -65,8 +65,8 @@
     },
     {
       "path": "data/gsm8k-formal/README.md",
-      "bytes": 983,
-      "sha256": "b5ff7e772825706febde64685d076fcc9156652974dacc287a09b258dfabb40f"
+      "bytes": 1109,
+      "sha256": "a8e994d30ffe219101f7aa1b16cb539076c70fa0996c014e3186589450990d43"
     },
     {
       "path": "data/gsm8k-formal/manifest.json",
@@ -94,6 +94,76 @@
       "sha256": "7399d2d5769b3c4006f5896fbbd16c3a85a2125cdd720e368501ec4fce12b50b"
     },
     {
+      "path": "data/gsm8k-next/LICENSE",
+      "bytes": 1063,
+      "sha256": "893951b3bf94db8df1b13e05da5cdeb499400960e4d44a3962a8b33ed0b4f28e"
+    },
+    {
+      "path": "data/gsm8k-next/README.md",
+      "bytes": 856,
+      "sha256": "13144bfa9869955ecedf6544b8d6c563f61fcc3431021fc97dd6838925c42bda"
+    },
+    {
+      "path": "data/gsm8k-next/manifest.json",
+      "bytes": 20732,
+      "sha256": "15181f0dcdfe6487b77b87dcae25429485b7f8e6e2d596de63125553f875b91e"
+    },
+    {
+      "path": "data/gsm8k-next/test.jsonl",
+      "bytes": 580964,
+      "sha256": "f4d23d7df915d8be3baf0b8bf622193d6d2a00755701f19339abe5975ff09e71"
+    },
+    {
+      "path": "data/gsm8k-next/test2.jsonl",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "data/gsm8k-next/train.jsonl",
+      "bytes": 864346,
+      "sha256": "0a3b034f2c8c341bb95094554fec5af88de98723557677a505ffe795a916f993"
+    },
+    {
+      "path": "data/gsm8k-next/validation.jsonl",
+      "bytes": 290063,
+      "sha256": "7399d2d5769b3c4006f5896fbbd16c3a85a2125cdd720e368501ec4fce12b50b"
+    },
+    {
+      "path": "data/gsm8k-next-fresh/LICENSE",
+      "bytes": 1063,
+      "sha256": "893951b3bf94db8df1b13e05da5cdeb499400960e4d44a3962a8b33ed0b4f28e"
+    },
+    {
+      "path": "data/gsm8k-next-fresh/README.md",
+      "bytes": 1034,
+      "sha256": "b4d4ed4c2018712708ba0f37781f9666f102f6b5672c52bbc82f212f8e90892b"
+    },
+    {
+      "path": "data/gsm8k-next-fresh/manifest.json",
+      "bytes": 227656,
+      "sha256": "f830aebd0f1d3b075b0993e8a5c16beed7ace16c098316338f62eb1ec44871be"
+    },
+    {
+      "path": "data/gsm8k-next-fresh/test.jsonl",
+      "bytes": 583384,
+      "sha256": "355bc1cb7de1e61863364ea4790b2223dac405295bc2ad6ee160b2d741ca212e"
+    },
+    {
+      "path": "data/gsm8k-next-fresh/test2.jsonl",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "data/gsm8k-next-fresh/train.jsonl",
+      "bytes": 866110,
+      "sha256": "b2a024bc82427709d5835c9f42091a4a5441111805afdf3e822774c40fe42dd4"
+    },
+    {
+      "path": "data/gsm8k-next-fresh/validation.jsonl",
+      "bytes": 285572,
+      "sha256": "4134f3804b0fab799b5db3ae58da2ac28c8955ad48bcd29becf928e4cf551ee6"
+    },
+    {
       "path": "data/train.jsonl",
       "bytes": 57643,
       "sha256": "9493e73bcd6eb59f281449308fd0626dea9e41a7d3f2fbdfca5f7163846df011"
@@ -105,8 +175,8 @@
     },
     {
       "path": "docs/STATUS.md",
-      "bytes": 4180,
-      "sha256": "f0eb164c18554180ef106dae2397274a9b586a5066d6f0f0d130c0f11c04abb4"
+      "bytes": 6162,
+      "sha256": "94b1dbc67c6326dcc8bd8fc0040cf3e2bb97e4e497918955f0ce712e7063c737"
     },
     {
       "path": "reports/checkpoint_selection.json",
@@ -115,8 +185,8 @@
     },
     {
       "path": "reports/data_split_validation.json",
-      "bytes": 553,
-      "sha256": "2207466616b6cd6cbe52dcd6237f0d5e6e541ee476d523919a23afc5c0af3ea9"
+      "bytes": 654,
+      "sha256": "b2029f579e127e2b01f7156019ced1a19a1b974f14d54ec06242bc318b396eca"
     },
     {
       "path": "reports/environment.json",
@@ -140,13 +210,13 @@
     },
     {
       "path": "reports/experiment_report.md",
-      "bytes": 16675,
-      "sha256": "f525a448fb44549fbcd89c1dd6a0871d6361b46ccfd91cf16878b614fee0d980"
+      "bytes": 20772,
+      "sha256": "e0b1d5ee930ee633f96dcee464e7d963f6ce51b3918e72e9fb8195e598d8b1cb"
     },
     {
       "path": "reports/formal_training_plan.md",
-      "bytes": 4746,
-      "sha256": "a048efac2aa3ba7c28102b62c764ecaf6de91581692de3ccdb75059b48927c3d"
+      "bytes": 5668,
+      "sha256": "2a791b5d729d471003f71380a69596669ca754c709891ff1131a265a98de062b"
     },
     {
       "path": "reports/gsm8k_base_test.json",
@@ -174,9 +244,44 @@
       "sha256": "e66b4fe79997587734ab1746ed3eb4534637484b2a034e9b2377717b39cfa0dd"
     },
     {
+      "path": "reports/gsm8k_formal_base_test.json",
+      "bytes": 719691,
+      "sha256": "951de195f6c8fda3eecb281096f915a3e31e26340bc0dfb9a9b87447c900185c"
+    },
+    {
+      "path": "reports/gsm8k_formal_base_validation.json",
+      "bytes": 345462,
+      "sha256": "3dc36306152230569f0b776a919495c0f3c17ecb762b104dc5bf64c3eb498175"
+    },
+    {
+      "path": "reports/gsm8k_formal_checkpoint_selection.json",
+      "bytes": 2747,
+      "sha256": "419cfa9a30abe6ced677c7d6070a37393928245712a700ff48f0488225f6a926"
+    },
+    {
       "path": "reports/gsm8k_formal_data_validation.json",
       "bytes": 1080,
       "sha256": "8c70fa88521c1e804b7f312784a49a10ffe2c59d16d11ecd89524e31d545fe7a"
+    },
+    {
+      "path": "reports/gsm8k_formal_g8_step100_test.json",
+      "bytes": 593468,
+      "sha256": "0011524803253afafcdf49d1c35303593651195c0bad271ffccd8f8b32b0ca38"
+    },
+    {
+      "path": "reports/gsm8k_formal_g8_step100_validation.json",
+      "bytes": 277417,
+      "sha256": "98e2c461b1ceb1277c20697cefc5f2015489abfcf3f0d3116e4b9002136e9e44"
+    },
+    {
+      "path": "reports/gsm8k_formal_g8_step50_validation.json",
+      "bytes": 276371,
+      "sha256": "378b03f72763c85eabab978e153c76aeef4b20ed404aee40ecab04e5f0787de9"
+    },
+    {
+      "path": "reports/gsm8k_formal_quality_gate.json",
+      "bytes": 6837,
+      "sha256": "26053bb9b1208931d19a499ce172cbbbffbb2c501d0b4b8633f54217dc6f0934"
     },
     {
       "path": "reports/gsm8k_group4_validation_step2.json",
@@ -187,6 +292,16 @@
       "path": "reports/gsm8k_group4_validation_step4.json",
       "bytes": 85345,
       "sha256": "15d0666b6335a4891074d2e2808c96f8a020bc4416ce1aeb9c0ae1708b40db42"
+    },
+    {
+      "path": "reports/gsm8k_next_data_validation.json",
+      "bytes": 1073,
+      "sha256": "b52d3507da92b96f0e9595d163579e175080ae76cf41a63f2cb6248da44c4f83"
+    },
+    {
+      "path": "reports/gsm8k_next_fresh_data_validation.json",
+      "bytes": 1073,
+      "sha256": "dda094a8f111993e75856923648d102d599062b4c82e50122064fcb3fc82fcfb"
     },
     {
       "path": "reports/gsm8k_quality_gate.json",
@@ -220,8 +335,8 @@
     },
     {
       "path": "reports/reward_correctness.json",
-      "bytes": 553,
-      "sha256": "2207466616b6cd6cbe52dcd6237f0d5e6e541ee476d523919a23afc5c0af3ea9"
+      "bytes": 654,
+      "sha256": "b2029f579e127e2b01f7156019ced1a19a1b974f14d54ec06242bc318b396eca"
     },
     {
       "path": "reports/runtime_preflight.json",
@@ -247,6 +362,746 @@
       "path": "requirements-wsl2.txt",
       "bytes": 377,
       "sha256": "aac3b9f77f0e88f7513e81125c021bd40a2e2ceed79512e3328b113bd1520e2a"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/config.json",
+      "bytes": 124,
+      "sha256": "a52e8e34daaec354f030ebe3f9e4c79fce3c28e89351e879d7dd4bc0e9b1be07"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/final_adapter/README.md",
+      "bytes": 5197,
+      "sha256": "6ac9f8604dcf8504c27f2661f9c1a58259c58b5a1ef30b5fc1116093d5abf507"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/final_adapter/adapter_config.json",
+      "bytes": 1169,
+      "sha256": "485400b34e1c3550d977713ff1fedcc5bb1d7d6c575a873cc01d5a0abde786c8"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/final_adapter/adapter_model.safetensors",
+      "bytes": 10143888,
+      "sha256": "9303bd44d27ae12a06872608cea13abe8489ed6127f669f48488fd7f5ed79236"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/final_adapter/added_tokens.json",
+      "bytes": 707,
+      "sha256": "c0284b582e14987fbd3d5a2cb2bd139084371ed9acbae488829a1c900833c680"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/final_adapter/chat_template.jinja",
+      "bytes": 4168,
+      "sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/final_adapter/merges.txt",
+      "bytes": 1671853,
+      "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/final_adapter/special_tokens_map.json",
+      "bytes": 613,
+      "sha256": "76862e765266b85aa9459767e33cbaf13970f327a0e88d1c65846c2ddd3a1ecd"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/final_adapter/tokenizer.json",
+      "bytes": 11422654,
+      "sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/final_adapter/tokenizer_config.json",
+      "bytes": 5430,
+      "sha256": "ffe7b045351d007df591529681cad1b162859afaa83abc082da65c7e8eb994da"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/final_adapter/training_args.bin",
+      "bytes": 7968,
+      "sha256": "9538e06dcb1973548a19e8e37b65d689e5bfd63f3d34e6b7e1b0a18f98bb4fbd"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/final_adapter/vocab.json",
+      "bytes": 2776833,
+      "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/run_summary.json",
+      "bytes": 58860,
+      "sha256": "87a1e109ec0582ac5dbec9a8ee9b238d9d9a3f547b16e9a94ceee6704f0706dc"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/README.md",
+      "bytes": 1902,
+      "sha256": "30101256c157c5627caaf4215c18117e7970f1ffedfb2d21a1a98a677becc5cf"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-100/README.md",
+      "bytes": 5197,
+      "sha256": "6ac9f8604dcf8504c27f2661f9c1a58259c58b5a1ef30b5fc1116093d5abf507"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-100/adapter_config.json",
+      "bytes": 1169,
+      "sha256": "485400b34e1c3550d977713ff1fedcc5bb1d7d6c575a873cc01d5a0abde786c8"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-100/adapter_model.safetensors",
+      "bytes": 10143888,
+      "sha256": "9303bd44d27ae12a06872608cea13abe8489ed6127f669f48488fd7f5ed79236"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-100/added_tokens.json",
+      "bytes": 707,
+      "sha256": "c0284b582e14987fbd3d5a2cb2bd139084371ed9acbae488829a1c900833c680"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-100/chat_template.jinja",
+      "bytes": 4168,
+      "sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-100/merges.txt",
+      "bytes": 1671853,
+      "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-100/optimizer.pt",
+      "bytes": 20511602,
+      "sha256": "ba9d686295400ff88ef734dd53c513a28e2ce770c41b3801740f8bf0f35854e6"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-100/rng_state.pth",
+      "bytes": 14232,
+      "sha256": "2c89c99f8d2fd6122e5014d3bf45f28a5e7d100a5ab6a1f5e42b13ff6ccee236"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-100/scheduler.pt",
+      "bytes": 1056,
+      "sha256": "71c408d8d56bc3dfc86e2c64e94cee35af2a4c726c28aac859fcfe8774960e7a"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-100/special_tokens_map.json",
+      "bytes": 613,
+      "sha256": "76862e765266b85aa9459767e33cbaf13970f327a0e88d1c65846c2ddd3a1ecd"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-100/tokenizer.json",
+      "bytes": 11422654,
+      "sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-100/tokenizer_config.json",
+      "bytes": 5430,
+      "sha256": "ffe7b045351d007df591529681cad1b162859afaa83abc082da65c7e8eb994da"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-100/trainer_state.json",
+      "bytes": 96602,
+      "sha256": "314c6f9d4125b3a015577c3651feeb192538c4e399f9cc186aaed1d3d99dcddc"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-100/training_args.bin",
+      "bytes": 7968,
+      "sha256": "9538e06dcb1973548a19e8e37b65d689e5bfd63f3d34e6b7e1b0a18f98bb4fbd"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-100/vocab.json",
+      "bytes": 2776833,
+      "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-50/README.md",
+      "bytes": 5197,
+      "sha256": "6ac9f8604dcf8504c27f2661f9c1a58259c58b5a1ef30b5fc1116093d5abf507"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-50/adapter_config.json",
+      "bytes": 1169,
+      "sha256": "485400b34e1c3550d977713ff1fedcc5bb1d7d6c575a873cc01d5a0abde786c8"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-50/adapter_model.safetensors",
+      "bytes": 10143888,
+      "sha256": "fe5da3e891f3a9e810d08948148fd9fecb2fbeb5dd4fbecd1eb98068679372f9"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-50/added_tokens.json",
+      "bytes": 707,
+      "sha256": "c0284b582e14987fbd3d5a2cb2bd139084371ed9acbae488829a1c900833c680"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-50/chat_template.jinja",
+      "bytes": 4168,
+      "sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-50/merges.txt",
+      "bytes": 1671853,
+      "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-50/optimizer.pt",
+      "bytes": 20511602,
+      "sha256": "7fe1cd21601167cadbe8aa92d21ee20f7028e5e2c66a947cfb237b8d24ec8f76"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-50/rng_state.pth",
+      "bytes": 14232,
+      "sha256": "82a99d76ad4a825efc7e0e7dd57c2f9c61e931c4a5abb98b72dfda6cd86e70ca"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-50/scheduler.pt",
+      "bytes": 1056,
+      "sha256": "e12b8bdd69f9224f052a78b555a9582f0a6288458fbdcd1229a115a62e4f5a8f"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-50/special_tokens_map.json",
+      "bytes": 613,
+      "sha256": "76862e765266b85aa9459767e33cbaf13970f327a0e88d1c65846c2ddd3a1ecd"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-50/tokenizer.json",
+      "bytes": 11422654,
+      "sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-50/tokenizer_config.json",
+      "bytes": 5430,
+      "sha256": "ffe7b045351d007df591529681cad1b162859afaa83abc082da65c7e8eb994da"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-50/trainer_state.json",
+      "bytes": 48637,
+      "sha256": "c15eb7c72d65572b5bbdd9e5093dc36aa179823acee0bc34b55deb0a98d75346"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-50/training_args.bin",
+      "bytes": 7968,
+      "sha256": "9538e06dcb1973548a19e8e37b65d689e5bfd63f3d34e6b7e1b0a18f98bb4fbd"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/checkpoint-50/vocab.json",
+      "bytes": 2776833,
+      "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00001.parquet",
+      "bytes": 6879,
+      "sha256": "669c292681babee258ae388bbaeb533b59073f86f9af253256dc04470bc1f4f6"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00002.parquet",
+      "bytes": 8346,
+      "sha256": "0cf3be14a64884ba24a38d7b4260dc5b75d2ab0563f36525d737ddd1fe5e3aa6"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00003.parquet",
+      "bytes": 6487,
+      "sha256": "3e21c1977d0f2950914f44dbaefdecc8ee3a8963cab3446ff120b8b71cb931b6"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00004.parquet",
+      "bytes": 7634,
+      "sha256": "6c847380ae55db2baadeeeee89427dfeb7ff74bf4e7e77c9948845b4294bfaa9"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00005.parquet",
+      "bytes": 6051,
+      "sha256": "07c8f498e119c6aa543739380256007ff61ddfdabbaf2aa9ea11740e0cfd8b37"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00006.parquet",
+      "bytes": 6196,
+      "sha256": "15fc9a2adb52400b59ccd42a3c48a6f8c7d7fb16fd098c8d4c12f8d7237ce18b"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00007.parquet",
+      "bytes": 6856,
+      "sha256": "b0b7235b3eba0c5edf89500d50fb82e4f56ca3af27533153cd0bd79e74908583"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00008.parquet",
+      "bytes": 6935,
+      "sha256": "b20613a912bd42ed105f90ae76ba389623b2800a8d1556af2372778756435d64"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00009.parquet",
+      "bytes": 7140,
+      "sha256": "624ed446629ca95fb1817fabcb176c79a7bbdfec5533d77080cbef08b070a262"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00010.parquet",
+      "bytes": 6227,
+      "sha256": "876e5c533bc2559e4ac784f0c5ce17c5b4c48bb068ffb27edb2692d5a611e647"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00011.parquet",
+      "bytes": 6473,
+      "sha256": "1592e1c0872c3ccdde8c58469407de85fda686e6f7625e11daa9adb1bb02ec33"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00012.parquet",
+      "bytes": 6382,
+      "sha256": "2bdbe06e6de9eede74ccbab1f474f0687d493914f4d8ed4e8931fbee152442b1"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00013.parquet",
+      "bytes": 7126,
+      "sha256": "74b7534c79325c90e9ebf1fbaacde0d2a727a7aba00c36dcb56a42cdb44c1a7f"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00014.parquet",
+      "bytes": 6724,
+      "sha256": "f17b7cb50dade24ac047ad9e3776481fd63c699dadb5a13d133192bc3b1c58fc"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00015.parquet",
+      "bytes": 6745,
+      "sha256": "baa5daec32bbcf30097845f593d6e4e176b45b6fffdd78bd4843b1257c14bdcd"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00016.parquet",
+      "bytes": 9704,
+      "sha256": "e8f3cc8eb1705083968a57eeaaa9518ae224800b48a997221eba3d1a0148c9f4"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00017.parquet",
+      "bytes": 8000,
+      "sha256": "4d65629593d706cd57271f15097e3388b5c2f6c5b6966724d159d5cfc1ed8c6b"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00018.parquet",
+      "bytes": 6913,
+      "sha256": "222902b4a61572dfab39094b106ee595f4deab74b04865ec16ee3c25fb37252b"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00019.parquet",
+      "bytes": 7178,
+      "sha256": "fefb7fec7da58c49e5a742200e04ab1978d5a6c8ae628adf63f6883fe79f8b50"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00020.parquet",
+      "bytes": 6407,
+      "sha256": "5c16ba1d99f59730d5094ecdb746dac58e02d18f427de6f777fbad5220dde593"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00021.parquet",
+      "bytes": 6289,
+      "sha256": "fe14a5a596a49a4eecf5b08df4017bc0e3731ffd64a79417f90517698448eba9"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00022.parquet",
+      "bytes": 8085,
+      "sha256": "8f9d60c1b326f4c55544392a9150ef55b41d3b332648bdf63d0831a34ffb4335"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00023.parquet",
+      "bytes": 6144,
+      "sha256": "86445bdc2c2efae2375877f555b0a86232bc709075a2a88a47e1fe4064c05c78"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00024.parquet",
+      "bytes": 7112,
+      "sha256": "4356a51b80e664ab70d5afe18de68cac64ca84f90141ee96dcbddf9f7ad7ac11"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00025.parquet",
+      "bytes": 6317,
+      "sha256": "d0c4205bbb5d7d1a61c218e796c2607503dce473a1a4445c3cd7da23753d2713"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00026.parquet",
+      "bytes": 7379,
+      "sha256": "f7492b28124b2350738b3852bee4fb8c3f8323539f468ff428f46b9bfa3958a5"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00027.parquet",
+      "bytes": 7858,
+      "sha256": "47624372c2017a44619642e7f274f06da8415e3b99a157e063222a864367b592"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00028.parquet",
+      "bytes": 7177,
+      "sha256": "1cdab87fdac77329ca10c3e2da9ad512fb2738a6d2ec4bc9e439b9166fd089c6"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00029.parquet",
+      "bytes": 6449,
+      "sha256": "8c0264828c35032aca3e70d55f30369f606567b076dc916a685e833ec7f67696"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00030.parquet",
+      "bytes": 7070,
+      "sha256": "a750b36c3498c599001c32f9ab70d95b0215662b68f9815bd6f5968ca89fc870"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00031.parquet",
+      "bytes": 6859,
+      "sha256": "a760dc70b7fec6087af9b976488fcbb4a82becc2fc518dcf45e8474ca842df5d"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00032.parquet",
+      "bytes": 7077,
+      "sha256": "fd8e300b1372623a1277e9ea9f81dd6918bcc275c840ff20dcceed3947793e4c"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00033.parquet",
+      "bytes": 6527,
+      "sha256": "4b7128302906d5e30494692e1f967d771a706a4e263304eb3067879754656ad0"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00034.parquet",
+      "bytes": 6040,
+      "sha256": "90bfbca9cccf15d81e3e88ec06232a9e2480c6873e9f99b57338f7d8bd0627dd"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00035.parquet",
+      "bytes": 6859,
+      "sha256": "1140f5235e465dfd50e89002c7095bb51ef53970505613b09fa7090b46fe5c05"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00036.parquet",
+      "bytes": 6670,
+      "sha256": "d0ebdc853e541ae3091ed6ef1ec6b07d2a407210757005aeb00bd99ed5058f4d"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00037.parquet",
+      "bytes": 7351,
+      "sha256": "0e4adb602353c1004419cd94ea3faa8014ef3f411914788c24e38e077cc156c5"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00038.parquet",
+      "bytes": 6316,
+      "sha256": "0a3cd3d457ee324f677e2aa28f35e926ccb2a8416bedf7eaa5242724db56d09d"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00039.parquet",
+      "bytes": 7045,
+      "sha256": "acad8f4f579a355a45dc719b50d4e61814133675e26ad48739c735f27f1500d2"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00040.parquet",
+      "bytes": 6820,
+      "sha256": "6943c383ac53e1afff992ca5dd78f37d1fbce2de2ec4221fd3d9b97ea15be44b"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00041.parquet",
+      "bytes": 7611,
+      "sha256": "65d4169661be98763fbefb0ac0d8d643705adab3585019cc2cbf353d7b7d2f32"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00042.parquet",
+      "bytes": 7004,
+      "sha256": "a43600c055543f3da542d9b6a1ec444b13a439649842b0445adbb41c4160e96e"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00043.parquet",
+      "bytes": 7603,
+      "sha256": "eba82a2596eb1eed51292c19c64e5b420464f2798512466571f97878e62235ad"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00044.parquet",
+      "bytes": 6207,
+      "sha256": "4db258de92e085247614c1e862cbb37dc06741b0a7ee6ec814db2681e49cf3dd"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00045.parquet",
+      "bytes": 6615,
+      "sha256": "c103f8394e831352fdfc8b5bcf562916c9900ce60eae8037f2937458236fc805"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00046.parquet",
+      "bytes": 6610,
+      "sha256": "69bfd8e826f7d791161261cb7bab892375cba711f147d80ac5f796e03ad614e4"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00047.parquet",
+      "bytes": 6513,
+      "sha256": "b932db4d30ca0b757cb59c20f7193c6cef9b115d2316d5b928924844de551d15"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00048.parquet",
+      "bytes": 7038,
+      "sha256": "2bc9f130a72339bc0968d6490df44a88d3b784b90373a0fdd474e976d101acf9"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00049.parquet",
+      "bytes": 5995,
+      "sha256": "213952835478bc3a591716f1525f1904f7791975ec3a1fc1c5a57d0bbac0304f"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00050.parquet",
+      "bytes": 6484,
+      "sha256": "5e00ad598f24d784a0f393557fb266ccda501821cac33cb8799165323c2296ba"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00051.parquet",
+      "bytes": 6442,
+      "sha256": "119c1797f08281835b533dafcf8ce17eae6d90870920265b0467962ee9aa5af8"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00052.parquet",
+      "bytes": 6071,
+      "sha256": "ff6f3f6fdc157d10727a3ca6e831f071b3f7628c0f4834a6155a86d57786199c"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00053.parquet",
+      "bytes": 6113,
+      "sha256": "88d07f7e2c8b1a7c8078bfceea146b2e8b351e69d228da91e648a0bb2356882e"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00054.parquet",
+      "bytes": 6613,
+      "sha256": "db6112cbda1c436c955d1ab9da76e070a1e3d5380f26b6aaba9bf86615ef017d"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00055.parquet",
+      "bytes": 6292,
+      "sha256": "5f95160ce770e640b17ee2b3d689e8266249d16e58b96d690c2202ab61d34661"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00056.parquet",
+      "bytes": 6378,
+      "sha256": "3bb89c79dfb706ee764291d8aa0118254a30c2fbadcc166ed903ce71359f9abb"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00057.parquet",
+      "bytes": 7398,
+      "sha256": "1ef74931924430cadea052c00a0d34a24cb1b1ce2c1922830c32870dd506ed8d"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00058.parquet",
+      "bytes": 6633,
+      "sha256": "e144c40cc661c3844afdbeeaaf5bdf213dec2c0150a40f61f41f3f4398fe7b16"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00059.parquet",
+      "bytes": 6956,
+      "sha256": "04305e04116be8d901664b62baf88ef1f6f457cdee18dc4b282befe02c78c104"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00060.parquet",
+      "bytes": 7327,
+      "sha256": "95cfc3fca2da037b93a931ac9e451d6550ab3d1fdc54cc73c57e313623171e9c"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00061.parquet",
+      "bytes": 6646,
+      "sha256": "c27a8e140eb15008c8d393ea3a60ca0a3aea6214d8ee14a3faf885e5fc4b3425"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00062.parquet",
+      "bytes": 7148,
+      "sha256": "0fcd507c33cc9196f959fc94023250cff301b5916908623423e19ec88e1681f2"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00063.parquet",
+      "bytes": 6384,
+      "sha256": "c76ae5351a68042bba87629f3b179f856cf42ced4a5e0498310aae1b9c2184b7"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00064.parquet",
+      "bytes": 8428,
+      "sha256": "882f4d58ce5515177f3420963163ac004c5705e22763322be91e8d85a7c87663"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00065.parquet",
+      "bytes": 7138,
+      "sha256": "60360f7a5cc2d3965c9ef3a61e6d91c482b8cb4ec3adb447d3d32f58a2ec2c0f"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00066.parquet",
+      "bytes": 7594,
+      "sha256": "68940358f47b596d3bbc20291e9a04a33145a13f799c2da41970f3576f1d2934"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00067.parquet",
+      "bytes": 7205,
+      "sha256": "40c192b02961c027374739e46885e8aca2ebf97ce3c2851b40dce81d5fdfd3b6"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00068.parquet",
+      "bytes": 6797,
+      "sha256": "174b5e401af30196b92816d766f09f8675030bff456f312da7b4093b2f03e3fe"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00069.parquet",
+      "bytes": 6412,
+      "sha256": "df73682887fb35487b011cc931bfe6d1a89a548d3231815b4d32b7432bcfe3d7"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00070.parquet",
+      "bytes": 6273,
+      "sha256": "d14c6f6987cacff652b9b5b0e25ae83d45ea2de95054868f7c1b46896b3179d5"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00071.parquet",
+      "bytes": 7283,
+      "sha256": "735975d72b6d7cb958a2ecdd23b77a996861ff820fc85c2f10ef7a43a358728b"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00072.parquet",
+      "bytes": 6507,
+      "sha256": "ad70527d999b4580458f0f4d27590c0a7a5fff09eee62942e09da2ea741c4d2a"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00073.parquet",
+      "bytes": 6349,
+      "sha256": "3037695a893786f6d94f960b3f9c4b716049d3657197535dfae1d3ed2c8b73d5"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00074.parquet",
+      "bytes": 7156,
+      "sha256": "5c22f66f6545ee0cbe8151e71476814d77747fc71e6c066a2d070bcd6c1684c5"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00075.parquet",
+      "bytes": 6714,
+      "sha256": "db695fea218b46e3f0ca15feda067eedcbb16c33b34190e30f884fda353dec95"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00076.parquet",
+      "bytes": 6152,
+      "sha256": "89ef7a7ec84ee1f9a1ec019449581eb09ba5770e0bab26bc6c57fe7a6bee6815"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00077.parquet",
+      "bytes": 7442,
+      "sha256": "8c7c9e8625c3993b9b08e5439fa68cd751eb7bc2ce2104857c1335b7875287a4"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00078.parquet",
+      "bytes": 7368,
+      "sha256": "bada0622545435791f157bae83d845ab209486cfb290e62b375e524d58238bb9"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00079.parquet",
+      "bytes": 6943,
+      "sha256": "497a50db92f252857ef6156f7ff9bc0f69aa19021b71c0b0e6df9fddc1f0c1b7"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00080.parquet",
+      "bytes": 6644,
+      "sha256": "2eb36be4573e0934fc562478359dc65f6d31f987eb74c1802940f6d940d21cb3"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00081.parquet",
+      "bytes": 6457,
+      "sha256": "a227cd17ecffae16a004298e01f8c7cf8a2ef09ccb6b0a91ad41108510e4484b"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00082.parquet",
+      "bytes": 6338,
+      "sha256": "bddf49e9d17e4bc2231d6dc5c2aa178886228e10e2d7087be52ca68d95c32c53"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00083.parquet",
+      "bytes": 6480,
+      "sha256": "fc9ec7a7fc91761dd7d344e0d56816d6a0757f4d182f80f3ec00274ea5ee8406"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00084.parquet",
+      "bytes": 6787,
+      "sha256": "30494160e7c5ed5a22ede15c81fc1c8ef17aed258ca3edcf933297d4341d4361"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00085.parquet",
+      "bytes": 7315,
+      "sha256": "d216445db9cae38a9d9b80fd48b010101f1ec860c898d0bdb95155390176d64d"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00086.parquet",
+      "bytes": 6671,
+      "sha256": "ae401df833a20ad395a4ac4311c78c81e65f61f02bfb7f90124525ce8e7c336d"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00087.parquet",
+      "bytes": 7461,
+      "sha256": "ceb6850254a7ae13c2ed240ff99f579ce698255da72acfb3d03ffe2bb752a586"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00088.parquet",
+      "bytes": 7853,
+      "sha256": "0cda56a294ab3f92f6a714c32a95f7eda0b2b84d6a94f03ae5cdcc153068e959"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00089.parquet",
+      "bytes": 7525,
+      "sha256": "258558adc6a254d49ef81c49c8c55ffca2c7989a7beaa159d387b16a2cde8393"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00090.parquet",
+      "bytes": 7168,
+      "sha256": "62cef2ddfd39964aabab37d26cbe300f459b33d9a3eefb310b759e638ab3c9ce"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00091.parquet",
+      "bytes": 6383,
+      "sha256": "1a7bb5771fa64b2c0af56661f87cd7d65ad2a01c06d55db8174df1e045ae26b2"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00092.parquet",
+      "bytes": 6786,
+      "sha256": "507f33a24cfcd77f6d593075ea335bc388eca4e40f0c13cf729e3873db117ec0"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00093.parquet",
+      "bytes": 7007,
+      "sha256": "09ecd4dc9d5945d30c19adfac3d935d657fb38fb2b09adea8827e000727410a6"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00094.parquet",
+      "bytes": 8061,
+      "sha256": "6bff600720c31eeeeeb6c17b0f67b6be1ba395bc0caa43f368aa6847e304781c"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00095.parquet",
+      "bytes": 7215,
+      "sha256": "3375dc5492c154941397bfc92c482f801bc83a24584c4b8bd050b4acc6dbbacd"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00096.parquet",
+      "bytes": 6928,
+      "sha256": "78d3f90dd44222caf39e513dcabdf1024d7a5684f3c33aad04b24fd013b02f28"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00097.parquet",
+      "bytes": 6469,
+      "sha256": "07beabd4409d18236274da216c8d9b6a556f14989f3dfcf5298f83477b5ab2a5"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00098.parquet",
+      "bytes": 7724,
+      "sha256": "1f50cdef8f3b84932a1282482c2771d2288ddce281ce12115aa31a1b07527220"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00099.parquet",
+      "bytes": 7005,
+      "sha256": "68ee533edc361c21e9cf6fc35c010317d33b63ddebedb39254c21aca0090f4ab"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer/completions/completions_00100.parquet",
+      "bytes": 6250,
+      "sha256": "c3dada74095db8ebaab5f4f0fad1059a63a5dc51e001d57d6ed82596213b5fdf"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer_log_history.json",
+      "bytes": 90665,
+      "sha256": "ab36ba31101fd88a494ee3378022e4bc81799c74ab61e6d202fdffacd5ab839b"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/attempt-01/trainer_state.json",
+      "bytes": 96852,
+      "sha256": "19c8900e51f15ae3872d20329f9d0fa89ecfd381b76f76d7e6848c07d5fddc4e"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/fallback_attempts.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "path": "runs/gsm8k-formal-g8-100/run_summary.json",
+      "bytes": 58906,
+      "sha256": "30238b635af76ae8142d380f7ff083a1fe10dc2ff08d85a6e2fbe89ec17d7025"
     },
     {
       "path": "runs/gsm8k-group4-pilot/attempt-01/config.json",
@@ -1614,6 +2469,11 @@
       "sha256": "2803e8f26306fc9e27d82ad07d6278e4649b88e441926b10c970878126c8ece0"
     },
     {
+      "path": "scripts/audit_formal_run.py",
+      "bytes": 16540,
+      "sha256": "c8962e945c963d87d06edd47045a8f9e3f59780ce7c4d69c8ce9e7009e10c442"
+    },
+    {
       "path": "scripts/audit_gsm8k.py",
       "bytes": 10749,
       "sha256": "926f2a4019526cf8e20f9b852cc19aa3c9f522f964fec59d1346d099a2758e33"
@@ -1640,8 +2500,8 @@
     },
     {
       "path": "scripts/math_task.py",
-      "bytes": 4257,
-      "sha256": "d88a20883dc08268406c729748bd1271a5d94080d1f57341380206e65ab19722"
+      "bytes": 5062,
+      "sha256": "03064ba746198b16bb6a0ce9acd7ad3969c445c15c4716ec111b14e2455cd7c2"
     },
     {
       "path": "scripts/prepare_data.py",
@@ -1650,8 +2510,8 @@
     },
     {
       "path": "scripts/prepare_gsm8k.py",
-      "bytes": 5086,
-      "sha256": "241457b2669c48dbbe41ea7cfcfa96f4f7989d657967eb3d77f48eda966eef48"
+      "bytes": 8866,
+      "sha256": "4ca79d63df5a47f4f3ff16e6986c573a2f4202dfa160cdcb265d83c8130ff925"
     },
     {
       "path": "scripts/telemetry.py",
@@ -1660,18 +2520,18 @@
     },
     {
       "path": "scripts/train_grpo.py",
-      "bytes": 19595,
-      "sha256": "34ad675316796234aa2e3eaf6da6ef50891bc10caaec8d89c383b6c529549629"
+      "bytes": 21721,
+      "sha256": "b20a73fe142a35f2d74f248249331f6f4fad4f3447c491fcf9147bc6214ad83d"
     },
     {
       "path": "scripts/validate_gsm8k.py",
-      "bytes": 3502,
-      "sha256": "9e70427ba661cbdc4911d4e25581d04579a7587cd5bd84bb7f74b98cbbf28adc"
+      "bytes": 3812,
+      "sha256": "8b39cd94ac770431897d929068f3b42104761b80710a03a3e06956b7c9fc24df"
     },
     {
       "path": "scripts/validate_reward.py",
-      "bytes": 2782,
-      "sha256": "b1dfade7f369535280556e1d56e62b14041afa07490812d247e3805648b00aec"
+      "bytes": 3427,
+      "sha256": "d9b22a1ad0bd2743209a14efde9bbb0492ecb87d017ddd30663b95c54f475746"
     }
   ]
 }

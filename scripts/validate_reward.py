@@ -5,7 +5,7 @@ import json
 import hashlib
 from pathlib import Path
 
-from math_task import build_examples, exact_math_reward, extract_answer
+from math_task import build_examples, exact_format_reward, exact_math_reward, extract_answer
 
 
 def main() -> None:
@@ -20,6 +20,17 @@ def main() -> None:
         actual = exact_math_reward([completion], [target])[0]
         assert abs(actual - expected) < 1e-9, (completion, expected, actual)
     assert extract_answer("The text mentions 999 but no marked result.") == (None, None)
+
+    exact_format_cases = [
+        ("work: 18 + 6 = 24. <answer>24</answer>", "24", 1.05),
+        ("<answer>23</answer>", "24", 0.05),
+        ("The result is 24.", "24", 0.0),
+        (r"\boxed{-7}", "-7", 1.0),
+    ]
+    for completion, target, expected in exact_format_cases:
+        actual = exact_format_reward([completion], [target])[0]
+        assert abs(actual - expected) < 1e-9, (completion, expected, actual)
+    assert exact_format_reward(["<answer>23</answer>"], ["1000000"]) == [0.05]
 
     expected_train = build_examples(256, 20261022)
     expected_eval = build_examples(48, 20261022 + 1_000_003)
@@ -61,6 +72,8 @@ def main() -> None:
     report = {
         "status": "passed",
         "reward_cases": len(cases),
+        "exact_format_reward_cases": len(exact_format_cases),
+        "reward_modes": ["distance_shaped", "exact_format"],
         "splits": {
             name: {"examples": len(rows), "sha256": hashlib.sha256(paths[name].read_bytes()).hexdigest()}
             for name, rows in persisted.items()

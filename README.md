@@ -8,7 +8,6 @@
 - `scripts/prepare_data.py`：按固定种子生成 JSONL 训练、验证和最终评测集。
 - `scripts/prepare_gsm8k.py` / `scripts/validate_gsm8k.py`：下载固定 GSM8K revision，生成不重叠子集并校验来源、答案格式与文件 hash。
 - `scripts/build_manifest.py`：刷新源码、数据、报告和运行产物的 SHA-256 与文件大小清单。
-- `scripts/build_manifest.py`：刷新源码、数据、报告和运行产物的 SHA-256 与文件大小清单。
 - `scripts/validate_reward.py`：验证答案提取、奖励函数和数据集隔离规则。
 - `scripts/train_grpo.py`：先运行 1 步 smoke，再运行小规模训练；仅在 OOM 时按顺序缩短 completion、降低 generation group，并记录每次配置。
 - `scripts/eval_math.py`：独立进程逐题贪心解码，评估基座模型或已保存的 LoRA adapter。
@@ -69,13 +68,13 @@ GSM8K 子集由 `scripts/prepare_gsm8k.py` 固定 revision 和 seed 生成；复
 
 ## 奖励与指标
 
-只接受 `<answer>整数</answer>` 或唯一 `\boxed{整数}` 中的整数作为最终答案。指定 XML 格式另有 0.05 分；数值越接近标准答案，获得最多 0.1 的倒数距离 shaping；精确答案额外获得 1.0 分。测试覆盖正确答案、错误答案、缺失格式和虚假解释数字。训练、验证、最终评测集由不同固定种子生成；训练脚本只读训练集，checkpoint 选择使用验证集，最终结果使用独立评测集。
+答案校验只接受唯一 `<answer>整数</answer>` 或唯一 `\boxed{整数}` 中的整数。`distance_shaped`历史奖励在此基础上加格式和数值距离分；新增`exact_format`对照只给精确答案1分、指定XML格式额外0.05分，不按错误答案距离排序。两种模式都有单测。`--max-generated-tokens`可令训练在完成当前组后停止，使不同采样组大小的比较按真实生成token对齐，并在summary记录目标与超额。新的奖励消融结果见`reports/experiment_report.md`；运行完成前不将任何候选当作已验证改进。
 
 每次成功运行保存实际优化步数、LoRA 可训练参数和权重更新量、TRL 原始 log history/reward、训练耗时、step/s、生成 completion/s、PyTorch 峰值 allocated/reserved 显存，以及 `nvidia-smi` 采样到的整卡峰值显存。报告需同时保留桌面进程的显存基线，不能将 WSL 进程显存与整卡显存混为一谈。
 
 ## AutoDL 单张 24GB 迁移
 
-保留同一 reward 与评测脚本。先在实例中记录 GPU 型号/驱动，按该驱动安装 PyTorch CUDA wheel，再创建同样的依赖锁定环境并跑 reward 测试与 1 步 smoke。24GB 卡先用 NF4 QLoRA、gradient checkpointing、no-vLLM、group 8、prompt 256、completion 256 做单步 profile；确认余量后运行正式训练。正式实验建议由固定 revision 的 GSM8K 生成独立目录 `data/gsm8k-formal/`，从官方 train split 取 1,500 条训练和 500 条 validation；官方 1,319 条 test 中先排除已有两个 pilot slice 使用的 256 题，余下 1,063 题作为全新留出集。固定 seed、每 50 步存 checkpoint、每 100 步在 validation 评估。遇到 OOM 时按代码回退顺序逐项缩短 completion、降低 group、降低 prompt；每次记录配置与显存。
+保留同一 reward 与评测脚本。先在实例中记录 GPU 型号/驱动，按该驱动安装 PyTorch CUDA wheel，再创建同样的依赖锁定环境并跑 reward 测试与 1 步 smoke。24GB 卡先用 NF4 QLoRA、gradient checkpointing、no-vLLM、group 8、prompt 256、completion 256 做单步 profile；确认余量后运行正式训练。旧官方test已在本地实验使用，后续正式运行不能再用它做选模或最终对照。`data/gsm8k-next-fresh/` 是新准备的独立轮次：从固定revision的GSM8K train split剩余行中先排除既有1,500 train与500 validation，再采样新train/validation/test（1,500/500/1,000），source index校验通过。每50步保存checkpoint、每100步在validation评估。遇到OOM时按代码回退顺序逐项缩短completion、降低group、降低prompt；每次记录配置与显存。
 
 ## 上游接口依据
 

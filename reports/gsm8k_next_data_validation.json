@@ -1,0 +1,38 @@
+{
+  "status": "passed",
+  "dataset_id": "openai/gsm8k",
+  "dataset_revision": "740312add88f781978c0658806c59bc2815b9866",
+  "license": "MIT",
+  "splits": {
+    "train": {
+      "count": 1500,
+      "unique_prompts": 1500,
+      "sha256": "0a3b034f2c8c341bb95094554fec5af88de98723557677a505ffe795a916f993"
+    },
+    "validation": {
+      "count": 500,
+      "unique_prompts": 500,
+      "sha256": "7399d2d5769b3c4006f5896fbbd16c3a85a2125cdd720e368501ec4fce12b50b"
+    },
+    "test": {
+      "count": 1000,
+      "unique_prompts": 1000,
+      "sha256": "f4d23d7df915d8be3baf0b8bf622193d6d2a00755701f19339abe5975ff09e71"
+    },
+    "test2": {
+      "count": 0,
+      "unique_prompts": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "question_overlaps": {
+    "train_validation": 0,
+    "train_test": 0,
+    "train_test2": 0,
+    "validation_test": 0,
+    "validation_test2": 0,
+    "test_test2": 0
+  },
+  "excluded_source_rows_verified": 2000,
+  "answer_schema": "terminal integer in the pinned GSM8K source #### marker"
+}
