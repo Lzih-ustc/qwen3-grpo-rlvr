@@ -1,0 +1,123 @@
+{
+  "status": "success",
+  "timestamp_utc": "2026-10-22T17:57:47.290717+00:00",
+  "attempt": 1,
+  "model_id": "Qwen/Qwen3-0.6B",
+  "model_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+  "software_versions": {
+    "torch": "2.5.1+cu121",
+    "transformers": "4.57.3",
+    "trl": "1.16.0",
+    "peft": "0.21.2",
+    "accelerate": "1.15.0",
+    "datasets": "4.7.0",
+    "bitsandbytes": "0.50.2"
+  },
+  "base_precision": "4bit-nf4-double-quant",
+  "compute_dtype": "torch.bfloat16",
+  "lora": {
+    "r": 8,
+    "alpha": 16,
+    "dropout": 0.0,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ]
+  },
+  "use_vllm": false,
+  "gradient_checkpointing": true,
+  "reward_mode": "distance_shaped",
+  "seed": 20261024,
+  "git": {
+    "commit": "120123558a79c48773db636b898740b51ebdf86c",
+    "working_tree_dirty": false
+  },
+  "dataset": {
+    "path": "data/gsm8k-next-fresh/train.jsonl",
+    "count": 1500,
+    "sha256": "b2a024bc82427709d5835c9f42091a4a5441111805afdf3e822774c40fe42dd4"
+  },
+  "code_sha256": {
+    "train_grpo.py": "b20a73fe142a35f2d74f248249331f6f4fad4f3447c491fcf9147bc6214ad83d",
+    "math_task.py": "03064ba746198b16bb6a0ce9acd7ad3969c445c15c4716ec111b14e2455cd7c2",
+    "telemetry.py": "fcb25c391f1029f5ec9a8adf39ff82c2064b42fd6c351e0d0c3dc8654b2897f8",
+    "eval_math.py": "a7d95e3302794024cbdd72713722437a6bb86d0723a93d92f396492a17c654e9",
+    "prepare_data.py": "769f080feb0943ec8447c62e2214af4a68ee3b609e7ca184f619599336ad41bb",
+    "validate_reward.py": "d9b22a1ad0bd2743209a14efde9bbb0492ecb87d017ddd30663b95c54f475746",
+    "audit_env.py": "2803e8f26306fc9e27d82ad07d6278e4649b88e441926b10c970878126c8ece0",
+    "check_runtime.py": "43a67903d0ec4715c9f3d36fe9ddaa78826e4a91ef9ef044d0a0af72796534a7"
+  },
+  "dependency_lock_sha256": "9b220140188d5ea20bd457a5fffb04b00a3c1f2ce0c528aeabbcd0306a8665d6",
+  "attempt_config": {
+    "prompt_token_limit": 256,
+    "max_completion_length": 256,
+    "num_generations": 8,
+    "gradient_accumulation_steps": 8,
+    "reward_mode": "distance_shaped",
+    "max_generated_tokens": 1
+  },
+  "optimizer_updates": 1,
+  "trainable_parameters": 5046272,
+  "changed_lora_parameter_count": 2748622,
+  "lora_parameter_l1_update": 137.3977351784706,
+  "train_seconds": 15.24051246800002,
+  "steps_per_second": 0.06561459151059819,
+  "completions_per_second": 0.5249167320847855,
+  "observed_generation_completion_count": 8,
+  "observed_completion_tokens": 274,
+  "completion_tokens_per_second": 17.978398073903904,
+  "training_budget": {
+    "type": "generated_completion_tokens",
+    "target": 1,
+    "actual": 274,
+    "reached": true,
+    "overshoot_tokens": 273
+  },
+  "trainer_metrics": {
+    "train_runtime": 15.0674,
+    "train_samples_per_second": 1.593,
+    "train_steps_per_second": 0.199,
+    "train_loss": 4.470348358154297e-08,
+    "epoch": 0.0006666666666666666
+  },
+  "reward_log_entries": [
+    {
+      "completions/mean_length": 34.25,
+      "completions/min_length": 8.0,
+      "completions/max_length": 86.0,
+      "completions/clipped_ratio": 0.0,
+      "completions/mean_terminated_length": 34.25,
+      "completions/min_terminated_length": 8.0,
+      "completions/max_terminated_length": 86.0,
+      "rewards/tracked_math_reward/mean": 0.5819690227508545,
+      "rewards/tracked_math_reward/std": 0.5944499969482422,
+      "reward": 0.5819690227508545,
+      "reward_std": 0.5944499969482422,
+      "frac_reward_zero_std": 0.0
+    }
+  ],
+  "torch_peak_allocated_mib": 1210.9794921875,
+  "torch_peak_reserved_mib": 1432.0,
+  "gpu_start": {
+    "memory_used_mib": 1586.0,
+    "memory_total_mib": 12288.0,
+    "gpu_util_percent": 12.0,
+    "temperature_c": 54.0
+  },
+  "gpu_monitor": {
+    "nvidia_smi_samples": 44,
+    "whole_gpu_peak_memory_used_mib": 3940.0,
+    "whole_gpu_peak_utilization_percent": 94.0,
+    "whole_gpu_start_memory_used_mib": 1586.0,
+    "whole_gpu_end_memory_used_mib": 3940.0
+  },
+  "checkpoints": [
+    "runs/token-budget-smoke/attempt-01/trainer/checkpoint-1"
+  ],
+  "final_adapter": "runs/token-budget-smoke/attempt-01/final_adapter"
+}

@@ -23,9 +23,13 @@
 
 每 100 步用单独进程在 validation 上从保存的 checkpoint 执行 `scripts/eval_math.py`，保存完整逐题输出、exact-match、解析率、token/s和显存峰值。按validation选择checkpoint；新test只对选定模型与基座各评一次，不能参与选模或奖励调节。训练reward只用于诊断，不能代替评测。报告记录训练开始前桌面/系统占用的整卡显存、训练全程`nvidia-smi`峰值、Torch allocator峰值、生成token/s、completion/s、step/s、平均reward、准确率、所有checkpoint路径和config/data/code/environment hash。
 
+## 资源估算与费用上限
+
+计划使用单张 RTX 4090 24GB；AutoDL 官方 GPU 价格页在 2026-10-23 的查询结果列出该型号按量价格为 ¥1.88/GPU小时，RTX 3090 24GB 为 ¥1.32/GPU小时（[AutoDL 官方价格页](https://www.autodl.com/home)）。采用 RTX 4090 时，预估本轮完整验证、profile、一次500步训练和最终评测需不超过2 GPU小时；设置硬上限4 GPU小时，即按该标价最多 ¥7.52。此估算依据本地100步训练耗时约4.5分钟和现有评测耗时，远程性能尚未实测，预留了实例初始化、checkpoint评测和运行波动。真正启动前必须再次核对实例页面的现价及计费粒度；超过该价格或费用上限时不启动，先取得用户明确批准。模型下载、数据盘和公网流量等非GPU费用不计入上述GPU费用上限，实例创建前需一并核对并保证不产生未授权费用。
+
 ## 本地奖励消融与 token 预算
 
-100步历史运行的800条completion里只有18条正确，且89/100个组没有任何正确输出；距离奖励让其中85个全错组仍出现组内方差。下一轮先在`data/gsm8k-next-fresh/`上固定group 8、LoRA、学习率、seed、prompt/completion上限和约8,603个生成completion token，对照`distance_shaped`与`exact_format`。训练在实际token计数越过预算时停止，报告真实token数、超额、整卡峰值显存、训练时间、吞吐、组内正确率和zero-variance比例。基座与各候选只在新validation上选择；test继续封存直到奖励和checkpoint均确定。只有通过本地消融后，才将被选配置迁移到24GB正式训练。
+100步历史运行的800条completion里只有18条正确，且89/100个组没有任何正确输出；距离奖励让其中85个全错组仍出现组内方差。下一轮先在`data/gsm8k-next-fresh/`上固定group 8、LoRA、学习率、seed、prompt/completion上限和约16,000个生成completion token，对照`distance_shaped`与`exact_format`。新split的基座500题验证已经生成21,635 token；16,000 token约为此前一轮完整验证的75%，作为可承受的本地小规模预算。训练在实际token计数越过预算时停止，报告真实token数、超额、整卡峰值显存、训练时间、吞吐、组内正确率和zero-variance比例。基座与各候选只在新validation上选择；test继续封存直到奖励和checkpoint均确定。只有通过本地消融后，才将被选配置迁移到24GB正式训练。
 
 ## 显存回退顺序
 

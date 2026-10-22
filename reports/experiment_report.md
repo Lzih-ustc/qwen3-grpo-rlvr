@@ -148,7 +148,9 @@ validation按预先固定的exact-match规则选择step50与step100中更好的s
 
 进一步按组统计，只有11/100组出现过正确答案，另有89组完全没有正确答案；其中仅4组reward方差为零，85组虽然全错仍因数值距离不同而产生非零方差。无正确答案组的平均reward标准差为0.00764，而出现正确答案组为0.416。当前`scale_rewards="group"`会将每组reward按组内统计量缩放，因此微弱的错误答案距离差异也可能为这85组提供相对优势。这是无效更新的一个可能来源。
 
-据此新增`exact_format`奖励消融：正确整数得1分，唯一`<answer>`格式另加0.05分，错误整数不再按距离分层；原有奖励保留为`distance_shaped`对照。训练脚本还新增按真实生成completion token预算停止的回调，用于将两个条件配到约8,603个生成token并记录组边界造成的实际超额。新奖励已通过独立单元案例；两种奖励在新鲜split上的训练对照仍待执行，正式test保持封存。
+据此新增`exact_format`奖励消融：正确整数得1分，唯一`<answer>`格式另加0.05分，错误整数不再按距离分层；原有奖励保留为`distance_shaped`对照。训练脚本还新增按真实生成completion token预算停止的回调，用于将两个条件配到约16,000个生成token并记录组边界造成的实际超额。新奖励已通过独立单元案例；两种奖励在新鲜split上的训练对照仍待执行，正式test保持封存。
+
+新鲜split上尚未训练前的基座验证已完成：54/500（10.8%）精确正确，解析率76.0%，生成21,635 token，耗时396.45秒（54.57 token/s），PyTorch峰值allocated/reserved为820/882 MiB，采样整卡峰值3,481 MiB。新测试集仍未运行模型。另以`token-budget-smoke`验证停止回调：目标1 token时完成1次真实optimizer update、8条completion、274 token，LoRA参数变化2,748,622个，step-1 checkpoint已保存；回调在完整group后停下，超额273 token。训练耗时15.24秒，PyTorch allocated/reserved峰值1,211/1,432 MiB，整卡峰值3,940 MiB。此极小预算仅验证回调和训练链路，不作为性能结果。
 
 step100按validation选定后，基座和adapter各自在完整1,063题正式test上贪心评测一次（test SHA-256=`306c5d08ad76236c03c24a7fb60160453fc6e99161c988721893662e5e4f838f`）：
 

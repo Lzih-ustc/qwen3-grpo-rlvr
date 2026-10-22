@@ -74,7 +74,9 @@ GSM8K 子集由 `scripts/prepare_gsm8k.py` 固定 revision 和 seed 生成；复
 
 ## AutoDL 单张 24GB 迁移
 
-保留同一 reward 与评测脚本。先在实例中记录 GPU 型号/驱动，按该驱动安装 PyTorch CUDA wheel，再创建同样的依赖锁定环境并跑 reward 测试与 1 步 smoke。24GB 卡先用 NF4 QLoRA、gradient checkpointing、no-vLLM、group 8、prompt 256、completion 256 做单步 profile；确认余量后运行正式训练。旧官方test已在本地实验使用，后续正式运行不能再用它做选模或最终对照。`data/gsm8k-next-fresh/` 是新准备的独立轮次：从固定revision的GSM8K train split剩余行中先排除既有1,500 train与500 validation，再采样新train/validation/test（1,500/500/1,000），source index校验通过。每50步保存checkpoint、每100步在validation评估。遇到OOM时按代码回退顺序逐项缩短completion、降低group、降低prompt；每次记录配置与显存。
+先用新鲜validation确定奖励与训练配置，再在实例中记录 GPU 型号/驱动，按该驱动安装 PyTorch CUDA wheel，创建锁定环境并跑 reward 测试与 1 步 smoke。24GB 卡先用 NF4 QLoRA、gradient checkpointing、no-vLLM、group 8、prompt 256、completion 256 做单步 profile；确认余量后运行500步正式训练。旧官方test已在本地实验使用，后续正式运行不能再用它选模。`data/gsm8k-next-fresh/` 是新准备的独立轮次：从固定revision的GSM8K train split剩余行中排除既有1,500 train与500 validation，再采样新train/validation/test（1,500/500/1,000），source index校验通过。每50步保存checkpoint、每100步在validation评估。OOM时按代码回退顺序逐项缩短completion、降低group、降低prompt；每次记录配置与显存。
+
+资源计划以单张 RTX 4090 24GB 为例：AutoDL 官方页面于2026-10-23列价为¥1.88/GPU小时，估计总用卡不超过2小时，硬上限4小时（GPU租用费最多¥7.52）；创建实例前重新核对当日价格、计费粒度和其他费用。该计划不是租卡授权，任何付费实例仍须先得到用户明确批准。
 
 ## 上游接口依据
 

@@ -29,6 +29,7 @@ Last updated: 2026-10-23 (Asia/Shanghai)
 - A fresh next-round dataset now lives in `data/gsm8k-next-fresh/`: 1,500 train, 500 new validation, 1,000 new test from unused official-train source rows. It excludes the previous formal train/validation's 2,000 source indices and passes `reports/gsm8k_next_fresh_data_validation.json`; the new test has not been model-evaluated.
 - A deeper audit of the 100-step rollouts found only 18/800 exact answers and only 11/100 groups with any correct completion. 89 all-wrong groups still had nonzero reward variance in 85 cases because the inverse-distance shaping differentiates wrong integers; after `scale_rewards="group"`, this weak signal can still drive relative updates. Mean within-group reward std was 0.00764 in all-wrong groups versus 0.416 in groups containing a correct completion.
 - Added a verifier-only `exact_format` reward mode (exact answer + optional 0.05 XML-format bonus, no distance shaping) and a generated-token-budget stop callback for fair compute comparisons. Reward unit cases and the fresh data/hash/source-index checks pass; training with the new mode has not run yet.
+- The generated-token callback passed a minimum GPU update: 8 rollouts, a nonzero gradient, 2,748,622 changed LoRA parameters, and a step-1 checkpoint; target 1 token stopped at 274 tokens after the full group. Base evaluation on the untouched fresh validation is 54/500 (10.8%), parse rate 76%, 21,635 tokens at 54.57 token/s; its test remains sealed.
 
 ## Remaining phases
 
@@ -38,4 +39,4 @@ Last updated: 2026-10-23 (Asia/Shanghai)
 
 ## Next action
 
-Run a minimum GPU correctness test of the new token-budget callback, then train the two reward conditions against the fresh training split under the same generated-token target. Evaluate candidates only on the fresh validation and keep the new test sealed until checkpoint selection. Keep both pilot test slices, the consumed formal test, and the arithmetic artifacts immutable. Continue on the local RTX 3060; any paid AutoDL run still requires explicit user approval.
+Train the two reward conditions against the fresh training split under the same 16,000 generated-token target. Evaluate candidates only on the fresh validation and keep the new test sealed until checkpoint selection. Keep both pilot test slices, the consumed formal test, and the arithmetic artifacts immutable. Continue on the local RTX 3060; any paid AutoDL run still requires explicit user approval.
