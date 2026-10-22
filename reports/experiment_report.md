@@ -116,6 +116,17 @@ test2 上两个模型对同一批题逐题配对：7 题都答对、5 题 base-o
 
 首个 test slice 的早期开发诊断为 base 13/128、group-2 step-4 4/128；看到该结果后才探索 group 4。它不用于最终结论。test2 在 group-4 checkpoint 选择前保持未查看。训练 step-4 的 completion 截断率为100%，下一轮须先扩大长度预算并测显存/截断，然后用更多 updates 和新 seed 重复；另需给效率比较匹配生成 token 或 GPU 时间预算。
 
+## Formal split 长度与组大小 profile
+
+为决定本机12GB显存上的下一轮配置，在正式 split 的训练数据上分别做了1步 group-4 与 group-8 profile，seed `20261023`，prompt/completion 上限均为256，并保存了完整 checkpoint。profile 没有用于模型选取或能力结论；两次只各观察一个随机 prompt batch，completion 实际都较短，不能代表最坏长度或稳定吞吐。
+
+| Group | Completion 数 / 实际 token | 更新耗时 / token 吞吐 | reward mean / std | PyTorch allocated/reserved | 整卡采样峰值 | OOM / 截断 |
+|---|---:|---:|---:|---:|---:|---|
+| 4 | 4 / 45 | 9.38秒 / 4.80 token/s | 0.05447 / 0.00231 | 1,107/1,432 MiB | 3,774 MiB | 无 / 0% |
+| 8 | 8 / 74 | 12.73秒 / 5.81 token/s | 0.05592 / 0.00492 | 1,107/1,432 MiB | 3,769 MiB | 无 / 0% |
+
+group-8比group-4单步生成更多token且用时增加，但不同completion数、短样本和不同采样结果使这一比较不能说明质量或效率优劣。基于本机显存余量，下一步采用group-8、256-token completion上限做100步扩展pilot；用固定500题validation比较step50与step100，再决定是否继续正式阶段。两个profile运行记录见 `runs/profile-g4-c256/` 和 `runs/profile-g8-c256/`。
+
 ## Checkpoint 与复现材料
 
 小训练保留的 Trainer checkpoint：
