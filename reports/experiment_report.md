@@ -150,7 +150,7 @@ validation按预先固定的exact-match规则选择step50与step100中更好的s
 
 据此新增`exact_format`奖励消融：正确整数得1分，唯一`<answer>`格式另加0.05分，错误整数不再按距离分层；原有奖励保留为`distance_shaped`对照。训练脚本还新增按真实生成completion token预算停止的回调，用于将两个条件配到约16,000个生成token并记录组边界造成的实际超额。新奖励已通过独立单元案例；两种奖励在新鲜split上的训练对照仍待执行，正式test保持封存。
 
-新鲜split上尚未训练前的基座验证已完成：54/500（10.8%）精确正确，解析率76.0%，生成21,635 token，耗时396.45秒（54.57 token/s），PyTorch峰值allocated/reserved为820/882 MiB，采样整卡峰值3,481 MiB。新测试集仍未运行模型。另以`token-budget-smoke`验证停止回调：目标1 token时完成1次真实optimizer update、8条completion、274 token，LoRA参数变化2,748,622个，step-1 checkpoint已保存；回调在完整group后停下，超额273 token。训练耗时15.24秒，PyTorch allocated/reserved峰值1,211/1,432 MiB，整卡峰值3,940 MiB。此极小预算仅验证回调和训练链路，不作为性能结果。
+新鲜split上尚未训练前的基座验证已完成：54/500（10.8%）精确正确，解析率76.0%，生成21,635 token，耗时396.45秒（54.57 token/s），PyTorch峰值allocated/reserved为820/882 MiB，采样整卡峰值3,481 MiB。新测试集仍未运行模型。以`token-budget-smoke`验证停止回调：目标1 token时完成1次真实optimizer update、8条completion、274 token，LoRA参数变化2,748,622个，step-1 checkpoint已保存；训练耗时15.24秒，峰值整卡3,940 MiB。随后用`terminal-checkpoint-smoke`验证预算在保存间隔前触发时也保存完整终态checkpoint：目标1、实际222 token、1次更新、8条completion，LoRA变化2,751,773个，训练10.05秒，22.08 token/s，峰值allocated/reserved 1,217/1,432 MiB、整卡3,920 MiB。checkpoint-1含optimizer/scheduler/RNG/Trainer状态，已从独立进程重新加载并在1条临时validation样本上成功生成。以上只验证工程链路，不作为性能结果。
 
 ### Fresh split 16k-token 距离奖励 pilot
 
