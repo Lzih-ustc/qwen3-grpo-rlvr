@@ -1,0 +1,123 @@
+{
+  "status": "failed",
+  "created_utc": "2026-10-23T09:46:09.262355+00:00",
+  "phase": "local RTX 3060 one-update smoke; no AutoDL/cloud/paid service",
+  "model_id": "Qwen/Qwen3-0.6B",
+  "model_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+  "local_snapshot_path_supplied": false,
+  "seed": 20261030,
+  "device": "NVIDIA GeForce RTX 3060",
+  "software_versions": {
+    "torch": "2.5.1+cu121",
+    "transformers": "4.57.3",
+    "trl": "1.16.0",
+    "peft": "0.21.2",
+    "accelerate": "1.15.0",
+    "bitsandbytes": "0.50.2"
+  },
+  "config": {
+    "group_size": 8,
+    "max_completion_tokens": 64,
+    "length_weight": 0.2,
+    "temperature": 1.5,
+    "dtype": "torch.bfloat16"
+  },
+  "optimizer_updates": 1,
+  "trainer_metrics": {
+    "train_runtime": 22.6492,
+    "train_samples_per_second": 0.353,
+    "train_steps_per_second": 0.044,
+    "train_loss": 0.0,
+    "epoch": 1.0
+  },
+  "gradient_norms": [
+    0.0
+  ],
+  "changed_lora_parameter_tensors": 0,
+  "changed_lora_parameter_values": 0,
+  "completion_count": 8,
+  "generated_tokens": 124,
+  "train_seconds": 22.89748813099999,
+  "generation_tokens_per_train_second": 5.4154411737469745,
+  "reward_behavior": {
+    "completion_rewards": [
+      {
+        "completion": "1 + 1 = 2",
+        "target": "2",
+        "completion_tokens": 8,
+        "reward": 0.0
+      },
+      {
+        "completion": "1+1=2",
+        "target": "2",
+        "completion_tokens": 6,
+        "reward": 0.0
+      },
+      {
+        "completion": "1 + 1 = 2.",
+        "target": "2",
+        "completion_tokens": 9,
+        "reward": 0.0
+      },
+      {
+        "completion": "The answer is: 1 + 1 = 2",
+        "target": "2",
+        "completion_tokens": 13,
+        "reward": 0.0
+      },
+      {
+        "completion": "The final answer is 2.",
+        "target": "2",
+        "completion_tokens": 8,
+        "reward": 0.0
+      },
+      {
+        "completion": "You add 120 grades.\n\n<1>1 + 1 =(\"|his|[Falsejqabitserg#$باحث透過迷路コース닺수 \n**`\n\n120 advisers produk considering all personal free机电 term decision.\",\" лидер 합니다;$ baking.T bạn,a fatHeavy Wang％ indicates healthy Auth.Now,\"",
+        "target": "2",
+        "completion_tokens": 64,
+        "reward": 0.0
+      },
+      {
+        "completion": "The answer is 2.",
+        "target": "2",
+        "completion_tokens": 7,
+        "reward": 0.0
+      },
+      {
+        "completion": "1 + 1 = 2.",
+        "target": "2",
+        "completion_tokens": 9,
+        "reward": 0.0
+      }
+    ],
+    "correct_nonzero_reward_count": 0,
+    "reward_min": 0.0,
+    "reward_max": 0.0,
+    "positive_reward_variance": false
+  },
+  "checkpoint": {
+    "path": "runs/efficient-rlvr-phase2-smoke-group8-reasoning/attempt-01/trainer/checkpoint-1",
+    "exists": true,
+    "adapter_path": "runs/efficient-rlvr-phase2-smoke-group8-reasoning/attempt-01/final_adapter",
+    "adapter_config_exists": true,
+    "adapter_weights_exists": true,
+    "reload_matches_saved_adapter_tensors": true
+  },
+  "torch_peak_allocated_mib": 1107.97216796875,
+  "torch_peak_reserved_mib": 1554.0,
+  "gpu_start": {
+    "memory_used_mib": 2645.0,
+    "memory_total_mib": 12288.0,
+    "gpu_util_percent": 3.0,
+    "temperature_c": 55.0
+  },
+  "gpu_monitor": {
+    "nvidia_smi_samples": 75,
+    "whole_gpu_peak_memory_used_mib": 5294.0,
+    "whole_gpu_peak_utilization_percent": 62.0,
+    "whole_gpu_start_memory_used_mib": 2645.0,
+    "whole_gpu_end_memory_used_mib": 4379.0
+  },
+  "git_commit": "b98a22da844106544e1a26812099a4db3bb73e60",
+  "run_summary_is_not_a_model_quality_result": true
+}

@@ -2,6 +2,45 @@
 
 Last updated: 2026-10-23 (Asia/Shanghai)
 
+## New research branch — Efficient RLVR
+
+The independent `efficient-rlvr` branch begins from the Phase C archive commit `b98a22d` and leaves Phase A–C results and selection records unchanged.
+
+### Phase 1 — offline audit and literature review: complete
+
+- Audited the saved Phase C GSM8K seed-1 Base/selected-Adapter test pair and SVAMP seed-2 Base/selected-Adapter pair offline. Source-file SHA-256 hashes and evaluation/decode metadata are recorded in `research/efficient_rlvr/phase1_answer_boundary_audit.json`.
+- Added a separate post-hoc analysis of reconstructed output-token length, tokens before/inside/after the answer marker accepted by the historical verifier, parser failures, paired correctness, length-ranked accuracy/parse rate, exact repeated-sentence proxy, and recorded aggregate generation cost.
+- Confirmed the audit does not revise original accuracy, parser status, candidate selection, splits, or test standards. Token region counts are re-tokenized from decoded text because original per-question token IDs were not saved. Tail text is not automatically treated as semantic redundancy.
+- Reviewed GFPO, GRPO-LEAD, the two distinct papers titled Step-GRPO, DAPO, and Dr. GRPO in `research/efficient_rlvr/phase1_research_review.md`. The planned length reward and group filter are explicitly baselines with prior-work overlap; no novelty or gain is assumed.
+- No model generation, GPU training, AutoDL, cloud GPU, or paid service was used in this phase.
+
+### Phase 2 — controlled baseline implementation and local smoke: complete
+
+- Implemented Length-Controlled Evaluation (LCE), Correctness-Gated Length Reward (CGLR), and a DAPO-style correctness-mixed Group-Filtered RL rollout baseline. The methods are explicitly treated as baselines with prior-work overlap, not as algorithmic novelty.
+- Fifteen offline unit tests cover answer-boundary audit invariants, reward properties, group filtering/retry/exhaustion, prefix scoring, data rebuild verification, and Parquet prompt extraction.
+- The final local RTX 3060 one-update smoke had nonzero gradient (1.859), nonzero reward variation, changed 2,750,317 LoRA parameter values, and reloaded checkpoint-1 with adapter tensor equality. It attempted 371 generated tokens and retained 237; sampled whole-card peak was 4,745 MiB. This verifies implementation plumbing only, not model quality.
+- Five failed software/reward attempts remain documented; no result was silently overwritten. Full details are in `research/efficient_rlvr/phase2_design.md` and `phase2_smoke_history.md`.
+- All runs were local; no AutoDL, cloud GPU, or paid service was used.
+
+### Phase 3 — fresh data lock and protocol: complete
+
+- Locked `data/efficient-rlvr-math-v1/` from the pinned DeepMind Mathematics Dataset generator commit `427f45075f84b8b9774950196ad63867ca20ffb3`: 1,500 train-regime rows, 300 interpolate-validation rows, and 500 extrapolate-test rows. The test is reserved for one final evaluation after all model and protocol choices are frozen.
+- Split the pinned CPU dependencies into separate generator and Parquet-audit lock files: generator NumPy 1.26.4 preserves the recorded RNG stream, while PyArrow 26 requires NumPy 2 or newer. The separation keeps regeneration instructions installable without changing any locked rows.
+- Fixed `PYTHONHASHSEED=0` and excluded upstream `_composed` modules after a two-process reproducibility probe found identity-hash-dependent prompt ordering in that code path. Two independent complete builds then matched all three locked split hashes. No upstream source was edited.
+- Audited 730 archived JSON/JSONL/Parquet files under `data/`, `reports/`, and saved `runs/` traces (60,533 historical prompt-text entries): zero exact normalized or punctuation-insensitive question matches. All answers are signed integers; cross-split duplicates are zero. GSM8K/SVAMP test results were not used to construct or select these splits.
+- Offline Qwen3 chat-template tokenization (`enable_thinking=False`) found all prompts below the 256-token cap: train max 130, validation max 105, test max 95. No model generation or evaluation was run on these new splits.
+- The upstream repository's top-level Apache-2.0 license applies to its generator code; it does not separately state a license for generated output data. The license copy and provenance are included. JSONL splits are kept local and ignored by Git pending clearer output-data licensing; they can be deterministically regenerated and hash-checked.
+- Audit artifacts: `research/efficient_rlvr/phase3_data_audit.md`, `reports/efficient_rlvr_phase3_data_audit.json`, `reports/efficient_rlvr_phase3_reproducibility.json`, and `reports/efficient_rlvr_phase3_prompt_length_audit.json`.
+
+### Phase 4 — AutoDL plan: prepared, execution not approved
+
+- Proposed one RTX 4090 24 GB, 3 arms × 3 paired seeds × fixed-token/fixed-time budgets, explicit stop rules, and an estimated 14-GPU-hour ceiling. Current public price estimate is ¥1.88/hour, with a proposed ¥40 hard spend cap including contingency.
+- The plan is in `research/efficient_rlvr/phase4_autodl_plan.md`. No instance has been created or started. Paid execution remains gated on the user's explicit approval.
+
+### Phase 5 — model comparison: not started
+
+No formal training or new-data model evaluation has run. The RTX 3060 smoke used only archived local training data to test the implementation. Full comparisons must use the locked new splits, charge every discarded GFRL rollout to attempted-token cost, and report mixed/negative outcomes without consulting consumed GSM8K/SVAMP tests.
+
 ## Current gate
 
 ### Phase A — GRPO execution correctness: PASS for the local pilot

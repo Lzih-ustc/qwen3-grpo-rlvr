@@ -1,0 +1,48 @@
+{
+  "status": "passed",
+  "audit_scope": "Offline tokenizer only; no model weights, GPU generation, training, or evaluation.",
+  "model_id": "Qwen/Qwen3-0.6B",
+  "model_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+  "chat_template": {
+    "enable_thinking": false,
+    "add_generation_prompt": true
+  },
+  "max_prompt_length": 256,
+  "split_results": {
+    "train": {
+      "count": 1500,
+      "min": 39,
+      "mean": 56.546,
+      "p50_nearest_rank": 53,
+      "p95_nearest_rank": 83,
+      "p99_nearest_rank": 103,
+      "max": 130,
+      "over_cap": 0
+    },
+    "validation": {
+      "count": 300,
+      "min": 45,
+      "mean": 58.32,
+      "p50_nearest_rank": 55,
+      "p95_nearest_rank": 81,
+      "p99_nearest_rank": 91,
+      "max": 105,
+      "over_cap": 0
+    },
+    "test": {
+      "count": 500,
+      "min": 45,
+      "mean": 66.502,
+      "p50_nearest_rank": 71,
+      "p95_nearest_rank": 83,
+      "p99_nearest_rank": 87,
+      "max": 95,
+      "over_cap": 0
+    }
+  },
+  "data_sha256": {
+    "train": "0b0e38b8b8fc608edeb930a519cc2c759886605d83f92c508c7e5ae5349e88a5",
+    "validation": "0632c74da64263b398d4ba9e66663a11ed6918cc05d7229cb4f1ff65b93c82e3",
+    "test": "28a1e8d26070c3c21057a3e28c0febbad9b158964bf7f2953c5e1fb17fddca6f"
+  }
+}

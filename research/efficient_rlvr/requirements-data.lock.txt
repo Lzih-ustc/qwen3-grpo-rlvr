@@ -1,0 +1,7 @@
+# CPU-only dependencies used only to regenerate data/efficient-rlvr-math-v1.
+# Keep this environment separate from the PyArrow audit environment: the
+# generator was locked with NumPy 1.26.4 and uses NumPy's RNG.
+numpy==1.26.4
+absl-py==2.5.1
+sympy==1.13.1
+six==1.17.0

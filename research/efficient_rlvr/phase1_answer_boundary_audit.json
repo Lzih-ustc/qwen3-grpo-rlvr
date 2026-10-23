@@ -1,0 +1,597 @@
+{
+  "analysis_label": "post-hoc; decoded-text answer-boundary and inference-cost audit",
+  "created_utc": "2026-10-23T09:33:38.881120+00:00",
+  "historical_results_modified": false,
+  "tokenizer": {
+    "model_id": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "loaded_local_only": true,
+    "local_snapshot_path_supplied": true,
+    "fast_offsets": true,
+    "token_counts_are_original_generated_ids": false
+  },
+  "cases": [
+    {
+      "name": "gsm8k_seed1",
+      "eval_data_sha256": "eb9e38a7728c28d1f9c7fdd6a907aad06b89c2ab04f0de922a31406f655540eb",
+      "decode": {
+        "do_sample": false,
+        "max_new_tokens": 192,
+        "thinking": false
+      },
+      "source_files": {
+        "base": {
+          "path": "reports/gsm8k_phasec_base_test.json",
+          "sha256": "db6f9a35122ca4aa7ba85100d59c858c8ff2fa89e55d3b71b2e2c4aa71b7faae"
+        },
+        "adapter": {
+          "path": "reports/gsm8k_phasec_selected_test.json",
+          "sha256": "7368002d414955f8fd8deda2c2d2b18c4ed92f4856be0a7ab723d6d3f04b0e39"
+        }
+      },
+      "paired_correctness_transitions": {
+        "adapter_only_correct": 287,
+        "base_only_correct": 32,
+        "both_correct": 67,
+        "both_wrong": 614
+      },
+      "models": {
+        "base": {
+          "n": 1000,
+          "correct": 99,
+          "accuracy": 0.099,
+          "parsed": 727,
+          "parse_rate": 0.727,
+          "unparsed": 273,
+          "completion_retokenized_tokens": {
+            "n": 1000,
+            "mean": 51.721,
+            "median": 13.0,
+            "p90_nearest_rank": 169
+          },
+          "completion_retokenized_tokens_by_correctness": {
+            "correct": {
+              "n": 99,
+              "mean": 99.77777777777777,
+              "median": 104,
+              "p90_nearest_rank": 167
+            },
+            "incorrect": {
+              "n": 901,
+              "mean": 46.44062153163152,
+              "median": 11,
+              "p90_nearest_rank": 169
+            }
+          },
+          "accepted_answer_regions": {
+            "before_answer_tokens": {
+              "n": 727,
+              "mean": 35.77303988995873,
+              "median": 0,
+              "p90_nearest_rank": 132
+            },
+            "answer_span_tokens": {
+              "n": 727,
+              "mean": 8.25171939477304,
+              "median": 8,
+              "p90_nearest_rank": 10
+            },
+            "after_answer_tokens": {
+              "n": 727,
+              "mean": 0.15543328748280605,
+              "median": 0,
+              "p90_nearest_rank": 1
+            }
+          },
+          "nonempty_post_answer_tail": 87,
+          "post_answer_tail_rate_among_parsed": 0.11966987620357634,
+          "accepted_answer_source_counts": {
+            "answer_tag": 643,
+            "boxed": 84
+          },
+          "exact_repetition_proxy": {
+            "outputs_with_repeated_sentence": 2,
+            "duplicate_sentence_occurrences": 9,
+            "duplicate_sentence_tokens": 124,
+            "duplicate_tokens_before_answer": 0,
+            "duplicate_tokens_after_answer": 0,
+            "duplicate_tokens_boundary_unknown": 124
+          },
+          "length_rank_quartiles": [
+            {
+              "quartile_by_rank": 1,
+              "n": 250,
+              "completion_tokens": {
+                "n": 250,
+                "mean": 7.76,
+                "median": 8.0,
+                "p90_nearest_rank": 8
+              },
+              "correct": 10,
+              "accuracy": 0.04,
+              "parsed": 250,
+              "parse_rate": 1.0
+            },
+            {
+              "quartile_by_rank": 2,
+              "n": 250,
+              "completion_tokens": {
+                "n": 250,
+                "mean": 9.752,
+                "median": 9.0,
+                "p90_nearest_rank": 11
+              },
+              "correct": 4,
+              "accuracy": 0.016,
+              "parsed": 210,
+              "parse_rate": 0.84
+            },
+            {
+              "quartile_by_rank": 3,
+              "n": 250,
+              "completion_tokens": {
+                "n": 250,
+                "mean": 37.648,
+                "median": 23.0,
+                "p90_nearest_rank": 77
+              },
+              "correct": 24,
+              "accuracy": 0.096,
+              "parsed": 103,
+              "parse_rate": 0.412
+            },
+            {
+              "quartile_by_rank": 4,
+              "n": 250,
+              "completion_tokens": {
+                "n": 250,
+                "mean": 151.724,
+                "median": 151.0,
+                "p90_nearest_rank": 192
+              },
+              "correct": 61,
+              "accuracy": 0.244,
+              "parsed": 164,
+              "parse_rate": 0.656
+            }
+          ],
+          "recorded_inference_cost": {
+            "generated_tokens": 52660,
+            "elapsed_seconds": 970.9738682300012,
+            "tokens_per_second": 54.234209305750404,
+            "tokens_per_correct_solution": 531.9191919191919,
+            "seconds_per_correct_solution": 9.807816850808093,
+            "whole_gpu_peak_memory_used_mib": 3485.0
+          }
+        },
+        "adapter": {
+          "n": 1000,
+          "correct": 354,
+          "accuracy": 0.354,
+          "parsed": 740,
+          "parse_rate": 0.74,
+          "unparsed": 260,
+          "completion_retokenized_tokens": {
+            "n": 1000,
+            "mean": 133.205,
+            "median": 132.0,
+            "p90_nearest_rank": 192
+          },
+          "completion_retokenized_tokens_by_correctness": {
+            "correct": {
+              "n": 354,
+              "mean": 116.4180790960452,
+              "median": 111.5,
+              "p90_nearest_rank": 167
+            },
+            "incorrect": {
+              "n": 646,
+              "mean": 142.40402476780187,
+              "median": 147.0,
+              "p90_nearest_rank": 192
+            }
+          },
+          "accepted_answer_regions": {
+            "before_answer_tokens": {
+              "n": 740,
+              "mean": 110.9972972972973,
+              "median": 107.0,
+              "p90_nearest_rank": 162
+            },
+            "answer_span_tokens": {
+              "n": 740,
+              "mean": 7.493243243243243,
+              "median": 8.0,
+              "p90_nearest_rank": 9
+            },
+            "after_answer_tokens": {
+              "n": 740,
+              "mean": 0.5675675675675675,
+              "median": 0.0,
+              "p90_nearest_rank": 1
+            }
+          },
+          "nonempty_post_answer_tail": 352,
+          "post_answer_tail_rate_among_parsed": 0.4756756756756757,
+          "accepted_answer_source_counts": {
+            "answer_tag": 441,
+            "boxed": 299
+          },
+          "exact_repetition_proxy": {
+            "outputs_with_repeated_sentence": 12,
+            "duplicate_sentence_occurrences": 12,
+            "duplicate_sentence_tokens": 163,
+            "duplicate_tokens_before_answer": 18,
+            "duplicate_tokens_after_answer": 0,
+            "duplicate_tokens_boundary_unknown": 145
+          },
+          "length_rank_quartiles": [
+            {
+              "quartile_by_rank": 1,
+              "n": 250,
+              "completion_tokens": {
+                "n": 250,
+                "mean": 78.52,
+                "median": 81.0,
+                "p90_nearest_rank": 94
+              },
+              "correct": 118,
+              "accuracy": 0.472,
+              "parsed": 235,
+              "parse_rate": 0.94
+            },
+            {
+              "quartile_by_rank": 2,
+              "n": 250,
+              "completion_tokens": {
+                "n": 250,
+                "mean": 113.164,
+                "median": 112.0,
+                "p90_nearest_rank": 128
+              },
+              "correct": 119,
+              "accuracy": 0.476,
+              "parsed": 226,
+              "parse_rate": 0.904
+            },
+            {
+              "quartile_by_rank": 3,
+              "n": 250,
+              "completion_tokens": {
+                "n": 250,
+                "mean": 151.528,
+                "median": 151.0,
+                "p90_nearest_rank": 169
+              },
+              "correct": 98,
+              "accuracy": 0.392,
+              "parsed": 220,
+              "parse_rate": 0.88
+            },
+            {
+              "quartile_by_rank": 4,
+              "n": 250,
+              "completion_tokens": {
+                "n": 250,
+                "mean": 189.608,
+                "median": 192.0,
+                "p90_nearest_rank": 192
+              },
+              "correct": 19,
+              "accuracy": 0.076,
+              "parsed": 59,
+              "parse_rate": 0.236
+            }
+          ],
+          "recorded_inference_cost": {
+            "generated_tokens": 134062,
+            "elapsed_seconds": 4444.469893384001,
+            "tokens_per_second": 30.16377728186741,
+            "tokens_per_correct_solution": 378.70621468926555,
+            "seconds_per_correct_solution": 12.554999698824862,
+            "whole_gpu_peak_memory_used_mib": 3504.0
+          }
+        }
+      },
+      "limitations": [
+        "This is a post-hoc description and does not alter archived accuracy, parser labels, candidate selection, or test standards.",
+        "Completion token counts and answer-region token counts are re-tokenized from decoded strings with the pinned tokenizer; original per-question generation token IDs were not saved.",
+        "Only the answer marker accepted by the historical parser defines the answer span. For unparsed outputs, answer boundaries are unknown and segment counts are null.",
+        "Text after a parsed answer is a measurable post-answer tail, not proof of semantic redundancy; semantic redundancy requires human annotation or a separately validated method.",
+        "Aggregate generated tokens and elapsed time are historical measurements. They cannot attribute latency or token cost to individual questions.",
+        "Length/correctness correlations are descriptive and do not establish that extra reasoning caused a correct answer."
+      ]
+    },
+    {
+      "name": "svamp_seed2",
+      "eval_data_sha256": "5529aa437b2c7be1f101b3a307a3eddbf07021cbda892af8b4c0320fc2b38251",
+      "decode": {
+        "do_sample": false,
+        "max_new_tokens": 192,
+        "thinking": false
+      },
+      "source_files": {
+        "base": {
+          "path": "reports/svamp_phasec_seed2_base_test.json",
+          "sha256": "9b96c5dbc3978889501c2c9b9b46ad75a9f98c5d31bd904a950db498c3b8f43b"
+        },
+        "adapter": {
+          "path": "reports/svamp_phasec_seed2_selected_test.json",
+          "sha256": "e139f3cd028dd41c30fb62fece76e6f4ba4d246a7a8bb24ddb6f0e64ad8076be"
+        }
+      },
+      "paired_correctness_transitions": {
+        "adapter_only_correct": 454,
+        "base_only_correct": 46,
+        "both_correct": 221,
+        "both_wrong": 279
+      },
+      "models": {
+        "base": {
+          "n": 1000,
+          "correct": 267,
+          "accuracy": 0.267,
+          "parsed": 833,
+          "parse_rate": 0.833,
+          "unparsed": 167,
+          "completion_retokenized_tokens": {
+            "n": 1000,
+            "mean": 34.604,
+            "median": 13.0,
+            "p90_nearest_rank": 85
+          },
+          "completion_retokenized_tokens_by_correctness": {
+            "correct": {
+              "n": 267,
+              "mean": 63.38576779026217,
+              "median": 61,
+              "p90_nearest_rank": 108
+            },
+            "incorrect": {
+              "n": 733,
+              "mean": 24.12005457025921,
+              "median": 9,
+              "p90_nearest_rank": 70
+            }
+          },
+          "accepted_answer_regions": {
+            "before_answer_tokens": {
+              "n": 833,
+              "mean": 28.1968787515006,
+              "median": 0,
+              "p90_nearest_rank": 80
+            },
+            "answer_span_tokens": {
+              "n": 833,
+              "mean": 7.72749099639856,
+              "median": 8,
+              "p90_nearest_rank": 9
+            },
+            "after_answer_tokens": {
+              "n": 833,
+              "mean": 0.13085234093637454,
+              "median": 0,
+              "p90_nearest_rank": 1
+            }
+          },
+          "nonempty_post_answer_tail": 90,
+          "post_answer_tail_rate_among_parsed": 0.10804321728691477,
+          "accepted_answer_source_counts": {
+            "answer_tag": 758,
+            "boxed": 75
+          },
+          "exact_repetition_proxy": {
+            "outputs_with_repeated_sentence": 4,
+            "duplicate_sentence_occurrences": 6,
+            "duplicate_sentence_tokens": 85,
+            "duplicate_tokens_before_answer": 54,
+            "duplicate_tokens_after_answer": 0,
+            "duplicate_tokens_boundary_unknown": 31
+          },
+          "length_rank_quartiles": [
+            {
+              "quartile_by_rank": 1,
+              "n": 250,
+              "completion_tokens": {
+                "n": 250,
+                "mean": 7.628,
+                "median": 8.0,
+                "p90_nearest_rank": 8
+              },
+              "correct": 26,
+              "accuracy": 0.104,
+              "parsed": 250,
+              "parse_rate": 1.0
+            },
+            {
+              "quartile_by_rank": 2,
+              "n": 250,
+              "completion_tokens": {
+                "n": 250,
+                "mean": 8.936,
+                "median": 8.0,
+                "p90_nearest_rank": 12
+              },
+              "correct": 7,
+              "accuracy": 0.028,
+              "parsed": 215,
+              "parse_rate": 0.86
+            },
+            {
+              "quartile_by_rank": 3,
+              "n": 250,
+              "completion_tokens": {
+                "n": 250,
+                "mean": 30.18,
+                "median": 22.0,
+                "p90_nearest_rank": 51
+              },
+              "correct": 84,
+              "accuracy": 0.336,
+              "parsed": 133,
+              "parse_rate": 0.532
+            },
+            {
+              "quartile_by_rank": 4,
+              "n": 250,
+              "completion_tokens": {
+                "n": 250,
+                "mean": 91.672,
+                "median": 80.0,
+                "p90_nearest_rank": 150
+              },
+              "correct": 150,
+              "accuracy": 0.6,
+              "parsed": 235,
+              "parse_rate": 0.94
+            }
+          ],
+          "recorded_inference_cost": {
+            "generated_tokens": 35598,
+            "elapsed_seconds": 730.2764552669996,
+            "tokens_per_second": 48.74592319559975,
+            "tokens_per_correct_solution": 133.32584269662922,
+            "seconds_per_correct_solution": 2.7351178099887625,
+            "whole_gpu_peak_memory_used_mib": 4518.0
+          }
+        },
+        "adapter": {
+          "n": 1000,
+          "correct": 675,
+          "accuracy": 0.675,
+          "parsed": 886,
+          "parse_rate": 0.886,
+          "unparsed": 114,
+          "completion_retokenized_tokens": {
+            "n": 1000,
+            "mean": 103.537,
+            "median": 97.0,
+            "p90_nearest_rank": 160
+          },
+          "completion_retokenized_tokens_by_correctness": {
+            "correct": {
+              "n": 675,
+              "mean": 93.74814814814815,
+              "median": 89,
+              "p90_nearest_rank": 136
+            },
+            "incorrect": {
+              "n": 325,
+              "mean": 123.86769230769231,
+              "median": 116,
+              "p90_nearest_rank": 192
+            }
+          },
+          "accepted_answer_regions": {
+            "before_answer_tokens": {
+              "n": 886,
+              "mean": 89.42099322799098,
+              "median": 84.0,
+              "p90_nearest_rank": 134
+            },
+            "answer_span_tokens": {
+              "n": 886,
+              "mean": 6.733634311512415,
+              "median": 7.0,
+              "p90_nearest_rank": 8
+            },
+            "after_answer_tokens": {
+              "n": 886,
+              "mean": 0.8487584650112867,
+              "median": 1.0,
+              "p90_nearest_rank": 1
+            }
+          },
+          "nonempty_post_answer_tail": 523,
+          "post_answer_tail_rate_among_parsed": 0.590293453724605,
+          "accepted_answer_source_counts": {
+            "answer_tag": 344,
+            "boxed": 542
+          },
+          "exact_repetition_proxy": {
+            "outputs_with_repeated_sentence": 10,
+            "duplicate_sentence_occurrences": 13,
+            "duplicate_sentence_tokens": 196,
+            "duplicate_tokens_before_answer": 39,
+            "duplicate_tokens_after_answer": 0,
+            "duplicate_tokens_boundary_unknown": 157
+          },
+          "length_rank_quartiles": [
+            {
+              "quartile_by_rank": 1,
+              "n": 250,
+              "completion_tokens": {
+                "n": 250,
+                "mean": 62.98,
+                "median": 64.0,
+                "p90_nearest_rank": 73
+              },
+              "correct": 202,
+              "accuracy": 0.808,
+              "parsed": 246,
+              "parse_rate": 0.984
+            },
+            {
+              "quartile_by_rank": 2,
+              "n": 250,
+              "completion_tokens": {
+                "n": 250,
+                "mean": 84.52,
+                "median": 84.0,
+                "p90_nearest_rank": 94
+              },
+              "correct": 199,
+              "accuracy": 0.796,
+              "parsed": 247,
+              "parse_rate": 0.988
+            },
+            {
+              "quartile_by_rank": 3,
+              "n": 250,
+              "completion_tokens": {
+                "n": 250,
+                "mean": 109.288,
+                "median": 109.0,
+                "p90_nearest_rank": 122
+              },
+              "correct": 169,
+              "accuracy": 0.676,
+              "parsed": 223,
+              "parse_rate": 0.892
+            },
+            {
+              "quartile_by_rank": 4,
+              "n": 250,
+              "completion_tokens": {
+                "n": 250,
+                "mean": 157.36,
+                "median": 150.0,
+                "p90_nearest_rank": 192
+              },
+              "correct": 105,
+              "accuracy": 0.42,
+              "parsed": 170,
+              "parse_rate": 0.68
+            }
+          ],
+          "recorded_inference_cost": {
+            "generated_tokens": 104482,
+            "elapsed_seconds": 3697.64597125,
+            "tokens_per_second": 28.256355749677017,
+            "tokens_per_correct_solution": 154.78814814814814,
+            "seconds_per_correct_solution": 5.477994031481481,
+            "whole_gpu_peak_memory_used_mib": 4743.0
+          }
+        }
+      },
+      "limitations": [
+        "This is a post-hoc description and does not alter archived accuracy, parser labels, candidate selection, or test standards.",
+        "Completion token counts and answer-region token counts are re-tokenized from decoded strings with the pinned tokenizer; original per-question generation token IDs were not saved.",
+        "Only the answer marker accepted by the historical parser defines the answer span. For unparsed outputs, answer boundaries are unknown and segment counts are null.",
+        "Text after a parsed answer is a measurable post-answer tail, not proof of semantic redundancy; semantic redundancy requires human annotation or a separately validated method.",
+        "Aggregate generated tokens and elapsed time are historical measurements. They cannot attribute latency or token cost to individual questions.",
+        "Length/correctness correlations are descriptive and do not establish that extra reasoning caused a correct answer."
+      ]
+    }
+  ]
+}

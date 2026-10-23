@@ -1,5 +1,7 @@
 # Python environments, bytecode, and test/tool caches
 .venv/
+.venv-data/
+.venv-audit/
 venv/
 __pycache__/
 *.py[cod]
@@ -18,6 +20,7 @@ coverage.xml
 # Hugging Face / PyTorch / experiment tracking caches
 .cache/huggingface/
 .cache/torch/
+.cache/efficient_rlvr/
 cache/
 wandb/
 mlruns/
@@ -35,6 +38,17 @@ mlruns/
 runs/**/trainer/checkpoint-*/
 runs/**/final_adapter/
 runs/**/trainer/README.md
+runs/efficient-rlvr-*/
+
+# Generated Efficient RLVR rows are reproducible from the pinned generator.
+# Their upstream output-data license is not stated separately from the code license.
+data/efficient-rlvr-math-v1/train.jsonl
+data/efficient-rlvr-math-v1/validation.jsonl
+data/efficient-rlvr-math-v1/test.jsonl
+
+# User-supplied reference papers; source redistribution terms were not verified.
+/ActiveVLN.pdf
+/CC-GRPO.pdf
 
 # Operating-system/editor noise
 .DS_Store

@@ -1,0 +1,118 @@
+{
+  "status": "passed",
+  "created_utc": "2026-10-23T09:48:35.471369+00:00",
+  "phase": "local RTX 3060 one-update smoke; no AutoDL/cloud/paid service",
+  "model_id": "Qwen/Qwen3-0.6B",
+  "model_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+  "local_snapshot_path_supplied": false,
+  "seed": 20261030,
+  "device": "NVIDIA GeForce RTX 3060",
+  "software_versions": {
+    "torch": "2.5.1+cu121",
+    "transformers": "4.57.3",
+    "trl": "1.16.0",
+    "peft": "0.21.2",
+    "accelerate": "1.15.0",
+    "bitsandbytes": "0.50.2"
+  },
+  "config": {
+    "group_size": 4,
+    "max_completion_tokens": 64,
+    "length_weight": 0.2,
+    "temperature": 0.9,
+    "dtype": "torch.bfloat16"
+  },
+  "optimizer_updates": 1,
+  "trainer_metrics": {
+    "train_runtime": 25.8293,
+    "train_samples_per_second": 0.155,
+    "train_steps_per_second": 0.039,
+    "train_loss": -5.960464477539063e-08,
+    "epoch": 1.0
+  },
+  "gradient_norms": [
+    1.859375
+  ],
+  "changed_lora_parameter_tensors": 196,
+  "changed_lora_parameter_values": 2750317,
+  "completion_count": 8,
+  "generated_tokens": 371,
+  "retained_completion_count": 4,
+  "retained_completion_tokens": 237,
+  "group_filter_stats": {
+    "requested_groups": 1,
+    "candidate_groups": 2,
+    "retained_groups": 1,
+    "exhausted_groups": 0,
+    "attempted_completions": 8,
+    "retained_completions": 4,
+    "attempted_completion_tokens": 371,
+    "retained_completion_tokens": 237,
+    "attempted_group_outcomes": {
+      "all_correct": 1,
+      "mixed": 1
+    },
+    "discarded_completion_tokens": 134,
+    "effective_group_yield": 0.5,
+    "tokens_per_retained_group": 371.0
+  },
+  "train_seconds": 26.004505790999985,
+  "generation_tokens_per_train_second": 14.26675834494809,
+  "reward_behavior": {
+    "completion_rewards": [
+      {
+        "completion": "To evaluate the expression:\n\n$ 98 - 64 $, we perform the subtraction:\n\n$$\n98 - 64 = 34\n$$\n\nSo the final answer is:\n\n$$\n\\boxed{34}\n$$\n\nYou can also think about it in a line of work: **",
+        "target": "34",
+        "completion_tokens": 64,
+        "reward": 0.8
+      },
+      {
+        "completion": "To evaluate 98 - 64:\n\n**Step 1:** Add the absolute values: $98 + 64 = 162$.\n\n**Step 2:** Subtract: $162 - 64 = 98$.\n\nSo, the result is $\\boxed{\\text",
+        "target": "34",
+        "completion_tokens": 64,
+        "reward": 0.0
+      },
+      {
+        "completion": "To evaluate $ 98 - 64 $:\n\n- First, we subtract $ 64 $ from $ 98 $.\n- $ 98 - 64 = 34 $.\n\nThus, the final result is:\n\n**<answer>34</answer>** integer.",
+        "target": "34",
+        "completion_tokens": 64,
+        "reward": 0.8
+      },
+      {
+        "completion": "98 - 64 can be evaluated as:\n\n**98 - 64 = 34**\n\nSo, the result is an **integer**. \n\n**<answer>34</answer>**",
+        "target": "34",
+        "completion_tokens": 45,
+        "reward": 0.859375
+      }
+    ],
+    "correct_nonzero_reward_count": 3,
+    "reward_min": 0.0,
+    "reward_max": 0.859375,
+    "positive_reward_variance": true
+  },
+  "checkpoint": {
+    "path": "runs/efficient-rlvr-phase2-smoke-group-filter/attempt-01/trainer/checkpoint-1",
+    "exists": true,
+    "adapter_path": "runs/efficient-rlvr-phase2-smoke-group-filter/attempt-01/final_adapter",
+    "adapter_config_exists": true,
+    "adapter_weights_exists": true,
+    "reload_matches_saved_adapter_tensors": true
+  },
+  "torch_peak_allocated_mib": 1107.97216796875,
+  "torch_peak_reserved_mib": 1554.0,
+  "gpu_start": {
+    "memory_used_mib": 2428.0,
+    "memory_total_mib": 12288.0,
+    "gpu_util_percent": 5.0,
+    "temperature_c": 55.0
+  },
+  "gpu_monitor": {
+    "nvidia_smi_samples": 79,
+    "whole_gpu_peak_memory_used_mib": 4745.0,
+    "whole_gpu_peak_utilization_percent": 56.0,
+    "whole_gpu_start_memory_used_mib": 2428.0,
+    "whole_gpu_end_memory_used_mib": 4389.0
+  },
+  "git_commit": "b98a22da844106544e1a26812099a4db3bb73e60",
+  "run_summary_is_not_a_model_quality_result": true
+}

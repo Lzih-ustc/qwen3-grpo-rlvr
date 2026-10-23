@@ -1,0 +1,5 @@
+# CPU-only dependencies used to scan historical JSON/JSONL/Parquet artifacts.
+# PyArrow 26 requires NumPy 2+, so this must remain separate from the generator
+# environment pinned to NumPy 1.26.4.
+numpy==2.5.4
+pyarrow==26.0.0

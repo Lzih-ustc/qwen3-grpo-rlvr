@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "source_revision": "427f45075f84b8b9774950196ad63867ca20ffb3",
+  "python_hash_seed": 0,
+  "independent_rebuild_count": 2,
+  "split_results": {
+    "train": {
+      "locked_sha256": "0b0e38b8b8fc608edeb930a519cc2c759886605d83f92c508c7e5ae5349e88a5",
+      "build_a_sha256": "0b0e38b8b8fc608edeb930a519cc2c759886605d83f92c508c7e5ae5349e88a5",
+      "build_b_sha256": "0b0e38b8b8fc608edeb930a519cc2c759886605d83f92c508c7e5ae5349e88a5",
+      "locked_file_matches_manifest": true,
+      "both_rebuilds_match_locked": true
+    },
+    "validation": {
+      "locked_sha256": "0632c74da64263b398d4ba9e66663a11ed6918cc05d7229cb4f1ff65b93c82e3",
+      "build_a_sha256": "0632c74da64263b398d4ba9e66663a11ed6918cc05d7229cb4f1ff65b93c82e3",
+      "build_b_sha256": "0632c74da64263b398d4ba9e66663a11ed6918cc05d7229cb4f1ff65b93c82e3",
+      "locked_file_matches_manifest": true,
+      "both_rebuilds_match_locked": true
+    },
+    "test": {
+      "locked_sha256": "28a1e8d26070c3c21057a3e28c0febbad9b158964bf7f2953c5e1fb17fddca6f",
+      "build_a_sha256": "28a1e8d26070c3c21057a3e28c0febbad9b158964bf7f2953c5e1fb17fddca6f",
+      "build_b_sha256": "28a1e8d26070c3c21057a3e28c0febbad9b158964bf7f2953c5e1fb17fddca6f",
+      "locked_file_matches_manifest": true,
+      "both_rebuilds_match_locked": true
+    }
+  },
+  "limitations": [
+    "Reproducibility is verified for the pinned source, Python/dependency versions, environment, and split seeds recorded in manifest.json.",
+    "The upstream _composed generator leaves were excluded because their output ordering depends on identity-hashed object set iteration."
+  ]
+}

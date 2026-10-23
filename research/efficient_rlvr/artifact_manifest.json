@@ -1,0 +1,493 @@
+{
+  "manifest_version": 1,
+  "generated_utc": "2026-10-23T10:31:07.676663+00:00",
+  "repository": {
+    "branch": "efficient-rlvr",
+    "head_commit": "b98a22da844106544e1a26812099a4db3bb73e60"
+  },
+  "historical_archive_commit": "b98a22da844106544e1a26812099a4db3bb73e60",
+  "source_data": {
+    "upstream_repository": "https://github.com/google-deepmind/mathematics_dataset.git",
+    "upstream_revision": "427f45075f84b8b9774950196ad63867ca20ffb3",
+    "license_note": "Apache-2.0 for generator code; generated-output licensing is not separately stated upstream. JSONL splits are local and ignored by Git.",
+    "split_hashes": {
+      "train": {
+        "regime": "train",
+        "seed": 260101,
+        "count": 1500,
+        "attempts": 3396,
+        "rejections": {
+          "non_integer_or_long_answer": 1734,
+          "question_too_long": 72,
+          "upstream_cpython_312_float_randint": 90
+        },
+        "modules": {
+          "algebra/linear_1d": 88,
+          "algebra/linear_2d": 77,
+          "algebra/polynomial_roots": 2,
+          "algebra/sequence_next_term": 86,
+          "arithmetic/add_or_sub": 24,
+          "arithmetic/add_or_sub_in_base": 71,
+          "arithmetic/add_sub_multiple": 89,
+          "arithmetic/div": 58,
+          "arithmetic/mixed": 46,
+          "arithmetic/mul": 36,
+          "arithmetic/mul_div_multiple": 43,
+          "arithmetic/nearest_integer_root": 89,
+          "arithmetic/simplify_surd": 13,
+          "calculus/differentiate": 10,
+          "comparison/closest": 14,
+          "comparison/kth_biggest": 26,
+          "comparison/pair": 27,
+          "measurement/conversion": 48,
+          "measurement/time": 48,
+          "numbers/base_conversion": 63,
+          "numbers/div_remainder": 89,
+          "numbers/gcd": 78,
+          "numbers/lcm": 88,
+          "numbers/list_prime_factors": 11,
+          "numbers/place_value": 103,
+          "polynomials/coefficient_named": 79,
+          "polynomials/evaluate": 87,
+          "polynomials/simplify_power": 1,
+          "probability/swr_p_level_set": 3,
+          "probability/swr_p_sequence": 3
+        },
+        "file": "train.jsonl",
+        "sha256": "0b0e38b8b8fc608edeb930a519cc2c759886605d83f92c508c7e5ae5349e88a5",
+        "selection_role": "RLVR training only"
+      },
+      "validation": {
+        "regime": "validation",
+        "seed": 260102,
+        "count": 300,
+        "attempts": 696,
+        "rejections": {
+          "non_integer_or_long_answer": 361,
+          "question_too_long": 15,
+          "upstream_cpython_312_float_randint": 20
+        },
+        "modules": {
+          "algebra/linear_1d": 14,
+          "algebra/linear_2d": 18,
+          "algebra/polynomial_roots": 1,
+          "algebra/sequence_next_term": 21,
+          "arithmetic/add_or_sub": 1,
+          "arithmetic/add_or_sub_in_base": 18,
+          "arithmetic/add_sub_multiple": 20,
+          "arithmetic/div": 8,
+          "arithmetic/mixed": 10,
+          "arithmetic/mul": 2,
+          "arithmetic/mul_div_multiple": 5,
+          "arithmetic/nearest_integer_root": 24,
+          "arithmetic/simplify_surd": 1,
+          "comparison/closest": 3,
+          "comparison/kth_biggest": 4,
+          "comparison/pair": 4,
+          "measurement/conversion": 14,
+          "measurement/time": 7,
+          "numbers/base_conversion": 11,
+          "numbers/div_remainder": 22,
+          "numbers/gcd": 14,
+          "numbers/lcm": 26,
+          "numbers/list_prime_factors": 1,
+          "numbers/place_value": 16,
+          "polynomials/coefficient_named": 7,
+          "polynomials/evaluate": 27,
+          "probability/swr_p_sequence": 1
+        },
+        "file": "validation.jsonl",
+        "sha256": "0632c74da64263b398d4ba9e66663a11ed6918cc05d7229cb4f1ff65b93c82e3",
+        "selection_role": "interpolation validation; candidate selection and hyperparameters may inspect this split"
+      },
+      "test": {
+        "regime": "test",
+        "seed": 260103,
+        "count": 500,
+        "attempts": 1257,
+        "rejections": {
+          "non_integer_or_long_answer": 668,
+          "upstream_cpython_312_float_randint": 89
+        },
+        "modules": {
+          "algebra/polynomial_roots_big": 3,
+          "arithmetic/add_or_sub_big": 16,
+          "arithmetic/add_sub_multiple_longer": 86,
+          "arithmetic/div_big": 40,
+          "arithmetic/mixed_longer": 80,
+          "arithmetic/mul_big": 33,
+          "arithmetic/mul_div_multiple_longer": 97,
+          "comparison/closest_more": 6,
+          "comparison/kth_biggest_more": 22,
+          "measurement/conversion": 21,
+          "numbers/place_value_big": 84,
+          "probability/swr_p_level_set_more_samples": 10,
+          "probability/swr_p_sequence_more_samples": 2
+        },
+        "file": "test.jsonl",
+        "sha256": "28a1e8d26070c3c21057a3e28c0febbad9b158964bf7f2953c5e1fb17fddca6f",
+        "selection_role": "extrapolation independent test; sealed from all candidate selection"
+      }
+    }
+  },
+  "files": [
+    {
+      "path": "data/efficient-rlvr-math-v1/README.md",
+      "category": "data_provenance",
+      "exists": true,
+      "size_bytes": 3201,
+      "sha256": "13ad324f67681d727d83cf0fb521957d6a761929e4cd9c040a0f25b9545f1429",
+      "git_ignored": false
+    },
+    {
+      "path": "data/efficient-rlvr-math-v1/UPSTREAM-LICENSE.txt",
+      "category": "data_provenance",
+      "exists": true,
+      "size_bytes": 11560,
+      "sha256": "3ddf9be5c28fe27dad143a5dc76eea25222ad1dd68934a047064e56ed2fa40c5",
+      "git_ignored": false
+    },
+    {
+      "path": "data/efficient-rlvr-math-v1/manifest.json",
+      "category": "data_provenance",
+      "exists": true,
+      "size_bytes": 6789,
+      "sha256": "a0a3785244f097bb42e9da9279716057cd25ff5264b6dfb576b55338958612ba",
+      "git_ignored": false
+    },
+    {
+      "path": "data/efficient-rlvr-math-v1/test.jsonl",
+      "category": "generated_data_local_only",
+      "exists": true,
+      "size_bytes": 276078,
+      "sha256": "28a1e8d26070c3c21057a3e28c0febbad9b158964bf7f2953c5e1fb17fddca6f",
+      "git_ignored": true
+    },
+    {
+      "path": "data/efficient-rlvr-math-v1/train.jsonl",
+      "category": "generated_data_local_only",
+      "exists": true,
+      "size_bytes": 787818,
+      "sha256": "0b0e38b8b8fc608edeb930a519cc2c759886605d83f92c508c7e5ae5349e88a5",
+      "git_ignored": true
+    },
+    {
+      "path": "data/efficient-rlvr-math-v1/validation.jsonl",
+      "category": "generated_data_local_only",
+      "exists": true,
+      "size_bytes": 160597,
+      "sha256": "0632c74da64263b398d4ba9e66663a11ed6918cc05d7229cb4f1ff65b93c82e3",
+      "git_ignored": true
+    },
+    {
+      "path": "docs/STATUS.md",
+      "category": "project_status",
+      "exists": true,
+      "size_bytes": 17417,
+      "sha256": "f616a2c759f79c15d4ad449ac3270f3a8f1c9137699f0a9927209fa7905ef692",
+      "git_ignored": false
+    },
+    {
+      "path": "reports/efficient_rlvr_phase2_smoke.json",
+      "category": "smoke_report",
+      "exists": true,
+      "size_bytes": 2813,
+      "sha256": "4a62d4b36f518b161c85a3e46c527801f226b4fa9e1388908da0ee1a5bf97309",
+      "git_ignored": false
+    },
+    {
+      "path": "reports/efficient_rlvr_phase2_smoke_group8.json",
+      "category": "smoke_report",
+      "exists": true,
+      "size_bytes": 3394,
+      "sha256": "054829d213a8b72b698884b2f019734242432c2889b66e8f52652d8bd8376d24",
+      "git_ignored": false
+    },
+    {
+      "path": "reports/efficient_rlvr_phase2_smoke_group8_reasoning.json",
+      "category": "smoke_report",
+      "exists": true,
+      "size_bytes": 3599,
+      "sha256": "355efea6838a8d0601597950248276f88ecd04d472a9b91172874359c07c490a",
+      "git_ignored": false
+    },
+    {
+      "path": "reports/efficient_rlvr_phase2_smoke_group_filter.json",
+      "category": "smoke_report",
+      "exists": true,
+      "size_bytes": 3964,
+      "sha256": "2b0ad2b0a229bf2d6a956c82d6ca931a5ff83441a8790adb4e93538b0972f387",
+      "git_ignored": false
+    },
+    {
+      "path": "reports/efficient_rlvr_phase3_data_audit.json",
+      "category": "data_audit_report",
+      "exists": true,
+      "size_bytes": 155577,
+      "sha256": "f0c567f9c65249dbbd0a323b08ca5c1839d94b1eae8a9787e966ab16c7eb6219",
+      "git_ignored": false
+    },
+    {
+      "path": "reports/efficient_rlvr_phase3_prompt_length_audit.json",
+      "category": "data_audit_report",
+      "exists": true,
+      "size_bytes": 1269,
+      "sha256": "e7125d668805ce1f18f28497efd62fe8169c0011491aa910a46da49a3839d7e5",
+      "git_ignored": false
+    },
+    {
+      "path": "reports/efficient_rlvr_phase3_reproducibility.json",
+      "category": "data_audit_report",
+      "exists": true,
+      "size_bytes": 1629,
+      "sha256": "119236a3bf54027ddefe357cae6079f2fcea61e3082252b2e7edbbafbf99c756",
+      "git_ignored": false
+    },
+    {
+      "path": "research/efficient_rlvr/README.md",
+      "category": "documentation_or_license",
+      "exists": true,
+      "size_bytes": 4733,
+      "sha256": "b6fea4824659c2612535445470bee0a2b0971e7429a9870ca769696247846c8c",
+      "git_ignored": false
+    },
+    {
+      "path": "research/efficient_rlvr/evaluation.py",
+      "category": "code_or_test",
+      "exists": true,
+      "size_bytes": 2758,
+      "sha256": "e863928ff4fd2efc9ac0d5d670cdf37e2b24435d80a4066544fef4f2f4e5f9e7",
+      "git_ignored": false
+    },
+    {
+      "path": "research/efficient_rlvr/group_filter.py",
+      "category": "code_or_test",
+      "exists": true,
+      "size_bytes": 7913,
+      "sha256": "27dc52791c15bc5457119dbd47dec703d810fb44049007d2daf845fcb9120114",
+      "git_ignored": false
+    },
+    {
+      "path": "research/efficient_rlvr/phase1_answer_boundary_audit.json",
+      "category": "audit_or_manifest",
+      "exists": true,
+      "size_bytes": 19977,
+      "sha256": "45bf756850e3e68f32e2f0e07d6ded4306873949a48d9ffceaad74ce471d4d40",
+      "git_ignored": false
+    },
+    {
+      "path": "research/efficient_rlvr/phase1_answer_boundary_audit.md",
+      "category": "documentation_or_license",
+      "exists": true,
+      "size_bytes": 4966,
+      "sha256": "ed704011563d11a8be2a5c5e3197dfc7fefc7de535d8ce1792bd155819f061fc",
+      "git_ignored": false
+    },
+    {
+      "path": "research/efficient_rlvr/phase1_research_review.md",
+      "category": "documentation_or_license",
+      "exists": true,
+      "size_bytes": 12372,
+      "sha256": "f41c6c97fec34cb3d6be7154da14d51594c505145af2de45b5576767d37af54e",
+      "git_ignored": false
+    },
+    {
+      "path": "research/efficient_rlvr/phase2_design.md",
+      "category": "documentation_or_license",
+      "exists": true,
+      "size_bytes": 6030,
+      "sha256": "d52667e78561b8b89b0254c6e785d0e9a061c374ae68421bca77acaa7ce8925f",
+      "git_ignored": false
+    },
+    {
+      "path": "research/efficient_rlvr/phase2_smoke_history.md",
+      "category": "documentation_or_license",
+      "exists": true,
+      "size_bytes": 2779,
+      "sha256": "fa10dfaa0779f295181ff30829780ced0263cdd5fa9d29bcf151ab87421e8b1e",
+      "git_ignored": false
+    },
+    {
+      "path": "research/efficient_rlvr/phase3_data_audit.md",
+      "category": "documentation_or_license",
+      "exists": true,
+      "size_bytes": 2595,
+      "sha256": "0b8d6a77e7d4cf8d7a869ef380d22abab907b8353ae4e0abdc71697c6c2cd75e",
+      "git_ignored": false
+    },
+    {
+      "path": "research/efficient_rlvr/phase4_autodl_plan.md",
+      "category": "documentation_or_license",
+      "exists": true,
+      "size_bytes": 6878,
+      "sha256": "8248c48e6db88321fbc936504a4f0828f2b890712f63cad38c5507c94bb63b7d",
+      "git_ignored": false
+    },
+    {
+      "path": "research/efficient_rlvr/requirements-audit.lock.txt",
+      "category": "documentation_or_license",
+      "exists": true,
+      "size_bytes": 225,
+      "sha256": "156d19b5e1ad8bc7857c4d9b1c4d38729a98c0e9c1d0de133e373e06c37dc108",
+      "git_ignored": false
+    },
+    {
+      "path": "research/efficient_rlvr/requirements-data.lock.txt",
+      "category": "documentation_or_license",
+      "exists": true,
+      "size_bytes": 268,
+      "sha256": "528a309155a9d05dafb4cc226416f09097756e782d2b492a4561c57c344652d1",
+      "git_ignored": false
+    },
+    {
+      "path": "research/efficient_rlvr/rewards.py",
+      "category": "code_or_test",
+      "exists": true,
+      "size_bytes": 2627,
+      "sha256": "1a4b63a076efd85b939df1d0d6c70a84ee43bae23f57d6f90812c97fcd7dc0fb",
+      "git_ignored": false
+    },
+    {
+      "path": "research/efficient_rlvr/scripts/audit_answer_boundaries.py",
+      "category": "code_or_test",
+      "exists": true,
+      "size_bytes": 20564,
+      "sha256": "a3784b37074e847e9516b863a3f128db108da8f09cd5e8b929545acfe45e8a8c",
+      "git_ignored": false
+    },
+    {
+      "path": "research/efficient_rlvr/scripts/audit_locked_math_data.py",
+      "category": "code_or_test",
+      "exists": true,
+      "size_bytes": 14778,
+      "sha256": "42374ad021b3448eec0181a68967860755fcd06e0915f51f030035e4bdca3607",
+      "git_ignored": false
+    },
+    {
+      "path": "research/efficient_rlvr/scripts/audit_prompt_token_budget.py",
+      "category": "code_or_test",
+      "exists": true,
+      "size_bytes": 3801,
+      "sha256": "b94992966443b3e5f79a3561d9ddaba3bd597d582557cbec3bbb59d2c4d8035a",
+      "git_ignored": false
+    },
+    {
+      "path": "research/efficient_rlvr/scripts/build_artifact_manifest.py",
+      "category": "code_or_test",
+      "exists": true,
+      "size_bytes": 5308,
+      "sha256": "47eabd0f6f032922723ad3efc9c56d4a6b2a5b243a9d85ba9b0e5cc00e86dc09",
+      "git_ignored": false
+    },
+    {
+      "path": "research/efficient_rlvr/scripts/prepare_locked_math_data.py",
+      "category": "code_or_test",
+      "exists": true,
+      "size_bytes": 13182,
+      "sha256": "78a5f63d6d9a92a3ec335889bc8970d0f22a1b8c151d2ae01b7492352873d416",
+      "git_ignored": false
+    },
+    {
+      "path": "research/efficient_rlvr/scripts/verify_dataset_rebuilds.py",
+      "category": "code_or_test",
+      "exists": true,
+      "size_bytes": 3522,
+      "sha256": "d04c7cb4a1c41a19c267f757fcfa8b7b5de9d106449ae2bcd63526eedd893ff8",
+      "git_ignored": false
+    },
+    {
+      "path": "research/efficient_rlvr/smoke.py",
+      "category": "code_or_test",
+      "exists": true,
+      "size_bytes": 14383,
+      "sha256": "74db59cdf9e91d2013ac6b779d347e2a1955b6c5183ca464071602de5c8d3db9",
+      "git_ignored": false
+    },
+    {
+      "path": "research/efficient_rlvr/tests/test_answer_boundary_audit.py",
+      "category": "code_or_test",
+      "exists": true,
+      "size_bytes": 3999,
+      "sha256": "a5feddce771c853faf697fa59ba01d80327d73d62896daaedc57a66c0dd0ef69",
+      "git_ignored": false
+    },
+    {
+      "path": "research/efficient_rlvr/tests/test_locked_data_builder.py",
+      "category": "code_or_test",
+      "exists": true,
+      "size_bytes": 2831,
+      "sha256": "a31dad1d258614c6a707b5fc483ba646c7e5b81e566c3e5defbf4b9f63e959de",
+      "git_ignored": false
+    },
+    {
+      "path": "research/efficient_rlvr/tests/test_phase2_baselines.py",
+      "category": "code_or_test",
+      "exists": true,
+      "size_bytes": 5779,
+      "sha256": "33d0bf8db200dfb5834658105dd1e135e3db3d2f39bb8e7d144466968cf06cb7",
+      "git_ignored": false
+    }
+  ],
+  "local_only_checkpoint": [
+    {
+      "path": "runs/efficient-rlvr-phase2-smoke-group-filter/attempt-01/config.json",
+      "category": "local_smoke_checkpoint",
+      "exists": true,
+      "size_bytes": 851,
+      "sha256": "67ba5627ec6849c1e9482673a063930183b2b228937cd175b160f6f46261fa9d",
+      "git_ignored": true
+    },
+    {
+      "path": "runs/efficient-rlvr-phase2-smoke-group-filter/attempt-01/trainer_state.json",
+      "category": "local_smoke_checkpoint",
+      "exists": true,
+      "size_bytes": 1905,
+      "sha256": "6276a7b8049fd4119ac21e43731ab838f3f8975ef1f937abbb7c36bad1a27f4e",
+      "git_ignored": true
+    },
+    {
+      "path": "runs/efficient-rlvr-phase2-smoke-group-filter/attempt-01/trainer/checkpoint-1/adapter_model.safetensors",
+      "category": "local_smoke_checkpoint",
+      "exists": true,
+      "size_bytes": 10143888,
+      "sha256": "42fce187ce0c7bf9ee781c54aa5042672383c965f0d78e5f16aa9d279e675b54",
+      "git_ignored": true
+    },
+    {
+      "path": "runs/efficient-rlvr-phase2-smoke-group-filter/attempt-01/trainer/checkpoint-1/optimizer.pt",
+      "category": "local_smoke_checkpoint",
+      "exists": true,
+      "size_bytes": 20514346,
+      "sha256": "90a4b6cbde092057fb219a496e8ced56fceb0c5cd6d554e7e4eae0a178298b39",
+      "git_ignored": true
+    },
+    {
+      "path": "runs/efficient-rlvr-phase2-smoke-group-filter/attempt-01/trainer/checkpoint-1/scheduler.pt",
+      "category": "local_smoke_checkpoint",
+      "exists": true,
+      "size_bytes": 1064,
+      "sha256": "dedff0bfa0a648c9cedf04bbe791acd06e5f5e933ede55dc382835af47b9538f",
+      "git_ignored": true
+    },
+    {
+      "path": "runs/efficient-rlvr-phase2-smoke-group-filter/attempt-01/trainer/checkpoint-1/rng_state.pth",
+      "category": "local_smoke_checkpoint",
+      "exists": true,
+      "size_bytes": 14244,
+      "sha256": "baf60bfeac02b9d1ec04b617361246e16b5f08f259a99951a185f9e9e054b3b9",
+      "git_ignored": true
+    },
+    {
+      "path": "runs/efficient-rlvr-phase2-smoke-group-filter/attempt-01/final_adapter/adapter_model.safetensors",
+      "category": "local_smoke_checkpoint",
+      "exists": true,
+      "size_bytes": 10143888,
+      "sha256": "42fce187ce0c7bf9ee781c54aa5042672383c965f0d78e5f16aa9d279e675b54",
+      "git_ignored": true
+    }
+  ],
+  "notes": [
+    "This manifest hashes the data and smoke evidence for this branch; it does not alter Phase A-C artifacts.",
+    "Generated JSONL split files and binary checkpoints are intentionally excluded from Git."
+  ]
+}
