@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="720" viewBox="0 0 1320 720" role="img" aria-labelledby="title desc">
+<title id="title">GRPO reward-group diagnostics</title>
+<desc id="desc">Reward-variable groups, correctness-mixed groups, and correctness-mixed groups per thousand generated tokens across both seeds.</desc>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<style>text{font-family:Inter,Segoe UI,Arial,sans-serif} .mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}</style>
+<text x="48" y="52" font-size="28" font-weight="700" fill="#152238" text-anchor="start">GRPO  |  What signal appeared inside each sampled group?</text>
+<text x="48" y="83" font-size="15" font-weight="400" fill="#617089" text-anchor="start">All counts are reconstructed from saved rollout completions; a nonzero reward variance can come from format-only reward differences.</text>
+<text x="48" y="148" font-size="16" font-weight="700" fill="#152238" text-anchor="start">Candidate</text>
+<text x="340" y="148" font-size="16" font-weight="700" fill="#152238" text-anchor="start">Nonzero reward variance</text>
+<text x="680" y="148" font-size="16" font-weight="700" fill="#152238" text-anchor="start">Correctness-mixed groups</text>
+<text x="1035" y="148" font-size="16" font-weight="700" fill="#152238" text-anchor="start">Mixed groups / 1k tokens</text>
+<line x1="48" y1="168" x2="1270" y2="168" stroke="#dbe3ef" stroke-width="2"/>
+<rect x="48" y="198" width="18" height="18" rx="4" fill="#0f766e"/>
+<text x="80" y="214" font-size="17" font-weight="600" fill="#152238" text-anchor="start">Seed 1 · G4</text>
+<rect x="340" y="197" width="220" height="20" rx="5" fill="#e5eaf2"/>
+<rect x="340" y="197" width="203.077" height="20" rx="5" fill="#0f766e"/>
+<text x="574" y="214" font-size="15" font-weight="700" fill="#0f766e" text-anchor="start">24/26  (92.3%)</text>
+<rect x="680" y="197" width="220" height="20" rx="5" fill="#e5eaf2"/>
+<rect x="680" y="197" width="126.923" height="20" rx="5" fill="#0f766e"/>
+<text x="914" y="214" font-size="15" font-weight="700" fill="#0f766e" text-anchor="start">15/26  (57.7%)</text>
+<rect x="1035" y="197" width="165" height="20" rx="5" fill="#e5eaf2"/>
+<rect x="1035" y="197" width="153.755" height="20" rx="5" fill="#0f766e"/>
+<text x="1212" y="214" font-size="15" font-weight="700" fill="#0f766e" text-anchor="start">0.932</text>
+<rect x="48" y="298" width="18" height="18" rx="4" fill="#d97706"/>
+<text x="80" y="314" font-size="17" font-weight="600" fill="#152238" text-anchor="start">Seed 1 · G8</text>
+<rect x="340" y="297" width="220" height="20" rx="5" fill="#e5eaf2"/>
+<rect x="340" y="297" width="220" height="20" rx="5" fill="#d97706"/>
+<text x="574" y="314" font-size="15" font-weight="700" fill="#d97706" text-anchor="start">13/13  (100.0%)</text>
+<rect x="680" y="297" width="220" height="20" rx="5" fill="#e5eaf2"/>
+<rect x="680" y="297" width="186.154" height="20" rx="5" fill="#d97706"/>
+<text x="914" y="314" font-size="15" font-weight="700" fill="#d97706" text-anchor="start">11/13  (84.6%)</text>
+<rect x="1035" y="297" width="165" height="20" rx="5" fill="#e5eaf2"/>
+<rect x="1035" y="297" width="110.982" height="20" rx="5" fill="#d97706"/>
+<text x="1212" y="314" font-size="15" font-weight="700" fill="#d97706" text-anchor="start">0.673</text>
+<rect x="48" y="398" width="18" height="18" rx="4" fill="#0f766e"/>
+<text x="80" y="414" font-size="17" font-weight="600" fill="#152238" text-anchor="start">Seed 2 · G4</text>
+<rect x="340" y="397" width="220" height="20" rx="5" fill="#e5eaf2"/>
+<rect x="340" y="397" width="167.2" height="20" rx="5" fill="#0f766e"/>
+<text x="574" y="414" font-size="15" font-weight="700" fill="#0f766e" text-anchor="start">19/25  (76.0%)</text>
+<rect x="680" y="397" width="220" height="20" rx="5" fill="#e5eaf2"/>
+<rect x="680" y="397" width="123.2" height="20" rx="5" fill="#0f766e"/>
+<text x="914" y="414" font-size="15" font-weight="700" fill="#0f766e" text-anchor="start">14/25  (56.0%)</text>
+<rect x="1035" y="397" width="165" height="20" rx="5" fill="#e5eaf2"/>
+<rect x="1035" y="397" width="142.946" height="20" rx="5" fill="#0f766e"/>
+<text x="1212" y="414" font-size="15" font-weight="700" fill="#0f766e" text-anchor="start">0.866</text>
+<rect x="48" y="498" width="18" height="18" rx="4" fill="#d97706"/>
+<text x="80" y="514" font-size="17" font-weight="600" fill="#152238" text-anchor="start">Seed 2 · G8</text>
+<rect x="340" y="497" width="220" height="20" rx="5" fill="#e5eaf2"/>
+<rect x="340" y="497" width="186.154" height="20" rx="5" fill="#d97706"/>
+<text x="574" y="514" font-size="15" font-weight="700" fill="#d97706" text-anchor="start">11/13  (84.6%)</text>
+<rect x="680" y="497" width="220" height="20" rx="5" fill="#e5eaf2"/>
+<rect x="680" y="497" width="169.231" height="20" rx="5" fill="#d97706"/>
+<text x="914" y="514" font-size="15" font-weight="700" fill="#d97706" text-anchor="start">10/13  (76.9%)</text>
+<rect x="1035" y="497" width="165" height="20" rx="5" fill="#e5eaf2"/>
+<rect x="1035" y="497" width="100.518" height="20" rx="5" fill="#d97706"/>
+<text x="1212" y="514" font-size="15" font-weight="700" fill="#d97706" text-anchor="start">0.609</text>
+<line x1="48" y1="598" x2="1270" y2="598" stroke="#dbe3ef" stroke-width="2"/>
+<text x="48" y="633" font-size="15" font-weight="600" fill="#152238" text-anchor="start">Mixed = at least one correct and one incorrect completion in the same prompt group.</text>
+<text x="48" y="660" font-size="14" font-weight="400" fill="#617089" text-anchor="start">Group8 has a higher mixed-group share, but fewer absolute mixed groups and lower mixed groups per 1k tokens in both seeds.</text>
+<text x="48" y="686" font-size="14" font-weight="600" fill="#617089" text-anchor="start">This is a verifier-signal-density proxy, not gradient efficacy, causal evidence, or model quality.</text>
+</svg>

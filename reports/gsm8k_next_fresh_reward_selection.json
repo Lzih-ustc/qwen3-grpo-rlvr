@@ -1,0 +1,100 @@
+{
+  "status": "validation_selected_test_still_sealed",
+  "plan": "reports/gsm8k_next_fresh_reward_selection_plan.json",
+  "validation_sha256": "4134f3804b0fab799b5db3ae58da2ac28c8955ad48bcd29becf928e4cf551ee6",
+  "selection_metric": "exact_match_accuracy",
+  "selection_rule": "Choose the trained candidate with highest exact-match accuracy on the fixed validation split; ties choose fewer training completion tokens, then fewer optimizer updates.",
+  "base_reference": {
+    "correct_count": 54,
+    "eval_count": 500,
+    "accuracy": 0.108,
+    "parse_rate": 0.76,
+    "wilson_95_ci": [
+      0.08372280963705037,
+      0.13825467328480662
+    ]
+  },
+  "candidates": [
+    {
+      "reward_mode": "distance_shaped",
+      "adapter": "runs/gsm8k-next-fresh-g8-distance-16k/attempt-01/final_adapter",
+      "optimizer_updates": 12,
+      "training_generated_tokens": 17502,
+      "validation_correct_count": 183,
+      "validation_count": 500,
+      "validation_accuracy": 0.366,
+      "validation_wilson_95_ci": [
+        0.32494760488221347,
+        0.40909571836148256
+      ],
+      "parse_rate": 0.592,
+      "generated_tokens": 78098,
+      "tokens_per_second": 30.647683824047693,
+      "elapsed_seconds": 2548.2512952160005,
+      "torch_peak_allocated_mib": 819.98828125,
+      "torch_peak_reserved_mib": 904.0,
+      "whole_gpu_peak_memory_used_mib": 3510.0,
+      "validation_sha256": "4134f3804b0fab799b5db3ae58da2ac28c8955ad48bcd29becf928e4cf551ee6"
+    },
+    {
+      "reward_mode": "exact_format",
+      "adapter": "runs/gsm8k-next-fresh-g8-exact-format-16k/attempt-01/trainer/checkpoint-13",
+      "optimizer_updates": 13,
+      "training_generated_tokens": 17272,
+      "validation_correct_count": 190,
+      "validation_count": 500,
+      "validation_accuracy": 0.38,
+      "validation_wilson_95_ci": [
+        0.33852233078455757,
+        0.42330751092621505
+      ],
+      "parse_rate": 0.728,
+      "generated_tokens": 68487,
+      "tokens_per_second": 30.292537399842672,
+      "elapsed_seconds": 2260.8538563810007,
+      "torch_peak_allocated_mib": 819.98828125,
+      "torch_peak_reserved_mib": 902.0,
+      "whole_gpu_peak_memory_used_mib": 3506.0,
+      "validation_sha256": "4134f3804b0fab799b5db3ae58da2ac28c8955ad48bcd29becf928e4cf551ee6"
+    }
+  ],
+  "paired_candidate_comparisons": {
+    "distance_shaped_vs_exact_format": {
+      "both_correct": 137,
+      "left_only_correct": 46,
+      "right_only_correct": 53,
+      "both_wrong": 264,
+      "exact_mcnemar_two_sided_p": 0.546713483598813
+    },
+    "base_vs_selected": {
+      "both_correct": 35,
+      "left_only_correct": 19,
+      "right_only_correct": 155,
+      "both_wrong": 291,
+      "exact_mcnemar_two_sided_p": 1.0478136547928038e-27
+    }
+  },
+  "selected": {
+    "reward_mode": "exact_format",
+    "adapter": "runs/gsm8k-next-fresh-g8-exact-format-16k/attempt-01/trainer/checkpoint-13",
+    "optimizer_updates": 13,
+    "training_generated_tokens": 17272,
+    "validation_correct_count": 190,
+    "validation_count": 500,
+    "validation_accuracy": 0.38,
+    "validation_wilson_95_ci": [
+      0.33852233078455757,
+      0.42330751092621505
+    ],
+    "parse_rate": 0.728,
+    "generated_tokens": 68487,
+    "tokens_per_second": 30.292537399842672,
+    "elapsed_seconds": 2260.8538563810007,
+    "torch_peak_allocated_mib": 819.98828125,
+    "torch_peak_reserved_mib": 902.0,
+    "whole_gpu_peak_memory_used_mib": 3506.0,
+    "validation_sha256": "4134f3804b0fab799b5db3ae58da2ac28c8955ad48bcd29becf928e4cf551ee6"
+  },
+  "selection_used_test": false,
+  "test_opened": false
+}

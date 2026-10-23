@@ -1,0 +1,135 @@
+{
+  "status": "validation_selected_test_still_sealed",
+  "selection_plan": "reports/gsm8k_phasec_seed2_plan.json",
+  "validation_sha256": "013d47a81e741e350ae097bcc6913e477bc89f5403f778c396bdc85689247b88",
+  "selection_metric": "exact_match_accuracy_on_fixed_500_row_validation",
+  "selection_rule": "Choose highest validation exact-match; ties choose fewer generated training tokens, then fewer optimizer updates.",
+  "matched_budget_target_tokens": 16000,
+  "base_reference": {
+    "correct_count": 49,
+    "eval_count": 500,
+    "accuracy": 0.098,
+    "parse_rate": 0.756,
+    "wilson_95_ci": [
+      0.07492391886460623,
+      0.12720605086648182
+    ]
+  },
+  "candidates": [
+    {
+      "candidate_id": "group4",
+      "group_size": 4,
+      "gradient_accumulation_steps": 4,
+      "run_dir": "runs/gsm8k-phasec-seed2-g4-16k",
+      "adapter": "runs/gsm8k-phasec-seed2-g4-16k/attempt-01/final_adapter",
+      "optimizer_updates": 25,
+      "generated_tokens": 16160,
+      "generation_completions": 100,
+      "training_completion_tokens_per_second": 69.5712645945054,
+      "training_completions_per_second": 0.4305152512036225,
+      "training_steps_per_second": 0.10762881280090562,
+      "training_elapsed_seconds": 232.27980825399982,
+      "training_torch_peak_allocated_mib": 1305.93017578125,
+      "training_torch_peak_reserved_mib": 1474.0,
+      "training_whole_gpu_peak_memory_used_mib": 4070.0,
+      "reward_mode": "exact_format",
+      "validation_correct_count": 183,
+      "validation_count": 500,
+      "validation_accuracy": 0.366,
+      "validation_wilson_95_ci": [
+        0.32494760488221347,
+        0.40909571836148256
+      ],
+      "parse_rate": 0.65,
+      "eval_generated_tokens": 74413,
+      "eval_tokens_per_second": 30.401722294284056,
+      "eval_elapsed_seconds": 2447.657382029,
+      "torch_peak_allocated_mib": 819.98828125,
+      "torch_peak_reserved_mib": 902.0,
+      "whole_gpu_peak_memory_used_mib": 3506.0
+    },
+    {
+      "candidate_id": "group8",
+      "group_size": 8,
+      "gradient_accumulation_steps": 8,
+      "run_dir": "runs/gsm8k-phasec-seed2-g8-16k",
+      "adapter": "runs/gsm8k-phasec-seed2-g8-16k/attempt-01/final_adapter",
+      "optimizer_updates": 13,
+      "generated_tokens": 16415,
+      "generation_completions": 104,
+      "training_completion_tokens_per_second": 109.28663881063709,
+      "training_completions_per_second": 0.6924039254527113,
+      "training_steps_per_second": 0.08655049068158892,
+      "training_elapsed_seconds": 150.20134372000007,
+      "training_torch_peak_allocated_mib": 1701.59228515625,
+      "training_torch_peak_reserved_mib": 1910.0,
+      "training_whole_gpu_peak_memory_used_mib": 4506.0,
+      "reward_mode": "exact_format",
+      "validation_correct_count": 163,
+      "validation_count": 500,
+      "validation_accuracy": 0.326,
+      "validation_wilson_95_ci": [
+        0.28637531603524746,
+        0.3682779544453728
+      ],
+      "parse_rate": 0.53,
+      "eval_generated_tokens": 79128,
+      "eval_tokens_per_second": 29.796401206955803,
+      "eval_elapsed_seconds": 2655.622719348,
+      "torch_peak_allocated_mib": 819.98828125,
+      "torch_peak_reserved_mib": 902.0,
+      "whole_gpu_peak_memory_used_mib": 4270.0
+    }
+  ],
+  "paired_comparisons": {
+    "group4_vs_group8": {
+      "both_correct": 127,
+      "left_only_correct": 56,
+      "right_only_correct": 36,
+      "both_wrong": 281,
+      "exact_mcnemar_two_sided_p": 0.047011561644854
+    },
+    "base_vs_selected": {
+      "both_correct": 30,
+      "left_only_correct": 19,
+      "right_only_correct": 153,
+      "both_wrong": 298,
+      "exact_mcnemar_two_sided_p": 3.329424957524123e-27
+    }
+  },
+  "selected": {
+    "candidate_id": "group4",
+    "group_size": 4,
+    "gradient_accumulation_steps": 4,
+    "run_dir": "runs/gsm8k-phasec-seed2-g4-16k",
+    "adapter": "runs/gsm8k-phasec-seed2-g4-16k/attempt-01/final_adapter",
+    "optimizer_updates": 25,
+    "generated_tokens": 16160,
+    "generation_completions": 100,
+    "training_completion_tokens_per_second": 69.5712645945054,
+    "training_completions_per_second": 0.4305152512036225,
+    "training_steps_per_second": 0.10762881280090562,
+    "training_elapsed_seconds": 232.27980825399982,
+    "training_torch_peak_allocated_mib": 1305.93017578125,
+    "training_torch_peak_reserved_mib": 1474.0,
+    "training_whole_gpu_peak_memory_used_mib": 4070.0,
+    "reward_mode": "exact_format",
+    "validation_correct_count": 183,
+    "validation_count": 500,
+    "validation_accuracy": 0.366,
+    "validation_wilson_95_ci": [
+      0.32494760488221347,
+      0.40909571836148256
+    ],
+    "parse_rate": 0.65,
+    "eval_generated_tokens": 74413,
+    "eval_tokens_per_second": 30.401722294284056,
+    "eval_elapsed_seconds": 2447.657382029,
+    "torch_peak_allocated_mib": 819.98828125,
+    "torch_peak_reserved_mib": 902.0,
+    "whole_gpu_peak_memory_used_mib": 3506.0
+  },
+  "test_used_for_selection": false,
+  "selection_used_test": false,
+  "test_opened": false
+}

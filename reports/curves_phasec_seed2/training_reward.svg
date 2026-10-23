@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="430" viewBox="0 0 1100 430">
+<rect width="100%" height="100%" fill="white"/>
+<text x="82" y="32" font-family="sans-serif" font-size="21" font-weight="bold">Training reward per optimizer update (diagnostic only)</text>
+<line x1="82" y1="372.0" x2="870" y2="372.0" stroke="#e5e7eb"/>
+<text x="72" y="376.0" text-anchor="end" font-family="sans-serif" font-size="12" fill="#374151">-0.08</text>
+<line x1="82.0" y1="372" x2="82.0" y2="377" stroke="#111827"/>
+<text x="82.0" y="393" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#374151">0</text>
+<line x1="82" y1="309.2" x2="870" y2="309.2" stroke="#e5e7eb"/>
+<text x="72" y="313.2" text-anchor="end" font-family="sans-serif" font-size="12" fill="#374151">0.152</text>
+<line x1="239.6" y1="372" x2="239.6" y2="377" stroke="#111827"/>
+<text x="239.6" y="393" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#374151">5</text>
+<line x1="82" y1="246.4" x2="870" y2="246.4" stroke="#e5e7eb"/>
+<text x="72" y="250.4" text-anchor="end" font-family="sans-serif" font-size="12" fill="#374151">0.384</text>
+<line x1="397.2" y1="372" x2="397.2" y2="377" stroke="#111827"/>
+<text x="397.2" y="393" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#374151">10</text>
+<line x1="82" y1="183.6" x2="870" y2="183.6" stroke="#e5e7eb"/>
+<text x="72" y="187.6" text-anchor="end" font-family="sans-serif" font-size="12" fill="#374151">0.616</text>
+<line x1="554.8" y1="372" x2="554.8" y2="377" stroke="#111827"/>
+<text x="554.8" y="393" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#374151">15</text>
+<line x1="82" y1="120.8" x2="870" y2="120.8" stroke="#e5e7eb"/>
+<text x="72" y="124.8" text-anchor="end" font-family="sans-serif" font-size="12" fill="#374151">0.848</text>
+<line x1="712.4" y1="372" x2="712.4" y2="377" stroke="#111827"/>
+<text x="712.4" y="393" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#374151">20</text>
+<line x1="82" y1="58.0" x2="870" y2="58.0" stroke="#e5e7eb"/>
+<text x="72" y="62.0" text-anchor="end" font-family="sans-serif" font-size="12" fill="#374151">1.08</text>
+<line x1="870.0" y1="372" x2="870.0" y2="377" stroke="#111827"/>
+<text x="870.0" y="393" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#374151">25</text>
+<line x1="82" y1="372" x2="870" y2="372" stroke="#111827"/>
+<line x1="82" y1="58" x2="82" y2="372" stroke="#111827"/>
+<text x="476.0" y="416" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#111827">Optimizer update</text>
+<polyline points="113.5,275.9 145.0,350.3 176.6,137.2 208.1,350.3 239.6,143.9 271.1,279.3 302.6,275.9 334.2,211.6 365.7,79.7 397.2,211.6 428.7,282.7 460.2,347.0 491.8,215.0 523.3,215.0 554.8,79.7 586.3,143.9 617.8,137.2 649.4,343.6 680.9,343.6 712.4,350.3 743.9,215.0 775.4,347.0 807.0,347.0 838.5,215.0 870.0,350.3" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linejoin="round"/>
+<circle cx="113.5" cy="275.9" r="2.4" fill="#2563eb"/>
+<circle cx="145.0" cy="350.3" r="2.4" fill="#2563eb"/>
+<circle cx="176.6" cy="137.2" r="2.4" fill="#2563eb"/>
+<circle cx="208.1" cy="350.3" r="2.4" fill="#2563eb"/>
+<circle cx="239.6" cy="143.9" r="2.4" fill="#2563eb"/>
+<circle cx="271.1" cy="279.3" r="2.4" fill="#2563eb"/>
+<circle cx="302.6" cy="275.9" r="2.4" fill="#2563eb"/>
+<circle cx="334.2" cy="211.6" r="2.4" fill="#2563eb"/>
+<circle cx="365.7" cy="79.7" r="2.4" fill="#2563eb"/>
+<circle cx="397.2" cy="211.6" r="2.4" fill="#2563eb"/>
+<circle cx="428.7" cy="282.7" r="2.4" fill="#2563eb"/>
+<circle cx="460.2" cy="347.0" r="2.4" fill="#2563eb"/>
+<circle cx="491.8" cy="215.0" r="2.4" fill="#2563eb"/>
+<circle cx="523.3" cy="215.0" r="2.4" fill="#2563eb"/>
+<circle cx="554.8" cy="79.7" r="2.4" fill="#2563eb"/>
+<circle cx="586.3" cy="143.9" r="2.4" fill="#2563eb"/>
+<circle cx="617.8" cy="137.2" r="2.4" fill="#2563eb"/>
+<circle cx="649.4" cy="343.6" r="2.4" fill="#2563eb"/>
+<circle cx="680.9" cy="343.6" r="2.4" fill="#2563eb"/>
+<circle cx="712.4" cy="350.3" r="2.4" fill="#2563eb"/>
+<circle cx="743.9" cy="215.0" r="2.4" fill="#2563eb"/>
+<circle cx="775.4" cy="347.0" r="2.4" fill="#2563eb"/>
+<circle cx="807.0" cy="347.0" r="2.4" fill="#2563eb"/>
+<circle cx="838.5" cy="215.0" r="2.4" fill="#2563eb"/>
+<circle cx="870.0" cy="350.3" r="2.4" fill="#2563eb"/>
+<line x1="888" y1="72" x2="912" y2="72" stroke="#2563eb" stroke-width="3"/>
+<text x="919" y="76" font-family="sans-serif" font-size="12" fill="#111827">group4</text>
+<polyline points="113.5,281.0 145.0,350.3 176.6,106.7 208.1,350.3 239.6,111.8 271.1,211.6 302.6,308.0 334.2,242.1 365.7,177.8 397.2,145.6 428.7,248.8 460.2,345.3 491.8,314.8" fill="none" stroke="#dc2626" stroke-width="2.2" stroke-linejoin="round"/>
+<circle cx="113.5" cy="281.0" r="2.4" fill="#dc2626"/>
+<circle cx="145.0" cy="350.3" r="2.4" fill="#dc2626"/>
+<circle cx="176.6" cy="106.7" r="2.4" fill="#dc2626"/>
+<circle cx="208.1" cy="350.3" r="2.4" fill="#dc2626"/>
+<circle cx="239.6" cy="111.8" r="2.4" fill="#dc2626"/>
+<circle cx="271.1" cy="211.6" r="2.4" fill="#dc2626"/>
+<circle cx="302.6" cy="308.0" r="2.4" fill="#dc2626"/>
+<circle cx="334.2" cy="242.1" r="2.4" fill="#dc2626"/>
+<circle cx="365.7" cy="177.8" r="2.4" fill="#dc2626"/>
+<circle cx="397.2" cy="145.6" r="2.4" fill="#dc2626"/>
+<circle cx="428.7" cy="248.8" r="2.4" fill="#dc2626"/>
+<circle cx="460.2" cy="345.3" r="2.4" fill="#dc2626"/>
+<circle cx="491.8" cy="314.8" r="2.4" fill="#dc2626"/>
+<line x1="888" y1="97" x2="912" y2="97" stroke="#dc2626" stroke-width="3"/>
+<text x="919" y="101" font-family="sans-serif" font-size="12" fill="#111827">group8</text>
+</svg>

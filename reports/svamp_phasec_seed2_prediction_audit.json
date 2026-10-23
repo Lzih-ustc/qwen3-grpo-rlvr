@@ -1,0 +1,807 @@
+{
+  "status": "saved_prediction_audit_passed",
+  "left_label": "base",
+  "right_label": "selected",
+  "eval_data_sha256": "5529aa437b2c7be1f101b3a307a3eddbf07021cbda892af8b4c0320fc2b38251",
+  "eval_count": 1000,
+  "paired_outcomes": {
+    "both_correct": 221,
+    "left_only_correct": 46,
+    "right_only_correct": 454,
+    "both_wrong": 279
+  },
+  "parser_and_decode_audit": {
+    "base": {
+      "tag": "phasec_seed2_svamp_base_test",
+      "adapter": null,
+      "correct_count": 267,
+      "eval_count": 1000,
+      "accuracy": 0.267,
+      "parse_rate": 0.833,
+      "parse_source_counts": {
+        "unparsed": 167,
+        "answer_tag": 758,
+        "boxed": 75
+      },
+      "parser_mismatch_count": 0,
+      "correctness_flag_mismatch_count": 0,
+      "unparsed_completion_with_answer_tag_markup": 154,
+      "completions_with_visible_think_tags": 0,
+      "decode": {
+        "do_sample": false,
+        "max_new_tokens": 192,
+        "thinking": false
+      },
+      "elapsed_seconds": 730.2764552669996,
+      "generated_tokens": 35598,
+      "tokens_per_second": 48.74592319559975,
+      "torch_peak_allocated_mib": 819.98828125,
+      "whole_gpu_peak_memory_used_mib": 4518.0
+    },
+    "selected": {
+      "tag": "phasec_seed2_svamp_selected_test",
+      "adapter": "runs/gsm8k-phasec-seed2-g4-16k/attempt-01/final_adapter",
+      "correct_count": 675,
+      "eval_count": 1000,
+      "accuracy": 0.675,
+      "parse_rate": 0.886,
+      "parse_source_counts": {
+        "boxed": 542,
+        "answer_tag": 344,
+        "unparsed": 114
+      },
+      "parser_mismatch_count": 0,
+      "correctness_flag_mismatch_count": 0,
+      "unparsed_completion_with_answer_tag_markup": 24,
+      "completions_with_visible_think_tags": 0,
+      "decode": {
+        "do_sample": false,
+        "max_new_tokens": 192,
+        "thinking": false
+      },
+      "elapsed_seconds": 3697.64597125,
+      "generated_tokens": 104482,
+      "tokens_per_second": 28.256355749677017,
+      "torch_peak_allocated_mib": 819.98828125,
+      "whole_gpu_peak_memory_used_mib": 4743.0
+    }
+  },
+  "manual_sample": {
+    "seed": 20261026,
+    "samples_per_stratum": 10,
+    "sampled_question_count": 40,
+    "strata": {
+      "both_correct": [
+        1,
+        8,
+        76,
+        215,
+        496,
+        507,
+        543,
+        556,
+        710,
+        993
+      ],
+      "left_only_correct": [
+        59,
+        234,
+        335,
+        368,
+        403,
+        465,
+        474,
+        498,
+        534,
+        740
+      ],
+      "right_only_correct": [
+        33,
+        36,
+        91,
+        278,
+        391,
+        427,
+        702,
+        839,
+        860,
+        971
+      ],
+      "both_wrong": [
+        63,
+        128,
+        241,
+        456,
+        595,
+        675,
+        717,
+        830,
+        842,
+        852
+      ]
+    },
+    "rows": [
+      {
+        "index": 1,
+        "prompt": "Dan had $ 3 left with him after he bought a candy bar. If he had $ 4 at the start\nHow much did the candy bar cost?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 1,
+        "base": {
+          "completion": "<answer>1</answer>",
+          "predicted": 1,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Dan had $4 at the start, and after buying a candy bar, he had $3 left. The amount of the candy bar is the difference between the initial amount and the remaining amount.\n\nSo, the cost of the candy bar is:\n\n$$\n4 - 3 = 1\n$$\n\nThe candy bar cost $1.\n\nFinal answer: <answer>1</answer>",
+          "predicted": 1,
+          "parse_source": "answer_tag",
+          "correct": true
+        }
+      },
+      {
+        "index": 8,
+        "prompt": "Mary is baking a cake. The recipe calls for 3 cups of sugar 10 cups of flour and 15 cups of salt. She already put in 6 cups of flour.\nHow many more cups of flour does she need to add?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 4,
+        "base": {
+          "completion": "The recipe requires 10 cups of flour, and Mary has already put in 6 cups. The difference is:\n\n$$\n10 - 6 = 4\n$$\n\nSo the answer is:\n\n$$\n<answer>4</answer>",
+          "predicted": 4,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Mary has already put in 6 cups of flour, and the recipe requires 10 cups of flour. To find out how many more cups she needs, we subtract:\n\n$$\n10 \\, \\text{cups} - 6 \\, \\text{cups} = 4 \\, \\text{cups}\n$$\n\nSo, Mary needs **4 more cups** of flour. \n\nFinal answer: <answer>4</answer>",
+          "predicted": 4,
+          "parse_source": "answer_tag",
+          "correct": true
+        }
+      },
+      {
+        "index": 33,
+        "prompt": "There were 78 dollars in Olivia's wallet. She spent 15 dollars at a supermarket.\nHow much money does she have left?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 63,
+        "base": {
+          "completion": "<answer>78 - 15</answer>",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        },
+        "selected": {
+          "completion": "Olivia had $78 in her wallet. She spent $15 at a supermarket. \n\nTo find out how much money she has left, we subtract the amount she spent from the total:\n\n$$\n78 - 15 = 63\n$$\n\nSo, Olivia has $63 left. \n\nFinal answer: <answer>63</answer>",
+          "predicted": 63,
+          "parse_source": "answer_tag",
+          "correct": true
+        }
+      },
+      {
+        "index": 36,
+        "prompt": "After eating a hearty meal they went to see the Buckingham palace. There, Rachel learned that 703 visitors came to the Buckingham palace on the previous day. If there were 246 visitors on that day\nHow many visited the Buckingham palace within 25 days?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 949,
+        "base": {
+          "completion": "<answer>246 + 703 = 949</answer>",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        },
+        "selected": {
+          "completion": "We are given:\n\n- On the previous day, there were **703 visitors**.\n- On that day, there were **246 visitors**.\n\nWe are to find the **total number of visitors** to the Buckingham palace **within 25 days**.\n\nSo, we add the number of visitors on the previous day and the number of visitors on the current day:\n\n$$\n703 + 246 = 949\n$$\n\nThe final answer is:\n\n$$\n\\boxed{949}\n$$",
+          "predicted": 949,
+          "parse_source": "boxed",
+          "correct": true
+        }
+      },
+      {
+        "index": 59,
+        "prompt": "After eating a hearty meal they went to see the Buckingham palace. There were 39 paintings in the Buckingham palace. There, Rachel learned that 661 visitors came to the Buckingham palace that day. If there were 600 visitors the previous day\nHow many more visitors visited the Buckingham palace on that day than on the previous day?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 61,
+        "base": {
+          "completion": "The number of visitors on that day is 661, and the number of visitors the previous day was 600. The difference is:\n\n$$\n661 - 600 = \\boxed{61}\n$$\n\nFinal answer: <answer>61</answer>",
+          "predicted": 61,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "We are given:\n\n- The number of paintings in the Buckingham palace: **39**\n- The number of visitors on that day: **661**\n- The number of visitors the previous day: **600**\n\nWe are asked: **How many more visitors visited the Buckingham palace on that day than on the previous day?**\n\nThe difference is:\n\n$$\n661 - 600 = \\boxed{61}\n$$\n\n### Final Answer:\n$$\n\\boxed{61}\n$$",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 63,
+        "prompt": "Mary is baking a cake. The recipe calls for 11 cups of flour and 7 cups of sugar. She already put in some cups of flour. If she still needs 2 more cups of flour than sugar\nHow many cups of flour did she put in?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 2,
+        "base": {
+          "completion": "The problem states that Mary has already put in some cups of flour, and she still needs 2 more cups of flour than sugar. The recipe requires 11 cups of flour and 7 cups of sugar.\n\nLet:\n- $ x $ be the number of cups of flour she has already put in.\n- $ y $ be the number of cups of sugar she has already put in.\n\nWe are given:\n- $ x + y = 11 $ (total flour and sugar)\n- $ x - y = 2 $ (flour needed is 2 more than sugar)\n\nSolving the system of equations:\n\n1. $ x + y = 11 $\n2. $ x - y = 2 $\n\nAdding the two equations:\n\n$ (x + y) + (x - y) = 11 + 2 $\n\n$ 2x = 13 $\n\n$ x = 6.5 $\n\nSo, the",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        },
+        "selected": {
+          "completion": "Let's denote the number of cups of flour Mary already put in as $ x $.\n\nWe are told:\n- The recipe requires 11 cups of flour and 7 cups of sugar.\n- She still needs 2 more cups of flour than sugar.\n\nSo, the number of cups of sugar she needs is 7 cups, and she needs 2 more cups of flour, which means she has $ 11 - x $ cups of flour left.\n\nWe are told that the number of cups of flour she has is 2 more than the number of cups of sugar she needs:\n\n$$\nx = 7 + 2 = 9\n$$\n\nSo, the number of cups of flour she already put in is:\n\n$$\n\\boxed{9}\n$$\n\nFinal answer: <answer>9</answer>",
+          "predicted": 9,
+          "parse_source": "answer_tag",
+          "correct": false
+        }
+      },
+      {
+        "index": 76,
+        "prompt": "Rachel had to complete 2 pages of reading homework and 4 pages of math homework.\nHow many more pages of math homework than reading homework did she have?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 2,
+        "base": {
+          "completion": "The number of pages of math homework Rachel had more than reading homework is:\n\n$$\n4 - 2 = 2\n$$\n\nFinal answer: <answer>2</answer>",
+          "predicted": 2,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Rachel had to complete:\n\n- 2 pages of reading homework  \n- 4 pages of math homework\n\nTo find how many more pages of math homework than reading homework she had:\n\n$$\n4 - 2 = 2\n$$\n\nSo, the answer is:\n\n$$\n\\boxed{2}\n$$",
+          "predicted": 2,
+          "parse_source": "boxed",
+          "correct": true
+        }
+      },
+      {
+        "index": 91,
+        "prompt": "Because of the decision Sofia asked the students to suggest specific types of food. If 408 students suggested adding mashed potatoes while 42 suggested adding bacon to the menu\nHow many more students suggested mashed potatoes than those that suggested bacon?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 366,
+        "base": {
+          "completion": "<answer>408 - 42</answer>",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        },
+        "selected": {
+          "completion": "We are given:\n\n- 408 students suggested adding mashed potatoes.\n- 42 students suggested adding bacon.\n\nWe are asked: **How many more students suggested mashed potatoes than those that suggested bacon?**\n\nThe difference is:\n\n$$\n408 - 42 = 366\n$$\n\nSo, the final answer is:\n\n$$\n\\boxed{366}\n$$",
+          "predicted": 366,
+          "parse_source": "boxed",
+          "correct": true
+        }
+      },
+      {
+        "index": 128,
+        "prompt": "Last week Fred had 47 dollars and Jason had 99 dollars. Over the weekend Fred delivered newspapers earning 111 dollars and washed cars earning 34 dollars.\nHow much money does Fred have now?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 192,
+        "base": {
+          "completion": "<answer>111 + 34 = 145</answer>",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        },
+        "selected": {
+          "completion": "Fred had $47, Jason had $99, and he earned $111 from delivering newspapers. \n\nSo, the total money Fred has now is:\n\n$$\n47 + 111 = 158\n$$\n\nThe final answer is:\n\n$$\n\\boxed{158}\n$$",
+          "predicted": 158,
+          "parse_source": "boxed",
+          "correct": false
+        }
+      },
+      {
+        "index": 215,
+        "prompt": "Mary is baking a cake. The recipe calls for 5 cups of flour and 14 cups of sugar. She already put in 10 cups of flour and 2 cups of sugar.\nHow many more cups of sugar does she need to add?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 12,
+        "base": {
+          "completion": "The recipe requires 14 cups of sugar, and Mary has already added 2 cups. The difference is:\n\n$$\n14 - 2 = 12\n$$\n\nSo the final answer is:\n\n$$\n<answer>12</answer>",
+          "predicted": 12,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Mary has already added:\n\n- 10 cups of flour  \n- 2 cups of sugar\n\nThe recipe requires:\n\n- 5 cups of flour  \n- 14 cups of sugar\n\nWe need to find how many more cups of sugar Mary needs to add.\n\nSo, the difference is:\n\n$$\n14 - 2 = 12\n$$\n\nMary needs **12 more cups of sugar**. \n\nFinal answer: <answer>12</answer>",
+          "predicted": 12,
+          "parse_source": "answer_tag",
+          "correct": true
+        }
+      },
+      {
+        "index": 234,
+        "prompt": "Dan has $ 4. He had $ 3 left with him after he bought a candy bar.\nHow much did the candy bar cost?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 1,
+        "base": {
+          "completion": "<answer>1</answer>",
+          "predicted": 1,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Dan had $3 left with him after buying a candy bar. So, the amount of the candy bar is:\n\n$$\n4 + 3 = 7\n$$\n\nThe candy bar cost **$7**. \n\nFinal answer: <answer>$7</answer>",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 241,
+        "prompt": "A grocery store had 81 bottles of regular soda, 60 bottles of diet soda and 60 bottles of lite soda.\nHow many more bottles of regular soda did they have than diet soda?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 21,
+        "base": {
+          "completion": "<answer>81</answer>",
+          "predicted": 81,
+          "parse_source": "answer_tag",
+          "correct": false
+        },
+        "selected": {
+          "completion": "We are given:\n\n- 81 bottles of regular soda  \n- 60 bottles of diet soda  \n- 60 bottles of lite soda  \n\nWe are asked: **How many more bottles of regular soda did they have than diet soda?**\n\nTo find the difference, we subtract the number of diet soda bottles from the number of regular soda bottles:\n\n$$\n81 - 60 = 21\n$$\n\nSo, the number of more bottles of regular soda than diet soda is:\n\n$$\n\\boxed{21}\n$$\n\nThe final answer is:\n\n$$\n\\boxed{21}\n$$",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 278,
+        "prompt": "There are some bananas in Philip's banana collection. If the bananas are organized into 140 groups of size 187\nHow many bananas does he have in his collection?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 26180,
+        "base": {
+          "completion": "<answer>140 * 187</answer>",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        },
+        "selected": {
+          "completion": "We are given:\n\n- There are 140 groups of size 187 bananas each.\n\nTo find the total number of bananas, we multiply the number of groups by the size of each group:\n\n$$\n140 \\times 187\n$$\n\nNow, perform the multiplication:\n\n$$\n140 \\times 187 = 26180\n$$\n\nSo, the total number of bananas in Philip's collection is:\n\n$$\n\\boxed{26180}\n$$",
+          "predicted": 26180,
+          "parse_source": "boxed",
+          "correct": true
+        }
+      },
+      {
+        "index": 335,
+        "prompt": "Jerry had 7 action figures and 2 books on a shelf in his room. Later he added 4 more books to the shelf.\nHow many more action figures than books were on his shelf?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 1,
+        "base": {
+          "completion": "The number of action figures is 7, and the number of books is 2. After adding 4 more books, the total number of books is 2 + 4 = 6. The difference between the number of action figures and books is 7 - 6 = 1.\n\nFinal answer: <answer>1</answer>",
+          "predicted": 1,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Jerry initially had 7 action figures and 2 books on the shelf. Later, he added 4 more books. \n\nSo, the number of action figures is 7, and the number of books is 2 + 4 = 6.\n\nNow, we need to find how many more action figures than books were on the shelf.\n\nThe difference is:  \n$$\n7 - 6 = 1\n$$\n\nThe final answer is:  \n$$\n\\boxed{1}\n$$\n\nInside the <answer> tag:  \n$$\n\\boxed{1}\n$$",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 368,
+        "prompt": "Edward spent $ 4 to buy books and $ 3 to buy pens. Now he has $ 12.\nHow much did Edward spend on books and pens?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 7,
+        "base": {
+          "completion": "The problem states that Edward spent $4 on books and $3 on pens. The total amount he spent is $4 + $3 = $7. \n\nFinal answer: <answer>7</answer>",
+          "predicted": 7,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Edward spent $4 on books and $3 on pens. The total amount he spent is:\n\n$$\n4 + 3 = 7\n$$\n\nHe now has $12, so the amount he spent is:\n\n$$\n12 - 7 = 5\n$$\n\nThe final answer is:\n\n$$\n\\boxed{5}\n$$\n\nSo, Edward spent $\\boxed{5}$ dollars on books and pens.",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 391,
+        "prompt": "Robin's hair was 19 inches long. If he grew 18 more inches\nHow long is his hair now?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 37,
+        "base": {
+          "completion": "<answer>19 + 18 = 37</answer>",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        },
+        "selected": {
+          "completion": "Robin's original hair length is 19 inches. He grew 18 more inches. \n\nSo, the total length of his hair now is:\n\n$$\n19 + 18 = 37 \\text{ inches}\n$$\n\nThe final answer is:\n\n$$\n\\boxed{37}\n$$",
+          "predicted": 37,
+          "parse_source": "boxed",
+          "correct": true
+        }
+      },
+      {
+        "index": 403,
+        "prompt": "Dave had 16 apps and 77 files on his phone. After deleting some apps and files he had 5 apps and 23 files left.\nHow many apps did he delete?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 11,
+        "base": {
+          "completion": "The number of apps Dave deleted is $ 16 - 5 = 11 $. \n\nFinal answer: <answer>11</answer>",
+          "predicted": 11,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Dave initially had 16 apps and 77 files. After deleting some apps and files, he had 5 apps and 23 files. We need to find how many apps he deleted.\n\nThe difference in the number of apps is:\n\n$$\n16 - 5 = 11\n$$\n\nThe difference in the number of files is:\n\n$$\n77 - 23 = 54\n$$\n\nSince the number of apps deleted is the same as the number of files deleted, we can conclude:\n\n$$\n\\boxed{11}\n$$\n\nSo the answer is:\n\n$$\n\\boxed{11}\n$$",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 427,
+        "prompt": "There were 10 roses in the vase. Jessica cut 8 more roses from her flower garden and put them in the vase.\nHow many roses are there in the vase now?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 18,
+        "base": {
+          "completion": "<answer>10 + 8 = 18</answer>",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        },
+        "selected": {
+          "completion": "Jessica added 8 roses to the vase, and there were 10 roses in the vase initially. So, the total number of roses in the vase is:\n\n$$\n10 + 8 = 18\n$$\n\nThe final answer is:\n\n$$\n\\boxed{18}\n$$",
+          "predicted": 18,
+          "parse_source": "boxed",
+          "correct": true
+        }
+      },
+      {
+        "index": 456,
+        "prompt": "Paco had 28 cookies. He ate some of them and had 7 cookies left.\nHow many cookies did Paco eat?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 21,
+        "base": {
+          "completion": "<answer>28 - 7 = 21</answer>",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        },
+        "selected": {
+          "completion": "Paco had 28 cookies and ate some of them, leaving 7 cookies. To find out how many he ate, we add the number of cookies he had initially and the number of cookies he had left:\n\n$$\n28 + 7 = 35\n$$\n\nSo, Paco ate **35** cookies. \n\nFinal answer: <answer>35</answer>",
+          "predicted": 35,
+          "parse_source": "answer_tag",
+          "correct": false
+        }
+      },
+      {
+        "index": 465,
+        "prompt": "46 campers went rowing on a day. 43 campers went rowing in the morning and some more campers went rowing in the afternoon.\nHow many campers went rowing in the afternoon?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 3,
+        "base": {
+          "completion": "The problem states that 43 campers went rowing in the morning, and some more went in the afternoon. The total number of campers is 46. Therefore, the number of campers who went rowing in the afternoon is:\n\n$$\n46 - 43 = 3\n$$\n\nFinal answer: <answer>3</answer>",
+          "predicted": 3,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Let's denote the number of campers who went rowing in the afternoon as $ x $.\n\nWe are told:\n- 43 campers went rowing in the morning.\n- Some more campers went rowing in the afternoon.\n\nSo, the total number of campers is:\n$$\n43 + x\n$$\n\nBut we are not given the total number of campers, only the number of campers in the morning. Therefore, we need to assume that the total number of campers is the same as the number of campers in the morning plus the number in the afternoon. However, since we are only asked for the number of campers in the afternoon, and not the total, we can only find the number in the afternoon if we had the total.\n\nBut since the problem doesn't provide the total number of campers, we can't determine the exact number of campers in the afternoon. However, if we assume",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 474,
+        "prompt": "Frank was reading through his favorite book. The book had 612 pages equally distributed over 24 chapters. It took Frank 6 days to finish the book.\nHow many pages did he read per day?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 102,
+        "base": {
+          "completion": "The book has 612 pages and is distributed equally over 24 chapters. Frank read for 6 days. \n\nThe number of pages Frank read per day is:\n\n$$\n\\frac{612 \\text{ pages}}{6 \\text{ days}} = 102 \\text{ pages/day}\n$$\n\nFinal answer: <answer>102</answer>",
+          "predicted": 102,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Frank read a book with 612 pages divided equally over 24 chapters. He finished the book in 6 days.\n\nTo find the number of pages he read per day:\n\n$$\n\\frac{612 \\text{ pages}}{24 \\text{ chapters}} = 25.5 \\text{ pages per chapter}\n$$\n\n$$\n\\frac{25.5 \\text{ pages per chapter}}{6 \\text{ days}} = 4.25 \\text{ pages per day}\n$$\n\nSo the number of pages Frank read per day is:\n\n$$\n\\boxed{4.25}\n$$\n\nFinal answer: <answer>4.25</answer>",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 496,
+        "prompt": "Danny collects bottle caps and wrappers. He found 71 bottle caps and 24 wrappers at the park. Now he has 28 bottle caps and 16 wrappers in his collection.\nHow many more bottle caps than wrappers does danny have now?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 12,
+        "base": {
+          "completion": "<answer>12</answer>",
+          "predicted": 12,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Danny has 28 bottle caps and 16 wrappers. To find how many more bottle caps than wrappers he has, we subtract the number of wrappers from the number of bottle caps:\n\n$$\n28 - 16 = 12\n$$\n\nSo, Danny has **12 more bottle caps than wrappers**. \n\nFinal answer: <answer>12</answer>",
+          "predicted": 12,
+          "parse_source": "answer_tag",
+          "correct": true
+        }
+      },
+      {
+        "index": 498,
+        "prompt": "5 children were riding on the bus. At the bus stop 63 children got off the bus while some more got on the bus. Then there were 14 children altogether on the bus.\nHow many more children got on the bus than those that got off?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 9,
+        "base": {
+          "completion": "The problem states:\n\n- 5 children were riding on the bus.\n- 63 children got off the bus.\n- There were 14 children altogether on the bus.\n\nWe are to find how many more children got on the bus than those that got off.\n\nLet:\n- $ x $ = number of children who got on the bus.\n\nWe know:\n\n- 5 children were on the bus initially.\n- 63 children got off the bus.\n- 14 children were on the bus at the end.\n\nSo, the number of children who got on the bus is:\n\n$$\nx = 63 + 14 - 5 = 72\n$$\n\nThe number of children who got off the bus is 63.\n\nThe difference is:\n\n$$\n72 - 63 = 9\n$$\n\n**Final answer: <answer>9</answer>**",
+          "predicted": 9,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Let's solve the problem step by step:\n\n1. Let $ x $ be the number of children who got on the bus.\n2. Initially, there were 5 children on the bus.\n3. 63 children got off the bus.\n4. After some more children got on, the total number of children on the bus is 14.\n\nSo, we can write the equation:\n\n$$\n5 + 63 + x = 14\n$$\n\nSubtract 63 from both sides:\n\n$$\nx = 14 - 63 = -49\n$$\n\nThis result is negative, which doesn't make sense in the context of the problem. This suggests that the number of children who got on the bus must be greater than 63, but the total number of children is only 14. This implies that the number of children who got off must be less than the number who got on,",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 507,
+        "prompt": "Marco and his dad went strawberry picking. Marco's dad's strawberries weighed 11 pounds. If together their strawberries weighed 30 pounds.\nHow much did Marco's strawberries weigh?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 19,
+        "base": {
+          "completion": "<answer>19</answer>",
+          "predicted": 19,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Let's solve the problem step by step:\n\n1. Marco's dad's strawberries weigh **11 pounds**.\n2. Together, their strawberries weigh **30 pounds**.\n3. The question is: How much did Marco's strawberries weigh?\n\nSince we are told that the total weight of both Marco's and his dad's strawberries is **30 pounds**, and Marco's dad's strawberries weigh **11 pounds**, we can find Marco's weight by subtracting the dad's weight from the total:\n\n$$\n30 \\, \\text{pounds} - 11 \\, \\text{pounds} = 19 \\, \\text{pounds}\n$$\n\nSo, Marco's strawberries weigh **19 pounds**.\n\nFinal answer: <answer>19</answer>",
+          "predicted": 19,
+          "parse_source": "answer_tag",
+          "correct": true
+        }
+      },
+      {
+        "index": 534,
+        "prompt": "Nell collects baseball cards. She had 573 cards. She gave 195 cards to John and yet some more to Jeff. Now she has 210 cards left.\nHow many cards did Nell give to Jeff?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 168,
+        "base": {
+          "completion": "Nell started with 573 cards. She gave 195 cards to John and some more to Jeff. After that, she had 210 cards left. To find how many cards she gave to Jeff, we subtract the number of cards she gave to John and Jeff from the total number of cards she had initially.\n\n$$\n573 - 195 - x = 210\n$$\n\nSolving for $x$:\n\n$$\nx = 573 - 195 - 210 = 168\n$$\n\n**Final answer:** <answer>168</answer>",
+          "predicted": 168,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Nell started with 573 cards. She gave 195 cards to John and some more to Jeff. After that, she had 210 cards left.\n\nWe are to find how many cards Nell gave to Jeff.\n\nWe can solve this by subtracting the total number of cards she had after giving to John and Jeff from the original number of cards:\n\n$$\n573 - 195 - x = 210\n$$\n\nWhere $x$ is the number of cards given to Jeff.\n\nSolving:\n\n$$\n573 - 195 = 378\n$$\n\nSo:\n\n$$\n378 - x = 210\n$$\n\nSubtracting:\n\n$$\nx = 378 - 210 = 168\n$$\n\nThus, Nell gave **168** cards to Jeff. \n\nFinal answer: $\\",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 543,
+        "prompt": "A book has 3 chapters. The first chapter is 91 pages long the second chapter is 23 pages long and the third chapter is 25 pages long.\nHow many more pages does the first chapter have than the second chapter?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 68,
+        "base": {
+          "completion": "The first chapter has 91 pages, the second has 23 pages, and the third has 25 pages. The difference between the first and second chapters is:\n\n$$\n91 - 23 = 68\n$$\n\n**Final answer:** <answer>68</answer>",
+          "predicted": 68,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "The first chapter has 91 pages, the second has 23 pages, and the third has 25 pages. The question is asking how many more pages the first chapter has than the second chapter.\n\nSo, we calculate:\n\n$$\n91 - 23 = 68\n$$\n\nThe final answer is:\n\n$$\n\\boxed{68}\n$$",
+          "predicted": 68,
+          "parse_source": "boxed",
+          "correct": true
+        }
+      },
+      {
+        "index": 556,
+        "prompt": "Bobby had 21 pieces of candy. He ate 5 pieces of candy. Then he ate 9 more.\nHow many pieces of candy does he still have left?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 7,
+        "base": {
+          "completion": "The problem states that Bobby had 21 pieces of candy, ate 5, and then ate 9 more. To find out how many pieces he still has left, we perform the following:\n\n- Start with the initial amount: 21 pieces\n- Subtract the number of pieces he ate: $21 - 5 = 16$\n- Then subtract the additional amount he ate: $16 - 9 = 7$\n\nSo, the final answer is: <answer>7</answer> pieces of candy.",
+          "predicted": 7,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Bobby had 21 pieces of candy. He ate 5 pieces, then 9 more. \n\nSo, the total number of candies he ate is:\n$$\n5 + 9 = 14\n$$\n\nHe had 21 candies initially, so the number of candies he still has is:\n$$\n21 - 14 = 7\n$$\n\nThe final answer is:\n$$\n\\boxed{7}\n$$",
+          "predicted": 7,
+          "parse_source": "boxed",
+          "correct": true
+        }
+      },
+      {
+        "index": 595,
+        "prompt": "He then went to see the oranges being harvested. He found out that they harvest 76 sacks per day and discard 64 of them.\nHow many oranges do they harvest per day if each sack contains 50 oranges?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 600,
+        "base": {
+          "completion": "<answer>76 * 50</answer>",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        },
+        "selected": {
+          "completion": "Each sack contains 50 oranges, and they harvest 76 sacks per day. So, the total number of oranges per day is:\n\n$$\n76 \\text{ sacks/day} \\times 50 \\text{ oranges/sack} = 3800 \\text{ oranges/day}\n$$\n\nThe final answer is:\n\n$$\n\\boxed{3800}\n$$\n\nInside the <answer> tag:\n\n<answer>3800</answer>",
+          "predicted": 3800,
+          "parse_source": "answer_tag",
+          "correct": false
+        }
+      },
+      {
+        "index": 675,
+        "prompt": "Frank was reading through his favorite book. The book had 193 pages equally distributed over 15 chapters. It took Frank 660 days to finish the book.\nHow many chapters did he read per day?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 44,
+        "base": {
+          "completion": "The book has 193 pages and is distributed equally over 15 chapters. \n\nTo find how many chapters Frank read per day, we divide the total number of pages by the number of chapters:\n\n$$\n\\frac{193}{15} = 12.87\n$$\n\nSo, Frank read $\\boxed{12.87}$ chapters per day.",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        },
+        "selected": {
+          "completion": "We are given:\n\n- The book has **193 pages** distributed over **15 chapters**.\n- Frank finished the book in **660 days**.\n- We are to find how many **chapters** Frank read per day.\n\n### Step 1: Find the number of pages per chapter\n\n$$\n\\frac{193 \\text{ pages}}{15 \\text{ chapters}} = \\frac{193}{15} \\approx 12.87 \\text{ pages per chapter}\n$$\n\n### Step 2: Find the number of chapters Frank read per day\n\nWe are told that Frank read **660 days** to finish the book. So:\n\n$$\n\\frac{193 \\text{ pages}}{660 \\text{ days}} \\approx 0.29 \\text{ pages per day}\n$$\n\nThis means Frank read **0.",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 702,
+        "prompt": "The grasshopper and the frog had a jumping contest. The frog jumped 39 inches and the grasshopper jumped 17 inches.\nHow much farther did the frog jump than the grasshopper?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 22,
+        "base": {
+          "completion": "<answer>39 - 17</answer>",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        },
+        "selected": {
+          "completion": "The frog jumped 39 inches, and the grasshopper jumped 17 inches. To find how much farther the frog jumped, we subtract the grasshopper's distance from the frog's distance:\n\n$$\n39 - 17 = 22\n$$\n\nThe answer is:\n\n$$\n\\boxed{22}\n$$",
+          "predicted": 22,
+          "parse_source": "boxed",
+          "correct": true
+        }
+      },
+      {
+        "index": 710,
+        "prompt": "Jack received a total of 9 emails in the day. If he received 7 emails in the morning and some more in the afternoon\nHow many emails did Jack receive in the afternoon?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 2,
+        "base": {
+          "completion": "The total number of emails Jack received is 9. He received 7 emails in the morning, and the remaining emails are in the afternoon. \n\nSo, the number of emails in the afternoon is:\n$$\n9 - 7 = 2\n$$\n\nThe final answer is:\n$$\n\\boxed{2}\n$$",
+          "predicted": 2,
+          "parse_source": "boxed",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Jack received a total of 9 emails in the day. He received 7 emails in the morning, and some more in the afternoon. Let's find how many emails he received in the afternoon.\n\nWe are given:\n- Total emails in the day: 9\n- Morning emails: 7\n\nSo, the number of emails in the afternoon is:\n\n$$\n9 - 7 = 2\n$$\n\nThus, Jack received **2 emails** in the afternoon.\n\nFinal answer: <answer>2</answer>",
+          "predicted": 2,
+          "parse_source": "answer_tag",
+          "correct": true
+        }
+      },
+      {
+        "index": 717,
+        "prompt": "A book has 2 chapters across 81 pages. The second chapter is 68 pages long.\nHow many pages are in the second chapter?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 13,
+        "base": {
+          "completion": "The second chapter is 68 pages long. \n\nFinal answer: <answer>68</answer>",
+          "predicted": 68,
+          "parse_source": "answer_tag",
+          "correct": false
+        },
+        "selected": {
+          "completion": "The second chapter is 68 pages long, and the book has 81 pages in total. Therefore, the number of pages in the second chapter is:\n\n$$\n\\boxed{68}\n$$\n\nThe final answer is:\n\n$$\n\\boxed{68}\n$$",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 740,
+        "prompt": "He had a total of 40 saltwater animals in different aquariums. Each aquarium has 2 animals in it.\nHow many aquariums did he have?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 20,
+        "base": {
+          "completion": "The problem states that there are 40 saltwater animals in different aquariums, and each aquarium has 2 animals. We are to find out how many aquariums there are.\n\nLet $ x $ be the number of aquariums. Each aquarium has 2 animals, so the total number of animals is $ 2x $.\n\nWe are told that the total number of animals is 40. Therefore:\n\n$$\n2x = 40\n$$\n\nSolving for $ x $:\n\n$$\nx = \\frac{40}{2} = 20\n$$\n\nSo the number of aquariums is:\n\n$$\n\\boxed{20}\n$$",
+          "predicted": 20,
+          "parse_source": "boxed",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Each aquarium has 2 animals, and there are 40 saltwater animals in total. Since the number of animals per aquarium is constant, we can divide the total number of animals by the number of animals per aquarium:\n\n$$\n\\frac{40}{2} = 20\n$$\n\nSo, the number of aquariums is:\n\n$$\n\\boxed{20}\n$$\n\nThe final answer is:\n\n$$\n\\boxed{20}\n$$",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 830,
+        "prompt": "Because of the decision Sofia asked the students to suggest specific types of food. If 324 students suggested adding mashed potatoes 374 suggested adding bacon to the menu and 128 suggested adding tomatoes\nHow many students participated in the suggestion of new food items?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 826,
+        "base": {
+          "completion": "<answer>324 + 374 + 128</answer>",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        },
+        "selected": {
+          "completion": "We are given the number of students who suggested adding three different food items:\n\n- 324 students suggested adding mashed potatoes  \n- 374 students suggested adding bacon  \n- 128 students suggested adding tomatoes  \n\nTo find the total number of students who participated, we add these numbers together:\n\n$$\n324 + 374 + 128 = 526\n$$\n\nThe final answer is:\n\n$$\n\\boxed{526}\n$$",
+          "predicted": 526,
+          "parse_source": "boxed",
+          "correct": false
+        }
+      },
+      {
+        "index": 839,
+        "prompt": "In a school there are 902 girls and 811 boys. 44 more girls joined the school.\nHow many girls are there in the school now?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 946,
+        "base": {
+          "completion": "<answer>902 + 44 = 946</answer>",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        },
+        "selected": {
+          "completion": "We are given:\n\n- Number of girls initially: $902$\n- Number of boys initially: $811$\n- Number of girls who joined: $44$\n\nTo find the total number of girls in the school now, we add the initial number of girls to the number of girls who joined:\n\n$$\n902 + 44 = 946\n$$\n\nSo, the final number of girls in the school is:\n\n$$\n\\boxed{946}\n$$",
+          "predicted": 946,
+          "parse_source": "boxed",
+          "correct": true
+        }
+      },
+      {
+        "index": 842,
+        "prompt": "The school is planning a field trip. The school has 24 classrooms. There are 120 students in the school with each classroom having the same number of students. There are 84 seats on each school bus.\nHow many students are in each class?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 5,
+        "base": {
+          "completion": "<answer>8</answer>",
+          "predicted": 8,
+          "parse_source": "answer_tag",
+          "correct": false
+        },
+        "selected": {
+          "completion": "We are given:\n\n- Total number of classrooms = 24  \n- Number of students per classroom = $ \\frac{120}{24} = 5 $  \n- Number of students per bus = 84  \n- Number of students per class = $ \\frac{84}{24} = 3.5 $  \n\nSo, the number of students in each class is:\n\n$$\n\\boxed{3.5}\n$$\n\nFinal answer: <answer>3.5</answer>",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 852,
+        "prompt": "Marco and his dad went strawberry picking. Marco's strawberries weighed 30 pounds. If together their strawberries weighed 47 pounds.\nHow much more did his strawberries weigh than his dad's?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 13,
+        "base": {
+          "completion": "The problem states that Marco's strawberries weigh 30 pounds, and together their total weight is 47 pounds. The question asks how much more Marco's strawberries weigh than his dad's.\n\nSince the total weight is 47 pounds, and Marco's strawberries are 30 pounds, the difference is:\n\n$$\n47 - 30 = 17\n$$\n\nThe final answer is:\n\n$$\n\\boxed{17}\n$$",
+          "predicted": 17,
+          "parse_source": "boxed",
+          "correct": false
+        },
+        "selected": {
+          "completion": "Marco's strawberries weigh **30 pounds**, and together their total weight is **47 pounds**. \n\nSo, the weight of Marco's strawberries is:\n\n$$\n30 \\text{ pounds}\n$$\n\nThe weight of his dad's strawberries is:\n\n$$\n47 \\text{ pounds} - 30 \\text{ pounds} = 17 \\text{ pounds}\n$$\n\nTherefore, the difference in weight is:\n\n$$\n17 \\text{ pounds}\n$$\n\nThe final answer is:\n\n$$\n\\boxed{17}\n$$\n\nInside the <answer> tag:\n\n$$\n\\boxed{17}\n$$",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 860,
+        "prompt": "Baker made 7 cakes and 148 pastries. If he sold 15 cakes and 103 pastries\nHow many pastries would baker still have?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 45,
+        "base": {
+          "completion": "<answer>148 - 15 = 133</answer>",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        },
+        "selected": {
+          "completion": "Baker made 7 cakes and 148 pastries. He sold 15 cakes and 103 pastries.\n\nTo find out how many pastries the baker still has, we subtract the number of pastries sold from the total number of pastries:\n\n$$\n148 - 103 = 45\n$$\n\nSo, the baker still has $\\boxed{45}$ pastries.",
+          "predicted": 45,
+          "parse_source": "boxed",
+          "correct": true
+        }
+      },
+      {
+        "index": 971,
+        "prompt": "A mailman has to give 4 pieces of junk mail to each house in each of the 16 blocks. If there are 17 houses in each block\nHow many pieces of junk mail should he give in total?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 1088,
+        "base": {
+          "completion": "<answer>17 * 4 = 68</answer>",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        },
+        "selected": {
+          "completion": "There are 16 blocks, and each block has 17 houses. The mailman must give 4 pieces of junk mail to each house in each block.\n\nSo, the total number of junk mail pieces is:\n\n$$\n16 \\times 17 \\times 4\n$$\n\nCalculating:\n\n$$\n16 \\times 17 = 272 \\\\\n272 \\times 4 = 1088\n$$\n\nThe final answer is:\n\n$$\n\\boxed{1088}\n$$",
+          "predicted": 1088,
+          "parse_source": "boxed",
+          "correct": true
+        }
+      },
+      {
+        "index": 993,
+        "prompt": "Luke scored 84 points after playing 2 rounds of a trivia game. If he gained the same number of points each round\nHow many points did he score per round?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 42,
+        "base": {
+          "completion": "The problem states that Luke scored 84 points after playing 2 rounds of a trivia game, and he gained the same number of points each round. We are to find how many points he scored per round.\n\nSince he scored 84 points in 2 rounds, the number of points per round is:\n\n$$\n\\frac{84}{2} = 42\n$$\n\nSo the final answer is:\n\n$$\n\\boxed{42}\n$$",
+          "predicted": 42,
+          "parse_source": "boxed",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Luke scored 84 points in 2 rounds. To find the points per round, we divide the total points by the number of rounds:\n\n$$\n\\frac{84}{2} = 42\n$$\n\nSo, Luke scored **42 points per round**. \n\nFinal answer: <answer>42</answer>",
+          "predicted": 42,
+          "parse_source": "answer_tag",
+          "correct": true
+        }
+      }
+    ],
+    "note": "Offline sample of saved paired generations. Parser parity is exhaustively checked; semantic correctness is not independently re-derived by this script."
+  }
+}

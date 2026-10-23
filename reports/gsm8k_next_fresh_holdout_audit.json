@@ -1,0 +1,42 @@
+{
+  "status": "passed",
+  "fresh_test_rows": 1000,
+  "fresh_test_source_index_unique": 1000,
+  "historical_training_split_files_checked": [
+    "data/gsm8k/train.jsonl",
+    "data/gsm8k-formal/train.jsonl",
+    "data/gsm8k-next/train.jsonl",
+    "data/gsm8k-next-fresh/train.jsonl"
+  ],
+  "fresh_test_overlaps_with_historical_training_splits": {},
+  "historical_model_evaluation_reports_checked": [
+    "reports/eval_base.json",
+    "reports/eval_local_small.json",
+    "reports/gsm8k_base_test.json",
+    "reports/gsm8k_base_test2.json",
+    "reports/gsm8k_base_validation.json",
+    "reports/gsm8k_formal_base_test.json",
+    "reports/gsm8k_formal_base_validation.json",
+    "reports/gsm8k_formal_g8_step100_test.json",
+    "reports/gsm8k_formal_g8_step100_validation.json",
+    "reports/gsm8k_formal_g8_step50_validation.json",
+    "reports/gsm8k_group4_validation_step2.json",
+    "reports/gsm8k_group4_validation_step4.json",
+    "reports/gsm8k_selected_test.json",
+    "reports/gsm8k_selected_test2.json",
+    "reports/gsm8k_validation_step4.json",
+    "reports/gsm8k_validation_step8.json",
+    "reports/terminal_checkpoint_smoke_reload.json",
+    "reports/token_budget_smoke_reload.json",
+    "reports/validation_step12.json",
+    "reports/validation_step8.json"
+  ],
+  "historical_evaluation_prediction_rows_scanned": 4908,
+  "fresh_test_overlaps_with_historical_model_evaluation_outputs": [],
+  "prepared_but_superseded_intermediate_test_overlap": {
+    "path": "data/gsm8k-next/test.jsonl",
+    "rows_overlapping": 184,
+    "note": "This intermediate test split had no model-evaluation output and was not used in a training split; its overlap is disclosed for provenance."
+  },
+  "test_sha256": "355bc1cb7de1e61863364ea4790b2223dac405295bc2ad6ee160b2d741ca212e"
+}

@@ -1,87 +1,150 @@
-# Qwen3-0.6B 本地 GRPO 实验
+# Qwen3-0.6B GRPO / RLVR under a small GPU budget
 
-这是一个面向单张 RTX 3060 12GB 的可复现小型实验：在 WSL2 Ubuntu 中使用 TRL `GRPOTrainer`、4-bit NF4 QLoRA、梯度检查点和 Transformers 原生 `generate()`（`use_vllm=False`），以可验证的整数奖励完成 GRPO 更新，并由独立评测进程评估固定留出集。基础模型固定为 `Qwen/Qwen3-0.6B` revision `c1899de289a04d12100db370d81485cdf75e47ca`。包含算术正确性 smoke 和固定 revision 的 GSM8K 多步数学 pilot。
+一个完整、可审计的 Qwen3-0.6B 数学 RLVR 项目：在 WSL2 + RTX 3060 12GB 上用 GRPO、NF4 QLoRA、梯度检查点和 Transformers 原生生成完成可验证奖励训练、checkpoint 选择、独立评测与保存样本诊断。模型固定为 [`Qwen/Qwen3-0.6B`](https://huggingface.co/Qwen/Qwen3-0.6B/tree/c1899de289a04d12100db370d81485cdf75e47ca) revision `c1899de289a04d12100db370d81485cdf75e47ca`；训练生成设为 `use_vllm=False`。
 
-## 目录
+> **Phase C 已完成，group-size 结论：MIXED。** 两个训练 seed 在约 16k 生成 token 预算下的 validation 胜者相反。未启动新的 GPU 训练，没有使用云端 GPU 或付费服务。完整状态见 [`docs/STATUS.md`](docs/STATUS.md)。
 
-- `scripts/audit_env.py`：记录 WSL、GPU、Python、PyTorch、CUDA、Transformers、TRL 等环境信息。
-- `scripts/prepare_data.py`：按固定种子生成 JSONL 训练、验证和最终评测集。
-- `scripts/prepare_gsm8k.py` / `scripts/validate_gsm8k.py`：下载固定 GSM8K revision，生成不重叠子集并校验来源、答案格式与文件 hash。
-- `scripts/build_manifest.py`：刷新源码、数据、报告和运行产物的 SHA-256 与文件大小清单。
-- `scripts/validate_reward.py`：验证答案提取、奖励函数和数据集隔离规则。
-- `scripts/train_grpo.py`：先运行 1 步 smoke，再运行小规模训练；仅在 OOM 时按顺序缩短 completion、降低 generation group，并记录每次配置。
-- `scripts/eval_math.py`：独立进程逐题贪心解码，评估基座模型或已保存的 LoRA adapter。
-- `scripts/audit_run.py`：检查训练日志有限性、真实梯度/参数更新、generation 组配置、checkpoint 内容和 validation 选模结果。
-- `scripts/audit_grpo_run.py`：逐 completion 审计精确正确率、解析率、组内方差、截断和生成 token 预算。
-- `scripts/audit_grpo_run.py`：逐 completion 审计精确正确率、解析率、组内方差、截断和生成 token 预算。
-- `scripts/audit_gsm8k.py`：审计 GSM8K pilot、validation checkpoint 选择和未参与选择的 test2 对照。
-- `requirements-wsl2.txt`：直接依赖版本；运行成功后生成的 `requirements-wsl2.lock.txt` 冻结完整依赖树。
-- `reports/`：环境审计、最小测试和实验结果。
-- `reports/experiment_report.md`：本地 smoke、小规模训练、独立评测和 AutoDL 迁移计划汇总。
-- `reports/artifact_manifest.json`：数据、代码、环境锁、checkpoint 和 adapter 的 SHA-256 与文件大小。
-- `reports/data_split_validation.json`：三份数据与确定性生成结果、跨 split 题目隔离验证。
-- `reports/gsm8k_quality_gate.json`：GSM8K 数据、训练、选模与留出对照质量门结果。
-- `runs/`：checkpoint、最终 adapter、Trainer 日志、显存和吞吐量指标。
-- `data/`：固定的本地 JSONL 数据。
+## 研究问题
 
-## WSL2 安装与运行
+在固定生成 token 预算下，把 GRPO 每个 prompt 的采样组从 4 条 completion 增加到 8 条，能否更有效地形成组内正确性信号？更大的组可能更常同时包含正确与错误答案，但在同样 token 预算下会减少训练 prompt 覆盖和优化更新数。实验比较这两种预算分配，并分析“组内信号”是否真的对应更好的 validation 表现。
 
-在 WSL Ubuntu 终端进入 Windows 工作区挂载目录（如 `/mnt/e/强化学习项目`）：
+### 结果图
+
+![Phase C 两个 seed 的 validation 结果；赢家反转](reports/figures/phasec_validation.svg)
+
+![奖励方差组、正误混合组和每千 token 信号密度](reports/figures/phasec_reward_signal.svg)
+
+![SVAMP paired test 与推理成本](reports/figures/phasec_svamp_cost.svg)
+
+图表由已保存的 JSON 结果通过 `scripts/plot_phasec_summary.py` 离线生成，不会重新运行模型或改变实验分数。
+
+## GRPO 与奖励实现
+
+对一个 prompt 采样 `G` 条答案，固定 verifier 分别给出奖励 `r_i`，再按组内奖励标准化计算优势：
+
+```text
+A_i = (r_i - mean(r_group)) / (std(r_group) + epsilon)
+```
+
+TRL 使用 clipped policy objective 更新 LoRA 参数；本项目没有 PPO 的单独 value/critic 网络。组内奖励方差为 0 时，该组没有相对优势信号。增加 `G` 可以增加同一题出现不同答案的机会，但会占用更多生成 token。
+
+Phase C 使用 `exact_format` 奖励：verifier 可解析且答案正确得 1 分；唯一、合规的 `<answer>整数</answer>` 格式可额外得 0.05 分；错误但格式合规的整数仅得 0.05 分；无法解析得 0 分。因而“奖励有方差组”不必然包含正确 completion；报告还单独统计至少一对正确/错误 completion 同组出现的“正确性混合组”。历史 `distance_shaped` 实验保留为负结果，不覆盖或改写。
+
+## 实验设计与环境
+
+- **硬件：** WSL2 Ubuntu 24.04.3，NVIDIA GeForce RTX 3060 12GB。运行前记录 GPU 基线；训练同时记录 PyTorch allocated/reserved 与 `nvidia-smi` 整卡峰值。
+- **软件：** Python 3.12.3、PyTorch 2.5.1+cu121（PyTorch CUDA runtime 12.1）、Transformers 4.57.3、TRL 1.16.0、PEFT 0.21.2、Accelerate 1.15.0、bitsandbytes 0.50.2；依赖锁见 [`requirements-wsl2.lock.txt`](requirements-wsl2.lock.txt)。驱动和运行时来源见 [`reports/environment.json`](reports/environment.json)。
+- **训练：** NF4 + double quant，BF16，LoRA `r=8 / alpha=16 / dropout=0`；目标模块为 attention 与 MLP projection；gradient checkpointing 开启；每个设备一个 prompt；`gradient_accumulation_steps=G`；学习率 `5e-5`，`beta=0`，group reward scaling；prompt 与 completion 上限均为 256 token。
+- **生成：** Transformers 原生 rollout，不使用 vLLM；`temperature=0.9`、`top_p=1.0`、`top_k=0`；训练和评测均关闭 Qwen thinking mode。
+- **预算：** 训练在完整 generation group 结束后触及 16,000 completion-token 目标并停止。因此实际 token 数有组边界超额；不同 group size 的生成 token 接近，但更新数和 prompt 数不相等。
+- **评测：** 固定 verifier；greedy decoding，`max_new_tokens=192`，thinking disabled；checkpoint 只按 locked validation 选择。最终 test 只评估所选 adapter 对 Base 一次。
+- **隔离：** GSM8K 固定 revision、source row 与文件 hash；SVAMP 固定仓库 commit、source hash 与输出 hash。所有 train/validation/test overlap 和历史模型输出重叠检查均保存在 `reports/`。本地审计不能证明公开题目未出现在基础模型预训练数据中。
+
+## Phase C 冻结结果
+
+### 固定 token 预算下的 group-size 结果
+
+| Seed | 组大小 | Validation exact match | 训练生成 tokens | 更新 / prompts | 训练生成 tok/s | 整卡训练峰值 |
+|---|---:|---:|---:|---:|---:|---:|
+| 1 | Group4 | 139/500 (27.8%) | 16,097 | 26 / 26 | 68.67 | 3,968 MiB |
+| 1 | Group8 | **176/500 (35.2%)** | 16,354 | 13 / 13 | 106.85 | 4,399 MiB |
+| 2 | Group4 | **183/500 (36.6%)** | 16,160 | 25 / 25 | 69.57 | 4,070 MiB |
+| 2 | Group8 | 163/500 (32.6%) | 16,415 | 13 / 13 | 109.29 | 4,506 MiB |
+
+seed 1 validation 选中 `runs/gsm8k-phasec-exact-g8-16k/attempt-01/trainer/checkpoint-13`；seed 2 选中 `runs/gsm8k-phasec-seed2-g4-16k/attempt-01/trainer/checkpoint-25`。每个 seed 的两组生成预算相差约 1.6%，但更新数约减半，不能把该对照描述为总计算量匹配。两个 seed 的赢家相反，结论为 **MIXED**；不支持稳定声称 Group8 或 Group4 更优。
+
+### 独立测试与推理成本
+
+| 一次性测试 | Base | Validation-selected adapter | 配对结果 | 生成 tokens（Base / Adapter） | wall time（Base / Adapter） | 推理整卡峰值（Base / Adapter） |
+|---|---:|---:|---|---:|---:|---:|
+| Seed 1 · GSM8K-train-source 1,000题 | 99/1,000 (9.9%) | Group8: 354/1,000 (35.4%) | McNemar p=2.12e-52；Base-only 32，Adapter-only 287 | 52,660 / 134,062 (2.55×) | 16.2 / 74.1 min (4.58×) | 3,485 / 3,504 MiB |
+| Seed 2 · SVAMP 1,000题 | 267/1,000 (26.7%) | Group4: 675/1,000 (67.5%) | McNemar p=2.07e-85；Base-only 46，Adapter-only 454 | 35,598 / 104,482 (2.94×) | 12.2 / 61.6 min (5.06×) | 4,518 / 4,743 MiB |
+
+两次 test 都只比较各自 validation 选中的 adapter 与 Base；没有在 test 上直接比较 Group4 与 Group8。Selected adapters 的准确率更高，但生成 token 更多、wall time 更长、token/s 更低，不能称为推理效率提升。上述测试已消费，不用于新候选的 checkpoint 选择或调参。
+
+### 组内信号机制诊断
+
+| Seed | Group4 正确性混合组 | Group8 正确性混合组 | Group4 / Group8 混合组每千 token |
+|---|---:|---:|---:|
+| 1 | 15/26 (57.7%) | 11/13 (84.6%) | 0.932 / 0.673 |
+| 2 | 14/25 (56.0%) | 10/13 (76.9%) | 0.866 / 0.609 |
+
+两 seed 的 Group8 正确性混合组比例更高，但绝对混合组数更少，且每千 token 的混合组密度更低。这是 verifier 信号密度代理，不是有效梯度、学习效率或因果收益。两个 seed 中 Group8 使用的 13 道 prompt 都包含在 Group4 覆盖内；共享 prompt 上的 rollout 样本准确率差分别为 +1.0pp 与 −1.0pp，方向也相反。详见 [`reports/phasec_seed2_diagnostic_report.md`](reports/phasec_seed2_diagnostic_report.md)。
+
+### 保存预测的 post-hoc 输出长度分析
+
+`reports/posthoc_prediction_length_audit.md` 从已保存的逐题输出离线统计长度、parse failures、正确性转换和聚合成本。它被明确标注为 **post-hoc**，不会修改原始准确率、答案解析器、测试阈值或 checkpoint 选择。
+
+- Adapter 无法解析输出：Seed 1 GSM8K 为 260/1,000，Base 为 273；Seed 2 SVAMP 为 114/1,000，Base 为 167。
+- Qwen tokenizer 长度是对保存的 decoded text 重新 tokenize，不是保存过的原始 generation token IDs；逐题 latency 也未记录。因此报告把字符、空白分词和重分词长度与真实聚合生成 token / wall time 分开。
+- Adapter 的错误输出仍明显更长：Seed 1 重分词平均长度为正确 116.4、错误 142.4；Seed 2 为正确 93.7、错误 123.9。输出更长与本轮准确率提升同时出现，但不是提升的因果解释。
+
+## 负结果与限制
+
+- 100-update `distance_shaped` 正式实验的选中 adapter 在已消费的 1,063 题 test 上为 77/1,063，低于 Base 95/1,063。旧 rollout 中 89/100 组没有一个正确答案，其中 85 组仍因错误答案距离分而出现 reward variance；非零奖励方差不等于有效正确性信号。
+- Fresh split 的 exact-format validation 为 190/500，distance-shaped 为 183/500，配对差异不显著（McNemar p=0.547）；该实验不证明某种 reward 稳定更好。
+- Phase C 只有两个训练 seed，seed 结果互相矛盾。逐题 McNemar/bootstrap 描述题目层不确定性，不能代替跨训练 seed 方差估计。
+- 测试报告中的 selected-vs-Base 提升不能归因为 group size，因为没有测试集上的 Group4-vs-Group8 成对比较；SVAMP 公开多年，也无法排除预训练污染。
+- Adapter 在两份 Phase C test 上分别用了 2.55× 和 2.94× tokens、4.58× 和 5.06× 时间。该实验不构成成本归一化后的能力结论。
+- 公开准确率严格保留原 exact-match/parser 结果；事后读者可发现模型有时算对但答案格式或表达式不合规，不能据此悄悄重算历史分数。
+
+## 离线 smoke 与复现
+
+在 WSL2 Ubuntu 中：
 
 ```bash
 python3 -m venv ~/.venvs/qwen3-grpo
-~/.venvs/qwen3-grpo/bin/python -m pip install --upgrade pip
-# requirements-wsl2.txt 中的 PyTorch wheel 使用 CUDA 12.1 runtime，和已审计的 WSL NVIDIA 驱动兼容。
-~/.venvs/qwen3-grpo/bin/python -m pip install -r requirements-wsl2.txt --extra-index-url https://download.pytorch.org/whl/cu121
-# 后续复现可直接使用完整冻结依赖树：
-# ~/.venvs/qwen3-grpo/bin/python -m pip install -r requirements-wsl2.lock.txt --extra-index-url https://download.pytorch.org/whl/cu121
-~/.venvs/qwen3-grpo/bin/python scripts/audit_env.py --output reports/environment.json
-~/.venvs/qwen3-grpo/bin/python scripts/check_runtime.py
-~/.venvs/qwen3-grpo/bin/python scripts/prepare_data.py
-~/.venvs/qwen3-grpo/bin/python scripts/validate_reward.py
-~/.venvs/qwen3-grpo/bin/python scripts/train_grpo.py --profile smoke --run-dir runs/smoke-repro
-~/.venvs/qwen3-grpo/bin/python scripts/train_grpo.py --profile small --run-dir runs/local-small-repro
-~/.venvs/qwen3-grpo/bin/python scripts/eval_math.py --tag base --output reports/eval_base.json
-~/.venvs/qwen3-grpo/bin/python scripts/eval_math.py --adapter runs/local-small-repro/attempt-01/trainer/checkpoint-8 --eval-data data/validation.jsonl --tag step8-validation --output reports/validation_step8_repro.json
-~/.venvs/qwen3-grpo/bin/python scripts/eval_math.py --adapter runs/local-small-repro/attempt-01/trainer/checkpoint-12 --eval-data data/validation.jsonl --tag step12-validation --output reports/validation_step12_repro.json
-~/.venvs/qwen3-grpo/bin/python scripts/eval_math.py --adapter runs/local-small-repro/attempt-01/final_adapter --tag local-small --output reports/eval_local_small.json
-~/.venvs/qwen3-grpo/bin/python scripts/audit_run.py --smoke-run runs/smoke-repro --small-run runs/local-small-repro --step8-validation reports/validation_step8_repro.json --step12-validation reports/validation_step12_repro.json --output-dir reports/repro
+source ~/.venvs/qwen3-grpo/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements-wsl2.lock.txt --extra-index-url https://download.pytorch.org/whl/cu121
+
+# CPU-only smoke：单元测试与确定性工具环境 demo，不加载 Qwen 或启动训练
+python -m unittest discover -s tests -v
+python -m agent_rl.demo
+
+# 离线复核已保存结果和图表
+python scripts/verify_manifest.py --portable-only
+python scripts/plot_phasec_summary.py
+python scripts/audit_prediction_lengths.py \
+  --case seed1_gsm8k reports/gsm8k_phasec_base_test.json reports/gsm8k_phasec_selected_test.json \
+  --case seed2_svamp reports/svamp_phasec_seed2_base_test.json reports/svamp_phasec_seed2_selected_test.json \
+  --output /tmp/posthoc-audit.json --markdown /tmp/posthoc-audit.md
 ```
 
-GSM8K 子集由 `scripts/prepare_gsm8k.py` 固定 revision 和 seed 生成；复跑训练使用新的空目录。来源、MIT 许可、哈希和本轮实测结果见 [data/gsm8k/README.md](data/gsm8k/README.md) 与 [实验报告](reports/experiment_report.md)。
-
-本地 GSM8K 采样组 pilot 可用以下命令复现。test2 只在 validation 选好 checkpoint 后用于最终对照：
+要重跑真实 GRPO correctness smoke，需本地 CUDA GPU 与下载模型；本归档期间没有重跑此命令：
 
 ```bash
-~/.venvs/qwen3-grpo/bin/python scripts/prepare_gsm8k.py
-~/.venvs/qwen3-grpo/bin/python scripts/validate_gsm8k.py
-~/.venvs/qwen3-grpo/bin/python scripts/train_grpo.py --profile small --max-steps 8 --save-steps 4 --num-generations 2 --max-completion-length 160 --prompt-token-limit 192 --seed 20261023 --train-data data/gsm8k/train.jsonl --run-dir runs/gsm8k-pilot-repro
-~/.venvs/qwen3-grpo/bin/python scripts/eval_math.py --adapter runs/gsm8k-pilot-repro/attempt-01/trainer/checkpoint-4 --eval-data data/gsm8k/validation.jsonl --tag gsm8k-group2-step4-val --output reports/gsm8k_group2_step4_val.json --max-new-tokens 192
-~/.venvs/qwen3-grpo/bin/python scripts/eval_math.py --adapter runs/gsm8k-pilot-repro/attempt-01/trainer/checkpoint-8 --eval-data data/gsm8k/validation.jsonl --tag gsm8k-group2-step8-val --output reports/gsm8k_group2_step8_val.json --max-new-tokens 192
-~/.venvs/qwen3-grpo/bin/python scripts/train_grpo.py --profile small --max-steps 4 --save-steps 2 --num-generations 4 --max-completion-length 160 --prompt-token-limit 192 --seed 20261023 --train-data data/gsm8k/train.jsonl --run-dir runs/gsm8k-group4-pilot-repro
-~/.venvs/qwen3-grpo/bin/python scripts/eval_math.py --adapter runs/gsm8k-group4-pilot-repro/attempt-01/trainer/checkpoint-2 --eval-data data/gsm8k/validation.jsonl --tag gsm8k-group4-step2-val --output reports/gsm8k_group4_step2_val.json --max-new-tokens 192
-~/.venvs/qwen3-grpo/bin/python scripts/eval_math.py --adapter runs/gsm8k-group4-pilot-repro/attempt-01/trainer/checkpoint-4 --eval-data data/gsm8k/validation.jsonl --tag gsm8k-group4-step4-val --output reports/gsm8k_group4_step4_val.json --max-new-tokens 192
-~/.venvs/qwen3-grpo/bin/python scripts/eval_math.py --tag gsm8k-base-test2 --eval-data data/gsm8k/test2.jsonl --output reports/gsm8k_base_test2.json --max-new-tokens 192
-~/.venvs/qwen3-grpo/bin/python scripts/eval_math.py --adapter runs/gsm8k-group4-pilot-repro/attempt-01/trainer/checkpoint-4 --eval-data data/gsm8k/test2.jsonl --tag gsm8k-selected-test2 --output reports/gsm8k_selected_test2.json --max-new-tokens 192
-~/.venvs/qwen3-grpo/bin/python scripts/audit_gsm8k.py --group2-run runs/gsm8k-pilot-repro --group4-run runs/gsm8k-group4-pilot-repro --group2-step4-validation reports/gsm8k_group2_step4_val.json --group2-step8-validation reports/gsm8k_group2_step8_val.json --group4-step2-validation reports/gsm8k_group4_step2_val.json --group4-step4-validation reports/gsm8k_group4_step4_val.json --base-test reports/gsm8k_base_test2.json --selected-test reports/gsm8k_selected_test2.json --output-dir reports/gsm8k-repro
+python scripts/audit_env.py --output reports/environment.json
+python scripts/check_runtime.py
+python scripts/validate_reward.py
+python scripts/train_grpo.py --profile smoke --run-dir runs/smoke-repro
 ```
 
-模型首次运行时从 Hugging Face 下载到默认 HF cache。实验本身不调用云端 GPU。为了便于复现，可在运行前设置 `HF_HOME` 指向持久磁盘目录。
+Phase C 训练协议复现示例（以下命令会启动本地 GPU 训练；此处仅作可复现说明，本次归档未执行）：
 
-## 奖励与指标
+```bash
+python scripts/train_grpo.py --profile formal --num-generations 4 --max-completion-length 256 --prompt-token-limit 256 --max-generated-tokens 16000 --seed 20261025 --learning-rate 5e-5 --reward-mode exact_format --train-data data/gsm8k-next-fresh/train.jsonl --run-dir runs/repro-phasec-seed1-g4
+python scripts/train_grpo.py --profile formal --num-generations 8 --max-completion-length 256 --prompt-token-limit 256 --max-generated-tokens 16000 --seed 20261025 --learning-rate 5e-5 --reward-mode exact_format --train-data data/gsm8k-next-fresh/train.jsonl --run-dir runs/repro-phasec-seed1-g8
+python scripts/eval_math.py --adapter runs/repro-phasec-seed1-g4/attempt-01/final_adapter --eval-data data/gsm8k-phasec/validation.jsonl --tag repro-seed1-g4-validation --output reports/repro-seed1-g4-validation.json --max-new-tokens 192
+python scripts/eval_math.py --adapter runs/repro-phasec-seed1-g8/attempt-01/final_adapter --eval-data data/gsm8k-phasec/validation.jsonl --tag repro-seed1-g8-validation --output reports/repro-seed1-g8-validation.json --max-new-tokens 192
+```
 
-答案校验只接受唯一 `<answer>整数</answer>` 或唯一 `\boxed{整数}` 中的整数。`distance_shaped`历史奖励在此基础上加格式和数值距离分；新增`exact_format`对照只给精确答案1分、指定XML格式额外0.05分，不按错误答案距离排序。两种模式都有单测。`--max-generated-tokens`可令训练在完成当前组后停止，使不同采样组大小的比较按真实生成token对齐，并在summary记录目标与超额。新的奖励消融结果见`reports/experiment_report.md`；运行完成前不将任何候选当作已验证改进。
+Seed 2 使用 `--seed 20261026`，validation 文件换成 `data/gsm8k-replication/validation.jsonl`。先按 locked validation 规则选 candidate；不可使用已消费的 Phase C test 对新候选调参。训练可能产生不同的组边界超额与更新数，需以新 run summary 如实报告。
 
-每次成功运行保存实际优化步数、LoRA 可训练参数和权重更新量、TRL 原始 log history/reward、训练耗时、step/s、生成 completion/s、PyTorch 峰值 allocated/reserved 显存，以及 `nvidia-smi` 采样到的整卡峰值显存。报告需同时保留桌面进程的显存基线，不能将 WSL 进程显存与整卡显存混为一谈。
+## 目录与产物
 
-## AutoDL 单张 24GB 迁移
+- `scripts/`：环境审计、数据准备、奖励、GRPO 训练、独立评测、逐题配对、rollout 诊断、manifest 和图表生成。
+- `tests/`：CPU 工具环境、runner 与 post-hoc 预测审计单元测试；数据隔离和 reward 验证结果保存在 `reports/`。
+- `data/`：固定 splits 与 source manifests；数据许可和来源见 [`DATA_NOTICE.md`](DATA_NOTICE.md) 与每个数据目录的 README/LICENSE。
+- `runs/`：训练日志、奖励历史、生成 completion parquet、配置和吞吐/显存摘要。大模型/optimizer/checkpoint 二进制不会提交到 Git。
+- `reports/`：环境、预注册/选择、原始逐题预测、paired tests、训练曲线、post-hoc 诊断和报告。
+- [`reports/artifact_manifest.json`](reports/artifact_manifest.json)：公开/可分发文件与本地权重文件分开记录 SHA-256 和字节数；用 `scripts/verify_manifest.py` 检查。
+- `agent_rl/`：未来 Agent RL 的 CPU-only 确定性 tool environment 和 benchmark runner。**没有 Phase D 模型训练。**
 
-先用新鲜validation确定奖励与训练配置，再在实例中记录 GPU 型号/驱动，按该驱动安装 PyTorch CUDA wheel，创建锁定环境并跑 reward 测试与 1 步 smoke。24GB 卡先用 NF4 QLoRA、gradient checkpointing、no-vLLM、group 8、prompt 256、completion 256 做单步 profile；确认余量后运行500步正式训练。旧官方test已在本地实验使用，后续正式运行不能再用它选模。`data/gsm8k-next-fresh/` 是新准备的独立轮次：从固定revision的GSM8K train split剩余行中排除既有1,500 train与500 validation，再采样新train/validation/test（1,500/500/1,000），source index校验通过。每50步保存checkpoint、每100步在validation评估。OOM时按代码回退顺序逐项缩短completion、降低group、降低prompt；每次记录配置与显存。
+## 数据、模型和分发范围
 
-资源计划以单张 RTX 4090 24GB 为例：AutoDL 官方页面于2026-10-23列价为¥1.88/GPU小时，估计总用卡不超过2小时，硬上限4小时（GPU租用费最多¥7.52）；创建实例前重新核对当日价格、计费粒度和其他费用。该计划不是租卡授权，任何付费实例仍须先得到用户明确批准。
+GSM8K pinned dataset card 声明 MIT；SVAMP 固定 commit 的 license 是 MIT；本仓库保留相应 notice。Qwen3-0.6B 上游模型仓库声明 Apache-2.0，但模型与 LoRA/checkpoint 权重不在 Git 中，使用者首次训练/推理时从固定 revision 下载。来源和边界见 [`DATA_NOTICE.md`](DATA_NOTICE.md)。项目没有额外对所有代码或派生产物作统一 license 声明。
 
-## 上游接口依据
+## AutoDL 后续计划
 
-- [TRL GRPOTrainer 文档](https://huggingface.co/docs/trl/grpo_trainer)
-- [Qwen3-0.6B 模型卡](https://huggingface.co/Qwen/Qwen3-0.6B)
-- [Qwen3 推理与 thinking 开关说明](https://huggingface.co/Qwen/Qwen3-0.6B)
+AutoDL 单张 24GB GPU 计划见 [`reports/formal_training_plan.md`](reports/formal_training_plan.md)，当前暂停且不是本项目的云端训练结果或租用授权。GSM8K 官方 train 仅剩 23 条未用 source rows；SVAMP 已用于 Phase C seed 2 test。正式运行前必须选择新 validation/test 并完成数据审计。没有创建 AutoDL 实例，也没有使用任何付费服务。

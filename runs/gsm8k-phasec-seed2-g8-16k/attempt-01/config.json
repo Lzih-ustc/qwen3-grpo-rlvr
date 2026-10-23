@@ -1,0 +1,8 @@
+{
+  "prompt_token_limit": 256,
+  "max_completion_length": 256,
+  "num_generations": 8,
+  "gradient_accumulation_steps": 8,
+  "reward_mode": "exact_format",
+  "max_generated_tokens": 16000
+}

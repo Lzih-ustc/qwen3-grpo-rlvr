@@ -1,0 +1,32 @@
+{
+  "status": "paired_bootstrap_complete",
+  "contrast": "selected_minus_base",
+  "metric": "exact_match_accuracy",
+  "left": "selected",
+  "right": "base",
+  "result": {
+    "left_tag": "phasec_seed2_group4_validation",
+    "right_tag": "phasec_seed2_base_validation",
+    "left_file": "reports/gsm8k_phasec_seed2_g4_validation.json",
+    "right_file": "reports/gsm8k_phasec_seed2_base_validation.json",
+    "eval_data_sha256": "013d47a81e741e350ae097bcc6913e477bc89f5403f778c396bdc85689247b88",
+    "eval_count": 500,
+    "left_accuracy": 0.366,
+    "right_accuracy": 0.098,
+    "left_minus_right_accuracy_percentage_points": 26.8,
+    "paired_item_bootstrap_95_ci_percentage_points": [
+      22.400000000000002,
+      31.4
+    ],
+    "bootstrap_replicates": 20000,
+    "bootstrap_seed": 20261026,
+    "paired_outcomes": {
+      "both_correct": 30,
+      "left_only_correct": 153,
+      "right_only_correct": 19,
+      "both_wrong": 298
+    },
+    "exact_mcnemar_two_sided_p": 3.329424957524123e-27,
+    "interpretation_scope": "item-level uncertainty conditional on these two saved model outputs; does not estimate training-seed variability"
+  }
+}

@@ -1,10 +1,44 @@
-# Local Python environment and caches
+# Python environments, bytecode, and test/tool caches
 .venv/
+venv/
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+.ipynb_checkpoints/
 
-# Keep run metrics and reports in Git, but leave model and optimizer binaries local.
+# Local credentials and machine-only configuration
+.env
+.env.*
+!.env.example
+
+# Hugging Face / PyTorch / experiment tracking caches
+.cache/huggingface/
+.cache/torch/
+cache/
+wandb/
+mlruns/
+
+# Large model, adapter, optimizer, and full Trainer checkpoint binaries
+*.safetensors
+*.pt
+*.pth
+*.gguf
+*.bin
+*.ckpt
+*.onnx
+**/pytorch_model*.bin
+**/model*.bin
 runs/**/trainer/checkpoint-*/
 runs/**/final_adapter/
 runs/**/trainer/README.md
+
+# Operating-system/editor noise
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/

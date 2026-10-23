@@ -1,0 +1,85 @@
+{
+  "status": "passed",
+  "run_dir": "runs/gsm8k-phasec-seed2-g4-16k",
+  "git": {
+    "commit": "900f147b0d73edaa7cdeafbb50690258ad142179",
+    "working_tree_dirty": true
+  },
+  "reward_mode": "exact_format",
+  "train_data": {
+    "path": "data/gsm8k-next-fresh/train.jsonl",
+    "count": 1500,
+    "sha256": "b2a024bc82427709d5835c9f42091a4a5441111805afdf3e822774c40fe42dd4"
+  },
+  "optimizer_updates": 25,
+  "actual_generated_tokens": 16160,
+  "training_budget": {
+    "type": "generated_completion_tokens",
+    "target": 16000,
+    "actual": 16160,
+    "reached": true,
+    "overshoot_tokens": 160
+  },
+  "train_seconds": 232.27980825399982,
+  "completion_tokens_per_second": 69.5712645945054,
+  "torch_peak_allocated_mib": 1305.93017578125,
+  "torch_peak_reserved_mib": 1474.0,
+  "whole_gpu_peak_used_mib": 4070.0,
+  "checkpoints": [
+    "runs/gsm8k-phasec-seed2-g4-16k/attempt-01/trainer/checkpoint-25"
+  ],
+  "oom_fallbacks": [],
+  "rollout_analysis": {
+    "completions": 100,
+    "generation_groups": 25,
+    "group_size": 4,
+    "unique_prompts": 25,
+    "parse_rate": 0.73,
+    "answer_tag_rate": 0.22,
+    "exact_match_rate": 0.36,
+    "correct_completions": 36,
+    "correct_completions_per_group": {
+      "0": 9,
+      "1": 4,
+      "2": 6,
+      "3": 4,
+      "4": 2
+    },
+    "all_wrong_groups": 9,
+    "all_correct_groups": 2,
+    "groups_with_any_correct": 16,
+    "groups_with_mixed_correct_and_incorrect": 14,
+    "nonzero_reward_variance_groups": 19,
+    "nonzero_reward_variance_groups_without_any_correct": 5,
+    "nonzero_reward_variance_groups_with_all_correct": 0,
+    "reward_variance_effective_group_rate": 0.76,
+    "correctness_mixed_group_rate": 0.56,
+    "mean_reward": 0.3709999958053231,
+    "mean_reward_on_correct": 1.012499988079071,
+    "mean_reward_on_incorrect": 0.010156250151339918,
+    "mean_within_group_reward_std": 0.2639943957655031,
+    "mean_group_reward_std_with_correct": 0.4053067491963017,
+    "mean_group_reward_std_without_correct": 0.012772434110749974,
+    "zero_variance_groups": 6,
+    "zero_gradient_steps": 6,
+    "logged_group_completion_tokens_complete": true,
+    "logged_completion_tokens_sum": 16160,
+    "run_summary_completion_tokens": 16160,
+    "group_tokens_by_kind": {
+      "all_groups": 16160,
+      "reward_variable_groups": 11385,
+      "correctness_mixed_groups": 7745,
+      "reward_variable_all_wrong_groups": 3640,
+      "reward_variable_all_correct_groups": 0,
+      "all_wrong_groups": 7599,
+      "all_correct_groups": 816
+    },
+    "tokens_per_reward_variable_group": 599.2105263157895,
+    "tokens_per_correctness_mixed_group": 553.2142857142857,
+    "correctness_mixed_groups_per_1000_tokens": 0.8663366336633663,
+    "clipped_updates": 10,
+    "mean_completion_clipped_fraction": 0.23,
+    "estimated_clipped_completions": 23,
+    "mean_absolute_error_for_parsed_incorrect": 7565.108108108108
+  }
+}

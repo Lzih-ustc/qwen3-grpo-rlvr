@@ -1,0 +1,55 @@
+{
+  "status": "paired_test_audit_passed",
+  "selection_json": "reports/gsm8k_phasec_seed2_selection.json",
+  "selected_reward_mode": "exact_format",
+  "selected_candidate_id": "group4",
+  "selected_group_size": 4,
+  "selected_adapter": "runs/gsm8k-phasec-seed2-g4-16k/attempt-01/final_adapter",
+  "test_sha256": "5529aa437b2c7be1f101b3a307a3eddbf07021cbda892af8b4c0320fc2b38251",
+  "eval_count": 1000,
+  "decode": {
+    "do_sample": false,
+    "max_new_tokens": 192,
+    "thinking": false
+  },
+  "base": {
+    "correct_count": 267,
+    "accuracy": 0.267,
+    "wilson_95_ci": [
+      0.24051036845887877,
+      0.29527290099538994
+    ],
+    "parse_rate": 0.833,
+    "generated_tokens": 35598,
+    "tokens_per_second": 48.74592319559975,
+    "elapsed_seconds": 730.2764552669996,
+    "torch_peak_allocated_mib": 819.98828125,
+    "torch_peak_reserved_mib": 872.0,
+    "whole_gpu_peak_memory_used_mib": 4518.0
+  },
+  "selected": {
+    "correct_count": 675,
+    "accuracy": 0.675,
+    "wilson_95_ci": [
+      0.6453485364754667,
+      0.703312098054589
+    ],
+    "parse_rate": 0.886,
+    "generated_tokens": 104482,
+    "tokens_per_second": 28.256355749677017,
+    "elapsed_seconds": 3697.64597125,
+    "torch_peak_allocated_mib": 819.98828125,
+    "torch_peak_reserved_mib": 894.0,
+    "whole_gpu_peak_memory_used_mib": 4743.0
+  },
+  "accuracy_delta_percentage_points": 40.800000000000004,
+  "paired_outcomes": {
+    "both_correct": 221,
+    "base_only_correct": 46,
+    "selected_only_correct": 454,
+    "both_wrong": 279
+  },
+  "exact_mcnemar_two_sided_p": 2.07333152887442e-85,
+  "selection_used_test": false,
+  "test_opened_after_selection": true
+}

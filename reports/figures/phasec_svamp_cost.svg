@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="850" viewBox="0 0 1440 850" role="img" aria-labelledby="title desc">
+<title id="title">SVAMP selected-adapter result and inference costs</title>
+<desc id="desc">One-time external paired test for seed 2: base versus validation-selected Group4 adapter, with paired correctness outcomes and measured inference costs.</desc>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<style>text{font-family:Inter,Segoe UI,Arial,sans-serif} .mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}</style>
+<text x="48" y="52" font-size="28" font-weight="700" fill="#152238" text-anchor="start">Seed 2  |  SVAMP external paired test and inference cost</text>
+<text x="48" y="83" font-size="16" font-weight="400" fill="#617089" text-anchor="start">1,000 fixed test items  ·  selected candidate: Group4  ·  paired McNemar p = 2.07e−85</text>
+<rect x="42" y="116" width="470" height="666" rx="16" fill="#f6f8fc" stroke="#dbe3ef"/>
+<text x="70" y="158" font-size="21" font-weight="700" fill="#152238" text-anchor="start">Exact match</text>
+<text x="70" y="227" font-size="16" font-weight="600" fill="#152238" text-anchor="start">Base</text>
+<rect x="180" y="206" width="250" height="24" rx="6" fill="#e5eaf2"/>
+<rect x="180" y="206" width="66.75" height="24" rx="6" fill="#64748b"/>
+<text x="442" y="227" font-size="15" font-weight="700" fill="#64748b" text-anchor="start">267/1,000  (26.7%)</text>
+<text x="70" y="305" font-size="16" font-weight="600" fill="#152238" text-anchor="start">Selected G4</text>
+<rect x="180" y="284" width="250" height="24" rx="6" fill="#e5eaf2"/>
+<rect x="180" y="284" width="168.75" height="24" rx="6" fill="#5b4bdb"/>
+<text x="442" y="305" font-size="15" font-weight="700" fill="#5b4bdb" text-anchor="start">675/1,000  (67.5%)</text>
+<rect x="70" y="305" width="400" height="48" rx="9" fill="#f0edff"/>
+<text x="88" y="335" font-size="15" font-weight="700" fill="#4433b6" text-anchor="start">Paired accuracy change: +40.8 percentage points</text>
+<text x="70" y="403" font-size="17" font-weight="700" fill="#152238" text-anchor="start">Question-level correctness transitions</text>
+<text x="70" y="457" font-size="15" font-weight="600" fill="#152238" text-anchor="start">Both correct</text>
+<rect x="185" y="438" width="225" height="22" rx="5" fill="#e5eaf2"/>
+<rect x="185" y="438" width="99.45" height="22" rx="5" fill="#8995a8"/>
+<text x="426" y="457" font-size="15" font-weight="700" fill="#8995a8" text-anchor="start">221</text>
+<text x="70" y="524" font-size="15" font-weight="600" fill="#152238" text-anchor="start">Base only</text>
+<rect x="185" y="505" width="225" height="22" rx="5" fill="#e5eaf2"/>
+<rect x="185" y="505" width="20.7" height="22" rx="5" fill="#64748b"/>
+<text x="426" y="524" font-size="15" font-weight="700" fill="#64748b" text-anchor="start">46</text>
+<text x="70" y="591" font-size="15" font-weight="600" fill="#152238" text-anchor="start">Adapter only</text>
+<rect x="185" y="572" width="225" height="22" rx="5" fill="#e5eaf2"/>
+<rect x="185" y="572" width="204.3" height="22" rx="5" fill="#16803c"/>
+<text x="426" y="591" font-size="15" font-weight="700" fill="#16803c" text-anchor="start">454</text>
+<text x="70" y="658" font-size="15" font-weight="600" fill="#152238" text-anchor="start">Both wrong</text>
+<rect x="185" y="639" width="225" height="22" rx="5" fill="#e5eaf2"/>
+<rect x="185" y="639" width="125.55" height="22" rx="5" fill="#b42318"/>
+<text x="426" y="658" font-size="15" font-weight="700" fill="#b42318" text-anchor="start">279</text>
+<text x="70" y="742" font-size="13" font-weight="400" fill="#617089" text-anchor="start">Test is consumed; this compares selected G4 against Base, not G4 against G8.</text>
+<rect x="540" y="116" width="860" height="666" rx="16" fill="#ffffff" stroke="#dbe3ef"/>
+<text x="575" y="158" font-size="21" font-weight="700" fill="#152238" text-anchor="start">Measured cost for the same 1,000 questions</text>
+<text x="575" y="190" font-size="14" font-weight="400" fill="#617089" text-anchor="start">Greedy decoding · max_new_tokens=192 · thinking disabled</text>
+<text x="575" y="242" font-size="14" font-weight="700" fill="#617089" text-anchor="start">Metric</text>
+<text x="895" y="242" font-size="14" font-weight="700" fill="#617089" text-anchor="start">Base</text>
+<text x="1068" y="242" font-size="14" font-weight="700" fill="#617089" text-anchor="start">Selected G4</text>
+<text x="1236" y="242" font-size="14" font-weight="700" fill="#617089" text-anchor="start">Adapter / Base</text>
+<line x1="575" y1="258" x2="1365" y2="258" stroke="#dbe3ef" stroke-width="2"/>
+<text x="575" y="310" font-size="15" font-weight="600" fill="#152238" text-anchor="start">Generated tokens</text>
+<text x="895" y="310" font-size="15" font-weight="700" fill="#64748b" text-anchor="start">35,598</text>
+<text x="1068" y="310" font-size="15" font-weight="700" fill="#5b4bdb" text-anchor="start">104,482</text>
+<text x="1236" y="310" font-size="15" font-weight="700" fill="#152238" text-anchor="start">2.94×</text>
+<rect x="575" y="326" width="720" height="12" rx="4" fill="#e5eaf2"/>
+<rect x="575" y="326" width="245.311" height="12" rx="4" fill="#64748b"/>
+<rect x="575" y="341" width="720" height="12" rx="4" fill="#e5eaf2"/>
+<rect x="575" y="341" width="720" height="12" rx="4" fill="#5b4bdb"/>
+<text x="575" y="415" font-size="15" font-weight="600" fill="#152238" text-anchor="start">Wall time</text>
+<text x="895" y="415" font-size="15" font-weight="700" fill="#64748b" text-anchor="start">12.2 min</text>
+<text x="1068" y="415" font-size="15" font-weight="700" fill="#5b4bdb" text-anchor="start">61.6 min</text>
+<text x="1236" y="415" font-size="15" font-weight="700" fill="#152238" text-anchor="start">5.06×</text>
+<rect x="575" y="431" width="720" height="12" rx="4" fill="#e5eaf2"/>
+<rect x="575" y="431" width="142.198" height="12" rx="4" fill="#64748b"/>
+<rect x="575" y="446" width="720" height="12" rx="4" fill="#e5eaf2"/>
+<rect x="575" y="446" width="720" height="12" rx="4" fill="#5b4bdb"/>
+<text x="575" y="520" font-size="15" font-weight="600" fill="#152238" text-anchor="start">Generation throughput</text>
+<text x="895" y="520" font-size="15" font-weight="700" fill="#64748b" text-anchor="start">48.75 tok/s</text>
+<text x="1068" y="520" font-size="15" font-weight="700" fill="#5b4bdb" text-anchor="start">28.26 tok/s</text>
+<text x="1236" y="520" font-size="15" font-weight="700" fill="#152238" text-anchor="start">0.58×</text>
+<rect x="575" y="536" width="720" height="12" rx="4" fill="#e5eaf2"/>
+<rect x="575" y="536" width="720" height="12" rx="4" fill="#64748b"/>
+<rect x="575" y="551" width="720" height="12" rx="4" fill="#e5eaf2"/>
+<rect x="575" y="551" width="417.36" height="12" rx="4" fill="#5b4bdb"/>
+<text x="575" y="625" font-size="15" font-weight="600" fill="#152238" text-anchor="start">Whole-GPU peak memory</text>
+<text x="895" y="625" font-size="15" font-weight="700" fill="#64748b" text-anchor="start">4,518.0 MiB</text>
+<text x="1068" y="625" font-size="15" font-weight="700" fill="#5b4bdb" text-anchor="start">4,743.0 MiB</text>
+<text x="1236" y="625" font-size="15" font-weight="700" fill="#152238" text-anchor="start">1.05×</text>
+<rect x="575" y="641" width="720" height="12" rx="4" fill="#e5eaf2"/>
+<rect x="575" y="641" width="685.844" height="12" rx="4" fill="#64748b"/>
+<rect x="575" y="656" width="720" height="12" rx="4" fill="#e5eaf2"/>
+<rect x="575" y="656" width="720" height="12" rx="4" fill="#5b4bdb"/>
+<rect x="575" y="746" width="790" height="18" rx="6" fill="#fff7ed"/>
+<text x="575" y="724" font-size="14" font-weight="600" fill="#9a4d00" text-anchor="start">The adapter answers more questions but uses 2.94× tokens and 5.06× wall time; this is not an efficiency gain.</text>
+<text x="575" y="769" font-size="12" font-weight="400" fill="#617089" text-anchor="start">Source: reports/svamp_phasec_seed2_final_test_audit.json  ·  bars are scaled independently within each metric.</text>
+</svg>

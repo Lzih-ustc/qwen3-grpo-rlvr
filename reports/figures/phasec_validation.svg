@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="670" viewBox="0 0 1320 670" role="img" aria-labelledby="title desc">
+<title id="title">Phase C group-size validation results</title>
+<desc id="desc">Two fixed-token-budget seeds with Base, Group4, and Group8 validation accuracy. The winner reverses across seeds.</desc>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<style>text{font-family:Inter,Segoe UI,Arial,sans-serif} .mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}</style>
+<text x="48" y="52" font-size="30" font-weight="700" fill="#152238" text-anchor="start">Phase C  |  Group-size validation</text>
+<text x="48" y="83" font-size="16" font-weight="400" fill="#617089" text-anchor="start">500 GSM8K validation questions per seed  ·  exact_format reward  ·  approximately 16k generated training tokens per arm</text>
+<rect x="44" y="118" width="596" height="430" rx="16" fill="#f6f8fc" stroke="#dbe3ef"/>
+<text x="70" y="157" font-size="21" font-weight="700" fill="#152238" text-anchor="start">Seed1  ·  validation winner: Group8</text>
+<text x="70" y="185" font-size="15" font-weight="400" fill="#617089" text-anchor="start">Group4 − Group8: -7.4 percentage points</text>
+<text x="72" y="251" font-size="17" font-weight="600" fill="#152238" text-anchor="start">Base</text>
+<rect x="172" y="231" width="378" height="26" rx="6" fill="#e5eaf2"/>
+<rect x="172" y="231" width="73.92" height="26" rx="6" fill="#64748b"/>
+<text x="257.92" y="251" font-size="16" font-weight="700" fill="#64748b" text-anchor="start">44/500  (8.8%)</text>
+<text x="72" y="333" font-size="17" font-weight="600" fill="#152238" text-anchor="start">Group4</text>
+<rect x="172" y="313" width="378" height="26" rx="6" fill="#e5eaf2"/>
+<rect x="172" y="313" width="233.52" height="26" rx="6" fill="#0f766e"/>
+<text x="417.52" y="333" font-size="16" font-weight="700" fill="#0f766e" text-anchor="start">139/500  (27.8%)</text>
+<text x="72" y="415" font-size="17" font-weight="600" fill="#152238" text-anchor="start">Group8</text>
+<rect x="172" y="395" width="378" height="26" rx="6" fill="#e5eaf2"/>
+<rect x="172" y="395" width="295.68" height="26" rx="6" fill="#d97706"/>
+<text x="479.68" y="415" font-size="16" font-weight="700" fill="#d97706" text-anchor="start">176/500  (35.2%)</text>
+<text x="72" y="512" font-size="13" font-weight="400" fill="#617089" text-anchor="start">Validation is for candidate selection; test does not compare G4 with G8.</text>
+<rect x="678" y="118" width="596" height="430" rx="16" fill="#f6f8fc" stroke="#dbe3ef"/>
+<text x="704" y="157" font-size="21" font-weight="700" fill="#152238" text-anchor="start">Seed2  ·  validation winner: Group4</text>
+<text x="704" y="185" font-size="15" font-weight="400" fill="#617089" text-anchor="start">Group4 − Group8: +4.0 percentage points</text>
+<text x="706" y="251" font-size="17" font-weight="600" fill="#152238" text-anchor="start">Base</text>
+<rect x="806" y="231" width="378" height="26" rx="6" fill="#e5eaf2"/>
+<rect x="806" y="231" width="82.32" height="26" rx="6" fill="#64748b"/>
+<text x="900.32" y="251" font-size="16" font-weight="700" fill="#64748b" text-anchor="start">49/500  (9.8%)</text>
+<text x="706" y="333" font-size="17" font-weight="600" fill="#152238" text-anchor="start">Group4</text>
+<rect x="806" y="313" width="378" height="26" rx="6" fill="#e5eaf2"/>
+<rect x="806" y="313" width="307.44" height="26" rx="6" fill="#0f766e"/>
+<text x="1125.44" y="333" font-size="16" font-weight="700" fill="#0f766e" text-anchor="start">183/500  (36.6%)</text>
+<text x="706" y="415" font-size="17" font-weight="600" fill="#152238" text-anchor="start">Group8</text>
+<rect x="806" y="395" width="378" height="26" rx="6" fill="#e5eaf2"/>
+<rect x="806" y="395" width="273.84" height="26" rx="6" fill="#d97706"/>
+<text x="1091.84" y="415" font-size="16" font-weight="700" fill="#d97706" text-anchor="start">163/500  (32.6%)</text>
+<text x="706" y="512" font-size="13" font-weight="400" fill="#617089" text-anchor="start">Validation is for candidate selection; test does not compare G4 with G8.</text>
+<rect x="44" y="574" width="1230" height="52" rx="10" fill="#fff7ed"/>
+<text x="64" y="606" font-size="17" font-weight="700" fill="#9a4d00" text-anchor="start">Exit verdict: MIXED  ·  Seed 1 selects Group8; Seed 2 selects Group4. Two seeds do not establish a stable group-size winner.</text>
+</svg>

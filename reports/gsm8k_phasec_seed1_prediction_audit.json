@@ -1,0 +1,807 @@
+{
+  "status": "saved_prediction_audit_passed",
+  "left_label": "base",
+  "right_label": "selected",
+  "eval_data_sha256": "eb9e38a7728c28d1f9c7fdd6a907aad06b89c2ab04f0de922a31406f655540eb",
+  "eval_count": 1000,
+  "paired_outcomes": {
+    "both_correct": 67,
+    "left_only_correct": 32,
+    "right_only_correct": 287,
+    "both_wrong": 614
+  },
+  "parser_and_decode_audit": {
+    "base": {
+      "tag": "phasec-base-test",
+      "adapter": null,
+      "correct_count": 99,
+      "eval_count": 1000,
+      "accuracy": 0.099,
+      "parse_rate": 0.727,
+      "parse_source_counts": {
+        "answer_tag": 643,
+        "unparsed": 273,
+        "boxed": 84
+      },
+      "parser_mismatch_count": 0,
+      "correctness_flag_mismatch_count": 0,
+      "unparsed_completion_with_answer_tag_markup": 205,
+      "completions_with_visible_think_tags": 0,
+      "decode": {
+        "do_sample": false,
+        "max_new_tokens": 192,
+        "thinking": false
+      },
+      "elapsed_seconds": 970.9738682300012,
+      "generated_tokens": 52660,
+      "tokens_per_second": 54.234209305750404,
+      "torch_peak_allocated_mib": 819.98828125,
+      "whole_gpu_peak_memory_used_mib": 3485.0
+    },
+    "selected": {
+      "tag": "phasec-group8-selected-test",
+      "adapter": "runs/gsm8k-phasec-exact-g8-16k/attempt-01/final_adapter",
+      "correct_count": 354,
+      "eval_count": 1000,
+      "accuracy": 0.354,
+      "parse_rate": 0.74,
+      "parse_source_counts": {
+        "answer_tag": 441,
+        "unparsed": 260,
+        "boxed": 299
+      },
+      "parser_mismatch_count": 0,
+      "correctness_flag_mismatch_count": 0,
+      "unparsed_completion_with_answer_tag_markup": 48,
+      "completions_with_visible_think_tags": 0,
+      "decode": {
+        "do_sample": false,
+        "max_new_tokens": 192,
+        "thinking": false
+      },
+      "elapsed_seconds": 4444.469893384001,
+      "generated_tokens": 134062,
+      "tokens_per_second": 30.16377728186741,
+      "torch_peak_allocated_mib": 819.98828125,
+      "whole_gpu_peak_memory_used_mib": 3504.0
+    }
+  },
+  "manual_sample": {
+    "seed": 20261023,
+    "samples_per_stratum": 10,
+    "sampled_question_count": 40,
+    "strata": {
+      "both_correct": [
+        70,
+        271,
+        559,
+        655,
+        734,
+        754,
+        959,
+        963,
+        976,
+        984
+      ],
+      "left_only_correct": [
+        172,
+        259,
+        296,
+        315,
+        331,
+        492,
+        493,
+        590,
+        596,
+        807
+      ],
+      "right_only_correct": [
+        7,
+        58,
+        152,
+        161,
+        424,
+        435,
+        606,
+        637,
+        711,
+        820
+      ],
+      "both_wrong": [
+        77,
+        211,
+        283,
+        321,
+        328,
+        394,
+        629,
+        701,
+        819,
+        836
+      ]
+    },
+    "rows": [
+      {
+        "index": 7,
+        "prompt": "An apple tree can fill 20 baskets. Each basket can be filled with 15 apples. How many apples can you get from 10 trees?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 3000,
+        "base": {
+          "completion": "<answer>10 * 15 = 150</answer>",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        },
+        "selected": {
+          "completion": "Each apple tree can fill 20 baskets, and each basket can hold 15 apples.  \nSo, one tree can fill $20 \\times 15 = 300$ apples.  \n\nFor 10 trees:  \n$10 \\times 300 = 3000$ apples.\n\nFinal answer:  \n$$\n\\boxed{3000}\n$$",
+          "predicted": 3000,
+          "parse_source": "boxed",
+          "correct": true
+        }
+      },
+      {
+        "index": 58,
+        "prompt": "There are 336 books in a library. On Monday, 124 books are taken out. On Tuesday, 22 books are brought back. How many books are there now?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 234,
+        "base": {
+          "completion": "<answer>336 - 124 + 22</answer>",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        },
+        "selected": {
+          "completion": "We start with 336 books in the library. On Monday, 124 books are taken out, so:\n\n$$\n336 - 124 = 212\n$$\n\nOn Tuesday, 22 books are brought back, so:\n\n$$\n212 + 22 = 234\n$$\n\nThe final number of books is:\n\n$$\n\\boxed{234}\n$$",
+          "predicted": 234,
+          "parse_source": "boxed",
+          "correct": true
+        }
+      },
+      {
+        "index": 70,
+        "prompt": "Aston has accidentally torn apart his comics and needs to put all the pages back together. Each comic has 25 pages and Aston has found 150 pages on the floor. He puts his comics back together and adds them back into his box of comics. If there were already 5 untorn comics in the box, how many comics are now in the box of comics?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 11,
+        "base": {
+          "completion": "The problem states that Aston has 150 pages on the floor, and each comic has 25 pages. So, the number of comics is:\n\n$$\n\\frac{150}{25} = 6\n$$\n\nAston has 5 untorn comics in the box, and he adds them back. Therefore, the final number of comics in the box is:\n\n$$\n5 + 6 = 11\n$$\n\nThe final answer is:\n\n$$\n\\boxed{11}\n$$",
+          "predicted": 11,
+          "parse_source": "boxed",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Aston has 150 pages on the floor, and each comic has 25 pages. So, the number of comics is:\n\n$$\n\\frac{150}{25} = 6\n$$\n\nHe adds the 6 comics back into the box, and there were already 5 untorn comics. So, the total number of comics now in the box is:\n\n$$\n5 + 6 = 11\n$$\n\n**Final answer:** <answer>11</answer>",
+          "predicted": 11,
+          "parse_source": "answer_tag",
+          "correct": true
+        }
+      },
+      {
+        "index": 77,
+        "prompt": "Janet makes $20 per hour at work. She works 52 hours per week. Anything over 40 hours per week is considered overtime and is paid at 1.5 times the normal rate. She wants to purchase a $4640 car. How many weeks does she need to work to purchase the car?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 4,
+        "base": {
+          "completion": "<answer>4640</answer>",
+          "predicted": 4640,
+          "parse_source": "answer_tag",
+          "correct": false
+        },
+        "selected": {
+          "completion": "We are given:\n\n- Janet earns **$20 per hour**.\n- She works **52 hours per week**.\n- Overtime is paid **1.5 times the normal rate**.\n- She wants to purchase a **$4640 car**.\n- Overtime hours are **any hours over 40**.\n\nWe need to find how many weeks she needs to work to afford the car.\n\n### Step 1: Calculate the total earnings per week\n\n- Overtime hours: 52 hours (total) - 40 = **12 hours of overtime**\n- Overtime rate: $20 × 1.5 = $30 per hour\n- Overtime earnings: $12 × $30 = $360\n\n- Regular hours: 52 - 12 = **40 hours**\n\n- Regular rate: $20\n\n- Regular earnings: $40",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 152,
+        "prompt": "Free Christmas decorations are being given out to families. Each box of decorations contains 4 pieces of tinsel, 1 Christmas tree and 5 snow globes. If 11 families receive a box of decorations and another box is given to the community center, how many decorations have been handed out?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 120,
+        "base": {
+          "completion": "<answer>11 + 1 = 12</answer>",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        },
+        "selected": {
+          "completion": "Each box contains:\n\n- 4 tinsel pieces  \n- 1 Christmas tree  \n- 5 snow globes\n\nTotal per box: $4 + 1 + 5 = 10$ decorations.\n\nNumber of boxes: 11 families + 1 box = 12 boxes.\n\nTotal decorations: $12 \\times 10 = 120$.\n\n**Final answer:** <answer>120</answer>",
+          "predicted": 120,
+          "parse_source": "answer_tag",
+          "correct": true
+        }
+      },
+      {
+        "index": 161,
+        "prompt": "There were 100 jelly beans in a bag to be given away on Halloween. Out of the 40 children taking part in the Halloween celebration, 80% were allowed to draw jelly beans from the bag. Each child drew two jelly beans out of the bag. How many jelly beans remained in the bag after the children took their share?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 36,
+        "base": {
+          "completion": "The problem involves a bag of jelly beans, and we are to find out how many remain after the children have taken their share. Here's the step-by-step solution:\n\n1. **Total number of jelly beans**: 100  \n2. **Number of children**: 40  \n3. **Percentage of children allowed to draw jelly beans**: 80%  \n4. **Number of children who drew jelly beans**:  \n   $ 40 \\times 0.80 = 32 $  \n\n5. **Number of jelly beans each child drew**:  \n   $ 2 $ jelly beans per child.  \n\n6. **Total number of jelly beans taken by children**:  \n   $ 32 \\times 2 = 64 $  \n\n7. **Number of jelly beans remaining in the bag**:  \n   $ 100 - 64 = 36 $  \n\n**Final answer**: <answer",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        },
+        "selected": {
+          "completion": "We are given:\n\n- Total jelly beans: 100  \n- Number of children: 40  \n- 80% of the children were allowed to draw jelly beans.  \n- Each child drew **2 jelly beans**.\n\n### Step 1: Find how many children drew jelly beans\n\n$$\n0.80 \\times 40 = 32 \\text{ children}\n$$\n\n### Step 2: Calculate the total number of jelly beans taken\n\n$$\n32 \\times 2 = 64 \\text{ jelly beans}\n$$\n\n### Step 3: Find how many jelly beans remain in the bag\n\n$$\n100 - 64 = 36 \\text{ jelly beans}\n$$\n\n### Final Answer:\n\n$$\n\\boxed{36}\n$$",
+          "predicted": 36,
+          "parse_source": "boxed",
+          "correct": true
+        }
+      },
+      {
+        "index": 172,
+        "prompt": "As Dan is learning to screen-print t-shirts to sell at the craft fair, he makes t-shirts, over the first hour, at the rate of one every 12 minutes. Then, in the second hour, he makes one at the rate of every 6 minutes. How many t-shirts does he make over the course of those two hours?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 15,
+        "base": {
+          "completion": "The problem asks how many t-shirts Dan makes in two hours. We need to calculate the total number of t-shirts he makes in each hour and then add them together.\n\n- In the first hour: 1 t-shirt every 12 minutes.\n- In the second hour: 1 t-shirt every 6 minutes.\n\nWe can calculate the number of t-shirts in each hour:\n\n- First hour: $ \\frac{1}{12} $ t-shirts per minute $ \\times 60 $ minutes = 5 t-shirts.\n- Second hour: $ \\frac{1}{6} $ t-shirts per minute $ \\times 60 $ minutes = 10 t-shirts.\n\nAdding them together: $ 5 + 10 = 15 $.\n\nThe final answer is:\n\n<answer>15</answer>",
+          "predicted": 15,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "We are given:\n\n- In the first hour, Dan makes **1 t-shirt every 12 minutes**.\n- In the second hour, he makes **1 t-shirt every 6 minutes**.\n\nWe need to find how many t-shirts he makes in **two hours**.\n\n### Step 1: Calculate the number of t-shirts in the first hour\n\n- 1 t-shirt every 12 minutes.\n- There are 60 minutes in an hour.\n\n$$\n\\frac{60}{12} = 5 \\text{ t-shirts}\n$$\n\n### Step 2: Calculate the number of t-shirts in the second hour\n\n- 1 t-shirt every 6 minutes.\n- There are 60 minutes in an hour.\n\n$$\n\\frac{60}{6} = 10 \\text{ t-shirts}\n$$\n\n### Step 3: Add the number of t-shirts in both hours\n\n$$",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 211,
+        "prompt": "Jacque arrived in France and his suitcase weighed 5 pounds.  While in France, he picked up 5 bottles of perfume that weighed 1.2 ounces each, 4 pounds of chocolate, 2 bars of soap that weighed 5 ounces each and 2 jars of jam that weighed 8 ounces each.  Considering 16 ounces is the same as 1 pound, how much did Jacque's suitcase weigh on the return flight home?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 11,
+        "base": {
+          "completion": "<answer>16</answer>",
+          "predicted": 16,
+          "parse_source": "answer_tag",
+          "correct": false
+        },
+        "selected": {
+          "completion": "Jacque's suitcase initially weighs **5 pounds**.  \nHe picks up:\n\n- 5 bottles of perfume: $5 \\times 1.2 = 6$ ounces  \n- 4 pounds of chocolate  \n- 2 bars of soap: $2 \\times 5 = 10$ ounces  \n- 2 jars of jam: $2 \\times 8 = 16$ ounces  \n\nTotal weight:  \n5 pounds + 6 ounces + 4 pounds + 10 ounces + 16 ounces = **21.6 pounds**.\n\nFinal answer:  \n$$\n\\boxed{21.6}\n$$",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 259,
+        "prompt": "Johan has a ten-bedroom house with 8 walls in each room. He paints 3/5 of the rooms in the house green and paints the rest of the rooms with purple color. How many walls in the house did he paint purple?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 32,
+        "base": {
+          "completion": "The house has 10 rooms, and 3/5 of the rooms are painted green. To find the number of purple walls, we first calculate the number of green rooms:\n\n$$\n\\frac{3}{5} \\times 10 = 6 \\text{ green rooms}\n$$\n\nSince there are 10 rooms in total, the remaining rooms are:\n\n$$\n10 - 6 = 4 \\text{ purple rooms}\n$$\n\nEach room has 8 walls, so the total number of purple walls is:\n\n$$\n4 \\times 8 = 32 \\text{ walls}\n$$\n\nFinal answer: <answer>32</answer>",
+          "predicted": 32,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Johan has a ten-bedroom house, with 8 walls in each room. There are 10 rooms in total.\n\n- 3/5 of the rooms are painted green.\n- The remaining 2/5 of the rooms are painted purple.\n\nWe calculate:\n\n$$\n\\frac{3}{5} \\times 10 = 6 \\text{ rooms}\n$$\n\nSo, the number of walls painted purple is:\n\n$$\n6 \\times 8 = \\boxed{48}\n$$\n\n**Final answer:** $\\boxed{48}$",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 271,
+        "prompt": "To finish the task assigned to her by the work supervisor in the stipulated deadline, Anie needs 5 hours extra aside from the normal work schedule each day.  If each day her work schedule requires her to be productive for 10 hours, and the project is estimated to take 1500 hours, calculate the number of days it would take Anie to finish the job.\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 100,
+        "base": {
+          "completion": "<answer>100</answer>",
+          "predicted": 100,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Anie needs 5 hours extra each day, so her total work time per day is:\n\n$$\n10 \\, \\text{hours} + 5 \\, \\text{hours} = 15 \\, \\text{hours/day}\n$$\n\nThe total project is estimated to take 1500 hours. To find the number of days, divide the total hours by the daily work hours:\n\n$$\n\\frac{1500 \\, \\text{hours}}{15 \\, \\text{hours/day}} = 100 \\, \\text{days}\n$$\n\n**Final answer: <answer>100</answer>**",
+          "predicted": 100,
+          "parse_source": "answer_tag",
+          "correct": true
+        }
+      },
+      {
+        "index": 283,
+        "prompt": "Los Angeles has 6 million people living in it. If half the population is women and 1/3 of the women work in retail, how many women work in retail in Los Angeles?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 1000000,
+        "base": {
+          "completion": "<answer>100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        },
+        "selected": {
+          "completion": "We are given:\n\n- Total population: 6 million  \n- Half the population is women: $ \\frac{1}{2} \\times 6 = 3 $ million  \n- $ \\frac{1}{3} $ of the women work in retail.\n\nTo find the number of women working in retail:\n\n$$\n\\text{Number of women working in retail} = \\frac{1}{3} \\times 3 = 1 \\text{ million}\n$$\n\n**Final answer:** <answer>1</answer>",
+          "predicted": 1,
+          "parse_source": "answer_tag",
+          "correct": false
+        }
+      },
+      {
+        "index": 296,
+        "prompt": "The ratio of boys to girls at the dance was 3:4. There were 60 girls at the dance. The teachers were 20% of the number of boys. How many people were at the dance?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 114,
+        "base": {
+          "completion": "The ratio of boys to girls is 3:4, and there are 60 girls. We can find the number of boys by dividing 60 by 4, then multiplying by 3.\n\n$$\n\\text{Number of boys} = \\frac{60}{4} \\times 3 = 15 \\times 3 = 45\n$$\n\nThe teachers are 20% of the number of boys, so we calculate:\n\n$$\n\\text{Number of teachers} = 0.20 \\times 45 = 9\n$$\n\nThe total number of people at the dance is the sum of boys, girls, and teachers:\n\n$$\n\\text{Total people} = 45 + 60 + 9 = 114\n$$\n\nFinal answer:\n\n$$\n\\boxed{114}\n$$",
+          "predicted": 114,
+          "parse_source": "boxed",
+          "correct": true
+        },
+        "selected": {
+          "completion": "We are given:\n\n- The ratio of boys to girls is $3:4$.\n- There are 60 girls.\n- The teachers are 20% of the number of boys.\n\nLet's solve step by step:\n\n1. **Find the number of boys:**\n\n   $$\n   \\text{Number of boys} = \\frac{60}{4} \\times 3 = 45\n   $$\n\n2. **Find the number of teachers:**\n\n   $$\n   \\text{Teachers} = 0.20 \\times 45 = 9\n   $$\n\n3. **Total number of people:**\n\n   $$\n   \\text{Total people} = \\text{Number of boys} + \\text{Number of girls} + \\text{Number of teachers}\n   $$\n   $$\n   = 45 + 60 + 9 = 114",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 315,
+        "prompt": "Maisy has been offered a new job and now has the option of continuing to work at her current job or take the new job. Her current job is 8 hours a week with a wage of $10 per hour. The new job is offering 4 hours a week with a wage of $15 per hour with an additional bonus of $35 per week if she exceeds her quota. Maisy is confident that she will exceed her quota and decides to include this when calculating her wage at the new job. How much more money, in dollars, will Maisy earn at her new job?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 15,
+        "base": {
+          "completion": "<answer>15</answer>",
+          "predicted": 15,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Maisy's current job is 8 hours a week, with a wage of $10 per hour.  \nHer new job is 4 hours a week, with a wage of $15 per hour, plus a bonus of $35 per week if she exceeds her quota.  \n\nShe will earn the bonus if she exceeds her quota.  \n\nSince the question asks how much more money Maisy will earn at her new job, we need to calculate the difference between the new job's weekly wage and her current job's weekly wage.  \n\n- New job's weekly wage: $15 per hour × 4 hours = $60  \n- Current job's weekly wage: $10 per hour × 8 hours = $80  \n\nDifference: $60 - $80 = **$20**  \n\nFinal answer: <answer>$20</answer>",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 321,
+        "prompt": "Four athletes joined a relay race. Athlete 1  ran for 55 seconds, athlete 2 ran 10 seconds more than athlete 1, athlete 3 ran 15 seconds less than athlete 2, and athlete four finished it 25 seconds less than athlete 1. How long, in seconds, did it take them to finish the relay race?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 200,
+        "base": {
+          "completion": "The problem gives us the time each athlete ran:\n\n- Athlete 1: 55 seconds  \n- Athlete 2: 55 + 10 = 65 seconds  \n- Athlete 3: 65 - 15 = 50 seconds  \n- Athlete 4: 55 - 25 = 30 seconds  \n\nThe total time for the relay is the sum of the times of all four athletes:\n\n$$\n55 + 65 + 50 + 30 = \\boxed{210} \\text{ seconds}\n$$\n\n**Final answer:** <answer>210</answer>",
+          "predicted": 210,
+          "parse_source": "answer_tag",
+          "correct": false
+        },
+        "selected": {
+          "completion": "Let's denote the time each athlete ran as:\n\n- Athlete 1: $ x $ seconds  \n- Athlete 2: $ x + 10 $ seconds  \n- Athlete 3: $ x - 15 $ seconds  \n- Athlete 4: $ x - 25 $ seconds  \n\nWe are told that athlete 4 finished it **25 seconds less** than athlete 1, so:\n\n$$\nx - 25 = x - 10 - 25 = x - 35\n$$\n\nThis means athlete 4 ran **35 seconds** less than athlete 1. So:\n\n$$\nx - 25 = x - 35 \\Rightarrow x = 10\n$$\n\nNow, substitute $ x = 10 $ into the expressions:\n\n- Athlete 1: 10 seconds  \n- Athlete 2: 10 +",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 328,
+        "prompt": "At Sarah's job 60% of the employees are women and the rest are men. Of the men, 75% have a college degree and 8 do not. How many women work at Sarah's company?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 48,
+        "base": {
+          "completion": "<answer>15</answer>",
+          "predicted": 15,
+          "parse_source": "answer_tag",
+          "correct": false
+        },
+        "selected": {
+          "completion": "We are given:\n\n- 60% of employees are women.\n- 75% of the men have a college degree.\n- 8 men do not have a college degree.\n\nWe are to find how many **women** work at Sarah's company.\n\nLet’s denote:\n\n- Total employees = 100 (for simplicity).\n- Number of women = 60.\n- Number of men = 40.\n\nWe are told:\n\n- 8 men do **not** have a college degree.\n- 75% of the men have a college degree.\n\nSo, the number of men with a college degree is:\n\n$$\n0.75 \\times 40 = 30\n$$\n\nTherefore, the number of men without a college degree is:\n\n$$\n40 - 30 = 10\n$$\n\nThis matches the given information.\n\nNow, the number of women is 60, and",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 331,
+        "prompt": "Tom swims for 2 hours at a speed of 2 miles per hour.  He then runs for half the time at 4 times the speed.  How many miles did he cover?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 12,
+        "base": {
+          "completion": "<answer>12</answer>",
+          "predicted": 12,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Tom swims for 2 hours at 2 miles per hour.  \nHe then runs for half the time at 4 times the speed.  \n\nFirst, calculate the distance he swims:  \n$$\n\\text{Distance} = \\text{Speed} \\times \\text{Time} = 2 \\, \\text{mph} \\times 2 \\, \\text{hours} = 4 \\, \\text{miles}\n$$\n\nHe runs for half the time, which is $ \\frac{2 \\, \\text{hours}}{2} = 1 \\, \\text{hour} $, at 4 times the speed:  \n$$\n\\text{Distance} = 4 \\, \\text{mph} \\times 1 \\, \\text{hour} = 4 \\, \\text{miles}\n$$\n\nTotal distance:  \n$$\n4 \\, \\text{miles (",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 394,
+        "prompt": "Shonda is throwing an Easter egg hunt for her 2 kids and their 10 friends. She is also supplying enough eggs for herself and the 7 other adults there to find eggs as well. If there are 15 Easter egg baskets for everyone to share and each ends up holding 12 Easter eggs, when they equally distribute all of the Easter eggs to everyone, how many eggs does each person get?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 9,
+        "base": {
+          "completion": "The problem involves finding the total number of Easter eggs and then dividing by the number of people to find how many each person gets. Here's the step-by-step solution:\n\n1. **Calculate the total number of Easter eggs:**\n   - There are 15 Easter egg baskets.\n   - Each basket has 12 Easter eggs.\n   - Total eggs = $15 \\times 12 = 180$.\n\n2. **Determine the total number of people:**\n   - Shonda's 2 kids.\n   - 10 friends.\n   - 7 other adults.\n   - Total people = $2 + 10 + 7 = 19$.\n\n3. **Calculate how many eggs each person gets:**\n   - Total eggs = 180.\n   - Total people = 19.\n   - Each person gets $180 \\div 19 = 9.",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        },
+        "selected": {
+          "completion": "There are 15 Easter egg baskets for everyone to share, and each holds 12 Easter eggs. So:\n\n$$\n15 \\times 12 = 180 \\text{ Easter eggs}\n$$\n\nThere are 2 kids, 10 friends, and 7 other adults. Total people:  \n$$\n2 + 10 + 7 = 19 \\text{ people}\n$$\n\nNow, divide the total number of eggs by the number of people:\n\n$$\n\\frac{180}{19} \\approx 9.47\n$$\n\nSo, each person gets **9.47** Easter eggs. \n\nFinal answer:  \n$$\n\\boxed{9.47}\n$$",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 424,
+        "prompt": "Johny traveled South 40 miles, then turned East and traveled for 20 more miles than the distance he took to travel to the south. If he turned North and traveled twice the distance he had traveled to the East, calculate the total distance his journey took.\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 220,
+        "base": {
+          "completion": "<answer>40 + 20 + 40 = 100</answer>",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        },
+        "selected": {
+          "completion": "Let's solve this step by step:\n\n- Johny travels **South** for 40 miles.\n- Then he travels **East** for 20 more miles than the distance to the South, so:\n  $$\n  40 + 20 = 60 \\text{ miles}\n  $$\n- Then he turns **North** and travels **twice** the distance he traveled to the East, so:\n  $$\n  2 \\times 60 = 120 \\text{ miles}\n  $$\n\n**Total distance:**\n$$\n40 + 60 + 120 = 220 \\text{ miles}\n$$\n\n**Final answer:**\n$$\n\\boxed{220}\n$$",
+          "predicted": 220,
+          "parse_source": "boxed",
+          "correct": true
+        }
+      },
+      {
+        "index": 435,
+        "prompt": "Beyonce releases 5 different singles on iTunes. Then she releases 2 albums that each has 15 songs and 1 album that has 20 songs. How many songs has Beyonce released in total?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 55,
+        "base": {
+          "completion": "<answer>15 + 15 + 20</answer>",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        },
+        "selected": {
+          "completion": "Beyonce releases:\n\n- 5 singles  \n- 2 albums with 15 songs each  \n- 1 album with 20 songs  \n\nTotal songs:  \n$5 + 2 \\times 15 + 20 = 5 + 30 + 20 = 55$ songs.\n\nFinal answer:  \n$$\n\\boxed{55}\n$$",
+          "predicted": 55,
+          "parse_source": "boxed",
+          "correct": true
+        }
+      },
+      {
+        "index": 492,
+        "prompt": "To eat to when she gets full, Michaela needs 20 oranges. Cassandra needs twice as many oranges as Michaela to eat until she gets full. If they picked 90 oranges from the farm today, how many oranges would remain after they've both eaten until they were full?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 30,
+        "base": {
+          "completion": "The problem states:\n\n- Michaela eats 20 oranges.\n- Cassandra needs twice as many as Michaela to eat until she gets full.\n- They picked 90 oranges from the farm.\n\nWe are to find how many oranges would remain after both have eaten until they were full.\n\n### Step 1: Determine how many oranges each person ate\n\n- Michaela ate 20 oranges.\n- Cassandra ate $2 \\times 20 = 40$ oranges.\n\n### Step 2: Add the number of oranges eaten by both\n\n$$\n20 + 40 = 60\n$$\n\n### Step 3: Subtract the total number of oranges picked from the total\n\n$$\n90 - 60 = \\boxed{30}\n$$\n\n**Final answer: <answer>30</answer>**",
+          "predicted": 30,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Let's solve this step by step:\n\n- Michaela eats **20 oranges**.\n- Cassandra eats **twice as many** as Michaela:  \n  $ 2 \\times 20 = 40 $ oranges.\n\n- Total number of oranges picked: **90**.\n\n- Number of oranges eaten by both:  \n  $ 20 + 40 = 60 $.\n\n- Oranges remaining:  \n  $ 90 - 60 = \\boxed{30} $.\n\n**Final answer:** $\\boxed{30}$",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 493,
+        "prompt": "Tedra is harvesting his tomatoes. He harvests 400 kg on Wednesday, and half as much on Thursday. He harvests a total of 2000 kg on Wednesday, Thursday, and Friday. How many tomatoes of the number he harvested on Friday are remaining if he gives away 700kg of them to his friends?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 700,
+        "base": {
+          "completion": "The number of tomatoes Tedra harvested on Friday is:\n\n$$\n2000 \\text{ kg (Wednesday + Thursday)} - 400 \\text{ kg (Wednesday)} - \\frac{400}{2} \\text{ kg (Thursday)} = 2000 - 400 - 200 = 1400 \\text{ kg}\n$$\n\nHe gives away 700 kg of them to his friends, so the remaining number of tomatoes is:\n\n$$\n1400 - 700 = \\boxed{700}\n$$\n\nFinal answer: <answer>700</answer>",
+          "predicted": 700,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "We are given:\n\n- Tedra harvests **400 kg** on **Wednesday**.\n- He harvests **half as much** on **Thursday**, so:\n  $$\n  \\text{Thursday} = \\frac{400}{2} = 200 \\text{ kg}\n  $$\n- Total harvest on **Wednesday, Thursday, and Friday** is **2000 kg**.\n\nWe are asked to find how many tomatoes of the number he harvested on **Friday** are **remaining** if he gives away **700 kg** of them.\n\n### Step 1: Find the total harvest on Friday\n\n$$\n\\text{Friday} = 2000 \\text{ kg (Wednesday + Thursday)} - 400 \\text{ kg (Wednesday)} - 200 \\text{ kg (Thursday)} = 2000 - 600 =",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 559,
+        "prompt": "Blinky wants to make a three-layer birthday cake for her mom. The recipe for the smallest layer of the cake requires 2 cups of sugar. If the second layer is twice as big as the first and the third layer is three times larger than the second, how many total cups of sugar will she need for the third layer?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 12,
+        "base": {
+          "completion": "<answer>12</answer>",
+          "predicted": 12,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "The first layer requires $2$ cups of sugar.\n\n- The second layer is **twice** as big as the first:  \n  $2 \\times 2 = 4$ cups.\n\n- The third layer is **three times** larger than the second:  \n  $4 \\times 3 = 12$ cups.\n\n**Total sugar needed for the third layer:**  \n$\\boxed{12}$",
+          "predicted": 12,
+          "parse_source": "boxed",
+          "correct": true
+        }
+      },
+      {
+        "index": 590,
+        "prompt": "Janet buys 45-pound containers of cat litter for $21 each.  If her cat litter box holds 15 pounds of cat litter, and she changes out the litter weekly, how much will it cost, in dollars, for her to buy enough litter to last 210 days?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 210,
+        "base": {
+          "completion": "<answer>210</answer>",
+          "predicted": 210,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "We are given:\n\n- 45-pound containers of cat litter for $21 each.\n- Each box holds 15 pounds of cat litter.\n- Janet changes out the litter weekly.\n- She needs to buy enough to last **210 days**.\n\n### Step 1: Calculate the total weight of cat litter needed for 210 days\n\n- Each week, she uses 15 pounds.\n- So, over 210 days, she uses:\n\n$$\n15 \\, \\text{pounds/day} \\times 210 \\, \\text{days} = 3150 \\, \\text{pounds}\n$$\n\n### Step 2: Calculate the number of containers needed\n\n- Each container is 45 pounds.\n- So, the number of containers needed is:\n\n$$\n\\frac{3150 \\, \\text{pounds}}{45 \\",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 596,
+        "prompt": "Wally gives 3/4 of his 400 tickets to his two friends Jensen and Finley, who share the tickets in a ratio of 4:11. How many tickets does Finley get?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 220,
+        "base": {
+          "completion": "The total number of tickets is 400. Wally gives $\\frac{3}{4}$ of this to his two friends, Jensen and Finley, in a ratio of 4:11.\n\nFirst, find the total number of tickets given to both friends:\n\n$$\n\\frac{3}{4} \\times 400 = 300\n$$\n\nNow, the ratio of the tickets to Jensen and Finley is 4:11. The total number of parts is 4 + 11 = 15.\n\nSo, the number of tickets Finley gets is:\n\n$$\n\\frac{11}{15} \\times 300 = 220\n$$\n\nFinal answer:\n\n$$\n\\boxed{220}\n$$",
+          "predicted": 220,
+          "parse_source": "boxed",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Wally gives **$\\frac{3}{4}$** of his 400 tickets to his two friends Jensen and Finley, who share the tickets in a ratio of **4:11**.\n\nFirst, find the total number of tickets given to both friends:\n\n$$\n\\frac{3}{4} \\times 400 = 300\n$$\n\nNow, the ratio of the tickets to Jensen and Finley is **4:11**. So, the total number of tickets is:\n\n$$\n4 + 11 = 15\n$$\n\nFinley gets $\\frac{11}{15}$ of the total tickets, so:\n\n$$\n\\frac{11}{15} \\times 300 = \\frac{11 \\times 300}{15} = \\frac{3300}{15} = 220",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 606,
+        "prompt": "Harper has 15 rubber bands. His brother has 6 fewer rubber bands than he has. How many rubber bands do they have together?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 24,
+        "base": {
+          "completion": "<answer>15 + 6 = 21</answer>",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        },
+        "selected": {
+          "completion": "Harper has 15 rubber bands. His brother has 6 fewer, so he has $15 - 6 = 9$ rubber bands.\n\nTogether, they have $15 + 9 = 24$ rubber bands.\n\nFinal answer: <answer>24</answer>",
+          "predicted": 24,
+          "parse_source": "answer_tag",
+          "correct": true
+        }
+      },
+      {
+        "index": 629,
+        "prompt": "Austin is a surfer. He took a trip to the beach during surfing season and the highest wave he caught was two feet higher than four times his height. The shortest wave he caught was four feet higher than his height. The shortest wave was three feet higher than his 7-foot surfboard is long. How tall was the highest wave Austin caught?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 26,
+        "base": {
+          "completion": "<answer>10</answer>",
+          "predicted": 10,
+          "parse_source": "answer_tag",
+          "correct": false
+        },
+        "selected": {
+          "completion": "Let $ h $ be Austin's height.  \nWe are given:\n\n- The highest wave was 2 feet higher than 4 times his height:  \n  $ 2 = 4h + 2 $  \n  $ 4h = 2 - 2 = 0 $  \n  $ h = 0 $  \n  This implies $ h = 0 $, which is impossible for a person.  \n  **This suggests a mistake in the problem setup.**\n\nLet's re-examine the problem:\n\n- The shortest wave was 4 feet higher than his height:  \n  $ 4 = h + 4 $  \n  $ h = 0 $, which is impossible.  \n- The shortest wave was 3 feet higher than his 7-foot surfboard:  \n  $ 3 = 7 + 3 $, which is true.  \n- The highest wave was 2 feet higher than 4 times",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 637,
+        "prompt": "Malou got 91, 90, and 92 in her three quizzes. What is her average score?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 91,
+        "base": {
+          "completion": "<answer>91 + 90 + 92 = 273</answer>",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        },
+        "selected": {
+          "completion": "To find the average score, we add the three quiz scores and then divide by 3:\n\n$$\n\\frac{91 + 90 + 92}{3} = \\frac{273}{3} = 91\n$$\n\nThe average score is <answer>91</answer>.",
+          "predicted": 91,
+          "parse_source": "answer_tag",
+          "correct": true
+        }
+      },
+      {
+        "index": 655,
+        "prompt": "Arthur knows that he needs to finish 800 pages of reading over the summer. He has read 80% of a 500-page book and 1/5 of a 1000 page book. How many more pages does he need to reach to meet his goal?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 200,
+        "base": {
+          "completion": "The problem states that Arthur has read 80% of a 500-page book and 1/5 of a 1000-page book. We need to find out how many more pages he needs to read to reach his goal of 800 pages.\n\n1. Calculate the total pages read:\n   - 80% of 500 pages: $0.80 \\times 500 = 400$\n   - $1/5$ of 1000 pages: $1000 \\div 5 = 200$\n\n2. Add the two amounts:\n   $400 + 200 = 600$\n\n3. The total pages left to read are:\n   $800 - 600 = 200$\n\n**Final answer: <answer>200</answer>**",
+          "predicted": 200,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Arthur has read:\n\n- $ 80\\% \\times 500 = 400 $ pages  \n- $ \\frac{1}{5} \\times 1000 = 200 $ pages\n\nTotal pages read: $ 400 + 200 = 600 $ pages.\n\nHe needs to read $ 800 - 600 = 200 $ pages.\n\n**Final answer:** <answer>200</answer>",
+          "predicted": 200,
+          "parse_source": "answer_tag",
+          "correct": true
+        }
+      },
+      {
+        "index": 701,
+        "prompt": "Jangshe spent $610 on 7 pieces of clothing. One piece was $49 and another piece was $81. If the other pieces were all the same price, how many dollars was one of the other pieces?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 96,
+        "base": {
+          "completion": "The total amount spent is $610. One piece was $49, another was $81, and the remaining pieces are all the same price. Let the price of the remaining pieces be $x.\n\nWe can set up the equation:\n\n$$\n49 + 81 + 7x = 610\n$$\n\n$$\n130 + 7x = 610\n$$\n\n$$\n7x = 480\n$$\n\n$$\nx = 480 \\div 7 = 68.57\n$$\n\nSo the final answer is:\n\n$$\n\\boxed{68.57}\n$$",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        },
+        "selected": {
+          "completion": "Let's solve the problem step by step:\n\n1. We know that Jangshe spent $610 in total, and the total cost includes:\n   - $49\n   - $81\n   - $x (the price of the remaining 5 pieces)\n\n2. The total cost is:\n   $$\n   49 + 81 + 5x = 610\n   $$\n\n3. First, add the known costs:\n   $$\n   49 + 81 = 130\n   $$\n\n4. Now, set up the equation:\n   $$\n   130 + 5x = 610\n   $$\n\n5. Subtract 130 from both sides:\n   $$\n   5x = 610 - 130 = 480\n   $$\n\n6. Divide both sides by 5",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 711,
+        "prompt": "Jacob loves to build things. In Jacob's toy bin there are 18 red blocks. There are 7 more yellow blocks than red blocks. There are also 14 more blue blocks than red blocks. How many blocks are there in all?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 75,
+        "base": {
+          "completion": "<answer>18 + 7 + 14</answer>",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        },
+        "selected": {
+          "completion": "We are given:\n\n- Number of red blocks = 18  \n- Number of yellow blocks = 18 + 7 = 25  \n- Number of blue blocks = 18 + 14 = 32  \n\nTotal number of blocks = 18 + 25 + 32 = 75\n\n**Final answer:**  \n<answer>75</answer>",
+          "predicted": 75,
+          "parse_source": "answer_tag",
+          "correct": true
+        }
+      },
+      {
+        "index": 734,
+        "prompt": "Ginger is weaving mats out of colored straw. Each mat takes 20 red straws, 30 orange straws, and half as many green straws as orange straws. How many straws does she need to make 10 mats?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 650,
+        "base": {
+          "completion": "The number of straws needed to make 10 mats is:\n\n$$\n10 \\times (20 + 30 + \\frac{1}{2} \\times 30) = 10 \\times (20 + 30 + 15) = 10 \\times 65 = 650\n$$\n\nFinal answer: <answer>650</answer>",
+          "predicted": 650,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Each mat uses:\n\n- 20 red straws  \n- 30 orange straws  \n- $ \\frac{1}{2} \\times 30 = 15 $ green straws\n\nTotal per mat:  \n$ 20 + 30 + 15 = 65 $ straws\n\nNumber of mats: 10\n\nTotal straws needed:  \n$ 65 \\times 10 = 650 $\n\n**Final answer:**  \n<answer>650</answer>",
+          "predicted": 650,
+          "parse_source": "answer_tag",
+          "correct": true
+        }
+      },
+      {
+        "index": 754,
+        "prompt": "Tim is 5 years old. His cousin, Rommel, is thrice as old as he is. His other cousin, Jenny, is 2 years older than Rommel. How many years younger is Tim than Jenny?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 12,
+        "base": {
+          "completion": "The problem can be solved step by step:\n\n1. Tim is 5 years old.\n2. Rommel is thrice as old as Tim:  \n   $ 3 \\times 5 = 15 $ years old.\n3. Jenny is 2 years older than Rommel:  \n   $ 15 + 2 = 17 $ years old.\n4. To find how many years younger Tim is than Jenny:  \n   $ 17 - 5 = 12 $ years.\n\n**Final answer:** <answer>12</answer>",
+          "predicted": 12,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "We are given:\n\n- Tim is 5 years old.\n- Rommel is **3 times** as old as Tim: $3 \\times 5 = 15$ years.\n- Jenny is **2 years older** than Rommel: $15 + 2 = 17$ years.\n\nNow, we need to find how many years **Tim is younger** than Jenny:\n\n$$\n17 - 5 = 12\n$$\n\n**Final answer:** $\\boxed{12}$ years.",
+          "predicted": 12,
+          "parse_source": "boxed",
+          "correct": true
+        }
+      },
+      {
+        "index": 807,
+        "prompt": "Belinda’s dog is missing, so she made 200 flyers to distribute around town with the help of her friends. Ryan passed out 42 flyers, Alyssa passed out 67, Scott passed out 51 and Belinda passed out the rest. What percentage of the flyers did Belinda pass out?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 20,
+        "base": {
+          "completion": "The total number of flyers distributed is:\n\n$$\n42 + 67 + 51 = 160\n$$\n\nBelinda passed out the remaining flyers, so:\n\n$$\n200 - 160 = 40\n$$\n\nPercentage of the flyers Belinda passed out:\n\n$$\n\\frac{40}{200} \\times 100 = 20\\%\n$$\n\nFinal answer:\n\n$$\n\\boxed{20}\n$$",
+          "predicted": 20,
+          "parse_source": "boxed",
+          "correct": true
+        },
+        "selected": {
+          "completion": "We are given:\n\n- Total number of flyers: 200  \n- Ryan: 42  \n- Alyssa: 67  \n- Belinda: $200 - 42 - 67 = 101$\n\nBelinda passed out **101** flyers.\n\nTo find the percentage:\n\n$$\n\\frac{101}{200} \\times 100 = 50.5\\%\n$$\n\n**Final answer:** <answer>50.5</answer>",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 819,
+        "prompt": "George and Amelia are picking oranges and apples at an orchard. George picks 45 oranges and 5 more apples than Amelia. Amelia picks 18 fewer oranges than George and 15 apples. How many fruits do they pick altogether?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 107,
+        "base": {
+          "completion": "<answer>108</answer>",
+          "predicted": 108,
+          "parse_source": "answer_tag",
+          "correct": false
+        },
+        "selected": {
+          "completion": "Let's solve this step by step:\n\n- Let $ x $ be the number of oranges picked by Amelia.\n- George picks 45 oranges and 5 more apples than Amelia, so George has $ x + 5 $ apples.\n\n- Amelia picks 18 fewer oranges than George:  \n  $ x - 18 $ oranges.\n\nWe are given:\n- George has 45 oranges and $ x + 5 $ apples.\n- Amelia has $ x $ oranges and $ x - 18 $ apples.\n\nWe are told that George picks 45 oranges and 5 more apples than Amelia. So:\n\n- George's total fruits: 45 oranges + 5 apples = 50 fruits.\n- Amelia's total fruits: $ x $ oranges + $ x - 18 $ apples.\n\nWe are also told that George picks 45 oranges and 5 more apples than Amelia. So:\n\n- $ x +",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 820,
+        "prompt": "There are 9 bicycles and 16 cars in the garage. How many wheels are there in the garage?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 82,
+        "base": {
+          "completion": "<answer>16 + 9 = 25</answer>",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        },
+        "selected": {
+          "completion": "The number of wheels is calculated by multiplying the number of bicycles by the number of wheels per bicycle and the number of cars by the number of wheels per car. \n\n- Wheels on bicycles: $9 \\times 2 = 18$\n- Wheels on cars: $16 \\times 4 = 64$\n\nTotal wheels: $18 + 64 = 82$\n\nFinal answer: <answer>82</answer>",
+          "predicted": 82,
+          "parse_source": "answer_tag",
+          "correct": true
+        }
+      },
+      {
+        "index": 836,
+        "prompt": "Brad's car broke down on an isolated road.  At the time, Brad was traveling with Jim and Marcus.  So, the three decided to push the car back into town, which was 10 miles away.  For the first three miles, Brad steered as Jim and Marcus pushed at a speed of 6 miles per hour.  Then, for the next 3 miles, Jim steered, as Brad and Marcus pushed at a speed of 3 miles per hour.  For the last four miles, Marcus steered as Brad and Jim pushed at a speed of 8 miles per hour.  How long did it take, in hours, to push the car back to town?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 2,
+        "base": {
+          "completion": "<answer>10</answer>",
+          "predicted": 10,
+          "parse_source": "answer_tag",
+          "correct": false
+        },
+        "selected": {
+          "completion": "We are given the distances and speeds for each segment of the trip:\n\n- **First 3 miles**: Brad (and Marcus) at 6 mph  \n- **Next 3 miles**: Jim (and Brad) at 3 mph  \n- **Last 4 miles**: Marcus (and Jim) at 8 mph  \n\nWe need to calculate the total time taken for the entire trip.\n\n### Step 1: Calculate time for each segment\n\n- **First 3 miles**:  \n  $$\n  \\text{Time} = \\frac{3 \\text{ miles}}{6 \\text{ mph}} = 0.5 \\text{ hours}\n  $$\n\n- **Next 3 miles**:  \n  $$\n  \\text{Time} = \\frac{3 \\text{ miles}}{3 \\text{ mph}} = 1 \\text{ hour}\n  $$\n\n- **Last 4 miles**:  \n  $$",
+          "predicted": null,
+          "parse_source": null,
+          "correct": false
+        }
+      },
+      {
+        "index": 959,
+        "prompt": "Mrs. Dunbar was creating floral arrangements for her niece's wedding.  She needed to make 5 bouquets and 7 table decorations.  She uses 12 white roses in each table decoration and 5 white roses in each bouquet.  How many white roses in total does she need to complete all bouquets and table decorations?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 109,
+        "base": {
+          "completion": "The total number of white roses needed is calculated by multiplying the number of bouquets by the number of white roses per bouquet and adding the number of table decorations by the number of white roses per table decoration.\n\n$$\n(5 \\times 5) + (7 \\times 12) = 25 + 84 = 109\n$$\n\nThe final answer is:\n\n<answer>109</answer>",
+          "predicted": 109,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Each table decoration uses 12 white roses, and there are 7 table decorations.  \nTotal white roses used:  \n$$\n7 \\times 12 = 84\n$$\n\nEach bouquet uses 5 white roses, and there are 5 bouquets.  \nTotal white roses used:  \n$$\n5 \\times 5 = 25\n$$\n\nTotal white roses needed:  \n$$\n84 + 25 = 109\n$$\n\nFinal answer:  \n$$\n\\boxed{109}\n$$",
+          "predicted": 109,
+          "parse_source": "boxed",
+          "correct": true
+        }
+      },
+      {
+        "index": 963,
+        "prompt": "Matt did his homework for 150 minutes. He spent 30% of that time on math and 40% on science. He spent the remaining time on other subjects. How much time did Matt spend on homework in other subjects?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 45,
+        "base": {
+          "completion": "The total time Matt spent on homework is 150 minutes. He spent 30% on math and 40% on science. The remaining time is on other subjects.\n\n$$\n\\text{Time on other subjects} = 150 \\times (1 - 0.30 - 0.40) = 150 \\times 0.30 = 45 \\text{ minutes}\n$$\n\nFinal answer: <answer>45</answer>",
+          "predicted": 45,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Matt spent 30% of 150 minutes on math, and 40% on science. The remaining time is on other subjects.\n\nTotal time = 150 minutes  \nTime on math = 0.3 × 150 = 45 minutes  \nTime on science = 0.4 × 150 = 60 minutes  \n\nTime on other subjects = 150 - 45 - 60 = 45 minutes\n\n**Final answer:** <answer>45</answer>",
+          "predicted": 45,
+          "parse_source": "answer_tag",
+          "correct": true
+        }
+      },
+      {
+        "index": 976,
+        "prompt": "Natalia sold clips to 48 of her friends in April, and then she sold half as many clips in May. How many clips did Natalia sell altogether in April and May?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 72,
+        "base": {
+          "completion": "The number of clips Natalia sold in April is 48. In May, she sold half as many as in April, so the number of clips sold in May is $ \\frac{48}{2} = 24 $.\n\nThe total number of clips sold in April and May is:\n$$\n48 + 24 = 72\n$$\n\nFinal answer: <answer>72</answer>",
+          "predicted": 72,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Natalia sold 48 clips in April, and then sold half as many in May. Half of 48 is:\n\n$$\n\\frac{1}{2} \\times 48 = 24\n$$\n\nSo, the total number of clips sold in April and May is:\n\n$$\n48 + 24 = 72\n$$\n\n**Final answer:** <answer>72</answer>",
+          "predicted": 72,
+          "parse_source": "answer_tag",
+          "correct": true
+        }
+      },
+      {
+        "index": 984,
+        "prompt": "Eastern rattlesnakes have 6 segments in their tails, while Western rattlesnakes have 8 segments. What is the percentage difference in their tail size, expressed as a percentage of the Western rattlesnake's tail size?\n\nSolve the problem and show concise work. Put only the final numeric answer, without units or commas, inside <answer>...</answer>.",
+        "expected": 25,
+        "base": {
+          "completion": "The percentage difference in tail size can be calculated as:\n\n$$\n\\left(\\frac{8 - 6}{8}\\right) \\times 100 = \\left(\\frac{2}{8}\\right) \\times 100 = 25\\%\n$$\n\nFinal answer: <answer>25</answer>",
+          "predicted": 25,
+          "parse_source": "answer_tag",
+          "correct": true
+        },
+        "selected": {
+          "completion": "Eastern rattlesnakes have 6 segments in their tails, and Western rattlesnakes have 8 segments. The percentage difference in their tail size is calculated as:\n\n$$\n\\left(\\frac{8 - 6}{8}\\right) \\times 100 = \\left(\\frac{2}{8}\\right) \\times 100 = 25\\%\n$$\n\n**Final answer:** <answer>25</answer>",
+          "predicted": 25,
+          "parse_source": "answer_tag",
+          "correct": true
+        }
+      }
+    ],
+    "note": "Offline sample of saved paired generations. Parser parity is exhaustively checked; semantic correctness is not independently re-derived by this script."
+  }
+}

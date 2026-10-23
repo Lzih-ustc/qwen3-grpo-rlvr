@@ -1,0 +1,24 @@
+{
+  "locked_at_utc": "2026-10-23T00:46:15.991062+00:00",
+  "plan": "reports/gsm8k_phasec_seed2_plan.json",
+  "plan_sha256": "d7e16ab8965c637240e77f484b450c342fd428bd08bb7997edb5fe82b545e137",
+  "train_data_sha256": "b2a024bc82427709d5835c9f42091a4a5441111805afdf3e822774c40fe42dd4",
+  "validation_data_sha256": "013d47a81e741e350ae097bcc6913e477bc89f5403f778c396bdc85689247b88",
+  "test_data_sha256": "5529aa437b2c7be1f101b3a307a3eddbf07021cbda892af8b4c0320fc2b38251",
+  "code_sha256": {
+    "train_grpo.py": "5c33cb5407d335893a430f72aad25ed89360fa5b854cde1c47b96d87acf2f55b",
+    "math_task.py": "03064ba746198b16bb6a0ce9acd7ad3969c445c15c4716ec111b14e2455cd7c2",
+    "telemetry.py": "fcb25c391f1029f5ec9a8adf39ff82c2064b42fd6c351e0d0c3dc8654b2897f8",
+    "eval_math.py": "a7d95e3302794024cbdd72713722437a6bb86d0723a93d92f396492a17c654e9",
+    "select_group_size_candidate.py": "ff2b353881f11e5a9530ce68ea1a1e20d4da0d44c59bf07faa64e2cd33186951",
+    "audit_fresh_holdout.py": "0c34647989194eb897d072fbc5f47dcc8c1fced2e185001595560ef07f0c17c6",
+    "prepare_svamp.py": "aa36a0d1abcca3e7d2f1a13f96a9b3939082ce6331035f44017d86ae6f6a5def"
+  },
+  "dependency_lock_sha256": "9b220140188d5ea20bd457a5fffb04b00a3c1f2ce0c528aeabbcd0306a8665d6",
+  "git_commit": "900f147b0d73edaa7cdeafbb50690258ad142179",
+  "working_tree_dirty": true,
+  "gpu_before_training": "NVIDIA GeForce RTX 3060, 12288 MiB, 1586 MiB, 10537 MiB, 25 %",
+  "validation_audit": "passed",
+  "external_test_audit": "passed",
+  "test_opened": false
+}

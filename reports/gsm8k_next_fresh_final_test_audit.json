@@ -1,0 +1,53 @@
+{
+  "status": "paired_test_audit_passed",
+  "selection_json": "reports/gsm8k_next_fresh_reward_selection.json",
+  "selected_reward_mode": "exact_format",
+  "selected_adapter": "runs/gsm8k-next-fresh-g8-exact-format-16k/attempt-01/trainer/checkpoint-13",
+  "test_sha256": "355bc1cb7de1e61863364ea4790b2223dac405295bc2ad6ee160b2d741ca212e",
+  "eval_count": 1000,
+  "decode": {
+    "do_sample": false,
+    "max_new_tokens": 192,
+    "thinking": false
+  },
+  "base": {
+    "correct_count": 97,
+    "accuracy": 0.097,
+    "wilson_95_ci": [
+      0.08016916179032305,
+      0.1169152055490344
+    ],
+    "parse_rate": 0.729,
+    "generated_tokens": 52270,
+    "tokens_per_second": 55.3817792577997,
+    "elapsed_seconds": 943.8122194790003,
+    "torch_peak_allocated_mib": 819.98828125,
+    "torch_peak_reserved_mib": 886.0,
+    "whole_gpu_peak_memory_used_mib": 3485.0
+  },
+  "selected": {
+    "correct_count": 336,
+    "accuracy": 0.336,
+    "wilson_95_ci": [
+      0.30740158982270954,
+      0.36585358696055253
+    ],
+    "parse_rate": 0.681,
+    "generated_tokens": 140260,
+    "tokens_per_second": 30.59984198628042,
+    "elapsed_seconds": 4583.683800161001,
+    "torch_peak_allocated_mib": 819.98828125,
+    "torch_peak_reserved_mib": 908.0,
+    "whole_gpu_peak_memory_used_mib": 3512.0
+  },
+  "accuracy_delta_percentage_points": 23.900000000000002,
+  "paired_outcomes": {
+    "both_correct": 60,
+    "base_only_correct": 37,
+    "selected_only_correct": 276,
+    "both_wrong": 627
+  },
+  "exact_mcnemar_two_sided_p": 2.3699490129169963e-46,
+  "selection_used_test": false,
+  "test_opened_after_selection": true
+}

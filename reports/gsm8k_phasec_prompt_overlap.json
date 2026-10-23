@@ -1,0 +1,139 @@
+{
+  "status": "passed",
+  "analysis_type": "exploratory_saved_prompt_coverage_audit",
+  "train_data": "data/gsm8k-next-fresh/train.jsonl",
+  "train_data_sha256": "b2a024bc82427709d5835c9f42091a4a5441111805afdf3e822774c40fe42dd4",
+  "pairs": [
+    {
+      "label": "seed1",
+      "seed": 20261025,
+      "dataset_sha256": "b2a024bc82427709d5835c9f42091a4a5441111805afdf3e822774c40fe42dd4",
+      "group4": {
+        "updates": 26,
+        "generated_tokens": 16097,
+        "unique_prompts": 26
+      },
+      "group8": {
+        "updates": 13,
+        "generated_tokens": 16354,
+        "unique_prompts": 13
+      },
+      "prompt_coverage": {
+        "intersection": 13,
+        "union": 26,
+        "group4_only": 13,
+        "group8_only": 0,
+        "jaccard": 0.5,
+        "common_prompt_sha256": [
+          "605a9b08db9c4dd3f46ecd99167ca84491003deb633bff649a29fcdd6f5a0060",
+          "64d06e156774654f5de9dc3f1a6dc44dee025e2080ce3059e3ae58e804e8478e",
+          "2b40228417a1942799aa322dabc68ce4e3680c8e0c156844b1cc9d7d1c98be1b",
+          "6ef1a6ff454cc033f87cac5241cf2fc7605476f642a59a8b897c47afe1c22d48",
+          "728817e2878797567ce6447e73ef3250eecee46ebc59804949f16d52dec5ed24",
+          "06adc48c1b4ba2d0431aa504a3bce07f443d820dd650623117dbad63e7ef3995",
+          "d74ffb59cf2eb2cc617d3938c2ad623890bbce6e6139f773d8a0202c1913de51",
+          "273291943004db3755c61817d84462874706ada8a1cb066c6bde58cbc6241f34",
+          "d20011e11b9d654e00ccf3065d4ab0723974f14f736576187981c7e622beb81a",
+          "6eaf9ae6cac1b7ded99190daf75fa1d342148888362f7b84b50628d4dc31d53a",
+          "cc8a2089af5bcf6c209f4188797b2f1676912bcf55a81d78debf82bb5944eccb",
+          "6add13dbf12a8d881ede1893e541db06c79f830647ec31638ca8a286119bc98b",
+          "1e67d987a1608d2f1123d66e9435f46d0a98006d79887554681f2d0c7fb1553c"
+        ]
+      },
+      "common_prompt_group_diagnostics": {
+        "group4": {
+          "prompt_count": 13,
+          "group_count": 13,
+          "completions": 52,
+          "mean_prompt_accuracy": 0.34615384615384615,
+          "correctness_mixed_groups": 6,
+          "nonzero_reward_variance_groups": 11,
+          "generated_tokens": 7006,
+          "tokens_per_correctness_mixed_group": 1167.6666666666667
+        },
+        "group8": {
+          "prompt_count": 13,
+          "group_count": 13,
+          "completions": 104,
+          "mean_prompt_accuracy": 0.3557692307692308,
+          "correctness_mixed_groups": 11,
+          "nonzero_reward_variance_groups": 13,
+          "generated_tokens": 16354,
+          "tokens_per_correctness_mixed_group": 1486.7272727272727
+        },
+        "group8_minus_group4_mean_prompt_accuracy": 0.009615384615384616,
+        "prompts_group8_higher_accuracy": 7,
+        "prompts_tied_accuracy": 3,
+        "prompts_group4_higher_accuracy": 3
+      }
+    },
+    {
+      "label": "seed2",
+      "seed": 20261026,
+      "dataset_sha256": "b2a024bc82427709d5835c9f42091a4a5441111805afdf3e822774c40fe42dd4",
+      "group4": {
+        "updates": 25,
+        "generated_tokens": 16160,
+        "unique_prompts": 25
+      },
+      "group8": {
+        "updates": 13,
+        "generated_tokens": 16415,
+        "unique_prompts": 13
+      },
+      "prompt_coverage": {
+        "intersection": 13,
+        "union": 25,
+        "group4_only": 12,
+        "group8_only": 0,
+        "jaccard": 0.52,
+        "common_prompt_sha256": [
+          "f156478ce2191636e9a64783ffe3ced38ce15655f1bbd4b2972db8e454d9b7e8",
+          "e01119128d6119aaba7008203bccf5f68551be761a218e209d07d42ad340ca8c",
+          "413033c7fea4ae6f3058d123ff26e5372aaa6819d782a2d11d0a3d82d5a7c700",
+          "af179c5eaf45f40d40f63bb8d6b1a2b5385cce49b5ab514d7e32ebd3d3ad25aa",
+          "f99456b47210cef48653c657bb9e72d176e4adeb006330700460668dd793f6fd",
+          "22c63c8210c68e8f3d1c995145c051ad4d01c03fc90ceeb7e3d65a0e4d8f44e4",
+          "9ea4b0a6dfbb377c84459ef5ace05ef14417e1ddcaa5d1b2b2dcbd8bacd22ab4",
+          "bc90961b42d42b5bf15a80faddfcc1fa24e419c26416472f9e1ddd86c43094df",
+          "e439d70b4793ddd0b2dfc8efad38180e250bdd7ac4850da1a3ceac81c0084a9a",
+          "228343348e5d64a7aabe02138e8345791950bcc1289a138d650f9997b1f97790",
+          "41b5d03ee6dbd86534fd962352c0079079d6e496890f2fc6a53d095bb34b7632",
+          "edef5703518922b9b01f8686e6e6d55e8c3f3cabdfd7c63dd5feedd6cbc8608a",
+          "ce854dd676bc0eb831e01889db6f073b283e54d3ce24f15dd4818ad3d9c43fa2"
+        ]
+      },
+      "common_prompt_group_diagnostics": {
+        "group4": {
+          "prompt_count": 13,
+          "group_count": 13,
+          "completions": 52,
+          "mean_prompt_accuracy": 0.38461538461538464,
+          "correctness_mixed_groups": 9,
+          "nonzero_reward_variance_groups": 10,
+          "generated_tokens": 7556,
+          "tokens_per_correctness_mixed_group": 839.5555555555555
+        },
+        "group8": {
+          "prompt_count": 13,
+          "group_count": 13,
+          "completions": 104,
+          "mean_prompt_accuracy": 0.375,
+          "correctness_mixed_groups": 10,
+          "nonzero_reward_variance_groups": 11,
+          "generated_tokens": 16415,
+          "tokens_per_correctness_mixed_group": 1641.5
+        },
+        "group8_minus_group4_mean_prompt_accuracy": -0.009615384615384616,
+        "prompts_group8_higher_accuracy": 5,
+        "prompts_tied_accuracy": 4,
+        "prompts_group4_higher_accuracy": 4
+      }
+    }
+  ],
+  "limitations": [
+    "Prompt overlap is descriptive; prompts were not assigned as a preregistered paired experimental design.",
+    "The two arms sampled independent completions and had different update counts and prompt coverage.",
+    "The paired subset may be small and selected by the observed sampling overlap; it cannot establish a causal group-size effect."
+  ]
+}

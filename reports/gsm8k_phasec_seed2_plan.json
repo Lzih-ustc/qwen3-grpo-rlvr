@@ -1,0 +1,62 @@
+{
+  "status": "locked_before_training_and_candidate_validation",
+  "experiment": "matched_token_group_size_replication_seed2",
+  "dataset": "data/gsm8k-replication",
+  "train_data": "data/gsm8k-next-fresh/train.jsonl",
+  "train_data_sha256": "b2a024bc82427709d5835c9f42091a4a5441111805afdf3e822774c40fe42dd4",
+  "validation_data": "data/gsm8k-replication/validation.jsonl",
+  "validation_sha256": "013d47a81e741e350ae097bcc6913e477bc89f5403f778c396bdc85689247b88",
+  "validation_source_split": "openai/gsm8k train rows unused by prior splits or predictions",
+  "validation_source_count": 500,
+  "data_split_seed": 20261023,
+  "reward_mode": "exact_format",
+  "seed": 20261026,
+  "learning_rate": 0.00005,
+  "prompt_token_limit": 256,
+  "max_completion_length": 256,
+  "generated_token_budget_target": 16000,
+  "base_model": "Qwen/Qwen3-0.6B",
+  "model_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+  "dependency_lock_sha256": "9b220140188d5ea20bd457a5fffb04b00a3c1f2ce0c528aeabbcd0306a8665d6",
+  "code_sha256": {
+    "train_grpo.py": "5c33cb5407d335893a430f72aad25ed89360fa5b854cde1c47b96d87acf2f55b",
+    "math_task.py": "03064ba746198b16bb6a0ce9acd7ad3969c445c15c4716ec111b14e2455cd7c2",
+    "telemetry.py": "fcb25c391f1029f5ec9a8adf39ff82c2064b42fd6c351e0d0c3dc8654b2897f8",
+    "eval_math.py": "a7d95e3302794024cbdd72713722437a6bb86d0723a93d92f396492a17c654e9",
+    "select_group_size_candidate.py": "ff2b353881f11e5a9530ce68ea1a1e20d4da0d44c59bf07faa64e2cd33186951",
+    "audit_fresh_holdout.py": "0c34647989194eb897d072fbc5f47dcc8c1fced2e185001595560ef07f0c17c6",
+    "prepare_svamp.py": "aa36a0d1abcca3e7d2f1a13f96a9b3939082ce6331035f44017d86ae6f6a5def"
+  },
+  "use_vllm": false,
+  "gradient_checkpointing": true,
+  "selection_metric": "exact_match_accuracy_on_fixed_500_row_validation",
+  "selection_rule": "Choose highest validation exact-match; ties choose fewer generated training tokens, then fewer optimizer updates.",
+  "candidate_validation_decode": {
+    "do_sample": false,
+    "max_new_tokens": 192,
+    "thinking": false
+  },
+  "candidates": [
+    {
+      "candidate_id": "group4",
+      "group_size": 4,
+      "gradient_accumulation_steps": 4,
+      "run_dir": "runs/gsm8k-phasec-seed2-g4-16k",
+      "adapter": "runs/gsm8k-phasec-seed2-g4-16k/attempt-01/final_adapter"
+    },
+    {
+      "candidate_id": "group8",
+      "group_size": 8,
+      "gradient_accumulation_steps": 8,
+      "run_dir": "runs/gsm8k-phasec-seed2-g8-16k",
+      "adapter": "runs/gsm8k-phasec-seed2-g8-16k/attempt-01/final_adapter"
+    }
+  ],
+  "test_data": "data/svamp/test.jsonl",
+  "test_dataset": "arkilpatel/SVAMP external challenge test",
+  "test_sha256": "5529aa437b2c7be1f101b3a307a3eddbf07021cbda892af8b4c0320fc2b38251",
+  "test_source_revision": "78e727689e1c1bebfc4be39c446898e8e10b0518",
+  "test_used_for_selection": false,
+  "test_opened": false,
+  "test_evaluation_rule": "After validation selects one candidate, evaluate the selected adapter and base exactly once each on all 1,000 SVAMP items; do not tune from these results."
+}

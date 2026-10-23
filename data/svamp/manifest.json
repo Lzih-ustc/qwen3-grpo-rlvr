@@ -1,0 +1,15 @@
+{
+  "dataset": "arkilpatel/SVAMP",
+  "repository_commit": "78e727689e1c1bebfc4be39c446898e8e10b0518",
+  "source_file": "data/svamp-source/SVAMP.json",
+  "source_sha256": "5be77703a6d891ae476d7c082787ad361392aa02453b132516cdd5f4e7934e3e",
+  "license_file": "data/svamp-source/LICENSE",
+  "license_sha256": "07ce3a34de7a865345634f9278bc26ddcacc2d0defd348c28e3f4603448b9ba4",
+  "rows": 1000,
+  "unique_source_ids": 1000,
+  "unique_normalized_questions": 1000,
+  "integer_gold_answers": 1000,
+  "output_file": "data/svamp/test.jsonl",
+  "output_sha256": "5529aa437b2c7be1f101b3a307a3eddbf07021cbda892af8b4c0320fc2b38251",
+  "evaluation_role": "external_test_only"
+}
