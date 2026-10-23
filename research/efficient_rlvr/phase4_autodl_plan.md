@@ -1,6 +1,6 @@
 # Phase 4 — audited AutoDL RTX 4090 experiment plan
 
-Status: **offline plan only; NO-GO for paid execution until the listed preflight blockers are closed and the user explicitly approves each paid stage.** No AutoDL instance has been created or started. No paid compute was used for this audit.
+Status: **local engineering gate PASS; paid execution remains NO-GO pending a separate explicit approval.** No AutoDL instance has been created or started. No paid compute was used. The current local evidence and a strictly capped 2-hour RTX 4090 preflight plan are recorded in phase4b_engineering_gate.md.
 
 This plan preserves the locked dataset and all Phase A–C records. The independent test is opened once, after the protocol and all terminal checkpoints are frozen.
 
@@ -22,7 +22,7 @@ All generated-token estimates below are completion tokens. The 128-token mean is
 
 | Stage | Model states | Scored model-prompt sequences | Planning generated tokens | Maximum generated tokens for the stage |
 |---|---:|---:|---:|---:|
-| Preflight | 2 adapter states from 1 base revision | 8 train-only diagnostic completions, plus up to 48 rollout completions | about 7,168 at 128 tokens/completion | 14,336 |
+| Preflight | 1 base state + 1 smoke adapter state from 1 base revision | 100 train-only diagnostic sequences plus data-dependent GFRL candidates (≤8,192 attempted completion tokens) | about 20,992 (12,800 diagnostic scenario + 8,192 training cap) | 33,792 (25,600 diagnostic maximum + 8,192 training cap) |
 | Fixed-token main training | 9 terminal adapters | Training prompt count is data-dependent; about 1,125 completions across 9 runs at 128 tokens/completion | 144,000 attempted completion tokens total | 144,000 attempted tokens |
 | Main validation | Base + 9 fixed-token adapters = 10 models | 10 × 300 = 3,000 | 409,600 including warmups | 819,200 |
 | Fixed-GPU-time supplement training | 9 terminal adapters | Training prompt count is data-dependent | 675,000–1,350,000 scenario range, using 50–100 emitted tokens/s during 25 active minutes/run | No independent token ceiling; the hard limit is billed/active time |
@@ -39,14 +39,11 @@ The 20 warmups per model are drawn from a fixed, non-scored subset of train; no 
 
 The current GroupFilterStats code counts every returned candidate completion and its completion-ID length before deciding whether the group is retained. Rejected all-correct and all-incorrect groups, retries on additional train rows, and candidates from groups that exhaust the 12-candidate limit all contribute to attempted completions and attempted completion tokens. Retained tokens include only completions from accepted mixed groups; discarded tokens are attempted minus retained. Exhausted requested groups are separately counted and their final returned outputs are marked ineffective for the optimizer.
 
-This establishes the accounting semantics for a successful callback, but it is **not yet a formal budget guarantee**. Current code has no hard fixed-token stop, no append-only event ledger, and only aggregate in-memory telemetry. A process interruption before the final report could lose that aggregate. The formal 18-run controller is not implemented.
+The historical audit above captured the state before the final engineering gate. That blocker has now been addressed for GFRL candidate generation by an SQLite WAL ledger and a global whole-group budget stopper in ledger.py. The ledger durably records reservations, returned IDs/lengths, retries, filter outcomes, discarded candidates, and interruptions. It serializes reservations and rejects a second live process. Replaying a committed candidate returns saved IDs without generating again.
 
-Before the main matrix, add and validate a budget-aware generation guard and durable per-candidate ledger:
+The controller reserves 4 × 256 = 1,024 tokens before each candidate group. Provided the backend honors the registered per-completion cap, it starts no group unless the complete reservation fits, so overrun is zero and boundary underfill is at most 1,023 tokens. A cap-violating backend is recorded with actual returned IDs/tokens and stops the run; a post-generation guard cannot prevent a misbehaving backend from emitting extra tokens. If a process dies after reserving but before saving generated IDs, recovery conservatively charges the full reservation, marks the physical count unknown, and fails the run closed. Exact physical output cannot be reconstructed across that narrow crash window; such an interrupted run is not accepted as valid training evidence. The formal 18-run controller remains unimplemented.
 
-1. Count completion IDs immediately after each generation call, before parsing/filtering; append candidate-group ID, source prompt ID, seed, arm, completion lengths, accepted/rejected/exhausted outcome, and cumulative attempted tokens.
-2. Reserve the worst-case 4 × 256 = 1,024 tokens before starting each complete group. Start another candidate group only if at least 1,024 tokens remain. Never start a partial group. Apply the same accounting to retries.
-3. Do not exceed 16,000 attempted completion tokens. The final unused slack will be less than 1,024 tokens; report actual tokens, requested groups, all candidate groups, unique prompts, completions, retained/discarded tokens, exhausted groups, effective groups, and optimizer updates.
-4. Reconcile the ledger token sum against saved completion IDs and training-run summaries before accepting any run. On a process restart, resume only if the budget state and ledger are recovered exactly; otherwise stop and mark the run incomplete.
+The CPU fault-injection suite and one local RTX 3060 training smoke pass. The detailed evidence and the distinction between exact known tokens and conservative crash reservations are in phase4b_engineering_gate.md. This clears the local engineering gate only; it does not approve cloud spending.
 
 The code currently counts completion-ID list lengths, which includes a returned EOS token if present and excludes prompt tokens. Log the generation finish reason where available and identify cap-truncated sequences separately. Do not substitute retained-token totals for attempted-token budgets.
 
@@ -90,15 +87,15 @@ Prices below use the current public RTX 4090 24 GB quote of ¥1.88/hour checked 
 
 | Stage | Maximum billed time | Estimated cost at ¥1.88/hour | Stage stop |
 |---|---:|---:|---|
-| Preflight | 0.5 h | ¥0.94 | One setup only. Stop on failed budget-guard test, non-finite/no-gradient update, no adapter change, checkpoint mismatch, OOM, or telemetry reconciliation failure. |
+| Preflight | **2.0 h hard maximum** | **¥3.76 compute at last recorded ¥1.88/h quote** | One instance and one run. Only environment, throughput/truncation, VRAM, one training update, ledger, and checkpoint tests. Stop at 120 billed minutes or any gate failure. No 18-run matrix. Recheck quote and any storage charge before approval. |
 | Fixed-token main: 9 runs × 40 min | 6.0 h | ¥11.28 | Each run reserves up to 10 min load/warmup, 25 min active training, and 5 min save. Stop at either 16,000 attempted tokens or 25 active minutes. Incomplete target means failed/incomplete run; no extension/replacement. |
 | Main validation: 10 models × 300 | 3.5 h | ¥6.58 | One saved full-cap completion per item and 20 train warmups/model. Stop on hash/ID mismatch, missing output, parser/verifier mismatch, or >5% cap-truncated completions in any arm. |
 | Fixed-time supplement: 9 runs × 40 min | 6.0 h | ¥11.28 | Each run allows 10 min load/warmup, exactly 25 active minutes, and up to 5 min save. Stop at the cutoff; no extension or replacement. |
 | Supplement validation: 9 models × 300 | 3.25 h | ¥6.11 | One saved full-cap completion per item and 20 train warmups/model. Stop on artifact/metric failure or >5% cap-truncated completions in any supplemental arm. |
 | Final independent test: 19 models × 500 | 10.0 h | ¥18.80 | One evaluation pass after hashes, terminal checkpoints, analysis code, and report tables are frozen. No test-based selection or reruns. |
-| **Total planning ceiling** | **29.25 h** | **¥54.99** | **30% reserve yields ¥71.49; proposed rounded hard cap ¥75.** |
+| **Total planning ceiling** | **30.75 h** | **¥57.81** | **30% reserve yields ¥75.15; proposed rounded hard cap ¥80.** |
 
-Evaluation reservations assume batch size 1, up to 256 generated tokens, 75 completion tokens/s, plus model reload, synchronization, and export overhead: 3.5 hours for main validation, 3.25 hours for supplement validation, and 10 hours for final test. If preflight cannot justify these reservations, revise the plan and obtain new approval before proceeding. The projected ¥75 cap includes no paid data disk, storage retention, premium image, or additional retries.
+Evaluation reservations assume batch size 1, up to 256 generated tokens, 75 completion tokens/s, plus model reload, synchronization, and export overhead: 3.5 hours for main validation, 3.25 hours for supplement validation, and 10 hours for final test. If preflight cannot justify these reservations, revise the plan and obtain new approval before proceeding. The proposed ¥80 cap includes no paid data disk, storage retention, premium image, or additional retries.
 
 Paid work must be manually gated, one stage at a time. Finishing a stage never starts the next stage automatically. Do not create an instance, enable an automation that launches runs, extend a slot, buy storage, or retry a failed run without a new explicit approval. Any OOM, lost accounting, or failed stop condition ends the current stage; do not change just one arm's sequence cap or budget.
 
@@ -106,4 +103,4 @@ Price references: [AutoDL public GPU prices](https://www.autodl.com/) and [AutoD
 
 ## Current GO / NO-GO
 
-**NO-GO for paid execution at this audit.** Offline data hashes, prompt caps, and current GFRL counter semantics pass; module-family generalization is limited and must be described accordingly. The formal run is blocked until the budget-aware stop, durable telemetry, and 4090 preflight are implemented and verified. This plan is not an approval to incur the estimated ¥75.
+**Local engineering gate PASS; paid execution NO-GO.** CPU fault-injection tests and the local RTX 3060 GFRL smoke verified zero budget overrun, exact known-token reconciliation, replay idempotency, one nonzero-gradient optimizer update, adapter change, and checkpoint reload. AutoDL 4090 throughput, VRAM, and locked-validation truncation remain unknown. The 2-hour preflight plan is design only, not approval to incur charges. The 18-run matrix remains blocked until a separate explicit approval and successful preflight.

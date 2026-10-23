@@ -32,13 +32,13 @@ The independent `efficient-rlvr` branch begins from the Phase C archive commit `
 - The upstream repository's top-level Apache-2.0 license applies to its generator code; it does not separately state a license for generated output data. The license copy and provenance are included. JSONL splits are kept local and ignored by Git pending clearer output-data licensing; they can be deterministically regenerated and hash-checked.
 - Audit artifacts: `research/efficient_rlvr/phase3_data_audit.md`, `reports/efficient_rlvr_phase3_data_audit.json`, `reports/efficient_rlvr_phase3_reproducibility.json`, and `reports/efficient_rlvr_phase3_prompt_length_audit.json`.
 
-### Phase 4 — final AutoDL audit: complete; paid execution NO-GO
+### Phase 4 — final AutoDL audit and local engineering gate: complete; paid execution NO-GO
 
-- Offline Phase 4B audited all 18 planned runs, GFRL attempted-token accounting, LCE interpretation, locked data composition, evaluation-panel cost, and accuracy-cost selection rules. The revised plan is in `research/efficient_rlvr/phase4_autodl_plan.md`; the audit decision and stage gates are in `research/efficient_rlvr/phase4b_go_no_go.md`.
+- Offline Phase 4B audited all 18 planned runs, GFRL attempted-token accounting, LCE interpretation, locked data composition, evaluation-panel cost, and accuracy-cost selection rules. The initial audit snapshot is `research/efficient_rlvr/phase4b_go_no_go.md`; the updated execution plan and final engineering gate are `research/efficient_rlvr/phase4_autodl_plan.md` and `research/efficient_rlvr/phase4b_engineering_gate.md`.
 - Train/validation/test hashes match the manifest and no prompt exceeds 256 tokens. The test is an extrapolation-regime split, not a family-disjoint split: all 13 test modules map to families present in train, and arithmetic is 70.4% of test versus 31.3% of train. See `research/efficient_rlvr/phase4b_data_audit.md`.
-- Current GFRL counters include rejected candidates and retries after successful callback returns, but there is no formal run-level token guard or durable event ledger. This is a preflight blocker.
+- The durable SQLite GFRL ledger and full-group token stopper now record retries, discarded groups, interruptions, and replay IDs. All 38 repository offline tests passed (26 Efficient RLVR and 12 agent/audit tests), and the local WSL RTX 3060 smoke performed one update before stopping at the 1,024-token budget boundary with zero overrun and exact reconciliation.
 - Evaluation is planned for 19 models × 300 validation prompts (split into primary/supplement gates) and 19 × 500 final test prompts. The completion-token envelope including warmups is 4,085,760 tokens; LCE prefixes reuse each full output.
-- Revised planning ceiling: 29.25 billed GPU-hours, ¥54.99 at the 2026-10-23 public ¥1.88/hour quote, proposed ¥75 cap with reserve. This is not paid-work authorization. No GPU training, AutoDL, or paid service was started for Phase 4B; per-stage user approval remains required.
+- Updated planning ceiling: 30.75 billed GPU-hours, ¥57.81 at the last recorded ¥1.88/hour quote, proposed ¥80 cap with reserve. The first RTX 4090 preflight design is capped at 2 billed hours (¥3.76 compute at that quote); it is not approved. No AutoDL instance or paid service was started; per-stage user approval remains required.
 
 ### Phase 5 — model comparison: not started
 

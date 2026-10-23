@@ -1,9 +1,9 @@
 {
   "manifest_version": 1,
-  "generated_utc": "2026-10-23T11:24:02.046502+00:00",
+  "generated_utc": "2026-10-23T13:07:06.193025+00:00",
   "repository": {
     "branch": "efficient-rlvr",
-    "head_commit_at_generation": "346d19dc49a12775874c13c074ce7bb8e9944629"
+    "head_commit_at_generation": "c38abd28692f6c3b68838a009374d8f027e0254a"
   },
   "historical_archive_commit": "b98a22da844106544e1a26812099a4db3bb73e60",
   "source_data": {
@@ -183,8 +183,8 @@
       "path": "docs/STATUS.md",
       "category": "project_status",
       "exists": true,
-      "size_bytes": 18383,
-      "sha256": "f2c60b784a63bd2c562e2e23f82d5042a97dccfe514b3eea4095a6418ce80eb9",
+      "size_bytes": 18714,
+      "sha256": "3bc1b35aa7f4f1a6ed2031f10d687d675f447fdf54a00a71df66e2e1191859f4",
       "git_ignored": false
     },
     {
@@ -252,11 +252,19 @@
       "git_ignored": false
     },
     {
+      "path": "reports/efficient_rlvr_phase4b_gpu_smoke.json",
+      "category": "smoke_report",
+      "exists": true,
+      "size_bytes": 5713,
+      "sha256": "836fdc25c82516758ec9fd1bf031821d66039e75e36c89d9e65e72f2e16d1dcf",
+      "git_ignored": false
+    },
+    {
       "path": "research/efficient_rlvr/README.md",
       "category": "documentation_or_license",
       "exists": true,
-      "size_bytes": 5126,
-      "sha256": "99a5c44fcee72de091feb26c6634bc7ee85d0fd216f594d8fea6cb804f9d49c8",
+      "size_bytes": 6310,
+      "sha256": "6af244f65d1140449483e58a2c00992431d097ea5b193f2bab0486f406e12922",
       "git_ignored": false
     },
     {
@@ -271,8 +279,16 @@
       "path": "research/efficient_rlvr/group_filter.py",
       "category": "code_or_test",
       "exists": true,
-      "size_bytes": 7913,
-      "sha256": "27dc52791c15bc5457119dbd47dec703d810fb44049007d2daf845fcb9120114",
+      "size_bytes": 15333,
+      "sha256": "038332e14a4598498c5c9404de74d9c6c33a49c5c4071d4a5bd8c3c07067effa",
+      "git_ignored": false
+    },
+    {
+      "path": "research/efficient_rlvr/ledger.py",
+      "category": "code_or_test",
+      "exists": true,
+      "size_bytes": 46399,
+      "sha256": "24b90e80d8b3f0fde0d7bc80ed2e858b75d44b8771a10dd1b924e8823f6c2dc9",
       "git_ignored": false
     },
     {
@@ -327,8 +343,8 @@
       "path": "research/efficient_rlvr/phase4_autodl_plan.md",
       "category": "documentation_or_license",
       "exists": true,
-      "size_bytes": 16302,
-      "sha256": "28a0a309b9f718bb2bd55d6bad8f6bff749f034e081455caf0a53236a38e1092",
+      "size_bytes": 16950,
+      "sha256": "80a459f319c94afdf346f742d4bdfd280b70bb6925ee91ec0d8cd23079a202f2",
       "git_ignored": false
     },
     {
@@ -340,11 +356,19 @@
       "git_ignored": false
     },
     {
+      "path": "research/efficient_rlvr/phase4b_engineering_gate.md",
+      "category": "documentation_or_license",
+      "exists": true,
+      "size_bytes": 9813,
+      "sha256": "f3577bc40d3afe21112837923d0cd113ecbb9f2eac78bf56c6ae95b9a91b79b6",
+      "git_ignored": false
+    },
+    {
       "path": "research/efficient_rlvr/phase4b_go_no_go.md",
       "category": "documentation_or_license",
       "exists": true,
-      "size_bytes": 10838,
-      "sha256": "f8e30cd3fb31e9d0c4035c6f95f1f85e049b40b5166d80dcab52c4dd4fb1ec5d",
+      "size_bytes": 11141,
+      "sha256": "20dcd79f4c55c98893aef2a5186d65f896974506bff0b2ceec5e5f95ccfe499d",
       "git_ignored": false
     },
     {
@@ -407,8 +431,8 @@
       "path": "research/efficient_rlvr/scripts/build_artifact_manifest.py",
       "category": "code_or_test",
       "exists": true,
-      "size_bytes": 5624,
-      "sha256": "6ad67b9bed0e704793526f6a436533a24f4236137457ec2de0bb3fa1afdf757e",
+      "size_bytes": 6767,
+      "sha256": "10405c63bbb22760a10927f54ebdb6101d9b4a1d4e60245278f6bdeb6f079257",
       "git_ignored": false
     },
     {
@@ -431,8 +455,8 @@
       "path": "research/efficient_rlvr/smoke.py",
       "category": "code_or_test",
       "exists": true,
-      "size_bytes": 14383,
-      "sha256": "74db59cdf9e91d2013ac6b779d347e2a1955b6c5183ca464071602de5c8d3db9",
+      "size_bytes": 15984,
+      "sha256": "1e0f44d3bce87ab5cf63226b7d01346b183d0626b4edd93bd7d7fb2d3a771cd0",
       "git_ignored": false
     },
     {
@@ -457,6 +481,14 @@
       "exists": true,
       "size_bytes": 5779,
       "sha256": "33d0bf8db200dfb5834658105dd1e135e3db3d2f39bb8e7d144466968cf06cb7",
+      "git_ignored": false
+    },
+    {
+      "path": "research/efficient_rlvr/tests/test_token_ledger.py",
+      "category": "code_or_test",
+      "exists": true,
+      "size_bytes": 14576,
+      "sha256": "d709aeb5f474405d46697d678f2ffd1add532be78668e1d8220ac2389c349ce5",
       "git_ignored": false
     }
   ],
@@ -515,6 +547,72 @@
       "exists": true,
       "size_bytes": 10143888,
       "sha256": "42fce187ce0c7bf9ee781c54aa5042672383c965f0d78e5f16aa9d279e675b54",
+      "git_ignored": true
+    }
+  ],
+  "local_only_run_artifacts": [
+    {
+      "path": "runs/efficient-rlvr-phase4b-gpu-smoke-attempt-01/attempt-01/config.json",
+      "category": "local_smoke_checkpoint",
+      "exists": true,
+      "size_bytes": 891,
+      "sha256": "7f8ae8227fc36f675c32e91b074600d0e0fba724962632e216348d4487131bb7",
+      "git_ignored": true
+    },
+    {
+      "path": "runs/efficient-rlvr-phase4b-gpu-smoke-attempt-01/attempt-01/trainer_state.json",
+      "category": "local_smoke_checkpoint",
+      "exists": true,
+      "size_bytes": 1677,
+      "sha256": "10298f0b70d35108442a3ee45e8095bf9c48c4d7abf8084a872f56ec0bdb1763",
+      "git_ignored": true
+    },
+    {
+      "path": "runs/efficient-rlvr-phase4b-gpu-smoke-attempt-01/attempt-01/attempted_tokens.sqlite3",
+      "category": "local_token_ledger",
+      "exists": true,
+      "size_bytes": 73728,
+      "sha256": "89f3b5d38c8314d4e6891688faa3c3c1063b519fff9e874f8f92a4bbfcf55340",
+      "git_ignored": true
+    },
+    {
+      "path": "runs/efficient-rlvr-phase4b-gpu-smoke-attempt-01/attempt-01/trainer/checkpoint-1/adapter_model.safetensors",
+      "category": "local_smoke_checkpoint",
+      "exists": true,
+      "size_bytes": 10143888,
+      "sha256": "d4451e28e66119fff2fd53d0a3d103a5f09ec1a42e1a72223cfb8fb32063d552",
+      "git_ignored": true
+    },
+    {
+      "path": "runs/efficient-rlvr-phase4b-gpu-smoke-attempt-01/attempt-01/trainer/checkpoint-1/optimizer.pt",
+      "category": "local_smoke_checkpoint",
+      "exists": true,
+      "size_bytes": 20514346,
+      "sha256": "1b1eb00b60be3a119250a37f58ac8289704ebfb802896d05f2367fde7d8e5461",
+      "git_ignored": true
+    },
+    {
+      "path": "runs/efficient-rlvr-phase4b-gpu-smoke-attempt-01/attempt-01/trainer/checkpoint-1/scheduler.pt",
+      "category": "local_smoke_checkpoint",
+      "exists": true,
+      "size_bytes": 1064,
+      "sha256": "dedff0bfa0a648c9cedf04bbe791acd06e5f5e933ede55dc382835af47b9538f",
+      "git_ignored": true
+    },
+    {
+      "path": "runs/efficient-rlvr-phase4b-gpu-smoke-attempt-01/attempt-01/trainer/checkpoint-1/rng_state.pth",
+      "category": "local_smoke_checkpoint",
+      "exists": true,
+      "size_bytes": 14244,
+      "sha256": "218aae486f96afe5bb5c7f9a5f4034cef2629b8768b8b09a7cd719b934d4a8fe",
+      "git_ignored": true
+    },
+    {
+      "path": "runs/efficient-rlvr-phase4b-gpu-smoke-attempt-01/attempt-01/final_adapter/adapter_model.safetensors",
+      "category": "local_smoke_checkpoint",
+      "exists": true,
+      "size_bytes": 10143888,
+      "sha256": "d4451e28e66119fff2fd53d0a3d103a5f09ec1a42e1a72223cfb8fb32063d552",
       "git_ignored": true
     }
   ],

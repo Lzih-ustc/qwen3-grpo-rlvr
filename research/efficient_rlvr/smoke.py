@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""One-update local RTX smoke for the correctness-gated length reward."""
+"""Local RTX smoke for a durable-token-budgeted correctness-gated GRPO update."""
 
 from __future__ import annotations
 
@@ -28,6 +28,7 @@ import train_grpo as archived
 from scripts.math_task import completion_text
 from research.efficient_rlvr.rewards import correctness_gated_length_reward
 from research.efficient_rlvr.group_filter import DynamicMixedGroupRollout
+from research.efficient_rlvr.ledger import AttemptedTokenLedger, TokenBudgetExhausted
 
 
 def cached_snapshot_path(explicit_path: Path | None) -> Path:
@@ -63,10 +64,12 @@ def load_base_for_adapter(dtype: torch.dtype, snapshot_path: Path):
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--run-dir", type=Path, default=Path("runs/efficient-rlvr-phase2-smoke"))
-    parser.add_argument("--report", type=Path, default=Path("reports/efficient_rlvr_phase2_smoke.json"))
-    parser.add_argument("--generations", type=int, default=8)
+    parser.add_argument("--run-dir", type=Path, default=Path("runs/efficient-rlvr-phase4b-gpu-smoke"))
+    parser.add_argument("--report", type=Path, default=Path("reports/efficient_rlvr_phase4b_gpu_smoke.json"))
+    parser.add_argument("--generations", type=int, default=4)
     parser.add_argument("--max-completion-length", type=int, default=64)
+    parser.add_argument("--token-budget", type=int, default=2048)
+    parser.add_argument("--max-steps", type=int, default=16)
     parser.add_argument("--length-weight", type=float, default=0.2)
     parser.add_argument("--temperature", type=float, default=0.9)
     parser.add_argument("--max-candidate-groups", type=int, default=12)
@@ -75,8 +78,8 @@ def main() -> None:
     args = parser.parse_args()
     if not torch.cuda.is_available():
         raise SystemExit("CUDA is unavailable; this script refuses to substitute CPU training for the requested GPU smoke")
-    if args.generations < 2 or args.max_completion_length < 1:
-        raise SystemExit("generations must be >=2 and max-completion-length must be positive")
+    if args.generations < 2 or args.max_completion_length < 1 or args.token_budget < 1 or args.max_steps < 1:
+        raise SystemExit("generations, max-completion-length, token-budget, and max-steps must be positive")
     if args.run_dir.exists() and any(args.run_dir.iterdir()):
         raise SystemExit(f"Run directory is nonempty; choose a new path to preserve all smoke attempts: {args.run_dir}")
 
@@ -127,11 +130,20 @@ def main() -> None:
         raise SystemExit("Synthetic smoke train split is empty")
     smoke_row = train_rows[0]
     dataset = Dataset.from_list([smoke_row])
+    ledger = AttemptedTokenLedger(
+        attempt_dir / "attempted_tokens.sqlite3",
+        run_id=f"local-rtx-smoke-seed-{args.seed}",
+        target_tokens=args.token_budget,
+        group_size=args.generations,
+        max_completion_tokens=args.max_completion_length,
+        max_candidates_per_group=args.max_candidate_groups,
+    )
     rollout = DynamicMixedGroupRollout(
         train_rows,
         group_size=args.generations,
         max_candidates_per_group=args.max_candidate_groups,
         seed=args.seed,
+        ledger=ledger,
     )
     generation_stats: dict[str, int] = {"retained_completion_count": 0, "retained_completion_tokens": 0}
     reward_rows: list[dict[str, object]] = []
@@ -158,7 +170,7 @@ def main() -> None:
 
     config = GRPOConfig(
         output_dir=str(attempt_dir / "trainer"),
-        max_steps=1,
+        max_steps=args.max_steps,
         per_device_train_batch_size=1,
         gradient_accumulation_steps=args.generations,
         num_generations=args.generations,
@@ -202,6 +214,7 @@ def main() -> None:
         "seed": seed,
         "group_size": args.generations,
         "max_completion_tokens": args.max_completion_length,
+        "global_attempted_token_budget": args.token_budget,
         "length_weight": args.length_weight,
         "temperature": args.temperature,
         "max_candidate_groups_per_retained_group": args.max_candidate_groups,
@@ -223,7 +236,18 @@ def main() -> None:
         rollout_func=rollout,
     )
     start = time.perf_counter()
-    train_result = trainer.train()
+    token_budget_stopped = False
+    train_error = None
+    train_result = None
+    try:
+        train_result = trainer.train()
+        ledger.mark_complete()
+    except TokenBudgetExhausted as exc:
+        token_budget_stopped = True
+        train_error = str(exc)
+    except Exception as exc:
+        train_error = f"{type(exc).__name__}: {exc}"
+        ledger.record_run_exception(stage="trainer.train", error=exc)
     train_seconds = time.perf_counter() - start
     global_step = trainer.state.global_step
     if global_step > 0 and not (attempt_dir / "trainer" / f"checkpoint-{global_step}").is_dir():
@@ -267,8 +291,16 @@ def main() -> None:
     ]
     positive_rewards = [float(item["reward"]) for item in reward_rows if isinstance(item["reward"], (int, float))]
     correct_reward_count = sum(value > 0 for value in positive_rewards)
+    ledger_summary = ledger.summary()
     summary = {
-        "status": "passed" if global_step >= 1 and changed_values > 0 and checkpoint_reload_match else "failed",
+        "status": "passed" if (
+            global_step >= 1
+            and changed_values > 0
+            and checkpoint_reload_match
+            and not ledger_summary["actual_count_unknown"]
+            and ledger_summary["budget_overrun_tokens"] == 0
+            and ledger_summary["attempted_completion_tokens"] == rollout.stats.attempted_completion_tokens
+        ) else "failed",
         "created_utc": datetime.now(timezone.utc).isoformat(),
         "phase": "local RTX 3060 one-update smoke; no AutoDL/cloud/paid service",
         "model_id": archived.MODEL_ID,
@@ -279,12 +311,15 @@ def main() -> None:
         "software_versions": {name: archived.package_version(name) for name in ["torch", "transformers", "trl", "peft", "accelerate", "bitsandbytes"]},
         "config": {"group_size": args.generations, "max_completion_tokens": args.max_completion_length, "length_weight": args.length_weight, "temperature": args.temperature, "dtype": str(dtype)},
         "optimizer_updates": global_step,
-        "trainer_metrics": train_result.metrics,
+        "trainer_metrics": train_result.metrics if train_result is not None else None,
+        "token_budget_stopped": token_budget_stopped,
+        "train_error": train_error,
         "gradient_norms": grad_norms,
         "changed_lora_parameter_tensors": changed_parameters,
         "changed_lora_parameter_values": changed_values,
         "completion_count": rollout.stats.attempted_completions,
         "generated_tokens": rollout.stats.attempted_completion_tokens,
+        "attempted_token_ledger": ledger_summary,
         "retained_completion_count": generation_stats["retained_completion_count"],
         "retained_completion_tokens": generation_stats["retained_completion_tokens"],
         "group_filter_stats": rollout.stats.as_dict(),

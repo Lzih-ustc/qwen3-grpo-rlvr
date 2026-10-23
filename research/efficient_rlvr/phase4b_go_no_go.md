@@ -2,6 +2,8 @@
 
 Audit date: 2026-10-23
 
+> Historical snapshot before implementation of the final engineering gate. Its GFRL-blocker decision is superseded by phase4b_engineering_gate.md, which records the CPU fault-injection results, local RTX 3060 smoke, and current paid-execution decision. Phase A–C experiment records remain unchanged.
+
 ## Decision
 
 **NO-GO for paid execution.** This turn performed offline code/data/protocol review only. No GPU training, AutoDL instance, paid storage, or other paid service was started; spend for this audit is ¥0.

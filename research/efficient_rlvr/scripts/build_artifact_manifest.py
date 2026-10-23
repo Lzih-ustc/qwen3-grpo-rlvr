@@ -82,7 +82,8 @@ def collect() -> dict[str, Any]:
     for path in (ROOT / "reports").glob("efficient_rlvr_phase3*.json"):
         files[path.relative_to(ROOT).as_posix()] = (path, "data_audit_report")
     for path in (ROOT / "reports").glob("efficient_rlvr_phase4b*.json"):
-        files[path.relative_to(ROOT).as_posix()] = (path, "data_audit_report")
+        category = "smoke_report" if "gpu_smoke" in path.name else "data_audit_report"
+        files[path.relative_to(ROOT).as_posix()] = (path, category)
     status_path = ROOT / "docs" / "STATUS.md"
     files[status_path.relative_to(ROOT).as_posix()] = (status_path, "project_status")
 
@@ -95,6 +96,18 @@ def collect() -> dict[str, Any]:
         run_dir / "trainer" / "checkpoint-1" / "scheduler.pt",
         run_dir / "trainer" / "checkpoint-1" / "rng_state.pth",
         run_dir / "final_adapter" / "adapter_model.safetensors",
+    ]
+
+    phase4b_smoke_dir = ROOT / "runs" / "efficient-rlvr-phase4b-gpu-smoke-attempt-01" / "attempt-01"
+    phase4b_run_paths = [
+        phase4b_smoke_dir / "config.json",
+        phase4b_smoke_dir / "trainer_state.json",
+        phase4b_smoke_dir / "attempted_tokens.sqlite3",
+        phase4b_smoke_dir / "trainer" / "checkpoint-1" / "adapter_model.safetensors",
+        phase4b_smoke_dir / "trainer" / "checkpoint-1" / "optimizer.pt",
+        phase4b_smoke_dir / "trainer" / "checkpoint-1" / "scheduler.pt",
+        phase4b_smoke_dir / "trainer" / "checkpoint-1" / "rng_state.pth",
+        phase4b_smoke_dir / "final_adapter" / "adapter_model.safetensors",
     ]
 
     return {
@@ -113,6 +126,10 @@ def collect() -> dict[str, Any]:
         },
         "files": [artifact(path, category) for _, (path, category) in sorted(files.items())],
         "local_only_checkpoint": [artifact(path, "local_smoke_checkpoint") for path in local_run_paths],
+        "local_only_run_artifacts": [
+            artifact(path, "local_token_ledger" if path.suffix == ".sqlite3" else "local_smoke_checkpoint")
+            for path in phase4b_run_paths
+        ],
         "notes": [
             "This manifest hashes the data and smoke evidence for this branch; it does not alter Phase A-C artifacts.",
             "Generated JSONL split files and binary checkpoints are intentionally excluded from Git.",
@@ -129,6 +146,8 @@ def main() -> None:
         "files": len(manifest["files"]),
         "local_checkpoint_files": sum(item["exists"] for item in manifest["local_only_checkpoint"]),
         "missing_local_checkpoint_files": [item["path"] for item in manifest["local_only_checkpoint"] if not item["exists"]],
+        "phase4b_run_artifacts": len(manifest["local_only_run_artifacts"]),
+        "missing_phase4b_run_artifacts": [item["path"] for item in manifest["local_only_run_artifacts"] if not item["exists"]],
     }, indent=2, ensure_ascii=False))
 
 
