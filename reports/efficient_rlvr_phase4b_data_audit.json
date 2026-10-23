@@ -1,0 +1,747 @@
+{
+  "status": "passed",
+  "audit_scope": "Offline data structure, descriptive difficulty proxies, module overlap, prompt cap, and split-hash verification; no generation or training.",
+  "dataset_id": "efficient-rlvr-math-v1",
+  "upstream_revision": "427f45075f84b8b9774950196ad63867ca20ffb3",
+  "split_hashes_verified": {
+    "train": "0b0e38b8b8fc608edeb930a519cc2c759886605d83f92c508c7e5ae5349e88a5",
+    "validation": "0632c74da64263b398d4ba9e66663a11ed6918cc05d7229cb4f1ff65b93c82e3",
+    "test": "28a1e8d26070c3c21057a3e28c0febbad9b158964bf7f2953c5e1fb17fddca6f"
+  },
+  "difficulty_proxy_limitations": [
+    "Question length, visible numbers/operators, answer digit count, and generator module are not calibrated difficulty labels.",
+    "Train, interpolation-validation, and extrapolation-test regimes are structurally different; this audit does not claim equal difficulty or concept-level independence.",
+    "Completion-length and reasoning truncation cannot be measured until a model generates on the training/validation data."
+  ],
+  "module_overlap": {
+    "train_vs_validation": {
+      "exact_leaf_overlap_count": 27,
+      "exact_leaf_overlap": [
+        "algebra/linear_1d",
+        "algebra/linear_2d",
+        "algebra/polynomial_roots",
+        "algebra/sequence_next_term",
+        "arithmetic/add_or_sub",
+        "arithmetic/add_or_sub_in_base",
+        "arithmetic/add_sub_multiple",
+        "arithmetic/div",
+        "arithmetic/mixed",
+        "arithmetic/mul",
+        "arithmetic/mul_div_multiple",
+        "arithmetic/nearest_integer_root",
+        "arithmetic/simplify_surd",
+        "comparison/closest",
+        "comparison/kth_biggest",
+        "comparison/pair",
+        "measurement/conversion",
+        "measurement/time",
+        "numbers/base_conversion",
+        "numbers/div_remainder",
+        "numbers/gcd",
+        "numbers/lcm",
+        "numbers/list_prime_factors",
+        "numbers/place_value",
+        "polynomials/coefficient_named",
+        "polynomials/evaluate",
+        "probability/swr_p_sequence"
+      ],
+      "expansion_normalized_family_overlap_count": 27,
+      "expansion_normalized_family_overlap": [
+        "algebra/linear_1d",
+        "algebra/linear_2d",
+        "algebra/polynomial_roots",
+        "algebra/sequence_next_term",
+        "arithmetic/add_or_sub",
+        "arithmetic/add_or_sub_in_base",
+        "arithmetic/add_sub_multiple",
+        "arithmetic/div",
+        "arithmetic/mixed",
+        "arithmetic/mul",
+        "arithmetic/mul_div_multiple",
+        "arithmetic/nearest_integer_root",
+        "arithmetic/simplify_surd",
+        "comparison/closest",
+        "comparison/kth_biggest",
+        "comparison/pair",
+        "measurement/conversion",
+        "measurement/time",
+        "numbers/base_conversion",
+        "numbers/div_remainder",
+        "numbers/gcd",
+        "numbers/lcm",
+        "numbers/list_prime_factors",
+        "numbers/place_value",
+        "polynomials/coefficient_named",
+        "polynomials/evaluate",
+        "probability/swr_p_sequence"
+      ],
+      "top_level_domain_overlap": [
+        "algebra",
+        "arithmetic",
+        "comparison",
+        "measurement",
+        "numbers",
+        "polynomials",
+        "probability"
+      ],
+      "left_only_leaf_count": 3,
+      "right_only_leaf_count": 0
+    },
+    "train_vs_test": {
+      "exact_leaf_overlap_count": 1,
+      "exact_leaf_overlap": [
+        "measurement/conversion"
+      ],
+      "expansion_normalized_family_overlap_count": 13,
+      "expansion_normalized_family_overlap": [
+        "algebra/polynomial_roots",
+        "arithmetic/add_or_sub",
+        "arithmetic/add_sub_multiple",
+        "arithmetic/div",
+        "arithmetic/mixed",
+        "arithmetic/mul",
+        "arithmetic/mul_div_multiple",
+        "comparison/closest",
+        "comparison/kth_biggest",
+        "measurement/conversion",
+        "numbers/place_value",
+        "probability/swr_p_level_set",
+        "probability/swr_p_sequence"
+      ],
+      "top_level_domain_overlap": [
+        "algebra",
+        "arithmetic",
+        "comparison",
+        "measurement",
+        "numbers",
+        "probability"
+      ],
+      "left_only_leaf_count": 29,
+      "right_only_leaf_count": 12
+    },
+    "validation_vs_test": {
+      "exact_leaf_overlap_count": 1,
+      "exact_leaf_overlap": [
+        "measurement/conversion"
+      ],
+      "expansion_normalized_family_overlap_count": 12,
+      "expansion_normalized_family_overlap": [
+        "algebra/polynomial_roots",
+        "arithmetic/add_or_sub",
+        "arithmetic/add_sub_multiple",
+        "arithmetic/div",
+        "arithmetic/mixed",
+        "arithmetic/mul",
+        "arithmetic/mul_div_multiple",
+        "comparison/closest",
+        "comparison/kth_biggest",
+        "measurement/conversion",
+        "numbers/place_value",
+        "probability/swr_p_sequence"
+      ],
+      "top_level_domain_overlap": [
+        "algebra",
+        "arithmetic",
+        "comparison",
+        "measurement",
+        "numbers",
+        "probability"
+      ],
+      "left_only_leaf_count": 26,
+      "right_only_leaf_count": 12
+    },
+    "interpretation": "Exact generator-leaf disjointness does not imply concept-level independence. The expansion-normalized family view strips only the upstream naming suffixes _big, _longer, _more, and _more_samples; it is a structural overlap diagnostic, not a calibrated math-difficulty score."
+  },
+  "split_summaries": {
+    "train": {
+      "rows": 1500,
+      "module_count": 30,
+      "question_characters": {
+        "min": 7,
+        "mean": 47.088,
+        "p50_nearest_rank": 47,
+        "p90_nearest_rank": 62,
+        "p95_nearest_rank": 83,
+        "p99_nearest_rank": 121,
+        "max": 156
+      },
+      "question_word_or_number_tokens": {
+        "min": 2,
+        "mean": 10.087,
+        "p50_nearest_rank": 9,
+        "p90_nearest_rank": 14,
+        "p95_nearest_rank": 17,
+        "p99_nearest_rank": 35,
+        "max": 45
+      },
+      "numeric_literals_per_question": {
+        "min": 0,
+        "mean": 3.796,
+        "p50_nearest_rank": 3,
+        "p90_nearest_rank": 7,
+        "p95_nearest_rank": 8,
+        "p99_nearest_rank": 15,
+        "max": 21
+      },
+      "visible_operator_symbols_per_question": {
+        "min": 0,
+        "mean": 4.15,
+        "p50_nearest_rank": 2,
+        "p90_nearest_rank": 11,
+        "p95_nearest_rank": 14,
+        "p99_nearest_rank": 34,
+        "max": 51
+      },
+      "answer_digits": {
+        "min": 1,
+        "mean": 2.925,
+        "p50_nearest_rank": 2,
+        "p90_nearest_rank": 6,
+        "p95_nearest_rank": 8,
+        "p99_nearest_rank": 12,
+        "max": 21
+      },
+      "answer_magnitude": {
+        "max_digits": 21,
+        "max_absolute_value": 110110110111100111110,
+        "over_12_digits": 9,
+        "over_20_digits": 1
+      },
+      "module_rows": {
+        "algebra/linear_1d": {
+          "count": 88,
+          "mean_question_chars": 36.22,
+          "mean_answer_digits": 1.48
+        },
+        "algebra/linear_2d": {
+          "count": 77,
+          "mean_question_chars": 53.87,
+          "mean_answer_digits": 1.14
+        },
+        "algebra/polynomial_roots": {
+          "count": 2,
+          "mean_question_chars": 58.5,
+          "mean_answer_digits": 4.5
+        },
+        "algebra/sequence_next_term": {
+          "count": 86,
+          "mean_question_chars": 59.51,
+          "mean_answer_digits": 5.12
+        },
+        "arithmetic/add_or_sub": {
+          "count": 24,
+          "mean_question_chars": 26.75,
+          "mean_answer_digits": 6.54
+        },
+        "arithmetic/add_or_sub_in_base": {
+          "count": 71,
+          "mean_question_chars": 32.06,
+          "mean_answer_digits": 5.45
+        },
+        "arithmetic/add_sub_multiple": {
+          "count": 89,
+          "mean_question_chars": 34.49,
+          "mean_answer_digits": 1.52
+        },
+        "arithmetic/div": {
+          "count": 58,
+          "mean_question_chars": 26.07,
+          "mean_answer_digits": 2.97
+        },
+        "arithmetic/mixed": {
+          "count": 46,
+          "mean_question_chars": 35.7,
+          "mean_answer_digits": 1.41
+        },
+        "arithmetic/mul": {
+          "count": 36,
+          "mean_question_chars": 20.72,
+          "mean_answer_digits": 5.28
+        },
+        "arithmetic/mul_div_multiple": {
+          "count": 43,
+          "mean_question_chars": 34.44,
+          "mean_answer_digits": 1.51
+        },
+        "arithmetic/nearest_integer_root": {
+          "count": 89,
+          "mean_question_chars": 57.9,
+          "mean_answer_digits": 2.47
+        },
+        "arithmetic/simplify_surd": {
+          "count": 13,
+          "mean_question_chars": 59.92,
+          "mean_answer_digits": 3
+        },
+        "calculus/differentiate": {
+          "count": 10,
+          "mean_question_chars": 53.9,
+          "mean_answer_digits": 5.8
+        },
+        "comparison/closest": {
+          "count": 14,
+          "mean_question_chars": 46.71,
+          "mean_answer_digits": 1
+        },
+        "comparison/kth_biggest": {
+          "count": 26,
+          "mean_question_chars": 55.04,
+          "mean_answer_digits": 2.08
+        },
+        "comparison/pair": {
+          "count": 27,
+          "mean_question_chars": 32.3,
+          "mean_answer_digits": 3.48
+        },
+        "measurement/conversion": {
+          "count": 48,
+          "mean_question_chars": 46.96,
+          "mean_answer_digits": 5
+        },
+        "measurement/time": {
+          "count": 48,
+          "mean_question_chars": 55.44,
+          "mean_answer_digits": 2.79
+        },
+        "numbers/base_conversion": {
+          "count": 63,
+          "mean_question_chars": 30.81,
+          "mean_answer_digits": 5.75
+        },
+        "numbers/div_remainder": {
+          "count": 89,
+          "mean_question_chars": 51.91,
+          "mean_answer_digits": 2.22
+        },
+        "numbers/gcd": {
+          "count": 78,
+          "mean_question_chars": 53.14,
+          "mean_answer_digits": 2.17
+        },
+        "numbers/lcm": {
+          "count": 88,
+          "mean_question_chars": 54.41,
+          "mean_answer_digits": 5.73
+        },
+        "numbers/list_prime_factors": {
+          "count": 11,
+          "mean_question_chars": 33.45,
+          "mean_answer_digits": 4.64
+        },
+        "numbers/place_value": {
+          "count": 103,
+          "mean_question_chars": 38.1,
+          "mean_answer_digits": 1
+        },
+        "polynomials/coefficient_named": {
+          "count": 79,
+          "mean_question_chars": 99.7,
+          "mean_answer_digits": 1.71
+        },
+        "polynomials/evaluate": {
+          "count": 87,
+          "mean_question_chars": 46.83,
+          "mean_answer_digits": 1.92
+        },
+        "polynomials/simplify_power": {
+          "count": 1,
+          "mean_question_chars": 74,
+          "mean_answer_digits": 1
+        },
+        "probability/swr_p_level_set": {
+          "count": 3,
+          "mean_question_chars": 90.33,
+          "mean_answer_digits": 1
+        },
+        "probability/swr_p_sequence": {
+          "count": 3,
+          "mean_question_chars": 89.67,
+          "mean_answer_digits": 1
+        }
+      },
+      "domain_rows": {
+        "algebra": 253,
+        "arithmetic": 469,
+        "calculus": 10,
+        "comparison": 67,
+        "measurement": 96,
+        "numbers": 432,
+        "polynomials": 167,
+        "probability": 6
+      }
+    },
+    "validation": {
+      "rows": 300,
+      "module_count": 27,
+      "question_characters": {
+        "min": 22,
+        "mean": 49.24,
+        "p50_nearest_rank": 53,
+        "p90_nearest_rank": 61,
+        "p95_nearest_rank": 67,
+        "p99_nearest_rank": 105,
+        "max": 123
+      },
+      "question_word_or_number_tokens": {
+        "min": 3,
+        "mean": 9.977,
+        "p50_nearest_rank": 10,
+        "p90_nearest_rank": 14,
+        "p95_nearest_rank": 15,
+        "p99_nearest_rank": 27,
+        "max": 35
+      },
+      "numeric_literals_per_question": {
+        "min": 0,
+        "mean": 3.723,
+        "p50_nearest_rank": 3,
+        "p90_nearest_rank": 7,
+        "p95_nearest_rank": 7,
+        "p99_nearest_rank": 11,
+        "max": 18
+      },
+      "visible_operator_symbols_per_question": {
+        "min": 0,
+        "mean": 3.76,
+        "p50_nearest_rank": 1,
+        "p90_nearest_rank": 10,
+        "p95_nearest_rank": 12,
+        "p99_nearest_rank": 22,
+        "max": 39
+      },
+      "answer_digits": {
+        "min": 1,
+        "mean": 3.647,
+        "p50_nearest_rank": 2,
+        "p90_nearest_rank": 7,
+        "p95_nearest_rank": 8,
+        "p99_nearest_rank": 16,
+        "max": 25
+      },
+      "answer_magnitude": {
+        "max_digits": 25,
+        "max_absolute_value": 1010000110000010010111100,
+        "over_12_digits": 5,
+        "over_20_digits": 1
+      },
+      "module_rows": {
+        "algebra/linear_1d": {
+          "count": 14,
+          "mean_question_chars": 41.5,
+          "mean_answer_digits": 1.93
+        },
+        "algebra/linear_2d": {
+          "count": 18,
+          "mean_question_chars": 55.61,
+          "mean_answer_digits": 1.17
+        },
+        "algebra/polynomial_roots": {
+          "count": 1,
+          "mean_question_chars": 56,
+          "mean_answer_digits": 7
+        },
+        "algebra/sequence_next_term": {
+          "count": 21,
+          "mean_question_chars": 60.57,
+          "mean_answer_digits": 6.19
+        },
+        "arithmetic/add_or_sub": {
+          "count": 1,
+          "mean_question_chars": 27,
+          "mean_answer_digits": 11
+        },
+        "arithmetic/add_or_sub_in_base": {
+          "count": 18,
+          "mean_question_chars": 36.61,
+          "mean_answer_digits": 8.94
+        },
+        "arithmetic/add_sub_multiple": {
+          "count": 20,
+          "mean_question_chars": 39.35,
+          "mean_answer_digits": 1.7
+        },
+        "arithmetic/div": {
+          "count": 8,
+          "mean_question_chars": 26.25,
+          "mean_answer_digits": 2.88
+        },
+        "arithmetic/mixed": {
+          "count": 10,
+          "mean_question_chars": 36.5,
+          "mean_answer_digits": 1.9
+        },
+        "arithmetic/mul": {
+          "count": 2,
+          "mean_question_chars": 25.5,
+          "mean_answer_digits": 4
+        },
+        "arithmetic/mul_div_multiple": {
+          "count": 5,
+          "mean_question_chars": 37.6,
+          "mean_answer_digits": 2
+        },
+        "arithmetic/nearest_integer_root": {
+          "count": 24,
+          "mean_question_chars": 59.75,
+          "mean_answer_digits": 2.67
+        },
+        "arithmetic/simplify_surd": {
+          "count": 1,
+          "mean_question_chars": 88,
+          "mean_answer_digits": 1
+        },
+        "comparison/closest": {
+          "count": 3,
+          "mean_question_chars": 44,
+          "mean_answer_digits": 1.33
+        },
+        "comparison/kth_biggest": {
+          "count": 4,
+          "mean_question_chars": 59.5,
+          "mean_answer_digits": 2.5
+        },
+        "comparison/pair": {
+          "count": 4,
+          "mean_question_chars": 32.25,
+          "mean_answer_digits": 4.75
+        },
+        "measurement/conversion": {
+          "count": 14,
+          "mean_question_chars": 44.43,
+          "mean_answer_digits": 4.93
+        },
+        "measurement/time": {
+          "count": 7,
+          "mean_question_chars": 55.43,
+          "mean_answer_digits": 3
+        },
+        "numbers/base_conversion": {
+          "count": 11,
+          "mean_question_chars": 32.73,
+          "mean_answer_digits": 7.45
+        },
+        "numbers/div_remainder": {
+          "count": 22,
+          "mean_question_chars": 53.82,
+          "mean_answer_digits": 2.36
+        },
+        "numbers/gcd": {
+          "count": 14,
+          "mean_question_chars": 55.07,
+          "mean_answer_digits": 2.57
+        },
+        "numbers/lcm": {
+          "count": 26,
+          "mean_question_chars": 56.31,
+          "mean_answer_digits": 7.27
+        },
+        "numbers/list_prime_factors": {
+          "count": 1,
+          "mean_question_chars": 39,
+          "mean_answer_digits": 8
+        },
+        "numbers/place_value": {
+          "count": 16,
+          "mean_question_chars": 39.31,
+          "mean_answer_digits": 1
+        },
+        "polynomials/coefficient_named": {
+          "count": 7,
+          "mean_question_chars": 98.14,
+          "mean_answer_digits": 2.71
+        },
+        "polynomials/evaluate": {
+          "count": 27,
+          "mean_question_chars": 48.93,
+          "mean_answer_digits": 1.93
+        },
+        "probability/swr_p_sequence": {
+          "count": 1,
+          "mean_question_chars": 89,
+          "mean_answer_digits": 1
+        }
+      },
+      "domain_rows": {
+        "algebra": 54,
+        "arithmetic": 89,
+        "comparison": 11,
+        "measurement": 21,
+        "numbers": 90,
+        "polynomials": 34,
+        "probability": 1
+      }
+    },
+    "test": {
+      "rows": 500,
+      "module_count": 13,
+      "question_characters": {
+        "min": 12,
+        "mean": 57.486,
+        "p50_nearest_rank": 59,
+        "p90_nearest_rank": 81,
+        "p95_nearest_rank": 87,
+        "p99_nearest_rank": 105,
+        "max": 111
+      },
+      "question_word_or_number_tokens": {
+        "min": 2,
+        "mean": 10.508,
+        "p50_nearest_rank": 11,
+        "p90_nearest_rank": 16,
+        "p95_nearest_rank": 18,
+        "p99_nearest_rank": 23,
+        "max": 25
+      },
+      "numeric_literals_per_question": {
+        "min": 0,
+        "mean": 7.1,
+        "p50_nearest_rank": 10,
+        "p90_nearest_rank": 12,
+        "p95_nearest_rank": 12,
+        "p99_nearest_rank": 13,
+        "max": 15
+      },
+      "visible_operator_symbols_per_question": {
+        "min": 0,
+        "mean": 8.602,
+        "p50_nearest_rank": 12,
+        "p90_nearest_rank": 17,
+        "p95_nearest_rank": 18,
+        "p99_nearest_rank": 20,
+        "max": 22
+      },
+      "answer_digits": {
+        "min": 1,
+        "mean": 3.874,
+        "p50_nearest_rank": 3,
+        "p90_nearest_rank": 10,
+        "p95_nearest_rank": 12,
+        "p99_nearest_rank": 17,
+        "max": 19
+      },
+      "answer_magnitude": {
+        "max_digits": 19,
+        "max_absolute_value": 5537569500000000000,
+        "over_12_digits": 23,
+        "over_20_digits": 0
+      },
+      "module_rows": {
+        "algebra/polynomial_roots_big": {
+          "count": 3,
+          "mean_question_chars": 72.67,
+          "mean_answer_digits": 11
+        },
+        "arithmetic/add_or_sub_big": {
+          "count": 16,
+          "mean_question_chars": 33.75,
+          "mean_answer_digits": 14.81
+        },
+        "arithmetic/add_sub_multiple_longer": {
+          "count": 86,
+          "mean_question_chars": 70.62,
+          "mean_answer_digits": 2.57
+        },
+        "arithmetic/div_big": {
+          "count": 40,
+          "mean_question_chars": 30.9,
+          "mean_answer_digits": 6.38
+        },
+        "arithmetic/mixed_longer": {
+          "count": 80,
+          "mean_question_chars": 68.69,
+          "mean_answer_digits": 2.59
+        },
+        "arithmetic/mul_big": {
+          "count": 33,
+          "mean_question_chars": 22.55,
+          "mean_answer_digits": 10.09
+        },
+        "arithmetic/mul_div_multiple_longer": {
+          "count": 97,
+          "mean_question_chars": 64.53,
+          "mean_answer_digits": 2.63
+        },
+        "comparison/closest_more": {
+          "count": 6,
+          "mean_question_chars": 65.5,
+          "mean_answer_digits": 1.33
+        },
+        "comparison/kth_biggest_more": {
+          "count": 22,
+          "mean_question_chars": 81.45,
+          "mean_answer_digits": 1.41
+        },
+        "measurement/conversion": {
+          "count": 21,
+          "mean_question_chars": 44.67,
+          "mean_answer_digits": 12.43
+        },
+        "numbers/place_value_big": {
+          "count": 84,
+          "mean_question_chars": 46.15,
+          "mean_answer_digits": 1
+        },
+        "probability/swr_p_level_set_more_samples": {
+          "count": 10,
+          "mean_question_chars": 101.3,
+          "mean_answer_digits": 1
+        },
+        "probability/swr_p_sequence_more_samples": {
+          "count": 2,
+          "mean_question_chars": 82.5,
+          "mean_answer_digits": 1
+        }
+      },
+      "domain_rows": {
+        "algebra": 3,
+        "arithmetic": 352,
+        "comparison": 28,
+        "measurement": 21,
+        "numbers": 84,
+        "probability": 12
+      }
+    }
+  },
+  "prompt_token_audit": {
+    "train": {
+      "count": 1500,
+      "min": 39,
+      "mean": 56.546,
+      "p50_nearest_rank": 53,
+      "p95_nearest_rank": 83,
+      "p99_nearest_rank": 103,
+      "max": 130,
+      "over_cap": 0
+    },
+    "validation": {
+      "count": 300,
+      "min": 45,
+      "mean": 58.32,
+      "p50_nearest_rank": 55,
+      "p95_nearest_rank": 81,
+      "p99_nearest_rank": 91,
+      "max": 105,
+      "over_cap": 0
+    },
+    "test": {
+      "count": 500,
+      "min": 45,
+      "mean": 66.502,
+      "p50_nearest_rank": 71,
+      "p95_nearest_rank": 83,
+      "p99_nearest_rank": 87,
+      "max": 95,
+      "over_cap": 0
+    }
+  },
+  "prompt_cap": {
+    "tokens": 256,
+    "over_cap_by_split": {
+      "train": 0,
+      "validation": 0,
+      "test": 0
+    },
+    "completion_cap_tokens": 256,
+    "completion_truncation_risk": "unknown until generated outputs are collected; no new-split model evaluation has run"
+  }
+}

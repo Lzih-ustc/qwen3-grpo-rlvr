@@ -81,6 +81,8 @@ def collect() -> dict[str, Any]:
         files[path.relative_to(ROOT).as_posix()] = (path, "smoke_report")
     for path in (ROOT / "reports").glob("efficient_rlvr_phase3*.json"):
         files[path.relative_to(ROOT).as_posix()] = (path, "data_audit_report")
+    for path in (ROOT / "reports").glob("efficient_rlvr_phase4b*.json"):
+        files[path.relative_to(ROOT).as_posix()] = (path, "data_audit_report")
     status_path = ROOT / "docs" / "STATUS.md"
     files[status_path.relative_to(ROOT).as_posix()] = (status_path, "project_status")
 

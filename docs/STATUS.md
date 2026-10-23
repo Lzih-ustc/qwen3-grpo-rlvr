@@ -32,10 +32,13 @@ The independent `efficient-rlvr` branch begins from the Phase C archive commit `
 - The upstream repository's top-level Apache-2.0 license applies to its generator code; it does not separately state a license for generated output data. The license copy and provenance are included. JSONL splits are kept local and ignored by Git pending clearer output-data licensing; they can be deterministically regenerated and hash-checked.
 - Audit artifacts: `research/efficient_rlvr/phase3_data_audit.md`, `reports/efficient_rlvr_phase3_data_audit.json`, `reports/efficient_rlvr_phase3_reproducibility.json`, and `reports/efficient_rlvr_phase3_prompt_length_audit.json`.
 
-### Phase 4 — AutoDL plan: prepared, execution not approved
+### Phase 4 — final AutoDL audit: complete; paid execution NO-GO
 
-- Proposed one RTX 4090 24 GB, 3 arms × 3 paired seeds × fixed-token/fixed-time budgets, explicit stop rules, and an estimated 14-GPU-hour ceiling. Current public price estimate is ¥1.88/hour, with a proposed ¥40 hard spend cap including contingency.
-- The plan is in `research/efficient_rlvr/phase4_autodl_plan.md`. No instance has been created or started. Paid execution remains gated on the user's explicit approval.
+- Offline Phase 4B audited all 18 planned runs, GFRL attempted-token accounting, LCE interpretation, locked data composition, evaluation-panel cost, and accuracy-cost selection rules. The revised plan is in `research/efficient_rlvr/phase4_autodl_plan.md`; the audit decision and stage gates are in `research/efficient_rlvr/phase4b_go_no_go.md`.
+- Train/validation/test hashes match the manifest and no prompt exceeds 256 tokens. The test is an extrapolation-regime split, not a family-disjoint split: all 13 test modules map to families present in train, and arithmetic is 70.4% of test versus 31.3% of train. See `research/efficient_rlvr/phase4b_data_audit.md`.
+- Current GFRL counters include rejected candidates and retries after successful callback returns, but there is no formal run-level token guard or durable event ledger. This is a preflight blocker.
+- Evaluation is planned for 19 models × 300 validation prompts (split into primary/supplement gates) and 19 × 500 final test prompts. The completion-token envelope including warmups is 4,085,760 tokens; LCE prefixes reuse each full output.
+- Revised planning ceiling: 29.25 billed GPU-hours, ¥54.99 at the 2026-10-23 public ¥1.88/hour quote, proposed ¥75 cap with reserve. This is not paid-work authorization. No GPU training, AutoDL, or paid service was started for Phase 4B; per-stage user approval remains required.
 
 ### Phase 5 — model comparison: not started
 

@@ -1,9 +1,9 @@
 {
   "manifest_version": 1,
-  "generated_utc": "2026-10-23T10:32:35.357376+00:00",
+  "generated_utc": "2026-10-23T11:24:02.046502+00:00",
   "repository": {
     "branch": "efficient-rlvr",
-    "head_commit_at_generation": "09eec0788d0f498a35df50ad27010436430cd48e"
+    "head_commit_at_generation": "346d19dc49a12775874c13c074ce7bb8e9944629"
   },
   "historical_archive_commit": "b98a22da844106544e1a26812099a4db3bb73e60",
   "source_data": {
@@ -183,8 +183,8 @@
       "path": "docs/STATUS.md",
       "category": "project_status",
       "exists": true,
-      "size_bytes": 17417,
-      "sha256": "f616a2c759f79c15d4ad449ac3270f3a8f1c9137699f0a9927209fa7905ef692",
+      "size_bytes": 18383,
+      "sha256": "f2c60b784a63bd2c562e2e23f82d5042a97dccfe514b3eea4095a6418ce80eb9",
       "git_ignored": false
     },
     {
@@ -244,11 +244,19 @@
       "git_ignored": false
     },
     {
+      "path": "reports/efficient_rlvr_phase4b_data_audit.json",
+      "category": "data_audit_report",
+      "exists": true,
+      "size_bytes": 22304,
+      "sha256": "1965b1d9c60b698af23c75ac01e61ec86667ffb7eae74752ff82e82fce45cfb5",
+      "git_ignored": false
+    },
+    {
       "path": "research/efficient_rlvr/README.md",
       "category": "documentation_or_license",
       "exists": true,
-      "size_bytes": 4733,
-      "sha256": "b6fea4824659c2612535445470bee0a2b0971e7429a9870ca769696247846c8c",
+      "size_bytes": 5126,
+      "sha256": "99a5c44fcee72de091feb26c6634bc7ee85d0fd216f594d8fea6cb804f9d49c8",
       "git_ignored": false
     },
     {
@@ -319,8 +327,24 @@
       "path": "research/efficient_rlvr/phase4_autodl_plan.md",
       "category": "documentation_or_license",
       "exists": true,
-      "size_bytes": 6878,
-      "sha256": "8248c48e6db88321fbc936504a4f0828f2b890712f63cad38c5507c94bb63b7d",
+      "size_bytes": 16302,
+      "sha256": "28a0a309b9f718bb2bd55d6bad8f6bff749f034e081455caf0a53236a38e1092",
+      "git_ignored": false
+    },
+    {
+      "path": "research/efficient_rlvr/phase4b_data_audit.md",
+      "category": "documentation_or_license",
+      "exists": true,
+      "size_bytes": 3472,
+      "sha256": "3db25d578b9fef35c9ea57c3959fe77b030838bb688895663914fd23fdcaf591",
+      "git_ignored": false
+    },
+    {
+      "path": "research/efficient_rlvr/phase4b_go_no_go.md",
+      "category": "documentation_or_license",
+      "exists": true,
+      "size_bytes": 10838,
+      "sha256": "f8e30cd3fb31e9d0c4035c6f95f1f85e049b40b5166d80dcab52c4dd4fb1ec5d",
       "git_ignored": false
     },
     {
@@ -364,6 +388,14 @@
       "git_ignored": false
     },
     {
+      "path": "research/efficient_rlvr/scripts/audit_phase4b_dataset.py",
+      "category": "code_or_test",
+      "exists": true,
+      "size_bytes": 12213,
+      "sha256": "eb8cc91de378fa6c07af6b7abab0d4e92103b5d479a49b3deb9bbf2046029e63",
+      "git_ignored": false
+    },
+    {
       "path": "research/efficient_rlvr/scripts/audit_prompt_token_budget.py",
       "category": "code_or_test",
       "exists": true,
@@ -375,8 +407,8 @@
       "path": "research/efficient_rlvr/scripts/build_artifact_manifest.py",
       "category": "code_or_test",
       "exists": true,
-      "size_bytes": 5472,
-      "sha256": "68ba9ba2f314b9c8f9eda351dd9217e4373bbf5ae9580b7d31865782bf210f99",
+      "size_bytes": 5624,
+      "sha256": "6ad67b9bed0e704793526f6a436533a24f4236137457ec2de0bb3fa1afdf757e",
       "git_ignored": false
     },
     {

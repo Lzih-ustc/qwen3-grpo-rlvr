@@ -9,7 +9,7 @@ This directory starts an additive research line on reducing RLVR inference cost 
 | 1. Offline trajectory audit and literature review | Complete | [Research review](phase1_research_review.md), [post-hoc audit](phase1_answer_boundary_audit.md), and [audit JSON](phase1_answer_boundary_audit.json). |
 | 2. Baselines and local smoke | Complete | [Design and implementation notes](phase2_design.md), [attempt history](phase2_smoke_history.md), 15 unit tests passed, and the local RTX 3060 one-update [smoke report](../../reports/efficient_rlvr_phase2_smoke_group_filter.json). |
 | 3. Data lock and evaluation protocol | Complete | [Data lock audit](phase3_data_audit.md), [two-build reproducibility check](../../reports/efficient_rlvr_phase3_reproducibility.json), [prompt-token budget audit](../../reports/efficient_rlvr_phase3_prompt_length_audit.json), and [split manifest](../../data/efficient-rlvr-math-v1/manifest.json). |
-| 4. AutoDL 4090 plan | Prepared; execution not approved | [Budget and experiment plan](phase4_autodl_plan.md). No cloud instance has been created or started. |
+| 4. AutoDL 4090 plan and final audit | Plan revised; paid execution NO-GO | [Audited plan](phase4_autodl_plan.md), [GO/NO-GO report](phase4b_go_no_go.md), and [locked-data distribution audit](phase4b_data_audit.md). No cloud instance has been created or started. |
 | 5. Full comparison | Not started | Requires the user's explicit approval for any paid AutoDL execution. No formal training or new-data model evaluation has been run. |
 
 Phase 1 found longer selected-adapter outputs and higher aggregate inference cost in both frozen Phase C pairs. Those decoded-text token counts are reconstructed, because per-question token IDs were not saved. They are post-hoc descriptions only and do not change archived accuracy or model selection.
@@ -40,6 +40,6 @@ Run the actual JSON/JSONL/Parquet history scan in a separate environment using `
 - Consumed GSM8K and SVAMP tests are descriptive history only; they cannot select any method in this branch.
 - The locked extrapolation test is sealed from checkpoint, reward, group-filter, stop, and prompt choices.
 - GRPO-LEAD, GFPO, DAPO, and Dr. GRPO are prior work. CGLR and correctness-mixed group filtering are baselines, not novelty claims.
-- Compare attempted generated tokens including discarded rollouts, wall-clock and billed GPU time, exact accuracy, parse failures, latency, and correct solutions per GPU-hour.
+- Compare attempted generated tokens including discarded rollouts, wall-clock and billed GPU time, exact accuracy, parse failures, latency, and correct solutions per GPU-hour. The current GFRL counter records these costs after a completed callback, but a durable ledger and hard run-level token stop are still required before formal training.
 - Report training-seed variation separately from paired question-level uncertainty. Mixed or negative results are valid outcomes.
-- Do not start paid compute until the user explicitly approves the concrete AutoDL budget and cap.
+- No paid compute stage starts automatically. Phase 4B is NO-GO until the budget guard and durable GFRL accounting are implemented and pass an explicitly approved preflight; obtain explicit approval for each paid stage.
