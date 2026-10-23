@@ -100,7 +100,7 @@ def collect() -> dict[str, Any]:
         "generated_utc": datetime.now(timezone.utc).isoformat(),
         "repository": {
             "branch": git_value("branch", "--show-current"),
-            "head_commit": git_value("rev-parse", "HEAD"),
+            "head_commit_at_generation": git_value("rev-parse", "HEAD"),
         },
         "historical_archive_commit": "b98a22da844106544e1a26812099a4db3bb73e60",
         "source_data": {
@@ -114,6 +114,7 @@ def collect() -> dict[str, Any]:
         "notes": [
             "This manifest hashes the data and smoke evidence for this branch; it does not alter Phase A-C artifacts.",
             "Generated JSONL split files and binary checkpoints are intentionally excluded from Git.",
+            "head_commit_at_generation identifies the repository revision present when the manifest was generated; the manifest does not self-hash.",
         ],
     }
 

@@ -1,9 +1,9 @@
 {
   "manifest_version": 1,
-  "generated_utc": "2026-10-23T10:31:07.676663+00:00",
+  "generated_utc": "2026-10-23T10:32:35.357376+00:00",
   "repository": {
     "branch": "efficient-rlvr",
-    "head_commit": "b98a22da844106544e1a26812099a4db3bb73e60"
+    "head_commit_at_generation": "09eec0788d0f498a35df50ad27010436430cd48e"
   },
   "historical_archive_commit": "b98a22da844106544e1a26812099a4db3bb73e60",
   "source_data": {
@@ -375,8 +375,8 @@
       "path": "research/efficient_rlvr/scripts/build_artifact_manifest.py",
       "category": "code_or_test",
       "exists": true,
-      "size_bytes": 5308,
-      "sha256": "47eabd0f6f032922723ad3efc9c56d4a6b2a5b243a9d85ba9b0e5cc00e86dc09",
+      "size_bytes": 5472,
+      "sha256": "68ba9ba2f314b9c8f9eda351dd9217e4373bbf5ae9580b7d31865782bf210f99",
       "git_ignored": false
     },
     {
@@ -488,6 +488,7 @@
   ],
   "notes": [
     "This manifest hashes the data and smoke evidence for this branch; it does not alter Phase A-C artifacts.",
-    "Generated JSONL split files and binary checkpoints are intentionally excluded from Git."
+    "Generated JSONL split files and binary checkpoints are intentionally excluded from Git.",
+    "head_commit_at_generation identifies the repository revision present when the manifest was generated; the manifest does not self-hash."
   ]
 }
